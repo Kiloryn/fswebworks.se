@@ -1,4 +1,5 @@
 import { ArrowUpRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const footerLinks = {
   services: [
@@ -90,12 +91,12 @@ export default function Footer() {
               © {new Date().getFullYear()} FSwebworks. Alla rättigheter förbehållna.
             </p>
             <div className="flex gap-6">
-              <a href="/integritetspolicy" className="text-xs text-[#444444] hover:text-[#666666] transition-colors">
+              <Link to="/integritetspolicy" className="text-xs text-[#444444] hover:text-[#666666] transition-colors">
                 Integritetspolicy
-              </a>
-              <a href="/anvandarvillkor" className="text-xs text-[#444444] hover:text-[#666666] transition-colors">
+              </Link>
+              <Link to="/anvandarvillkor" className="text-xs text-[#444444] hover:text-[#666666] transition-colors">
                 Användarvillkor
-              </a>
+              </Link>
             </div>
           </div>
         </div>
