@@ -395,26 +395,20 @@ function ConsultantPreview({ palette = { primary: '#8b5cf6', secondary: '#6d28d9
   );
 }
 
-// Template Card Component - Fresh modern design
+// Template Card Component - Fresh modern design with images
 function TemplateCard({ template, onClick }: { template: any; onClick: () => void }) {
-  const previewComponents: Record<string, React.ComponentType<PreviewProps>> = {
-    plumber: PlumberPreview,
-    electrician: ElectricianPreview,
-    salon: SalonPreview,
-    restaurant: RestaurantPreview,
-    retail: RetailPreview,
-    consultant: ConsultantPreview,
-  };
-  const PreviewComponent = previewComponents[template.id];
-
   return (
     <div 
       onClick={onClick}
       className="group bg-[#1a1a1a] border border-[#2a2a2a] rounded-2xl overflow-hidden hover:border-[#c8a46e]/50 transition-all cursor-pointer hover:-translate-y-2 hover:shadow-2xl hover:shadow-[#c8a46e]/10"
     >
-      {/* Website Preview */}
-      <div className="h-48 p-3 bg-gradient-to-br from-gray-800 to-gray-900">
-        <PreviewComponent />
+      {/* Website Preview Image */}
+      <div className="h-48 overflow-hidden bg-gray-900">
+        <img 
+          src={template.image} 
+          alt={template.name}
+          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+        />
       </div>
       
       {/* Content */}
@@ -433,7 +427,7 @@ function TemplateCard({ template, onClick }: { template: any; onClick: () => voi
         
         {/* Features */}
         <div className="flex flex-wrap gap-2">
-          {template.features.map((feature: string, i: number) => (
+          {template.features.slice(0, 3).map((feature: string, i: number) => (
             <span 
               key={i}
               className="text-xs px-3 py-1.5 bg-[#252525] text-gray-300 rounded-lg border border-[#333333]"
@@ -441,6 +435,11 @@ function TemplateCard({ template, onClick }: { template: any; onClick: () => voi
               {feature}
             </span>
           ))}
+          {template.features.length > 3 && (
+            <span className="text-xs px-3 py-1.5 bg-[#252525] text-gray-500 rounded-lg border border-[#333333]">
+              +{template.features.length - 3}
+            </span>
+          )}
         </div>
 
         {/* View button */}
@@ -454,34 +453,8 @@ function TemplateCard({ template, onClick }: { template: any; onClick: () => voi
   );
 }
 
-// Template Modal Component
+// Template Modal Component - with full size image preview
 function TemplateModal({ template, onClose }: { template: any; onClose: () => void }) {
-  const [selectedPalette, setSelectedPalette] = useState(colorPalettes[0]);
-
-  const previewComponents: Record<string, React.ComponentType<PreviewProps>> = {
-    plumber: PlumberPreview,
-    electrician: ElectricianPreview,
-    salon: SalonPreview,
-    restaurant: RestaurantPreview,
-    retail: RetailPreview,
-    consultant: ConsultantPreview,
-  };
-  const PreviewComponent = previewComponents[template.id];
-
-  // Get default palette for this template type
-  const defaultPalettes: Record<string, typeof colorPalettes[number]> = {
-    plumber: colorPalettes[0], // blue
-    electrician: colorPalettes[2], // orange
-    salon: colorPalettes[3], // purple
-    restaurant: colorPalettes[2], // orange
-    retail: colorPalettes[1], // green
-    consultant: colorPalettes[3], // purple
-  };
-
-  useEffect(() => {
-    setSelectedPalette(defaultPalettes[template.id] || colorPalettes[0]);
-  }, [template.id]);
-
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       {/* Backdrop */}
@@ -491,7 +464,7 @@ function TemplateModal({ template, onClose }: { template: any; onClose: () => vo
       />
       
       {/* Modal Content */}
-      <div className="relative bg-[#1a1a1a] rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden border border-[#333333] shadow-2xl">
+      <div className="relative bg-[#1a1a1a] rounded-2xl max-w-5xl w-full max-h-[90vh] overflow-hidden border border-[#333333] shadow-2xl">
         {/* Close button */}
         <button 
           onClick={onClose}
@@ -502,12 +475,16 @@ function TemplateModal({ template, onClose }: { template: any; onClose: () => vo
           </svg>
         </button>
 
-        <div className="flex flex-col lg:flex-row h-full">
-          {/* Preview Area */}
+        <div className="flex flex-col lg:flex-row h-full overflow-auto">
+          {/* Preview Area - Full Image */}
           <div className="lg:w-2/3 p-6 bg-[#0a0a0a]">
             <div className="text-xs text-gray-500 mb-2 uppercase tracking-wide">Förhandsvisning</div>
-            <div className="aspect-video rounded-xl overflow-hidden shadow-2xl">
-              <PreviewComponent palette={selectedPalette} />
+            <div className="rounded-xl overflow-hidden shadow-2xl border border-[#333333]">
+              <img 
+                src={template.image} 
+                alt={template.name}
+                className="w-full h-auto"
+              />
             </div>
           </div>
 
@@ -516,33 +493,21 @@ function TemplateModal({ template, onClose }: { template: any; onClose: () => vo
             <h2 className="text-2xl font-bold text-white mb-2">{template.name}</h2>
             <p className="text-gray-400 text-sm mb-6">{template.description}</p>
             
-            {/* Color Palette Selector */}
-            <div className="mb-6">
-              <div className="text-xs text-gray-500 mb-3 uppercase tracking-wide">Välj färg</div>
-              <div className="flex gap-3 flex-wrap">
-                {colorPalettes.map((palette) => (
-                  <button
-                    key={palette.id}
-                    onClick={() => setSelectedPalette(palette)}
-                    className={`w-10 h-10 rounded-full border-2 transition-all hover:scale-110 ${
-                      selectedPalette.id === palette.id 
-                        ? 'border-white scale-110 shadow-lg shadow-white/20' 
-                        : 'border-transparent'
-                    }`}
-                    style={{ backgroundColor: palette.primary }}
-                    title={palette.name}
-                  />
-                ))}
-              </div>
+            {/* Color Palette Info */}
+            <div className="mb-6 p-4 bg-[#252525] rounded-xl border border-[#333333]">
+              <div className="text-xs text-gray-500 mb-2 uppercase tracking-wide">Färgval</div>
+              <p className="text-gray-300 text-sm">
+                Vi anpassar färgerna efter ditt varumärke. Välj mellan olika färgscheman i samband med beställning.
+              </p>
             </div>
 
             {/* Features */}
             <div className="mb-8">
-              <div className="text-xs text-gray-500 mb-3 uppercase tracking-wide">Ingår</div>
+              <div className="text-xs text-gray-500 mb-3 uppercase tracking-wide">Ingår i mallen</div>
               <ul className="space-y-2">
                 {template.features.map((feature: string, i: number) => (
                   <li key={i} className="flex items-center gap-2 text-gray-300 text-sm">
-                    <svg className="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-4 h-4 text-green-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
                     {feature}
@@ -565,49 +530,55 @@ function TemplateModal({ template, onClose }: { template: any; onClose: () => vo
   );
 }
 
-// Templates data
+// Examples Section Component
 const templates = [
   {
     id: 'plumber',
     name: 'VVS & Rörmokare',
     category: 'Hantverkare',
     description: 'Akut service, jourdygnet runt, offreförfrågan. Perfekt för dig som vill synas och få fler kunder.',
-    features: ['Akut kontakt-knapp', 'Tjänsteöversikt', 'Prislista', 'Jourdygnet runt', 'Offertförfrågan']
+    features: ['Akut kontakt-knapp', 'Tjänsteöversikt', 'Prislista', 'Jourdygnet runt', 'Offertförfrågan'],
+    image: '/templates/plumber.png'
   },
   {
     id: 'electrician',
     name: 'Elektriker',
     category: 'Hantverkare',
     description: 'Elinstallation, säkerhet, certifierad. Bygg förtroende med dokumenterad kompetens.',
-    features: ['Säkerhetsfokus', 'Certifieringar', 'Kontaktformulär', 'Tjänstepresentation', 'Offertförfrågan']
+    features: ['Säkerhetsfokus', 'Certifieringar', 'Kontaktformulär', 'Tjänstepresentation', 'Offertförfrågan'],
+    image: '/templates/electrician.png'
   },
   {
     id: 'salon',
     name: 'Salong',
     category: 'Skönhet',
     description: 'Bokning, behandlingar, priser. Låt dina kunder boka direkt online.',
-    features: ['Online-bokning', 'Behandlingsmeny', 'Priser', 'Galleri', 'Personal presentation']
+    features: ['Online-bokning', 'Behandlingsmeny', 'Priser', 'Galleri', 'Personal presentation'],
+    image: '/templates/salon.png'
   },
   {
     id: 'restaurant',
     name: 'Restaurang',
     category: 'Mat & Dryck',
     description: 'Meny, bordsbokning, evenemang. Visa upp din mat och skapa stämning.',
-    features: ['Digital meny', 'Bordsbokning', 'Evenemang', 'Öppettider', 'Kontakt']
+    features: ['Digital meny', 'Bordsbokning', 'Evenemang', 'Öppettider', 'Kontakt'],
+    image: '/templates/restaurant.png'
   },
   {
     id: 'retail',
     name: 'Butik',
     category: 'Handel',
     description: 'Produkter, e-handel, öppettider. Visa upp ditt utbud och öka försäljningen.',
-    features: ['Produktkatalog', 'Öppettider', 'Kontakt', 'Om oss', 'Karta']
+    features: ['Produktkatalog', 'Öppettider', 'Kontakt', 'Om oss', 'Karta'],
+    image: '/templates/retail.png'
   },
   {
     id: 'consultant',
     name: 'Konsult',
     category: 'Företagstjänster',
     description: 'Expertis, tjänster, kontakt. Bygg trovärdighet och få fler uppdrag.',
-    features: ['Tjänsteöversikt', 'Om mig', 'Kontakt', 'Referenser', 'Blogg']
+    features: ['Tjänsteöversikt', 'Om mig', 'Kontakt', 'Referenser', 'Blogg'],
+    image: '/templates/consultant.png'
   }
 ];
 
