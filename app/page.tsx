@@ -2,6 +2,15 @@
 
 import { useState, useEffect } from 'react';
 
+// Color palettes for templates
+const colorPalettes = [
+  { id: 'blue', name: 'Blå', primary: '#3b82f6', secondary: '#1e40af', bg: '#eff6ff', accent: '#60a5fa' },
+  { id: 'green', name: 'Grön', primary: '#10b981', secondary: '#047857', bg: '#ecfdf5', accent: '#34d399' },
+  { id: 'orange', name: 'Orange', primary: '#f97316', secondary: '#c2410c', bg: '#fff7ed', accent: '#fb923c' },
+  { id: 'purple', name: 'Lila', primary: '#8b5cf6', secondary: '#6d28d9', bg: '#f5f3ff', accent: '#a78bfa' },
+  { id: 'dark', name: 'Mörk', primary: '#cbd5e1', secondary: '#475569', bg: '#1e293b', accent: '#94a3b8' },
+];
+
 // Hero Section Component
 function HeroSection({ content }: { content: any }) {
   return (
@@ -180,99 +189,48 @@ function ServicesSection({ content }: { content: any }) {
   );
 }
 
-// Template Preview Components - Realistic mini-websites
-function PlumberPreview() {
+// Template Preview Components - with color palette support
+interface PreviewProps {
+  palette?: { primary: string; secondary: string; bg: string; accent: string };
+}
+
+function PlumberPreview({ palette = { primary: '#3b82f6', secondary: '#1e40af', bg: '#eff6ff', accent: '#60a5fa' } }: PreviewProps) {
   return (
-    <div className="h-full bg-gradient-to-b from-blue-900 to-blue-950 p-2">
-      <div className="bg-white rounded h-full flex flex-col overflow-hidden">
+    <div className="h-full w-full flex flex-col rounded-lg overflow-hidden shadow-lg" style={{ background: `linear-gradient(to bottom, ${palette.secondary}, ${palette.bg})` }}>
+      {/* Browser header */}
+      <div className="bg-white/10 backdrop-blur-sm px-3 py-2 flex items-center gap-2">
+        <div className="flex gap-1.5">
+          <div className="w-3 h-3 rounded-full bg-red-400"></div>
+          <div className="w-3 h-3 rounded-full bg-yellow-400"></div>
+          <div className="w-3 h-3 rounded-full bg-green-400"></div>
+        </div>
+        <div className="flex-1 bg-white/20 rounded h-5 mx-4"></div>
+      </div>
+      {/* Website preview */}
+      <div className="flex-1 p-3 bg-white m-2 rounded shadow-md">
         {/* Header */}
-        <div className="bg-blue-600 px-2 py-1.5 flex items-center justify-between">
-          <div className="flex items-center gap-1">
-            <div className="w-4 h-4 bg-white rounded-full flex items-center justify-center">
-              <span className="text-[6px] font-bold text-blue-600">P</span>
+        <div className="flex items-center justify-between mb-3 pb-2 border-b" style={{ borderColor: palette.primary }}>
+          <div className="flex items-center gap-2">
+            <div className="w-8 h-8 rounded-lg flex items-center justify-center text-white text-sm font-bold" style={{ backgroundColor: palette.primary }}>
+              P
             </div>
-            <span className="text-[6px] font-bold text-white">RÖR-PRO</span>
+            <span className="font-bold text-gray-800 text-sm">RÖR-PRO</span>
           </div>
-          <div className="w-8 bg-green-500 rounded text-[5px] text-white text-center py-0.5 font-bold">RING</div>
-        </div>
-        {/* Hero */}
-        <div className="bg-gray-100 flex-1 p-2">
-          <div className="text-[7px] font-bold text-gray-800 mb-1">Din rörmokare i Stockholm</div>
-          <div className="text-[5px] text-gray-600 mb-1">✓ Akut service</div>
-          <div className="text-[5px] text-gray-600 mb-1">✓Jour dygnet runt</div>
-          <div className="text-[5px] text-gray-600">✓ Fri offert</div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function ElectricianPreview() {
-  return (
-    <div className="h-full bg-gradient-to-b from-yellow-900 to-yellow-950 p-2">
-      <div className="bg-white rounded h-full flex flex-col overflow-hidden">
-        {/* Header */}
-        <div className="bg-yellow-500 px-2 py-1.5 flex items-center justify-between">
-          <div className="flex items-center gap-1">
-            <span className="text-[8px]">⚡</span>
-            <span className="text-[6px] font-bold text-black">EL-SÄKERT</span>
+          <div className="px-3 py-1 rounded-full text-white text-xs font-semibold" style={{ backgroundColor: '#22c55e' }}>
+            RING
           </div>
-          <div className="w-8 bg-black rounded text-[5px] text-white text-center py-0.5">KONTAKT</div>
         </div>
-        {/* Hero */}
-        <div className="bg-gray-50 flex-1 p-2">
-          <div className="text-[7px] font-bold text-gray-900 mb-1">Elinstallation & Säkerhet</div>
-          <div className="flex gap-1 mb-1">
-            <div className="bg-yellow-100 text-[4px] px-1 rounded text-yellow-800">Certifierad</div>
-            <div className="bg-yellow-100 text-[4px] px-1 rounded text-yellow-800">A-behörighet</div>
+        {/* Hero content */}
+        <div className="space-y-1.5">
+          <div className="font-bold text-gray-800 text-xs">Din rörmokare i Stockholm</div>
+          <div className="flex items-center gap-1 text-green-600 text-[10px]">
+            <span>✓</span> Akut service
           </div>
-          <div className="text-[5px] text-gray-600">Nyinstallation • Felavhjälpning • Besiktning</div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function SalonPreview() {
-  return (
-    <div className="h-full bg-gradient-to-b from-pink-900 to-pink-950 p-2">
-      <div className="bg-white rounded h-full flex flex-col overflow-hidden">
-        {/* Header */}
-        <div className="bg-pink-500 px-2 py-1.5 flex items-center justify-between">
-          <span className="text-[6px] font-bold text-white italic">GLAMOUR SALONG</span>
-          <div className="w-8 bg-white text-[5px] text-pink-600 text-center py-0.5 rounded font-bold">BOKA</div>
-        </div>
-        {/* Hero */}
-        <div className="bg-pink-50 flex-1 p-2">
-          <div className="text-[7px] font-bold text-pink-900 mb-1">Hårvård & Styling</div>
-          <div className="text-[5px] text-gray-600 mb-1">Klippning • Färgning • Styling</div>
-          <div className="text-[5px] text-gray-500">Öppet: Mån-Fre 9-18</div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function RestaurantPreview() {
-  return (
-    <div className="h-full bg-gradient-to-b from-orange-900 to-orange-950 p-2">
-      <div className="bg-white rounded h-full flex flex-col overflow-hidden">
-        {/* Header */}
-        <div className="bg-orange-700 px-2 py-1.5 flex items-center justify-between">
-          <span className="text-[6px] font-bold text-white">BISTRO ITALIA</span>
-          <div className="w-8 bg-red-600 rounded text-[5px] text-white text-center py-0.5 font-bold">BOKA</div>
-        </div>
-        {/* Hero */}
-        <div className="bg-stone-100 flex-1 p-2">
-          <div className="text-[6px] font-bold text-gray-800 mb-1">Veckans Lunch</div>
-          <div className="text-[5px] text-gray-600 mb-0.5 flex justify-between">
-            <span>Pasta Carbonara</span><span>89 kr</span>
+          <div className="flex items-center gap-1 text-green-600 text-[10px]">
+            <span>✓</span> Jour dygnet runt
           </div>
-          <div className="text-[5px] text-gray-600 mb-0.5 flex justify-between">
-            <span>Caesarsallad</span><span>79 kr</span>
-          </div>
-          <div className="text-[5px] text-gray-600 flex justify-between">
-            <span>Grillad lax</span><span>119 kr</span>
+          <div className="flex items-center gap-1 text-green-600 text-[10px]">
+            <span>✓</span> Fri offert
           </div>
         </div>
       </div>
@@ -280,28 +238,96 @@ function RestaurantPreview() {
   );
 }
 
-function RetailPreview() {
+function ElectricianPreview({ palette = { primary: '#eab308', secondary: '#a16207', bg: '#fefce8', accent: '#fde047' } }: PreviewProps) {
   return (
-    <div className="h-full bg-gradient-to-b from-green-900 to-green-950 p-2">
-      <div className="bg-white rounded h-full flex flex-col overflow-hidden">
-        {/* Header */}
-        <div className="bg-green-600 px-2 py-1.5 flex items-center justify-between">
-          <span className="text-[6px] font-bold text-white">BUTIK Stockholm</span>
-          <div className="w-8 bg-white text-[5px] text-green-700 text-center py-0.5 rounded font-bold">KÖP</div>
+    <div className="h-full w-full flex flex-col rounded-lg overflow-hidden shadow-lg" style={{ background: `linear-gradient(to bottom, ${palette.secondary}, ${palette.bg})` }}>
+      <div className="bg-white/10 backdrop-blur-sm px-3 py-2 flex items-center gap-2">
+        <div className="flex gap-1.5">
+          <div className="w-3 h-3 rounded-full bg-red-400"></div>
+          <div className="w-3 h-3 rounded-full bg-yellow-400"></div>
+          <div className="w-3 h-3 rounded-full bg-green-400"></div>
         </div>
-        {/* Hero */}
-        <div className="bg-gray-50 flex-1 p-2">
-          <div className="text-[7px] font-bold text-gray-800 mb-1">Nya produkter</div>
-          <div className="grid grid-cols-3 gap-1">
-            <div className="bg-gray-200 h-8 rounded flex items-center justify-center">
-              <span className="text-[8px]">📦</span>
-            </div>
-            <div className="bg-gray-200 h-8 rounded flex items-center justify-center">
-              <span className="text-[8px]">📦</span>
-            </div>
-            <div className="bg-gray-200 h-8 rounded flex items-center justify-center">
-              <span className="text-[8px]">📦</span>
-            </div>
+        <div className="flex-1 bg-white/20 rounded h-5 mx-4"></div>
+      </div>
+      <div className="flex-1 p-3 bg-white m-2 rounded shadow-md">
+        <div className="flex items-center justify-between mb-3 pb-2 border-b" style={{ borderColor: palette.primary }}>
+          <div className="flex items-center gap-2">
+            <span className="text-lg">⚡</span>
+            <span className="font-bold text-gray-800 text-sm">EL-SÄKERT</span>
+          </div>
+          <div className="px-3 py-1 rounded-full text-white text-xs font-semibold" style={{ backgroundColor: palette.primary }}>
+            KONTAKT
+          </div>
+        </div>
+        <div className="space-y-1.5">
+          <div className="font-bold text-gray-800 text-xs">Elinstallation & Säkerhet</div>
+          <div className="flex gap-1 flex-wrap">
+            <span className="px-1.5 py-0.5 rounded text-[8px] font-medium" style={{ backgroundColor: palette.bg, color: palette.secondary }}>Certifierad</span>
+            <span className="px-1.5 py-0.5 rounded text-[8px] font-medium" style={{ backgroundColor: palette.bg, color: palette.secondary }}>A-behörighet</span>
+          </div>
+          <div className="text-gray-500 text-[10px]">Nyinstallation • Felavhjälpning • Besiktning</div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function SalonPreview({ palette = { primary: '#ec4899', secondary: '#be185d', bg: '#fdf2f8', accent: '#f9a8d4' } }: PreviewProps) {
+  return (
+    <div className="h-full w-full flex flex-col rounded-lg overflow-hidden shadow-lg" style={{ background: `linear-gradient(to bottom, ${palette.secondary}, ${palette.bg})` }}>
+      <div className="bg-white/10 backdrop-blur-sm px-3 py-2 flex items-center gap-2">
+        <div className="flex gap-1.5">
+          <div className="w-3 h-3 rounded-full bg-red-400"></div>
+          <div className="w-3 h-3 rounded-full bg-yellow-400"></div>
+          <div className="w-3 h-3 rounded-full bg-green-400"></div>
+        </div>
+        <div className="flex-1 bg-white/20 rounded h-5 mx-4"></div>
+      </div>
+      <div className="flex-1 p-3 bg-white m-2 rounded shadow-md">
+        <div className="flex items-center justify-between mb-3 pb-2 border-b" style={{ borderColor: palette.primary }}>
+          <span className="font-bold text-gray-800 text-sm italic">GLAMOUR SALONG</span>
+          <div className="px-3 py-1 rounded-full text-white text-xs font-semibold" style={{ backgroundColor: palette.primary }}>
+            BOKA
+          </div>
+        </div>
+        <div className="space-y-1.5">
+          <div className="font-bold text-gray-800 text-xs">Hårvård & Styling</div>
+          <div className="text-gray-600 text-[10px]">Klippning • Färgning • Styling</div>
+          <div className="text-gray-400 text-[10px]">Öppet: Mån-Fre 9-18</div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function RestaurantPreview({ palette = { primary: '#f97316', secondary: '#c2410c', bg: '#fff7ed', accent: '#fb923c' } }: PreviewProps) {
+  return (
+    <div className="h-full w-full flex flex-col rounded-lg overflow-hidden shadow-lg" style={{ background: `linear-gradient(to bottom, ${palette.secondary}, ${palette.bg})` }}>
+      <div className="bg-white/10 backdrop-blur-sm px-3 py-2 flex items-center gap-2">
+        <div className="flex gap-1.5">
+          <div className="w-3 h-3 rounded-full bg-red-400"></div>
+          <div className="w-3 h-3 rounded-full bg-yellow-400"></div>
+          <div className="w-3 h-3 rounded-full bg-green-400"></div>
+        </div>
+        <div className="flex-1 bg-white/20 rounded h-5 mx-4"></div>
+      </div>
+      <div className="flex-1 p-3 bg-white m-2 rounded shadow-md">
+        <div className="flex items-center justify-between mb-3 pb-2 border-b" style={{ borderColor: palette.primary }}>
+          <span className="font-bold text-gray-800 text-sm">BISTRO ITALIA</span>
+          <div className="px-3 py-1 rounded-full text-white text-xs font-semibold" style={{ backgroundColor: '#dc2626' }}>
+            BOKA
+          </div>
+        </div>
+        <div className="space-y-1.5">
+          <div className="font-bold text-gray-800 text-xs">Veckans Lunch</div>
+          <div className="flex justify-between text-[10px] text-gray-600">
+            <span>Pasta Carbonara</span><span className="font-medium">89 kr</span>
+          </div>
+          <div className="flex justify-between text-[10px] text-gray-600">
+            <span>Caesarsallad</span><span className="font-medium">79 kr</span>
+          </div>
+          <div className="flex justify-between text-[10px] text-gray-600">
+            <span>Grillad lax</span><span className="font-medium">119 kr</span>
           </div>
         </div>
       </div>
@@ -309,22 +335,30 @@ function RetailPreview() {
   );
 }
 
-function ConsultantPreview() {
+function RetailPreview({ palette = { primary: '#22c55e', secondary: '#15803d', bg: '#f0fdf4', accent: '#4ade80' } }: PreviewProps) {
   return (
-    <div className="h-full bg-gradient-to-b from-purple-900 to-purple-950 p-2">
-      <div className="bg-white rounded h-full flex flex-col overflow-hidden">
-        {/* Header */}
-        <div className="bg-purple-800 px-2 py-1.5 flex items-center justify-between">
-          <span className="text-[6px] font-bold text-white">ANDERS ERIKSSON</span>
-          <span className="text-[5px] text-purple-200">Konsult</span>
+    <div className="h-full w-full flex flex-col rounded-lg overflow-hidden shadow-lg" style={{ background: `linear-gradient(to bottom, ${palette.secondary}, ${palette.bg})` }}>
+      <div className="bg-white/10 backdrop-blur-sm px-3 py-2 flex items-center gap-2">
+        <div className="flex gap-1.5">
+          <div className="w-3 h-3 rounded-full bg-red-400"></div>
+          <div className="w-3 h-3 rounded-full bg-yellow-400"></div>
+          <div className="w-3 h-3 rounded-full bg-green-400"></div>
         </div>
-        {/* Hero */}
-        <div className="bg-purple-50 flex-1 p-2">
-          <div className="text-[7px] font-bold text-purple-900 mb-1">Strategi & Ledarskap</div>
-          <div className="text-[5px] text-gray-600 mb-1">20 års erfarenhet</div>
-          <div className="flex gap-1">
-            <div className="bg-purple-200 text-[4px] px-1 rounded text-purple-800">Företagsutveckling</div>
-            <div className="bg-purple-200 text-[4px] px-1 rounded text-purple-800">Coaching</div>
+        <div className="flex-1 bg-white/20 rounded h-5 mx-4"></div>
+      </div>
+      <div className="flex-1 p-3 bg-white m-2 rounded shadow-md">
+        <div className="flex items-center justify-between mb-3 pb-2 border-b" style={{ borderColor: palette.primary }}>
+          <span className="font-bold text-gray-800 text-sm">BUTIK Stockholm</span>
+          <div className="px-3 py-1 rounded-full text-white text-xs font-semibold" style={{ backgroundColor: palette.primary }}>
+            KÖP
+          </div>
+        </div>
+        <div className="space-y-1.5">
+          <div className="font-bold text-gray-800 text-xs">Nya produkter</div>
+          <div className="grid grid-cols-3 gap-1.5">
+            <div className="aspect-square bg-gray-100 rounded flex items-center justify-center text-xl">📦</div>
+            <div className="aspect-square bg-gray-100 rounded flex items-center justify-center text-xl">📦</div>
+            <div className="aspect-square bg-gray-100 rounded flex items-center justify-center text-xl">📦</div>
           </div>
         </div>
       </div>
@@ -332,39 +366,199 @@ function ConsultantPreview() {
   );
 }
 
-// Template Card Component
-function TemplateCard({ template }: { template: any }) {
+function ConsultantPreview({ palette = { primary: '#8b5cf6', secondary: '#6d28d9', bg: '#f5f3ff', accent: '#a78bfa' } }: PreviewProps) {
   return (
-    <div className="group bg-[#0a0a0a] border border-[#2a2a2a] rounded-xl overflow-hidden hover:border-[#c8a46e]/30 transition-all cursor-pointer hover:-translate-y-1">
+    <div className="h-full w-full flex flex-col rounded-lg overflow-hidden shadow-lg" style={{ background: `linear-gradient(to bottom, ${palette.secondary}, ${palette.bg})` }}>
+      <div className="bg-white/10 backdrop-blur-sm px-3 py-2 flex items-center gap-2">
+        <div className="flex gap-1.5">
+          <div className="w-3 h-3 rounded-full bg-red-400"></div>
+          <div className="w-3 h-3 rounded-full bg-yellow-400"></div>
+          <div className="w-3 h-3 rounded-full bg-green-400"></div>
+        </div>
+        <div className="flex-1 bg-white/20 rounded h-5 mx-4"></div>
+      </div>
+      <div className="flex-1 p-3 bg-white m-2 rounded shadow-md">
+        <div className="flex items-center justify-between mb-3 pb-2 border-b" style={{ borderColor: palette.primary }}>
+          <span className="font-bold text-gray-800 text-sm">ANDERS ERIKSSON</span>
+          <span className="text-gray-400 text-[10px]">Konsult</span>
+        </div>
+        <div className="space-y-1.5">
+          <div className="font-bold text-gray-800 text-xs">Strategi & Ledarskap</div>
+          <div className="text-gray-500 text-[10px]">20 års erfarenhet</div>
+          <div className="flex gap-1 flex-wrap">
+            <span className="px-1.5 py-0.5 rounded text-[8px] font-medium" style={{ backgroundColor: palette.bg, color: palette.secondary }}>Företagsutveckling</span>
+            <span className="px-1.5 py-0.5 rounded text-[8px] font-medium" style={{ backgroundColor: palette.bg, color: palette.secondary }}>Coaching</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// Template Card Component - Fresh modern design
+function TemplateCard({ template, onClick }: { template: any; onClick: () => void }) {
+  const previewComponents: Record<string, React.ComponentType<PreviewProps>> = {
+    plumber: PlumberPreview,
+    electrician: ElectricianPreview,
+    salon: SalonPreview,
+    restaurant: RestaurantPreview,
+    retail: RetailPreview,
+    consultant: ConsultantPreview,
+  };
+  const PreviewComponent = previewComponents[template.id];
+
+  return (
+    <div 
+      onClick={onClick}
+      className="group bg-[#1a1a1a] border border-[#2a2a2a] rounded-2xl overflow-hidden hover:border-[#c8a46e]/50 transition-all cursor-pointer hover:-translate-y-2 hover:shadow-2xl hover:shadow-[#c8a46e]/10"
+    >
       {/* Website Preview */}
-      <div className="h-36">
-        {template.id === 'plumber' && <PlumberPreview />}
-        {template.id === 'electrician' && <ElectricianPreview />}
-        {template.id === 'salon' && <SalonPreview />}
-        {template.id === 'restaurant' && <RestaurantPreview />}
-        {template.id === 'retail' && <RetailPreview />}
-        {template.id === 'consultant' && <ConsultantPreview />}
+      <div className="h-48 p-3 bg-gradient-to-br from-gray-800 to-gray-900">
+        <PreviewComponent />
       </div>
       
       {/* Content */}
       <div className="p-5">
-        <h3 className="text-lg font-semibold text-[#f5f5f0] group-hover:text-[#c8a46e] transition-colors mb-1.5">
-          {template.name}
-        </h3>
-        <p className="text-[#666666] text-sm mb-3">
+        <div className="flex items-center justify-between mb-2">
+          <h3 className="text-lg font-bold text-white group-hover:text-[#c8a46e] transition-colors">
+            {template.name}
+          </h3>
+          <span className="px-2 py-1 bg-[#c8a46e]/10 text-[#c8a46e] text-xs font-medium rounded-full">
+            {template.category}
+          </span>
+        </div>
+        <p className="text-gray-400 text-sm mb-4">
           {template.description}
         </p>
         
         {/* Features */}
-        <div className="flex flex-wrap gap-1.5">
+        <div className="flex flex-wrap gap-2">
           {template.features.map((feature: string, i: number) => (
             <span 
               key={i}
-              className="text-xs px-2 py-1 bg-[#1a1a1a] text-[#999999] rounded"
+              className="text-xs px-3 py-1.5 bg-[#252525] text-gray-300 rounded-lg border border-[#333333]"
             >
               {feature}
             </span>
           ))}
+        </div>
+
+        {/* View button */}
+        <div className="mt-4 pt-4 border-t border-[#2a2a2a] flex items-center justify-between">
+          <span className="text-[#c8a46e] text-sm font-medium group-hover:translate-x-1 transition-transform">
+            Se mall →
+          </span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// Template Modal Component
+function TemplateModal({ template, onClose }: { template: any; onClose: () => void }) {
+  const [selectedPalette, setSelectedPalette] = useState(colorPalettes[0]);
+
+  const previewComponents: Record<string, React.ComponentType<PreviewProps>> = {
+    plumber: PlumberPreview,
+    electrician: ElectricianPreview,
+    salon: SalonPreview,
+    restaurant: RestaurantPreview,
+    retail: RetailPreview,
+    consultant: ConsultantPreview,
+  };
+  const PreviewComponent = previewComponents[template.id];
+
+  // Get default palette for this template type
+  const defaultPalettes: Record<string, typeof colorPalettes[number]> = {
+    plumber: colorPalettes[0], // blue
+    electrician: colorPalettes[2], // orange
+    salon: colorPalettes[3], // purple
+    restaurant: colorPalettes[2], // orange
+    retail: colorPalettes[1], // green
+    consultant: colorPalettes[3], // purple
+  };
+
+  useEffect(() => {
+    setSelectedPalette(defaultPalettes[template.id] || colorPalettes[0]);
+  }, [template.id]);
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+      {/* Backdrop */}
+      <div 
+        className="absolute inset-0 bg-black/80 backdrop-blur-sm"
+        onClick={onClose}
+      />
+      
+      {/* Modal Content */}
+      <div className="relative bg-[#1a1a1a] rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden border border-[#333333] shadow-2xl">
+        {/* Close button */}
+        <button 
+          onClick={onClose}
+          className="absolute top-4 right-4 z-10 w-10 h-10 bg-[#252525] hover:bg-[#333333] rounded-full flex items-center justify-center text-white transition-colors"
+        >
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+
+        <div className="flex flex-col lg:flex-row h-full">
+          {/* Preview Area */}
+          <div className="lg:w-2/3 p-6 bg-[#0a0a0a]">
+            <div className="text-xs text-gray-500 mb-2 uppercase tracking-wide">Förhandsvisning</div>
+            <div className="aspect-video rounded-xl overflow-hidden shadow-2xl">
+              <PreviewComponent palette={selectedPalette} />
+            </div>
+          </div>
+
+          {/* Controls Area */}
+          <div className="lg:w-1/3 p-6 bg-[#1a1a1a] border-l border-[#333333]">
+            <h2 className="text-2xl font-bold text-white mb-2">{template.name}</h2>
+            <p className="text-gray-400 text-sm mb-6">{template.description}</p>
+            
+            {/* Color Palette Selector */}
+            <div className="mb-6">
+              <div className="text-xs text-gray-500 mb-3 uppercase tracking-wide">Välj färg</div>
+              <div className="flex gap-3 flex-wrap">
+                {colorPalettes.map((palette) => (
+                  <button
+                    key={palette.id}
+                    onClick={() => setSelectedPalette(palette)}
+                    className={`w-10 h-10 rounded-full border-2 transition-all hover:scale-110 ${
+                      selectedPalette.id === palette.id 
+                        ? 'border-white scale-110 shadow-lg shadow-white/20' 
+                        : 'border-transparent'
+                    }`}
+                    style={{ backgroundColor: palette.primary }}
+                    title={palette.name}
+                  />
+                ))}
+              </div>
+            </div>
+
+            {/* Features */}
+            <div className="mb-8">
+              <div className="text-xs text-gray-500 mb-3 uppercase tracking-wide">Ingår</div>
+              <ul className="space-y-2">
+                {template.features.map((feature: string, i: number) => (
+                  <li key={i} className="flex items-center gap-2 text-gray-300 text-sm">
+                    <svg className="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* CTA */}
+            <button 
+              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+              className="w-full py-4 bg-[#c8a46e] text-[#111111] font-bold rounded-xl hover:bg-[#d4b480] transition-colors"
+            >
+              Välj denna mall
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -376,77 +570,99 @@ const templates = [
   {
     id: 'plumber',
     name: 'VVS & Rörmokare',
-    description: 'Akut service, jourdygnet runt, offreförfrågan',
-    features: ['Akut kontakt-knapp', 'Tjänsteöversikt', 'Prislista']
+    category: 'Hantverkare',
+    description: 'Akut service, jourdygnet runt, offreförfrågan. Perfekt för dig som vill synas och få fler kunder.',
+    features: ['Akut kontakt-knapp', 'Tjänsteöversikt', 'Prislista', 'Jourdygnet runt', 'Offertförfrågan']
   },
   {
     id: 'electrician',
     name: 'Elektriker',
-    description: 'Elinstallation, säkerhet, certifierad',
-    features: ['Säkerhetsfokus', 'Certifieringar', 'Kontaktformulär']
+    category: 'Hantverkare',
+    description: 'Elinstallation, säkerhet, certifierad. Bygg förtroende med dokumenterad kompetens.',
+    features: ['Säkerhetsfokus', 'Certifieringar', 'Kontaktformulär', 'Tjänstepresentation', 'Offertförfrågan']
   },
   {
     id: 'salon',
     name: 'Salong',
-    description: 'Bokning, behandlingar, priser',
-    features: ['Online-bokning', 'Behandlingsmeny', 'Priser']
+    category: 'Skönhet',
+    description: 'Bokning, behandlingar, priser. Låt dina kunder boka direkt online.',
+    features: ['Online-bokning', 'Behandlingsmeny', 'Priser', 'Galleri', 'Personal presentation']
   },
   {
     id: 'restaurant',
     name: 'Restaurang',
-    description: 'Meny, bordsbokning, evenemang',
-    features: ['Digital meny', 'Bordsbokning', 'Evenemang']
+    category: 'Mat & Dryck',
+    description: 'Meny, bordsbokning, evenemang. Visa upp din mat och skapa stämning.',
+    features: ['Digital meny', 'Bordsbokning', 'Evenemang', 'Öppettider', 'Kontakt']
   },
   {
     id: 'retail',
     name: 'Butik',
-    description: 'Produkter, e-handel, öppettider',
-    features: ['Produktkatalog', 'Öppettider', 'Kontakt']
+    category: 'Handel',
+    description: 'Produkter, e-handel, öppettider. Visa upp ditt utbud och öka försäljningen.',
+    features: ['Produktkatalog', 'Öppettider', 'Kontakt', 'Om oss', 'Karta']
   },
   {
     id: 'consultant',
     name: 'Konsult',
-    description: 'Expertis, tjänster, kontakt',
-    features: ['Tjänsteöversikt', 'Om mig', 'Kontakt']
+    category: 'Företagstjänster',
+    description: 'Expertis, tjänster, kontakt. Bygg trovärdighet och få fler uppdrag.',
+    features: ['Tjänsteöversikt', 'Om mig', 'Kontakt', 'Referenser', 'Blogg']
   }
 ];
 
 // Examples Section Component
 function ExamplesSection({ content }: { content: any }) {
+  const [selectedTemplate, setSelectedTemplate] = useState<any>(null);
+
   return (
-    <section id="examples" className="py-24 bg-[#111111]">
-      <div className="max-w-6xl mx-auto px-6">
-        {/* Section Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-[#f5f5f0] mb-4">
-            {content.examples.sectionTitle}
-          </h2>
-          <p className="text-[#999999] max-w-2xl mx-auto">
-            {content.examples.sectionSubtitle}
-          </p>
+    <>
+      <section id="examples" className="py-24 bg-[#111111]">
+        <div className="max-w-6xl mx-auto px-6">
+          {/* Section Header */}
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-[#f5f5f0] mb-4">
+              {content.examples.sectionTitle}
+            </h2>
+            <p className="text-[#999999] max-w-2xl mx-auto">
+              {content.examples.sectionSubtitle}
+            </p>
+          </div>
+          
+          {/* Templates Grid */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {templates.map((template) => (
+              <TemplateCard 
+                key={template.id} 
+                template={template} 
+                onClick={() => setSelectedTemplate(template)}
+              />
+            ))}
+          </div>
+          
+          {/* Call to Action */}
+          <div className="text-center mt-12">
+            <p className="text-[#999999] mb-4">
+              Alla mallar anpassas efter ditt företags varumärke och behov
+            </p>
+            <button 
+              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+              className="px-8 py-3 bg-[#c8a46e] text-[#111111] font-semibold rounded-lg hover:bg-[#d4b480] transition-colors"
+            >
+              Beställ din hemsida
+            </button>
+          </div>
         </div>
-        
-        {/* Templates Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {templates.map((template) => (
-            <TemplateCard key={template.id} template={template} />
-          ))}
-        </div>
-        
-        {/* Call to Action */}
-        <div className="text-center mt-12">
-          <p className="text-[#999999] mb-4">
-            Alla mallar anpassas efter ditt företags varumärke och behov
-          </p>
-          <button 
-            onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-            className="px-8 py-3 bg-[#c8a46e] text-[#111111] font-semibold rounded-lg hover:bg-[#d4b480] transition-colors"
-          >
-            Beställ din hemsida
-          </button>
-        </div>
-      </div>
-    </section>
+      </section>
+
+      {/* Modal */}
+      {selectedTemplate && (
+        <TemplateModal 
+          template={selectedTemplate} 
+          onClose={() => setSelectedTemplate(null)} 
+        />
+      )}
+    </>
   );
 }
 
