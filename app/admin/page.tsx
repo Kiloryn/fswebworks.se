@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import { TinaCMS, TinaProvider } from 'tinacms'
 
+// TinaCMS Configuration
 const tinaConfig = {
   clientId: process.env.NEXT_PUBLIC_TINA_CLIENT_ID || 'b3e1c303-9506-402d-b961-731fc3e185cf',
   token: process.env.NEXT_PUBLIC_TINA_TOKEN || 'b6ba928d88971e082d545d1429c8652417dfeac0',
