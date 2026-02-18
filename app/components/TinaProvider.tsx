@@ -1,24 +1,15 @@
-import { defineConfig } from 'tinacms'
+'use client'
 
-// @ts-ignore - Next.js app directory
-export default defineConfig({
-  branch: 'main',
+import { TinaCMS, TinaProvider } from 'tinacms'
+import { useState } from 'react'
+
+// TinaCMS configuration
+const tinaConfig = {
   clientId: 'b3e1c303-9506-402d-b961-731fc3e185cf',
   token: 'b6ba928d88971e082d545d1429c8652417dfeac0',
   build: {
     outputFolder: 'out',
     publicFolder: 'public'
-  },
-  media: {
-    tina: {
-      mediaRoot: 'uploads',
-      publicFolder: 'public'
-    }
-  },
-  search: {
-    tina: {
-      indexerToken: '4339fdbd2b93a1ff5fed2bb5b5c77323da4edfd6'
-    }
   },
   schema: {
     collections: [
@@ -67,4 +58,14 @@ export default defineConfig({
       }
     ]
   }
-})
+}
+
+export default function TinaProviderWrapper({ children }: { children: React.ReactNode }) {
+  const [cms] = useState(() => new TinaCMS(tinaConfig))
+
+  return (
+    <TinaProvider cms={cms}>
+      {children}
+    </TinaProvider>
+  )
+}

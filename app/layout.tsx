@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import TinaProviderWrapper from "./components/TinaProvider";
 
 export const metadata: Metadata = {
   title: "FSwebworks - Webbdesign för småföretag i Stockholm",
@@ -16,11 +17,13 @@ export default function RootLayout({
   return (
     <html lang="sv" className="scroll-smooth">
       <body className="min-h-screen bg-[#0a0a0a] antialiased">
-        <Header />
-        <main className="pt-20">
-          {children}
-        </main>
-        <Footer />
+        <TinaProviderWrapper>
+          <Header />
+          <main className="pt-20">
+            {children}
+          </main>
+          <Footer />
+        </TinaProviderWrapper>
       </body>
     </html>
   );
