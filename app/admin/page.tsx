@@ -10,10 +10,6 @@ const tinaConfig = {
     outputFolder: 'out',
     publicFolder: 'public'
   },
-  // Use sidebar for editing
-  sidebar: {
-    hidden: false,
-  },
   // Enable media
   media: {
     tina: {
