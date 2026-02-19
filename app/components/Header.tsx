@@ -26,7 +26,7 @@ export default function Header() {
   return (
     <header 
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled 
+        scrolled || mobileMenuOpen
           ? 'bg-[#0a0a0a]/95 backdrop-blur-md border-b border-[#2a2a2a]' 
           : 'bg-transparent'
       }`}
@@ -86,29 +86,29 @@ export default function Header() {
 
         {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <div className="md:hidden py-4 border-t border-[#2a2a2a]">
-            <nav className="flex flex-col gap-4">
+          <div className="md:hidden fixed inset-0 top-20 z-40 bg-[#0a0a0a] border-t border-[#2a2a2a] overflow-y-auto">
+            <nav className="flex flex-col gap-4 p-6">
               <button 
                 onClick={() => scrollToSection('hero')}
-                className="text-[#999999] hover:text-[#f5f5f0] text-left py-2"
+                className="text-[#f5f5f0] text-left py-4 px-4 text-xl font-medium border-b border-[#2a2a2a] hover:bg-[#2a2a2a]/50 transition-colors"
               >
                 Hem
               </button>
               <button 
                 onClick={() => scrollToSection('services')}
-                className="text-[#999999] hover:text-[#f5f5f0] text-left py-2"
+                className="text-[#f5f5f0] text-left py-4 px-4 text-xl font-medium border-b border-[#2a2a2a] hover:bg-[#2a2a2a]/50 transition-colors"
               >
                 Tjänster
               </button>
               <button 
                 onClick={() => scrollToSection('examples')}
-                className="text-[#999999] hover:text-[#f5f5f0] text-left py-2"
+                className="text-[#f5f5f0] text-left py-4 px-4 text-xl font-medium border-b border-[#2a2a2a] hover:bg-[#2a2a2a]/50 transition-colors"
               >
                 Mallar
               </button>
               <button 
                 onClick={() => scrollToSection('contact')}
-                className="text-[#999999] hover:text-[#f5f5f0] text-left py-2"
+                className="text-[#f5f5f0] text-left py-4 px-4 text-xl font-medium border-b border-[#2a2a2a] hover:bg-[#2a2a2a]/50 transition-colors"
               >
                 Kontakt
               </button>

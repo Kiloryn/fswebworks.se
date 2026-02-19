@@ -741,7 +741,6 @@ const defaultContent = {
 
 export default function Home() {
   const [content, setContent] = useState(defaultContent);
-  const [loading, setLoading] = useState(true);
 
   // Load content from localStorage or use default
   useEffect(() => {
@@ -753,16 +752,7 @@ export default function Home() {
         console.error('Failed to parse content:', e);
       }
     }
-    setLoading(false);
   }, []);
-
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#c8a46e]"></div>
-      </div>
-    );
-  }
 
   return (
     <main className="min-h-screen bg-[#0a0a0a]">
