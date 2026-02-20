@@ -16,15 +16,15 @@ export default function Footer() {
           <div data-oid="c:xjkvz">
             <div className="flex items-center gap-2 mb-4" data-oid="12t_6ge">
               <div
-                className="w-10 h-10 rounded-xl bg-[#c8a46e] flex items-center justify-center"
+                className="w-10 h-10 rounded-xl bg-[#c8a46e] flex items-center justify-center p-1"
                 data-oid="qx1d.g4"
               >
-                <span
-                  className="text-xl font-bold text-[#111111]"
+                <img
+                  src="/favicon.ico"
+                  alt="FSwebworks logo"
+                  className="w-full h-full object-contain"
                   data-oid="xgmant:"
-                >
-                  F
-                </span>
+                />
               </div>
               <span
                 className="text-xl font-semibold text-[#f5f5f0]"
