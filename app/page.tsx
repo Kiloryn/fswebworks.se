@@ -187,17 +187,35 @@ function HeroSection({ content }: { content: PageContent }) {
 // Services Section Component
 function ServicesSection({ content }: { content: PageContent }) {
   return (
-    <section id="services" className="py-24 bg-[#0a0a0a]" data-oid="v6pxpwd">
-      <div className="max-w-6xl mx-auto px-6" data-oid="2o5s9e5">
+    <section
+      id="services"
+      className="relative py-24 bg-[#0a0a0a] overflow-hidden"
+      data-oid="v6pxpwd"
+    >
+      {/* Subtle background glow */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(ellipse 70% 40% at 50% 100%, rgba(200, 164, 110, 0.06), transparent 60%)",
+        }}
+        aria-hidden
+        data-oid="_ez5uj."
+      />
+
+      <div className="relative max-w-6xl mx-auto px-6" data-oid="2o5s9e5">
         {/* Section Header */}
         <div className="text-center mb-16" data-oid="6kj:74t">
           <h2
-            className="text-3xl md:text-4xl font-bold text-[#f5f5f0] mb-4"
+            className="services-section-title text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-[#f5f5f0] via-[#d4b480] to-[#f5f5f0] bg-clip-text text-transparent max-w-2xl mx-auto"
             data-oid="_0ulb4x"
           >
             {content.services.sectionTitle}
           </h2>
-          <p className="text-[#999999] max-w-2xl mx-auto" data-oid="vzfe_39">
+          <p
+            className="services-section-subtitle text-[#999999] max-w-2xl mx-auto"
+            data-oid="vzfe_39"
+          >
             {content.services.sectionSubtitle}
           </p>
         </div>
@@ -206,16 +224,22 @@ function ServicesSection({ content }: { content: PageContent }) {
         <div className="grid md:grid-cols-2 gap-8" data-oid="ouwfl7q">
           {/* Package 1 */}
           <div
-            className="bg-[#111111] border border-[#2a2a2a] rounded-2xl p-8 hover:border-[#c8a46e]/30 transition-colors"
+            className="group services-card-entrance bg-[#111111] border border-[#2a2a2a] rounded-2xl p-8 hover:border-[#c8a46e]/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-[#c8a46e]/10 overflow-hidden"
+            style={{ animationDelay: "0.15s" }}
             data-oid="lo3nz5h"
           >
             {content.services.package1.image ? (
-              <img
-                src={content.services.package1.image}
-                alt={content.services.package1.title}
-                className="w-full h-48 object-cover rounded-lg mb-6"
-                data-oid="o9filvl"
-              />
+              <div
+                className="w-full h-48 rounded-lg mb-6 overflow-hidden"
+                data-oid="x926r26"
+              >
+                <img
+                  src={content.services.package1.image}
+                  alt={content.services.package1.title}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  data-oid="o9filvl"
+                />
+              </div>
             ) : (
               <div
                 className="w-full h-48 bg-gradient-to-br from-[#1a1a1a] to-[#111111] rounded-lg mb-6 flex items-center justify-center"
@@ -276,7 +300,7 @@ function ServicesSection({ content }: { content: PageContent }) {
             </ul>
             <Link
               href="#contact"
-              className="block w-full py-3 bg-[#c8a46e] text-[#111111] font-semibold rounded-lg hover:bg-[#d4b480] transition-colors text-center"
+              className="block w-full py-3 bg-[#c8a46e] text-[#111111] font-semibold rounded-lg hover:bg-[#d4b480] transition-all duration-200 text-center hover:scale-[1.02] hover:shadow-lg hover:shadow-[#c8a46e]/20"
               data-oid=".y_i1pm"
             >
               {content.services.package1.cta}
@@ -285,16 +309,22 @@ function ServicesSection({ content }: { content: PageContent }) {
 
           {/* Package 2 */}
           <div
-            className="bg-[#111111] border border-[#2a2a2a] rounded-2xl p-8 hover:border-[#c8a46e]/30 transition-colors"
+            className="group services-card-entrance bg-[#111111] border border-[#2a2a2a] rounded-2xl p-8 hover:border-[#c8a46e]/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-[#c8a46e]/10 overflow-hidden"
+            style={{ animationDelay: "0.25s" }}
             data-oid="v6c81h-"
           >
             {content.services.package2.image ? (
-              <img
-                src={content.services.package2.image}
-                alt={content.services.package2.title}
-                className="w-full h-48 object-cover rounded-lg mb-6"
-                data-oid="uo89u-5"
-              />
+              <div
+                className="w-full h-48 rounded-lg mb-6 overflow-hidden"
+                data-oid="_ixn9il"
+              >
+                <img
+                  src={content.services.package2.image}
+                  alt={content.services.package2.title}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  data-oid="uo89u-5"
+                />
+              </div>
             ) : (
               <div
                 className="w-full h-48 bg-gradient-to-br from-[#1a1a1a] to-[#111111] rounded-lg mb-6 flex items-center justify-center"
@@ -355,7 +385,7 @@ function ServicesSection({ content }: { content: PageContent }) {
             </ul>
             <Link
               href="#contact"
-              className="block w-full py-3 bg-transparent border border-[#c8a46e] text-[#c8a46e] font-semibold rounded-lg hover:bg-[#c8a46e] hover:text-[#111111] transition-colors text-center"
+              className="block w-full py-3 bg-transparent border border-[#c8a46e] text-[#c8a46e] font-semibold rounded-lg hover:bg-[#c8a46e] hover:text-[#111111] transition-all duration-200 text-center hover:shadow-[0_0_0_1px_var(--gold)]"
               data-oid="89qamm5"
             >
               {content.services.package2.cta}
