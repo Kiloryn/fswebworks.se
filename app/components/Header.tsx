@@ -97,15 +97,15 @@ export default function Header() {
               data-oid="v109ph8"
             >
               <div
-                className="w-10 h-10 rounded-xl bg-[#c8a46e] flex items-center justify-center"
+                className="w-10 h-10 rounded-xl bg-[#c8a46e] flex items-center justify-center p-1"
                 data-oid="fm0k8il"
               >
-                <span
-                  className="text-xl font-bold text-[#111111] w-[21px] h-[28px]"
+                <img
+                  src="/favicon.ico"
+                  alt="FSwebworks logo"
+                  className="w-full h-full object-contain text-start"
                   data-oid="kj9yp97"
-                >
-                  F
-                </span>
+                />
               </div>
               <span
                 className="text-3xl font-semibold text-[#f5f5f0] opacity-[100%] border-0 border-[rgb(229,_231,_235)]"
