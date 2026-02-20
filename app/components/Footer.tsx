@@ -1,14 +1,9 @@
 'use client';
 
+import Link from 'next/link';
+
 export default function Footer() {
   const currentYear = new Date().getFullYear();
-
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
 
   return (
     <footer className="bg-[#0a0a0a] border-t border-[#2a2a2a] py-16">
@@ -33,19 +28,19 @@ export default function Footer() {
             <h3 className="text-[#f5f5f0] font-semibold mb-4">Länkar</h3>
             <ul className="space-y-3">
               <li>
-                <button onClick={() => scrollToSection('services')} className="text-[#666666] hover:text-[#c8a46e] transition-colors text-sm text-left">
+                <Link href="#services" className="text-[#666666] hover:text-[#c8a46e] transition-colors text-sm text-left">
                   Tjänster & Priser
-                </button>
+                </Link>
               </li>
               <li>
-                <button onClick={() => scrollToSection('examples')} className="text-[#666666] hover:text-[#c8a46e] transition-colors text-sm text-left">
+                <Link href="#examples" className="text-[#666666] hover:text-[#c8a46e] transition-colors text-sm text-left">
                   Våra Mallar
-                </button>
+                </Link>
               </li>
               <li>
-                <button onClick={() => scrollToSection('contact')} className="text-[#666666] hover:text-[#c8a46e] transition-colors text-sm text-left">
+                <Link href="#contact" className="text-[#666666] hover:text-[#c8a46e] transition-colors text-sm text-left">
                   Kontakta oss
-                </button>
+                </Link>
               </li>
             </ul>
           </div>

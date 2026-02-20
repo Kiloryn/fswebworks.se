@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
 
 // Color palettes for templates
 const colorPalettes = [
@@ -61,18 +62,18 @@ function HeroSection({ content }: { content: any }) {
         
         {/* CTAs */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <button 
-            onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })}
-            className="px-8 py-4 bg-[#c8a46e] text-[#111111] font-semibold rounded-lg hover:bg-[#d4b480] transition-colors"
+          <Link
+            href="#services"
+            className="px-8 py-4 bg-[#c8a46e] text-[#111111] font-semibold rounded-lg hover:bg-[#d4b480] transition-colors text-center"
           >
             {content.hero.ctaPrimary}
-          </button>
-          <button 
-            onClick={() => document.getElementById('examples')?.scrollIntoView({ behavior: 'smooth' })}
-            className="px-8 py-4 bg-transparent border border-[#333333] text-[#f5f5f0] font-semibold rounded-lg hover:border-[#c8a46e] hover:text-[#c8a46e] transition-colors"
+          </Link>
+          <Link
+            href="#examples"
+            className="px-8 py-4 bg-transparent border border-[#333333] text-[#f5f5f0] font-semibold rounded-lg hover:border-[#c8a46e] hover:text-[#c8a46e] transition-colors text-center"
           >
             {content.hero.ctaSecondary}
-          </button>
+          </Link>
         </div>
         
         {/* Trust Text */}
@@ -136,12 +137,12 @@ function ServicesSection({ content }: { content: any }) {
                 </li>
               ))}
             </ul>
-            <button 
-              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-              className="w-full py-3 bg-[#c8a46e] text-[#111111] font-semibold rounded-lg hover:bg-[#d4b480] transition-colors"
+            <Link
+              href="#contact"
+              className="block w-full py-3 bg-[#c8a46e] text-[#111111] font-semibold rounded-lg hover:bg-[#d4b480] transition-colors text-center"
             >
               {content.services.package1.cta}
-            </button>
+            </Link>
           </div>
           
           {/* Package 2 */}
@@ -179,9 +180,12 @@ function ServicesSection({ content }: { content: any }) {
                 </li>
               ))}
             </ul>
-            <button className="w-full py-3 bg-transparent border border-[#c8a46e] text-[#c8a46e] font-semibold rounded-lg hover:bg-[#c8a46e] hover:text-[#111111] transition-colors">
+            <Link
+              href="#contact"
+              className="block w-full py-3 bg-transparent border border-[#c8a46e] text-[#c8a46e] font-semibold rounded-lg hover:bg-[#c8a46e] hover:text-[#111111] transition-colors text-center"
+            >
               {content.services.package2.cta}
-            </button>
+            </Link>
           </div>
         </div>
       </div>
@@ -466,7 +470,9 @@ function TemplateModal({ template, onClose }: { template: any; onClose: () => vo
       {/* Modal Content */}
       <div className="relative bg-[#1a1a1a] rounded-2xl max-w-5xl w-full max-h-[90vh] overflow-hidden border border-[#333333] shadow-2xl">
         {/* Close button */}
-        <button 
+        <button
+          type="button"
+          aria-label="Stäng"
           onClick={onClose}
           className="absolute top-4 right-4 z-10 w-10 h-10 bg-[#252525] hover:bg-[#333333] rounded-full flex items-center justify-center text-white transition-colors"
         >
@@ -517,12 +523,12 @@ function TemplateModal({ template, onClose }: { template: any; onClose: () => vo
             </div>
 
             {/* CTA */}
-            <button 
-              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-              className="w-full py-4 bg-[#c8a46e] text-[#111111] font-bold rounded-xl hover:bg-[#d4b480] transition-colors"
+            <Link
+              href="#contact"
+              className="block w-full py-4 bg-[#c8a46e] text-[#111111] font-bold rounded-xl hover:bg-[#d4b480] transition-colors text-center"
             >
               Välj denna mall
-            </button>
+            </Link>
           </div>
         </div>
       </div>
@@ -616,12 +622,12 @@ function ExamplesSection({ content }: { content: any }) {
             <p className="text-[#999999] mb-4">
               Alla mallar anpassas efter ditt företags varumärke och behov
             </p>
-            <button 
-              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-              className="px-8 py-3 bg-[#c8a46e] text-[#111111] font-semibold rounded-lg hover:bg-[#d4b480] transition-colors"
+            <Link
+              href="#contact"
+              className="inline-block px-8 py-3 bg-[#c8a46e] text-[#111111] font-semibold rounded-lg hover:bg-[#d4b480] transition-colors"
             >
               Beställ din hemsida
-            </button>
+            </Link>
           </div>
         </div>
       </section>
@@ -693,7 +699,7 @@ function ContactSection({ content }: { content: any }) {
   );
 }
 
-// Default content
+// Default content (full shape for sections)
 const defaultContent = {
   hero: {
     badge: "Webbdesign för småföretag i Stockholm",
@@ -739,20 +745,74 @@ const defaultContent = {
   }
 };
 
-export default function Home() {
-  const [content, setContent] = useState(defaultContent);
+// Default page query shape (API returns { page: ... })
+const defaultPageQuery = {
+  page: {
+    hero: {
+      badge: defaultContent.hero.badge,
+      heading: defaultContent.hero.heading,
+      subheading: defaultContent.hero.subheading,
+      ctaPrimary: defaultContent.hero.ctaPrimary,
+      ctaSecondary: defaultContent.hero.ctaSecondary,
+    },
+    services: {
+      sectionTitle: defaultContent.services.sectionTitle,
+      sectionSubtitle: defaultContent.services.sectionSubtitle,
+    },
+    contact: {
+      sectionTitle: defaultContent.contact.sectionTitle,
+      sectionSubtitle: defaultContent.contact.sectionSubtitle,
+    },
+  },
+};
 
-  // Load content from localStorage or use default
+type PageDoc = typeof defaultPageQuery.page;
+
+/** Merge API page document into full content shape for sections */
+function mergePageIntoContent(page: PageDoc | null | undefined): typeof defaultContent {
+  const hero = page?.hero;
+  const services = page?.services;
+  const contact = page?.contact;
+  return {
+    ...defaultContent,
+    hero: {
+      ...defaultContent.hero,
+      ...(hero && {
+        badge: hero.badge ?? defaultContent.hero.badge,
+        heading: hero.heading ?? defaultContent.hero.heading,
+        subheading: hero.subheading ?? defaultContent.hero.subheading,
+        ctaPrimary: hero.ctaPrimary ?? defaultContent.hero.ctaPrimary,
+        ctaSecondary: hero.ctaSecondary ?? defaultContent.hero.ctaSecondary,
+      }),
+    },
+    services: {
+      ...defaultContent.services,
+      ...(services && {
+        sectionTitle: services.sectionTitle ?? defaultContent.services.sectionTitle,
+        sectionSubtitle: services.sectionSubtitle ?? defaultContent.services.sectionSubtitle,
+      }),
+    },
+    contact: {
+      ...defaultContent.contact,
+      ...(contact && {
+        sectionTitle: contact.sectionTitle ?? defaultContent.contact.sectionTitle,
+        sectionSubtitle: contact.sectionSubtitle ?? defaultContent.contact.sectionSubtitle,
+      }),
+    },
+  };
+}
+
+export default function Home() {
+  const [pageData, setPageData] = useState<{ page: PageDoc } | null>(null);
+
   useEffect(() => {
-    const savedContent = localStorage.getItem('fswebworks_content');
-    if (savedContent) {
-      try {
-        setContent(JSON.parse(savedContent));
-      } catch (e) {
-        console.error('Failed to parse content:', e);
-      }
-    }
+    fetch('/api/page-data')
+      .then((r) => r.ok ? r.json() : null)
+      .then((data) => data && setPageData(data))
+      .catch(() => {});
   }, []);
+
+  const content = mergePageIntoContent(pageData?.page ?? defaultPageQuery.page);
 
   return (
     <main className="min-h-screen bg-[#0a0a0a]">
