@@ -44,22 +44,25 @@ export default function Header() {
           aria-modal="true"
           aria-label="Meny"
         >
-          {/* Backdrop - tap to close */}
+          {/* Light backdrop – tap to close */}
           <button
             type="button"
             aria-label="Stäng meny"
-            className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+            className="mobile-menu-backdrop absolute inset-0 z-0"
             onClick={closeMobileMenu}
           />
-          {/* Menu panel */}
-          <div className="absolute inset-x-0 top-20 bottom-0 bg-[#0a0a0a]/95 backdrop-blur-md border-t border-[#2a2a2a] shadow-2xl overflow-y-auto">
-            <nav className="flex flex-col items-center justify-center min-h-[60vh] px-6 py-12 gap-2">
+          {/* Compact dropdown – centered below header */}
+          <div
+            className="mobile-menu-panel absolute left-1/2 top-[5.25rem] z-10 w-[min(calc(100vw-2rem),16rem)] -translate-x-1/2 overflow-hidden py-2"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <nav className="flex flex-col">
               {MENU_LINKS.map(({ href, label }) => (
                 <Link
                   key={href}
                   href={href}
                   onClick={closeMobileMenu}
-                  className="w-full max-w-xs py-4 px-6 text-center text-xl font-medium text-[#f5f5f0] rounded-xl border border-transparent hover:border-[#c8a46e]/50 hover:bg-[#c8a46e]/10 hover:text-[#c8a46e] transition-all duration-200"
+                  className="mobile-menu-link"
                 >
                   {label}
                 </Link>
@@ -102,8 +105,9 @@ export default function Header() {
             {/* Mobile Menu Button - large touch target, explicit handlers */}
             <button
               type="button"
-              aria-label={mobileMenuOpen ? 'Stäng meny' : 'Öppna meny'}
-              aria-expanded={mobileMenuOpen ? 'true' : 'false'}
+              {...(mobileMenuOpen
+                ? { 'aria-label': 'Stäng meny', 'aria-expanded': 'true' as const }
+                : { 'aria-label': 'Öppna meny', 'aria-expanded': 'false' as const })}
               className="md:hidden flex items-center justify-center min-w-[44px] min-h-[44px] -mr-2 text-[#f5f5f0] hover:text-[#c8a46e] active:opacity-80 transition-colors cursor-pointer touch-manipulation"
               onClick={(e) => {
                 e.preventDefault();

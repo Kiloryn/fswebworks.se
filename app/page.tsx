@@ -1,7 +1,9 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, Suspense } from 'react';
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
+import type { PageContent } from '@/lib/pageContent';
 
 // Color palettes for templates
 const colorPalettes = [
@@ -13,15 +15,15 @@ const colorPalettes = [
 ];
 
 // Hero Section Component
-function HeroSection({ content }: { content: any }) {
+function HeroSection({ content }: { content: PageContent }) {
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#0a0a0a] via-[#111111] to-[#0a0a0a]" />
-      {content.heroImage && (
+      {content.hero.heroImage && (
         <div 
           className="absolute inset-0 bg-cover bg-center opacity-20"
-          style={{ backgroundImage: `url(${content.heroImage})` }}
+          style={{ backgroundImage: `url(${content.hero.heroImage})` }}
         />
       )}
       
@@ -86,7 +88,7 @@ function HeroSection({ content }: { content: any }) {
 }
 
 // Services Section Component
-function ServicesSection({ content }: { content: any }) {
+function ServicesSection({ content }: { content: PageContent }) {
   return (
     <section id="services" className="py-24 bg-[#0a0a0a]">
       <div className="max-w-6xl mx-auto px-6">
@@ -399,8 +401,13 @@ function ConsultantPreview({ palette = { primary: '#8b5cf6', secondary: '#6d28d9
   );
 }
 
+const TEMPLATE_IMAGE_PLACEHOLDER = '/templates/placeholder.svg';
+
 // Template Card Component - Fresh modern design with images
 function TemplateCard({ template, onClick }: { template: any; onClick: () => void }) {
+  const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
+    e.currentTarget.src = TEMPLATE_IMAGE_PLACEHOLDER;
+  };
   return (
     <div 
       onClick={onClick}
@@ -409,9 +416,10 @@ function TemplateCard({ template, onClick }: { template: any; onClick: () => voi
       {/* Website Preview Image */}
       <div className="h-48 overflow-hidden bg-gray-900">
         <img 
-          src={template.image} 
+          src={template.image || TEMPLATE_IMAGE_PLACEHOLDER} 
           alt={template.name}
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+          onError={handleImageError}
         />
       </div>
       
@@ -457,10 +465,54 @@ function TemplateCard({ template, onClick }: { template: any; onClick: () => voi
   );
 }
 
+// Focusable selector for modal trap
+const FOCUSABLE = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+
 // Template Modal Component - with full size image preview
 function TemplateModal({ template, onClose }: { template: any; onClose: () => void }) {
+  const modalRef = useRef<HTMLDivElement>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    closeButtonRef.current?.focus();
+  }, []);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        onClose();
+        return;
+      }
+      if (e.key !== 'Tab' || !modalRef.current) return;
+      const focusable = Array.from<HTMLElement>(modalRef.current.querySelectorAll(FOCUSABLE));
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (e.shiftKey) {
+        if (document.activeElement === first) {
+          e.preventDefault();
+          last?.focus();
+        }
+      } else {
+        if (document.activeElement === last) {
+          e.preventDefault();
+          first?.focus();
+        }
+      }
+    };
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [onClose]);
+
+  const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
+    e.currentTarget.src = TEMPLATE_IMAGE_PLACEHOLDER;
+  };
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center p-4"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="template-modal-title"
+    >
       {/* Backdrop */}
       <div 
         className="absolute inset-0 bg-black/80 backdrop-blur-sm"
@@ -468,9 +520,13 @@ function TemplateModal({ template, onClose }: { template: any; onClose: () => vo
       />
       
       {/* Modal Content */}
-      <div className="relative bg-[#1a1a1a] rounded-2xl max-w-5xl w-full max-h-[90vh] overflow-hidden border border-[#333333] shadow-2xl">
+      <div
+        ref={modalRef}
+        className="relative bg-[#1a1a1a] rounded-2xl max-w-5xl w-full max-h-[90vh] overflow-hidden border border-[#333333] shadow-2xl"
+      >
         {/* Close button */}
         <button
+          ref={closeButtonRef}
           type="button"
           aria-label="Stäng"
           onClick={onClose}
@@ -487,16 +543,17 @@ function TemplateModal({ template, onClose }: { template: any; onClose: () => vo
             <div className="text-xs text-gray-500 mb-2 uppercase tracking-wide">Förhandsvisning</div>
             <div className="rounded-xl overflow-hidden shadow-2xl border border-[#333333]">
               <img 
-                src={template.image} 
+                src={template.image || TEMPLATE_IMAGE_PLACEHOLDER} 
                 alt={template.name}
                 className="w-full h-auto"
+                onError={handleImageError}
               />
             </div>
           </div>
 
           {/* Controls Area */}
           <div className="lg:w-1/3 p-6 bg-[#1a1a1a] border-l border-[#333333]">
-            <h2 className="text-2xl font-bold text-white mb-2">{template.name}</h2>
+            <h2 id="template-modal-title" className="text-2xl font-bold text-white mb-2">{template.name}</h2>
             <p className="text-gray-400 text-sm mb-6">{template.description}</p>
             
             {/* Color Palette Info */}
@@ -522,9 +579,10 @@ function TemplateModal({ template, onClose }: { template: any; onClose: () => vo
               </ul>
             </div>
 
-            {/* CTA */}
+            {/* CTA – close modal on click so contact form is visible when we navigate */}
             <Link
-              href="#contact"
+              href={`/?mall=${template.id}#contact`}
+              onClick={onClose}
               className="block w-full py-4 bg-[#c8a46e] text-[#111111] font-bold rounded-xl hover:bg-[#d4b480] transition-colors text-center"
             >
               Välj denna mall
@@ -589,7 +647,7 @@ const templates = [
 ];
 
 // Examples Section Component
-function ExamplesSection({ content }: { content: any }) {
+function ExamplesSection({ content }: { content: PageContent }) {
   const [selectedTemplate, setSelectedTemplate] = useState<any>(null);
 
   return (
@@ -644,9 +702,88 @@ function ExamplesSection({ content }: { content: any }) {
 }
 
 // Contact Section Component
-function ContactSection({ content }: { content: any }) {
+function ContactSection({ content }: { content: PageContent }) {
+  const searchParams = useSearchParams();
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
+  const [templateId, setTemplateId] = useState('');
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState('');
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const mall = searchParams.get('mall');
+    if (mall && templates.some((t) => t.id === mall)) {
+      setTemplateId(mall);
+    }
+  }, [searchParams]);
+
+  useEffect(() => {
+    if ((status === 'success' || status === 'error') && sectionRef.current) {
+      sectionRef.current.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  }, [status]);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setErrorMessage('');
+    const trimmedName = name.trim();
+    const trimmedEmail = email.trim();
+    const trimmedMessage = message.trim();
+    if (!trimmedName) {
+      setErrorMessage('Namn krävs');
+      setStatus('error');
+      return;
+    }
+    if (!trimmedEmail) {
+      setErrorMessage('E-post krävs');
+      setStatus('error');
+      return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmedEmail)) {
+      setErrorMessage('Ogiltig e-postadress');
+      setStatus('error');
+      return;
+    }
+    if (!trimmedMessage) {
+      setErrorMessage('Meddelande krävs');
+      setStatus('error');
+      return;
+    }
+    const templateName = templateId && templateId !== 'other' ? templates.find((t) => t.id === templateId)?.name ?? '' : '';
+    setStatus('loading');
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: trimmedName,
+          email: trimmedEmail,
+          message: trimmedMessage,
+          template: templateName,
+        }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        const msg = data.detail ? `${data.error} (${data.detail})` : (data.error || 'Något gick fel');
+        setErrorMessage(msg);
+        setStatus('error');
+        return;
+      }
+      setStatus('success');
+      setName('');
+      setEmail('');
+      setMessage('');
+      setTemplateId('');
+    } catch {
+      setErrorMessage('Kunde inte skicka. Försök igen.');
+      setStatus('error');
+    }
+  };
+
   return (
-    <section id="contact" className="py-24 bg-[#0a0a0a] relative overflow-hidden">
+    <section id="contact" className="py-24 bg-[#0a0a0a] relative overflow-hidden" ref={sectionRef}>
       {/* Background */}
       {content.contact.image && (
         <div 
@@ -664,36 +801,96 @@ function ContactSection({ content }: { content: any }) {
           {content.contact.sectionSubtitle}
         </p>
         
-        {/* Contact Form */}
-        <form className="space-y-4 text-left max-w-lg mx-auto">
-          <div>
-            <input 
-              type="text" 
-              placeholder="Namn"
-              className="w-full px-4 py-3 bg-[#111111] border border-[#2a2a2a] rounded-lg text-[#f5f5f0] placeholder-[#666666] focus:border-[#c8a46e] focus:outline-none"
-            />
+        {status === 'success' ? (
+          <div className="max-w-lg mx-auto py-8 px-6 bg-[#111111] border border-[#2a2a2a] rounded-xl text-[#f5f5f0]">
+            <p className="text-lg font-medium text-[#c8a46e] mb-2">Tack för din förfrågan!</p>
+            <p className="text-[#999999]">Vi återkommer inom 24 timmar.</p>
           </div>
-          <div>
-            <input 
-              type="email" 
-              placeholder="E-post"
-              className="w-full px-4 py-3 bg-[#111111] border border-[#2a2a2a] rounded-lg text-[#f5f5f0] placeholder-[#666666] focus:border-[#c8a46e] focus:outline-none"
-            />
-          </div>
-          <div>
-            <textarea 
-              placeholder="Meddelande"
-              rows={4}
-              className="w-full px-4 py-3 bg-[#111111] border border-[#2a2a2a] rounded-lg text-[#f5f5f0] placeholder-[#666666] focus:border-[#c8a46e] focus:outline-none resize-none"
-            />
-          </div>
-          <button 
-            type="submit"
-            className="w-full py-4 bg-[#c8a46e] text-[#111111] font-semibold rounded-lg hover:bg-[#d4b480] transition-colors"
-          >
-            Skicka förfrågan
-          </button>
-        </form>
+        ) : (
+          <form onSubmit={handleSubmit} className="space-y-4 text-left max-w-lg mx-auto">
+            {errorMessage && (
+              <p className="text-red-400 text-sm" role="alert">
+                {errorMessage}
+              </p>
+            )}
+            <div>
+              <label htmlFor="contact-name" className="block text-[#e5e5e0] text-sm font-medium mb-1.5">
+                Namn
+              </label>
+              <input 
+                id="contact-name"
+                name="name"
+                type="text" 
+                autoComplete="name"
+                placeholder="Ditt namn"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                disabled={status === 'loading'}
+                className="w-full px-4 py-3 bg-[#111111] border border-[#2a2a2a] rounded-lg text-[#f5f5f0] placeholder-[#666666] focus:border-[#c8a46e] focus:outline-none disabled:opacity-60"
+              />
+            </div>
+            <div>
+              <label htmlFor="contact-email" className="block text-[#e5e5e0] text-sm font-medium mb-1.5">
+                E-post
+              </label>
+              <input 
+                id="contact-email"
+                name="email"
+                type="email" 
+                autoComplete="email"
+                placeholder="din@epost.se"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                disabled={status === 'loading'}
+                className="w-full px-4 py-3 bg-[#111111] border border-[#2a2a2a] rounded-lg text-[#f5f5f0] placeholder-[#666666] focus:border-[#c8a46e] focus:outline-none disabled:opacity-60"
+              />
+            </div>
+            <div>
+              <label htmlFor="contact-template" className="block text-[#e5e5e0] text-sm font-medium mb-1.5">
+                Vilken mall är du intresserad av? (valfritt)
+              </label>
+              <select
+                id="contact-template"
+                name="template"
+                value={templateId}
+                onChange={(e) => setTemplateId(e.target.value)}
+                disabled={status === 'loading'}
+                className="w-full px-4 py-3 bg-[#111111] border border-[#2a2a2a] rounded-lg text-[#f5f5f0] focus:border-[#c8a46e] focus:outline-none disabled:opacity-60"
+              >
+                <option value="">— Välj mall —</option>
+                {templates.map((t) => (
+                  <option key={t.id} value={t.id}>
+                    {t.name}
+                  </option>
+                ))}
+                <option value="other">Övrigt / ingen specifik</option>
+              </select>
+            </div>
+            <div>
+              <label htmlFor="contact-message" className="block text-[#e5e5e0] text-sm font-medium mb-1.5">
+                Meddelande
+              </label>
+              <textarea 
+                id="contact-message"
+                name="message"
+                placeholder="Skriv ditt meddelande..."
+                rows={4}
+                autoComplete="off"
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                disabled={status === 'loading'}
+                className="w-full px-4 py-3 bg-[#111111] border border-[#2a2a2a] rounded-lg text-[#f5f5f0] placeholder-[#666666] focus:border-[#c8a46e] focus:outline-none resize-none disabled:opacity-60"
+              />
+            </div>
+            <button 
+              type="submit"
+              disabled={status === 'loading'}
+              className="w-full py-4 bg-[#c8a46e] text-[#111111] font-semibold rounded-lg hover:bg-[#d4b480] transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+            >
+              {status === 'loading' ? 'Skickar...' : 'Skicka förfrågan'}
+            </button>
+          </form>
+        )}
       </div>
     </section>
   );
@@ -745,33 +942,61 @@ const defaultContent = {
   }
 };
 
-// Default page query shape (API returns { page: ... })
+// Default page query shape (API returns { page: ... }) – full shape from getPageData
 const defaultPageQuery = {
   page: {
     hero: {
       badge: defaultContent.hero.badge,
       heading: defaultContent.hero.heading,
       subheading: defaultContent.hero.subheading,
+      benefits: defaultContent.hero.benefits,
       ctaPrimary: defaultContent.hero.ctaPrimary,
       ctaSecondary: defaultContent.hero.ctaSecondary,
+      trustText: defaultContent.hero.trustText,
+      logo: defaultContent.hero.logo,
+      heroImage: defaultContent.hero.heroImage,
     },
     services: {
       sectionTitle: defaultContent.services.sectionTitle,
       sectionSubtitle: defaultContent.services.sectionSubtitle,
+      package1: defaultContent.services.package1,
+      package2: defaultContent.services.package2,
+    },
+    examples: {
+      sectionTitle: defaultContent.examples.sectionTitle,
+      sectionSubtitle: defaultContent.examples.sectionSubtitle,
     },
     contact: {
       sectionTitle: defaultContent.contact.sectionTitle,
       sectionSubtitle: defaultContent.contact.sectionSubtitle,
+      image: defaultContent.contact.image,
     },
   },
 };
 
 type PageDoc = typeof defaultPageQuery.page;
 
+function mergePackage(
+  from: PageDoc['services'] extends { package1?: infer P } ? P : never,
+  fallback: typeof defaultContent.services.package1
+): typeof defaultContent.services.package1 {
+  if (!from) return fallback;
+  return {
+    title: from.title ?? fallback.title,
+    price: from.price ?? fallback.price,
+    priceLabel: from.priceLabel ?? fallback.priceLabel,
+    description: from.description ?? fallback.description,
+    features: from.features?.length ? from.features : fallback.features,
+    cta: from.cta ?? fallback.cta,
+    image: from.image ?? fallback.image,
+  };
+}
+
 /** Merge API page document into full content shape for sections */
 function mergePageIntoContent(page: PageDoc | null | undefined): typeof defaultContent {
   const hero = page?.hero;
   const services = page?.services;
+  const examples = page?.examples;
   const contact = page?.contact;
   return {
     ...defaultContent,
@@ -781,8 +1006,12 @@ function mergePageIntoContent(page: PageDoc | null | undefined): typeof defaultC
         badge: hero.badge ?? defaultContent.hero.badge,
         heading: hero.heading ?? defaultContent.hero.heading,
         subheading: hero.subheading ?? defaultContent.hero.subheading,
+        benefits: hero.benefits?.length ? hero.benefits : defaultContent.hero.benefits,
         ctaPrimary: hero.ctaPrimary ?? defaultContent.hero.ctaPrimary,
         ctaSecondary: hero.ctaSecondary ?? defaultContent.hero.ctaSecondary,
+        trustText: hero.trustText ?? defaultContent.hero.trustText,
+        logo: hero.logo ?? defaultContent.hero.logo,
+        heroImage: hero.heroImage ?? defaultContent.hero.heroImage,
       }),
     },
     services: {
@@ -790,6 +1019,15 @@ function mergePageIntoContent(page: PageDoc | null | undefined): typeof defaultC
       ...(services && {
         sectionTitle: services.sectionTitle ?? defaultContent.services.sectionTitle,
         sectionSubtitle: services.sectionSubtitle ?? defaultContent.services.sectionSubtitle,
+        package1: mergePackage(services.package1, defaultContent.services.package1),
+        package2: mergePackage(services.package2, defaultContent.services.package2),
+      }),
+    },
+    examples: {
+      ...defaultContent.examples,
+      ...(examples && {
+        sectionTitle: examples.sectionTitle ?? defaultContent.examples.sectionTitle,
+        sectionSubtitle: examples.sectionSubtitle ?? defaultContent.examples.sectionSubtitle,
       }),
     },
     contact: {
@@ -797,6 +1035,7 @@ function mergePageIntoContent(page: PageDoc | null | undefined): typeof defaultC
       ...(contact && {
         sectionTitle: contact.sectionTitle ?? defaultContent.contact.sectionTitle,
         sectionSubtitle: contact.sectionSubtitle ?? defaultContent.contact.sectionSubtitle,
+        image: contact.image ?? defaultContent.contact.image,
       }),
     },
   };
@@ -819,7 +1058,9 @@ export default function Home() {
       <HeroSection content={content} />
       <ServicesSection content={content} />
       <ExamplesSection content={content} />
-      <ContactSection content={content} />
+      <Suspense fallback={<div className="py-24 min-h-[40vh]" />}>
+        <ContactSection content={content} />
+      </Suspense>
     </main>
   );
 }

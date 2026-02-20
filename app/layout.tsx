@@ -1,11 +1,32 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import "./globals.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import SmoothScroll from "./components/SmoothScroll";
+
+const siteName = 'FSwebworks';
+const title = 'FSwebworks - Webbdesign för småföretag i Stockholm';
+const description = 'Enkla och professionella hemsidor för hantverkare och småföretag. Fast pris från 9 900 kr.';
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://fswebworks.se';
 
 export const metadata: Metadata = {
-  title: "FSwebworks - Webbdesign för småföretag i Stockholm",
-  description: "Enkla och professionella hemsidor för hantverkare och småföretag. Fast pris från 9 900 kr.",
+  title,
+  description,
+  openGraph: {
+    type: 'website',
+    locale: 'sv_SE',
+    url: baseUrl,
+    siteName,
+    title,
+    description,
+    images: [{ url: `${baseUrl}/og.png`, width: 1200, height: 630, alt: siteName }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title,
+    description,
+  },
 };
 
 export default function RootLayout({
@@ -16,6 +37,9 @@ export default function RootLayout({
   return (
     <html lang="sv" className="scroll-smooth">
       <body className="min-h-screen bg-[#0a0a0a] antialiased">
+        <Suspense fallback={null}>
+          <SmoothScroll />
+        </Suspense>
         <Header />
         <main className="pt-20">
           {children}
