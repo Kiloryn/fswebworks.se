@@ -55,42 +55,42 @@ function HeroSection({ content }: { content: PageContent }) {
     <section
       id="hero"
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
-      data-oid="0:pkbi1"
+      data-oid="wcrqy1_"
     >
       {/* Background */}
       <div
         className="inset-0 bg-gradient-to-br from-[#0a0a0a] via-[#111111] to-[#0a0a0a] right-auto bottom-auto absolute left-[713px] top-[512px]"
-        data-oid="s8jjofo"
+        data-oid="so1dcx6"
       />
 
       {content.hero.heroImage && (
         <div
           className="absolute inset-0 bg-cover bg-center opacity-20"
           style={{ backgroundImage: `url(${content.hero.heroImage})` }}
-          data-oid="5hd-iwf"
+          data-oid="xh6agta"
         />
       )}
 
       <div
         className="relative z-10 max-w-6xl mx-auto px-6 py-20 text-center"
-        data-oid="x0jsw3s"
+        data-oid="by94y96"
       >
         {/* Badge */}
         <div
           className="inline-block px-4 py-2 bg-[#c8a46e]/10 border border-[#c8a46e]/20 text-[#c8a46e] text-sm mb-8 w-[334px] h-[55px] rounded-[9998px]"
-          data-oid="w3sjl_s"
+          data-oid="bj.ynsa"
         >
           {content.hero.badge}
         </div>
 
         {/* Logo - only show if uploaded */}
         {content.hero.logo && (
-          <div className="mb-8" data-oid="3lqsilc">
+          <div className="mb-8" data-oid="27t-dv_">
             <img
               src={content.hero.logo}
               alt="Logo"
               className="h-24 mx-auto object-contain"
-              data-oid="_tc-v9d"
+              data-oid="ge92.13"
             />
           </div>
         )}
@@ -98,7 +98,7 @@ function HeroSection({ content }: { content: PageContent }) {
         {/* Heading */}
         <h1
           className="text-4xl md:text-6xl font-bold text-[#f5f5f0] mb-6 max-w-4xl mx-auto leading-tight"
-          data-oid="vsaap0q"
+          data-oid="z94mjfc"
         >
           {content.hero.heading}
         </h1>
@@ -106,7 +106,7 @@ function HeroSection({ content }: { content: PageContent }) {
         {/* Subheading */}
         <p
           className="text-lg md:text-xl text-[#999999] mb-10 max-w-2xl mx-auto leading-relaxed"
-          data-oid="98856a1"
+          data-oid="9bsi-z4"
         >
           {content.hero.subheading}
         </p>
@@ -114,27 +114,27 @@ function HeroSection({ content }: { content: PageContent }) {
         {/* Benefits */}
         <div
           className="flex flex-wrap justify-center gap-4 mb-10"
-          data-oid="l8i5o._"
+          data-oid="e.i0ao8"
         >
           {content.hero.benefits?.map((benefit: string, i: number) => (
             <div
               key={i}
               className="flex items-center gap-2 text-[#999999]"
-              data-oid="m.wrd9b"
+              data-oid="m1_k3c0"
             >
               <svg
                 className="w-5 h-5 text-[#c8a46e]"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
-                data-oid="a_45c5z"
+                data-oid="ol85lnn"
               >
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   strokeWidth={2}
                   d="M5 13l4 4L19 7"
-                  data-oid="yrpb5x9"
+                  data-oid="_0e_o-h"
                 />
               </svg>
               {benefit}
@@ -145,26 +145,26 @@ function HeroSection({ content }: { content: PageContent }) {
         {/* CTAs */}
         <div
           className="flex flex-col sm:flex-row gap-4 justify-center"
-          data-oid="rzvqy59"
+          data-oid="a9418o8"
         >
           <Link
             href="#services"
             className="px-8 py-4 bg-[#c8a46e] text-[#111111] font-semibold rounded-lg hover:bg-[#d4b480] transition-colors text-center"
-            data-oid="uzmqrza"
+            data-oid="gfi:kff"
           >
             {content.hero.ctaPrimary}
           </Link>
           <Link
             href="#examples"
             className="px-8 py-4 bg-transparent border border-[#333333] text-[#f5f5f0] font-semibold rounded-lg hover:border-[#c8a46e] hover:text-[#c8a46e] transition-colors text-center"
-            data-oid="awd61kt"
+            data-oid="n4bojf:"
           >
             {content.hero.ctaSecondary}
           </Link>
         </div>
 
         {/* Trust Text */}
-        <p className="text-[#666666] mt-8 text-sm" data-oid="e8p:8nd">
+        <p className="text-[#666666] mt-8 text-sm" data-oid="vg454i1">
           {content.hero.trustText}
         </p>
       </div>
@@ -175,86 +175,86 @@ function HeroSection({ content }: { content: PageContent }) {
 // Services Section Component
 function ServicesSection({ content }: { content: PageContent }) {
   return (
-    <section id="services" className="py-24 bg-[#0a0a0a]" data-oid="o5fx9jf">
-      <div className="max-w-6xl mx-auto px-6" data-oid="n_i99w_">
+    <section id="services" className="py-24 bg-[#0a0a0a]" data-oid="v6pxpwd">
+      <div className="max-w-6xl mx-auto px-6" data-oid="2o5s9e5">
         {/* Section Header */}
-        <div className="text-center mb-16" data-oid="iz3tai5">
+        <div className="text-center mb-16" data-oid="6kj:74t">
           <h2
             className="text-3xl md:text-4xl font-bold text-[#f5f5f0] mb-4"
-            data-oid="fuyxgna"
+            data-oid="_0ulb4x"
           >
             {content.services.sectionTitle}
           </h2>
-          <p className="text-[#999999] max-w-2xl mx-auto" data-oid="w6x7np_">
+          <p className="text-[#999999] max-w-2xl mx-auto" data-oid="vzfe_39">
             {content.services.sectionSubtitle}
           </p>
         </div>
 
         {/* Packages Grid */}
-        <div className="grid md:grid-cols-2 gap-8" data-oid="izrqnnn">
+        <div className="grid md:grid-cols-2 gap-8" data-oid="ouwfl7q">
           {/* Package 1 */}
           <div
             className="bg-[#111111] border border-[#2a2a2a] rounded-2xl p-8 hover:border-[#c8a46e]/30 transition-colors"
-            data-oid="w.l2z.7"
+            data-oid="lo3nz5h"
           >
             {content.services.package1.image ? (
               <img
                 src={content.services.package1.image}
                 alt={content.services.package1.title}
                 className="w-full h-48 object-cover rounded-lg mb-6"
-                data-oid="1yl9:.."
+                data-oid="o9filvl"
               />
             ) : (
               <div
                 className="w-full h-48 bg-gradient-to-br from-[#1a1a1a] to-[#111111] rounded-lg mb-6 flex items-center justify-center"
-                data-oid="boalhug"
+                data-oid="2bxc.ym"
               >
-                <span className="text-6xl" data-oid="n.4rsp7">
+                <span className="text-6xl" data-oid="k7:0y5c">
                   🏠
                 </span>
               </div>
             )}
-            <div className="flex items-baseline gap-2 mb-4" data-oid="dwl8qq9">
+            <div className="flex items-baseline gap-2 mb-4" data-oid="v8cyss_">
               <span
                 className="text-3xl font-bold text-[#f5f5f0]"
-                data-oid="tm64vjw"
+                data-oid="1h8gdpl"
               >
                 {content.services.package1.price}
               </span>
-              <span className="text-[#666666]" data-oid="xlkr5cj">
+              <span className="text-[#666666]" data-oid="ouxq.wa">
                 / {content.services.package1.priceLabel}
               </span>
             </div>
             <h3
               className="text-xl font-semibold text-[#f5f5f0] mb-3"
-              data-oid="ko7vdc1"
+              data-oid="4w:n-j."
             >
               {content.services.package1.title}
             </h3>
-            <p className="text-[#999999] mb-6" data-oid="dqtfxlv">
+            <p className="text-[#999999] mb-6" data-oid="x2-swwb">
               {content.services.package1.description}
             </p>
-            <ul className="space-y-3 mb-8" data-oid="1w9yjpa">
+            <ul className="space-y-3 mb-8" data-oid="n34khow">
               {content.services.package1.features?.map(
                 (feature: string, i: number) => (
                   <li
                     key={i}
                     className="flex items-start gap-3 text-[#999999]"
-                    data-oid="6hun5o0"
+                    data-oid=":i6lpig"
                   >
                     <svg
                       className="w-5 h-5 text-[#c8a46e] flex-shrink-0 mt-0.5"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
-                      data-oid="b.6k3m0"
+                      data-oid="2b5stzd"
                     >
                       <path
                         strokeLinecap="round"
                         strokeLinejoin="round"
                         strokeWidth={2}
                         d="M5 13l4 4L19 7"
-                        data-oid="ecvjqya"
+                        data-oid="rnmgtao"
                       />
                     </svg>
                     {feature}
@@ -265,7 +265,7 @@ function ServicesSection({ content }: { content: PageContent }) {
             <Link
               href="#contact"
               className="block w-full py-3 bg-[#c8a46e] text-[#111111] font-semibold rounded-lg hover:bg-[#d4b480] transition-colors text-center"
-              data-oid="j5607qn"
+              data-oid=".y_i1pm"
             >
               {content.services.package1.cta}
             </Link>
@@ -274,66 +274,66 @@ function ServicesSection({ content }: { content: PageContent }) {
           {/* Package 2 */}
           <div
             className="bg-[#111111] border border-[#2a2a2a] rounded-2xl p-8 hover:border-[#c8a46e]/30 transition-colors"
-            data-oid="r83lanq"
+            data-oid="v6c81h-"
           >
             {content.services.package2.image ? (
               <img
                 src={content.services.package2.image}
                 alt={content.services.package2.title}
                 className="w-full h-48 object-cover rounded-lg mb-6"
-                data-oid="yu1e631"
+                data-oid="uo89u-5"
               />
             ) : (
               <div
                 className="w-full h-48 bg-gradient-to-br from-[#1a1a1a] to-[#111111] rounded-lg mb-6 flex items-center justify-center"
-                data-oid="vfu7ija"
+                data-oid=":gelr3-"
               >
-                <span className="text-6xl" data-oid=".ej07jk">
+                <span className="text-6xl" data-oid=":8pty10">
                   🔧
                 </span>
               </div>
             )}
-            <div className="flex items-baseline gap-2 mb-4" data-oid="khr1znk">
+            <div className="flex items-baseline gap-2 mb-4" data-oid="q_c:y9g">
               <span
                 className="text-3xl font-bold text-[#f5f5f0]"
-                data-oid="x.8m.vs"
+                data-oid="s7a49wg"
               >
                 {content.services.package2.price}
               </span>
-              <span className="text-[#666666]" data-oid="rui-n0v">
+              <span className="text-[#666666]" data-oid="-zcih_u">
                 / {content.services.package2.priceLabel}
               </span>
             </div>
             <h3
               className="text-xl font-semibold text-[#f5f5f0] mb-3"
-              data-oid="fbjf_b1"
+              data-oid="p5.b5vl"
             >
               {content.services.package2.title}
             </h3>
-            <p className="text-[#999999] mb-6" data-oid="o-hu27u">
+            <p className="text-[#999999] mb-6" data-oid="m997fpy">
               {content.services.package2.description}
             </p>
-            <ul className="space-y-3 mb-8" data-oid="j5_de3p">
+            <ul className="space-y-3 mb-8" data-oid=":v68psy">
               {content.services.package2.features?.map(
                 (feature: string, i: number) => (
                   <li
                     key={i}
                     className="flex items-start gap-3 text-[#999999]"
-                    data-oid="5ai9:dj"
+                    data-oid="l_1wvq3"
                   >
                     <svg
                       className="w-5 h-5 text-[#c8a46e] flex-shrink-0 mt-0.5"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
-                      data-oid="hwoxlxs"
+                      data-oid="nub9lvd"
                     >
                       <path
                         strokeLinecap="round"
                         strokeLinejoin="round"
                         strokeWidth={2}
                         d="M5 13l4 4L19 7"
-                        data-oid="a0m1:.."
+                        data-oid="9o0zdqp"
                       />
                     </svg>
                     {feature}
@@ -344,7 +344,7 @@ function ServicesSection({ content }: { content: PageContent }) {
             <Link
               href="#contact"
               className="block w-full py-3 bg-transparent border border-[#c8a46e] text-[#c8a46e] font-semibold rounded-lg hover:bg-[#c8a46e] hover:text-[#111111] transition-colors text-center"
-              data-oid="l2x7ml0"
+              data-oid="89qamm5"
             >
               {content.services.package2.cta}
             </Link>
@@ -374,54 +374,54 @@ function PlumberPreview({
       style={{
         background: `linear-gradient(to bottom, ${palette.secondary}, ${palette.bg})`,
       }}
-      data-oid="e_1sv13"
+      data-oid="26tkdqe"
     >
       {/* Browser header */}
       <div
         className="bg-white/10 backdrop-blur-sm px-3 py-2 flex items-center gap-2"
-        data-oid="fdtpmq:"
+        data-oid=".xudk2c"
       >
-        <div className="flex gap-1.5" data-oid="3t3s3m_">
+        <div className="flex gap-1.5" data-oid="7.o8:su">
           <div
             className="w-3 h-3 rounded-full bg-red-400"
-            data-oid="d0bq4kx"
+            data-oid="d3c4lnt"
           ></div>
           <div
             className="w-3 h-3 rounded-full bg-yellow-400"
-            data-oid="zxvsy4s"
+            data-oid=":a.nfc0"
           ></div>
           <div
             className="w-3 h-3 rounded-full bg-green-400"
-            data-oid="pdmhgo8"
+            data-oid="alwgi:c"
           ></div>
         </div>
         <div
           className="flex-1 bg-white/20 rounded h-5 mx-4"
-          data-oid="9:mpu2-"
+          data-oid="grof82l"
         ></div>
       </div>
       {/* Website preview */}
       <div
         className="flex-1 p-3 bg-white m-2 rounded shadow-md"
-        data-oid="sp8hosu"
+        data-oid="5enbwze"
       >
         {/* Header */}
         <div
           className="flex items-center justify-between mb-3 pb-2 border-b"
           style={{ borderColor: palette.primary }}
-          data-oid="iw0arih"
+          data-oid="sbw997k"
         >
-          <div className="flex items-center gap-2" data-oid="1n0l036">
+          <div className="flex items-center gap-2" data-oid="x2gy7gq">
             <div
               className="w-8 h-8 rounded-lg flex items-center justify-center text-white text-sm font-bold"
               style={{ backgroundColor: palette.primary }}
-              data-oid="pht33lr"
+              data-oid="zria7i2"
             >
               P
             </div>
             <span
               className="font-bold text-gray-800 text-sm"
-              data-oid="t7qpjg0"
+              data-oid="kk2-3zg"
             >
               RÖR-PRO
             </span>
@@ -429,33 +429,33 @@ function PlumberPreview({
           <div
             className="px-3 py-1 rounded-full text-white text-xs font-semibold"
             style={{ backgroundColor: "#22c55e" }}
-            data-oid="5uad:c6"
+            data-oid="e7zu1d7"
           >
             RING
           </div>
         </div>
         {/* Hero content */}
-        <div className="space-y-1.5" data-oid="4v:jt42">
-          <div className="font-bold text-gray-800 text-xs" data-oid="hhrjk_f">
+        <div className="space-y-1.5" data-oid="lktw.un">
+          <div className="font-bold text-gray-800 text-xs" data-oid="wfq0ws0">
             Din rörmokare i Stockholm
           </div>
           <div
             className="flex items-center gap-1 text-green-600 text-[10px]"
-            data-oid="9y2b7j2"
+            data-oid="we6xsth"
           >
-            <span data-oid="k6s0:s7">✓</span> Akut service
+            <span data-oid="sh6a_fe">✓</span> Akut service
           </div>
           <div
             className="flex items-center gap-1 text-green-600 text-[10px]"
-            data-oid="rs0lca9"
+            data-oid="yiyr71v"
           >
-            <span data-oid="9bfjdcr">✓</span> Jour dygnet runt
+            <span data-oid="ba25:x:">✓</span> Jour dygnet runt
           </div>
           <div
             className="flex items-center gap-1 text-green-600 text-[10px]"
-            data-oid="4z01e7p"
+            data-oid="hpo5dgu"
           >
-            <span data-oid="duinad-">✓</span> Fri offert
+            <span data-oid="hf-vb09">✓</span> Fri offert
           </div>
         </div>
       </div>
@@ -477,47 +477,47 @@ function ElectricianPreview({
       style={{
         background: `linear-gradient(to bottom, ${palette.secondary}, ${palette.bg})`,
       }}
-      data-oid="kb3ga11"
+      data-oid="wsdwshi"
     >
       <div
         className="bg-white/10 backdrop-blur-sm px-3 py-2 flex items-center gap-2"
-        data-oid="gyiaxhi"
+        data-oid="_p6ght."
       >
-        <div className="flex gap-1.5" data-oid="x6p9b6a">
+        <div className="flex gap-1.5" data-oid="33yljwh">
           <div
             className="w-3 h-3 rounded-full bg-red-400"
-            data-oid="y:2mwot"
+            data-oid=":w._nt3"
           ></div>
           <div
             className="w-3 h-3 rounded-full bg-yellow-400"
-            data-oid="f4471s6"
+            data-oid="z.8dts-"
           ></div>
           <div
             className="w-3 h-3 rounded-full bg-green-400"
-            data-oid="b-.coyt"
+            data-oid="i82c1a3"
           ></div>
         </div>
         <div
           className="flex-1 bg-white/20 rounded h-5 mx-4"
-          data-oid="9gmt3uv"
+          data-oid="v.466io"
         ></div>
       </div>
       <div
         className="flex-1 p-3 bg-white m-2 rounded shadow-md"
-        data-oid="fbcgs6p"
+        data-oid="z:bokos"
       >
         <div
           className="flex items-center justify-between mb-3 pb-2 border-b"
           style={{ borderColor: palette.primary }}
-          data-oid="c7ys9.z"
+          data-oid="m:ga6ia"
         >
-          <div className="flex items-center gap-2" data-oid="y48hlc4">
-            <span className="text-lg" data-oid="1:g1rop">
+          <div className="flex items-center gap-2" data-oid=":0l4y23">
+            <span className="text-lg" data-oid="uezfwa_">
               ⚡
             </span>
             <span
               className="font-bold text-gray-800 text-sm"
-              data-oid="by1.by."
+              data-oid="99d8aof"
             >
               EL-SÄKERT
             </span>
@@ -525,32 +525,32 @@ function ElectricianPreview({
           <div
             className="px-3 py-1 rounded-full text-white text-xs font-semibold"
             style={{ backgroundColor: palette.primary }}
-            data-oid="7v5d7ye"
+            data-oid=".del8ps"
           >
             KONTAKT
           </div>
         </div>
-        <div className="space-y-1.5" data-oid="meryl4n">
-          <div className="font-bold text-gray-800 text-xs" data-oid="1mhw6-m">
+        <div className="space-y-1.5" data-oid="sqhnnnk">
+          <div className="font-bold text-gray-800 text-xs" data-oid="kmnf-mg">
             Elinstallation & Säkerhet
           </div>
-          <div className="flex gap-1 flex-wrap" data-oid="3j:db3h">
+          <div className="flex gap-1 flex-wrap" data-oid="hbe3yn2">
             <span
               className="px-1.5 py-0.5 rounded text-[8px] font-medium"
               style={{ backgroundColor: palette.bg, color: palette.secondary }}
-              data-oid="7r:kn2s"
+              data-oid="e5-uk4v"
             >
               Certifierad
             </span>
             <span
               className="px-1.5 py-0.5 rounded text-[8px] font-medium"
               style={{ backgroundColor: palette.bg, color: palette.secondary }}
-              data-oid="viwwqxf"
+              data-oid="_qgp_w."
             >
               A-behörighet
             </span>
           </div>
-          <div className="text-gray-500 text-[10px]" data-oid="y8.cb9o">
+          <div className="text-gray-500 text-[10px]" data-oid="9-30hzb">
             Nyinstallation • Felavhjälpning • Besiktning
           </div>
         </div>
@@ -573,62 +573,62 @@ function SalonPreview({
       style={{
         background: `linear-gradient(to bottom, ${palette.secondary}, ${palette.bg})`,
       }}
-      data-oid="pbhu.bg"
+      data-oid="ol2nfvr"
     >
       <div
         className="bg-white/10 backdrop-blur-sm px-3 py-2 flex items-center gap-2"
-        data-oid=":c6lkf-"
+        data-oid="hrt78z3"
       >
-        <div className="flex gap-1.5" data-oid="cyqz-q-">
+        <div className="flex gap-1.5" data-oid="7b4wdlh">
           <div
             className="w-3 h-3 rounded-full bg-red-400"
-            data-oid="9b49d.-"
+            data-oid="q.iz5og"
           ></div>
           <div
             className="w-3 h-3 rounded-full bg-yellow-400"
-            data-oid=":tu64ow"
+            data-oid="ip.c:__"
           ></div>
           <div
             className="w-3 h-3 rounded-full bg-green-400"
-            data-oid="cr221d1"
+            data-oid="9m7.fb6"
           ></div>
         </div>
         <div
           className="flex-1 bg-white/20 rounded h-5 mx-4"
-          data-oid="hnyddjl"
+          data-oid="m5w330x"
         ></div>
       </div>
       <div
         className="flex-1 p-3 bg-white m-2 rounded shadow-md"
-        data-oid="h_nwwbr"
+        data-oid="_9j3tm5"
       >
         <div
           className="flex items-center justify-between mb-3 pb-2 border-b"
           style={{ borderColor: palette.primary }}
-          data-oid=":vwmp_a"
+          data-oid="g479tn8"
         >
           <span
             className="font-bold text-gray-800 text-sm italic"
-            data-oid="qu11lgl"
+            data-oid="wc:c946"
           >
             GLAMOUR SALONG
           </span>
           <div
             className="px-3 py-1 rounded-full text-white text-xs font-semibold"
             style={{ backgroundColor: palette.primary }}
-            data-oid="makkdda"
+            data-oid=":chznn8"
           >
             BOKA
           </div>
         </div>
-        <div className="space-y-1.5" data-oid="ubdp19w">
-          <div className="font-bold text-gray-800 text-xs" data-oid="ykp:pzm">
+        <div className="space-y-1.5" data-oid="daa1.-u">
+          <div className="font-bold text-gray-800 text-xs" data-oid="xzasebp">
             Hårvård & Styling
           </div>
-          <div className="text-gray-600 text-[10px]" data-oid="wa5kvez">
+          <div className="text-gray-600 text-[10px]" data-oid="db.hc_d">
             Klippning • Färgning • Styling
           </div>
-          <div className="text-gray-400 text-[10px]" data-oid="1cbqnh6">
+          <div className="text-gray-400 text-[10px]" data-oid="ozyq5wb">
             Öppet: Mån-Fre 9-18
           </div>
         </div>
@@ -651,79 +651,79 @@ function RestaurantPreview({
       style={{
         background: `linear-gradient(to bottom, ${palette.secondary}, ${palette.bg})`,
       }}
-      data-oid="ch-90l:"
+      data-oid="eaxedeg"
     >
       <div
         className="bg-white/10 backdrop-blur-sm px-3 py-2 flex items-center gap-2"
-        data-oid="tq5:az_"
+        data-oid="tmdsans"
       >
-        <div className="flex gap-1.5" data-oid="yjqtqa8">
+        <div className="flex gap-1.5" data-oid="ka.:.0l">
           <div
             className="w-3 h-3 rounded-full bg-red-400"
-            data-oid="xsact.g"
+            data-oid="ufrcztz"
           ></div>
           <div
             className="w-3 h-3 rounded-full bg-yellow-400"
-            data-oid="yh3s8ky"
+            data-oid="3_fv50-"
           ></div>
           <div
             className="w-3 h-3 rounded-full bg-green-400"
-            data-oid="h1-3e.c"
+            data-oid="6j_4arm"
           ></div>
         </div>
         <div
           className="flex-1 bg-white/20 rounded h-5 mx-4"
-          data-oid="nk5u8pt"
+          data-oid="ncgi3pj"
         ></div>
       </div>
       <div
         className="flex-1 p-3 bg-white m-2 rounded shadow-md"
-        data-oid="5xb_x7x"
+        data-oid="cj:_o_2"
       >
         <div
           className="flex items-center justify-between mb-3 pb-2 border-b"
           style={{ borderColor: palette.primary }}
-          data-oid="xqfo4fn"
+          data-oid="5-x922z"
         >
-          <span className="font-bold text-gray-800 text-sm" data-oid="c_wpmey">
+          <span className="font-bold text-gray-800 text-sm" data-oid="7zf1y3i">
             BISTRO ITALIA
           </span>
           <div
             className="px-3 py-1 rounded-full text-white text-xs font-semibold"
             style={{ backgroundColor: "#dc2626" }}
-            data-oid="2yzogiw"
+            data-oid="crx0ix5"
           >
             BOKA
           </div>
         </div>
-        <div className="space-y-1.5" data-oid="d8tfn8f">
-          <div className="font-bold text-gray-800 text-xs" data-oid="jugww58">
+        <div className="space-y-1.5" data-oid="mnrgnhh">
+          <div className="font-bold text-gray-800 text-xs" data-oid="r2fl8a8">
             Veckans Lunch
           </div>
           <div
             className="flex justify-between text-[10px] text-gray-600"
-            data-oid="vwm8u1f"
+            data-oid="3n-sosu"
           >
-            <span data-oid="5gi0omg">Pasta Carbonara</span>
-            <span className="font-medium" data-oid="2k52ki3">
+            <span data-oid="nh5u5d:">Pasta Carbonara</span>
+            <span className="font-medium" data-oid="592wqb3">
               89 kr
             </span>
           </div>
           <div
             className="flex justify-between text-[10px] text-gray-600"
-            data-oid="_g.gep3"
+            data-oid="auy6015"
           >
-            <span data-oid="ktat2_3">Caesarsallad</span>
-            <span className="font-medium" data-oid="e-1jgn1">
+            <span data-oid="j6w-7k2">Caesarsallad</span>
+            <span className="font-medium" data-oid="aaiu3xr">
               79 kr
             </span>
           </div>
           <div
             className="flex justify-between text-[10px] text-gray-600"
-            data-oid=":gzdfw6"
+            data-oid="jftja-g"
           >
-            <span data-oid="2w73_y6">Grillad lax</span>
-            <span className="font-medium" data-oid="wyyfzpw">
+            <span data-oid="elxcpd8">Grillad lax</span>
+            <span className="font-medium" data-oid="4lf6pv3">
               119 kr
             </span>
           </div>
@@ -747,71 +747,71 @@ function RetailPreview({
       style={{
         background: `linear-gradient(to bottom, ${palette.secondary}, ${palette.bg})`,
       }}
-      data-oid="y3e8eae"
+      data-oid="aalo2o6"
     >
       <div
         className="bg-white/10 backdrop-blur-sm px-3 py-2 flex items-center gap-2"
-        data-oid="lglh33p"
+        data-oid="-olmws1"
       >
-        <div className="flex gap-1.5" data-oid="5a8z4:d">
+        <div className="flex gap-1.5" data-oid="n6lsz3k">
           <div
             className="w-3 h-3 rounded-full bg-red-400"
-            data-oid="zzoiw9b"
+            data-oid="w0m0wwp"
           ></div>
           <div
             className="w-3 h-3 rounded-full bg-yellow-400"
-            data-oid="dqxizz_"
+            data-oid="ijtsx4z"
           ></div>
           <div
             className="w-3 h-3 rounded-full bg-green-400"
-            data-oid="x9ewvxx"
+            data-oid="mbe3aln"
           ></div>
         </div>
         <div
           className="flex-1 bg-white/20 rounded h-5 mx-4"
-          data-oid="on4jpsw"
+          data-oid=":yebjyf"
         ></div>
       </div>
       <div
         className="flex-1 p-3 bg-white m-2 rounded shadow-md"
-        data-oid="n9x-o00"
+        data-oid="qb8sc1u"
       >
         <div
           className="flex items-center justify-between mb-3 pb-2 border-b"
           style={{ borderColor: palette.primary }}
-          data-oid="xc7hjnp"
+          data-oid="b2_qtxu"
         >
-          <span className="font-bold text-gray-800 text-sm" data-oid="olc5con">
+          <span className="font-bold text-gray-800 text-sm" data-oid="gcpmh8b">
             BUTIK Stockholm
           </span>
           <div
             className="px-3 py-1 rounded-full text-white text-xs font-semibold"
             style={{ backgroundColor: palette.primary }}
-            data-oid="tju5t.t"
+            data-oid="iz0ke2a"
           >
             KÖP
           </div>
         </div>
-        <div className="space-y-1.5" data-oid="qw3prai">
-          <div className="font-bold text-gray-800 text-xs" data-oid="8f3tbym">
+        <div className="space-y-1.5" data-oid="9xsf34y">
+          <div className="font-bold text-gray-800 text-xs" data-oid="-7np4ag">
             Nya produkter
           </div>
-          <div className="grid grid-cols-3 gap-1.5" data-oid="wjmffv3">
+          <div className="grid grid-cols-3 gap-1.5" data-oid="7k901ef">
             <div
               className="aspect-square bg-gray-100 rounded flex items-center justify-center text-xl"
-              data-oid="tti_.ya"
+              data-oid="rph.9z0"
             >
               📦
             </div>
             <div
               className="aspect-square bg-gray-100 rounded flex items-center justify-center text-xl"
-              data-oid="9763vl-"
+              data-oid="zkidj_p"
             >
               📦
             </div>
             <div
               className="aspect-square bg-gray-100 rounded flex items-center justify-center text-xl"
-              data-oid="1qb:5y."
+              data-oid="qgc_6_:"
             >
               📦
             </div>
@@ -836,66 +836,66 @@ function ConsultantPreview({
       style={{
         background: `linear-gradient(to bottom, ${palette.secondary}, ${palette.bg})`,
       }}
-      data-oid="zrtqg6b"
+      data-oid="19y0rr:"
     >
       <div
         className="bg-white/10 backdrop-blur-sm px-3 py-2 flex items-center gap-2"
-        data-oid=":z5o5ba"
+        data-oid="3mnv176"
       >
-        <div className="flex gap-1.5" data-oid="e_.0uqj">
+        <div className="flex gap-1.5" data-oid="gounaq0">
           <div
             className="w-3 h-3 rounded-full bg-red-400"
-            data-oid="qgf7jp:"
+            data-oid="5syvmrq"
           ></div>
           <div
             className="w-3 h-3 rounded-full bg-yellow-400"
-            data-oid="3c:mu5q"
+            data-oid="ww7szc6"
           ></div>
           <div
             className="w-3 h-3 rounded-full bg-green-400"
-            data-oid="eng.70g"
+            data-oid="_iouo__"
           ></div>
         </div>
         <div
           className="flex-1 bg-white/20 rounded h-5 mx-4"
-          data-oid="vm4-oe8"
+          data-oid="i.iichh"
         ></div>
       </div>
       <div
         className="flex-1 p-3 bg-white m-2 rounded shadow-md"
-        data-oid="-vckpuq"
+        data-oid="7pwb0la"
       >
         <div
           className="flex items-center justify-between mb-3 pb-2 border-b"
           style={{ borderColor: palette.primary }}
-          data-oid="32hy.:0"
+          data-oid="t1bjmu6"
         >
-          <span className="font-bold text-gray-800 text-sm" data-oid="f5jv2t7">
+          <span className="font-bold text-gray-800 text-sm" data-oid="bbz4yl9">
             ANDERS ERIKSSON
           </span>
-          <span className="text-gray-400 text-[10px]" data-oid="7pgz2zf">
+          <span className="text-gray-400 text-[10px]" data-oid="wjm:.9z">
             Konsult
           </span>
         </div>
-        <div className="space-y-1.5" data-oid="t43a5ez">
-          <div className="font-bold text-gray-800 text-xs" data-oid="zq0nf8s">
+        <div className="space-y-1.5" data-oid="vy.yn.s">
+          <div className="font-bold text-gray-800 text-xs" data-oid="c1abu0n">
             Strategi & Ledarskap
           </div>
-          <div className="text-gray-500 text-[10px]" data-oid="7sr3c_3">
+          <div className="text-gray-500 text-[10px]" data-oid="pm7z8:n">
             20 års erfarenhet
           </div>
-          <div className="flex gap-1 flex-wrap" data-oid="lwvapjp">
+          <div className="flex gap-1 flex-wrap" data-oid="24fjmyy">
             <span
               className="px-1.5 py-0.5 rounded text-[8px] font-medium"
               style={{ backgroundColor: palette.bg, color: palette.secondary }}
-              data-oid="ge7vd8o"
+              data-oid="7zt9q4p"
             >
               Företagsutveckling
             </span>
             <span
               className="px-1.5 py-0.5 rounded text-[8px] font-medium"
               style={{ backgroundColor: palette.bg, color: palette.secondary }}
-              data-oid=".llqnnu"
+              data-oid="tsqtj7_"
             >
               Coaching
             </span>
@@ -923,49 +923,49 @@ function TemplateCard({
     <div
       onClick={onClick}
       className="group bg-[#1a1a1a] border border-[#2a2a2a] rounded-2xl overflow-hidden hover:border-[#c8a46e]/50 transition-all cursor-pointer hover:-translate-y-2 hover:shadow-2xl hover:shadow-[#c8a46e]/10"
-      data-oid="uq:5ecq"
+      data-oid="a2l72b_"
     >
       {/* Website Preview Image */}
-      <div className="h-48 overflow-hidden bg-gray-900" data-oid="dd4971p">
+      <div className="h-48 overflow-hidden bg-gray-900" data-oid="6xv_uvq">
         <img
           src={template.image || TEMPLATE_IMAGE_PLACEHOLDER}
           alt={template.name}
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
           onError={handleImageError}
-          data-oid="s--qkm-"
+          data-oid="jfrw4qe"
         />
       </div>
 
       {/* Content */}
-      <div className="p-5" data-oid="mweh3h-">
+      <div className="p-5" data-oid="0y_8asp">
         <div
           className="flex items-center justify-between mb-2"
-          data-oid="opvil4w"
+          data-oid="mkad:v2"
         >
           <h3
             className="text-lg font-bold text-white group-hover:text-[#c8a46e] transition-colors"
-            data-oid="j6241bj"
+            data-oid="1o-4yg6"
           >
             {template.name}
           </h3>
           <span
             className="px-2 py-1 bg-[#c8a46e]/10 text-[#c8a46e] text-xs font-medium rounded-full"
-            data-oid="_jto8gr"
+            data-oid="620uv4b"
           >
             {template.category}
           </span>
         </div>
-        <p className="text-gray-400 text-sm mb-4" data-oid=":r.dj4p">
+        <p className="text-gray-400 text-sm mb-4" data-oid="8iw6kii">
           {template.description}
         </p>
 
         {/* Features */}
-        <div className="flex flex-wrap gap-2" data-oid="al49ah0">
+        <div className="flex flex-wrap gap-2" data-oid="ps91myv">
           {template.features.slice(0, 3).map((feature: string, i: number) => (
             <span
               key={i}
               className="text-xs px-3 py-1.5 bg-[#252525] text-gray-300 rounded-lg border border-[#333333]"
-              data-oid="534lk9t"
+              data-oid="yrln4tg"
             >
               {feature}
             </span>
@@ -973,7 +973,7 @@ function TemplateCard({
           {template.features.length > 3 && (
             <span
               className="text-xs px-3 py-1.5 bg-[#252525] text-gray-500 rounded-lg border border-[#333333]"
-              data-oid="6v7507f"
+              data-oid="8nqsw02"
             >
               +{template.features.length - 3}
             </span>
@@ -983,11 +983,11 @@ function TemplateCard({
         {/* View button */}
         <div
           className="mt-4 pt-4 border-t border-[#2a2a2a] flex items-center justify-between"
-          data-oid="-pqo0w8"
+          data-oid="on6cdba"
         >
           <span
             className="text-[#c8a46e] text-sm font-medium group-hover:translate-x-1 transition-transform"
-            data-oid="dzbbf.d"
+            data-oid="9i4:eos"
           >
             Se mall →
           </span>
@@ -1053,20 +1053,20 @@ function TemplateModal({
       role="dialog"
       aria-modal="true"
       aria-labelledby="template-modal-title"
-      data-oid="rs4c6xe"
+      data-oid="w.1vzwj"
     >
       {/* Backdrop */}
       <div
         className="absolute inset-0 bg-black/80 backdrop-blur-sm"
         onClick={onClose}
-        data-oid="6gi0nwy"
+        data-oid="ztj4tme"
       />
 
       {/* Modal Content */}
       <div
         ref={modalRef}
         className="relative bg-[#1a1a1a] rounded-2xl max-w-5xl w-full max-h-[90vh] overflow-hidden border border-[#333333] shadow-2xl"
-        data-oid="hbbgzzv"
+        data-oid=":mgocwc"
       >
         {/* Close button */}
         <button
@@ -1075,47 +1075,47 @@ function TemplateModal({
           aria-label="Stäng"
           onClick={onClose}
           className="absolute top-4 right-4 z-10 w-10 h-10 bg-[#252525] hover:bg-[#333333] rounded-full flex items-center justify-center text-white transition-colors"
-          data-oid="mgdza.7"
+          data-oid="9xu7muz"
         >
           <svg
             className="w-5 h-5"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
-            data-oid="lf2mio:"
+            data-oid="02u7nw6"
           >
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
               strokeWidth={2}
               d="M6 18L18 6M6 6l12 12"
-              data-oid="ouz_oj1"
+              data-oid="p5_nrc9"
             />
           </svg>
         </button>
 
         <div
           className="flex flex-col lg:flex-row h-full overflow-auto"
-          data-oid="qt_l85l"
+          data-oid="mk4ircz"
         >
           {/* Preview Area - Full Image */}
-          <div className="lg:w-2/3 p-6 bg-[#0a0a0a]" data-oid="u99bm7-">
+          <div className="lg:w-2/3 p-6 bg-[#0a0a0a]" data-oid="5b:eixi">
             <div
               className="text-xs text-gray-500 mb-2 uppercase tracking-wide"
-              data-oid="-4ri:vm"
+              data-oid=".tvgser"
             >
               Förhandsvisning
             </div>
             <div
               className="rounded-xl overflow-hidden shadow-2xl border border-[#333333]"
-              data-oid="h83m86h"
+              data-oid="q0a3kdn"
             >
               <img
                 src={template.image || TEMPLATE_IMAGE_PLACEHOLDER}
                 alt={template.name}
                 className="w-full h-auto"
                 onError={handleImageError}
-                data-oid="z5ql3w5"
+                data-oid="o_7qowv"
               />
             </div>
           </div>
@@ -1123,64 +1123,64 @@ function TemplateModal({
           {/* Controls Area */}
           <div
             className="lg:w-1/3 p-6 bg-[#1a1a1a] border-l border-[#333333]"
-            data-oid="9bsxp1o"
+            data-oid="dlj:vdc"
           >
             <h2
               id="template-modal-title"
               className="text-2xl font-bold text-white mb-2"
-              data-oid="8pp43bs"
+              data-oid="blujadc"
             >
               {template.name}
             </h2>
-            <p className="text-gray-400 text-sm mb-6" data-oid="18o.s3.">
+            <p className="text-gray-400 text-sm mb-6" data-oid="5vx-izh">
               {template.description}
             </p>
 
             {/* Color Palette Info */}
             <div
               className="mb-6 p-4 bg-[#252525] rounded-xl border border-[#333333]"
-              data-oid="tuwcu2s"
+              data-oid="zfzqtr0"
             >
               <div
                 className="text-xs text-gray-500 mb-2 uppercase tracking-wide"
-                data-oid="o-1ur5k"
+                data-oid="k4airyl"
               >
                 Färgval
               </div>
-              <p className="text-gray-300 text-sm" data-oid="9nkv8it">
+              <p className="text-gray-300 text-sm" data-oid="ss1t_4h">
                 Vi anpassar färgerna efter ditt varumärke. Välj mellan olika
                 färgscheman i samband med beställning.
               </p>
             </div>
 
             {/* Features */}
-            <div className="mb-8" data-oid="16wnd4h">
+            <div className="mb-8" data-oid="81qmy6o">
               <div
                 className="text-xs text-gray-500 mb-3 uppercase tracking-wide"
-                data-oid="dmf-c2:"
+                data-oid="can6pw0"
               >
                 Ingår i mallen
               </div>
-              <ul className="space-y-2" data-oid="yekumqx">
+              <ul className="space-y-2" data-oid="dl25yci">
                 {template.features.map((feature: string, i: number) => (
                   <li
                     key={i}
                     className="flex items-center gap-2 text-gray-300 text-sm"
-                    data-oid="3--0:f3"
+                    data-oid="m9tdm77"
                   >
                     <svg
                       className="w-4 h-4 text-green-500 flex-shrink-0"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
-                      data-oid="bafegux"
+                      data-oid="geuf6gg"
                     >
                       <path
                         strokeLinecap="round"
                         strokeLinejoin="round"
                         strokeWidth={2}
                         d="M5 13l4 4L19 7"
-                        data-oid="sydesis"
+                        data-oid="4u9.yv7"
                       />
                     </svg>
                     {feature}
@@ -1194,7 +1194,7 @@ function TemplateModal({
               href={`/?mall=${template.id}#contact`}
               onClick={onClose}
               className="block w-full py-4 bg-[#c8a46e] text-[#111111] font-bold rounded-xl hover:bg-[#d4b480] transition-colors text-center"
-              data-oid="ia9759i"
+              data-oid="ua2z83h"
             >
               Välj denna mall
             </Link>
@@ -1297,17 +1297,17 @@ function ExamplesSection({ content }: { content: PageContent }) {
 
   return (
     <>
-      <section id="examples" className="py-24 bg-[#111111]" data-oid="oiwc974">
-        <div className="max-w-6xl mx-auto px-6" data-oid="ulobkmi">
+      <section id="examples" className="py-24 bg-[#111111]" data-oid="9ok_._v">
+        <div className="max-w-6xl mx-auto px-6" data-oid="tzqg2ep">
           {/* Section Header */}
-          <div className="text-center mb-16" data-oid="u-y27s4">
+          <div className="text-center mb-16" data-oid="6x-m:7.">
             <h2
               className="text-3xl md:text-4xl font-bold text-[#f5f5f0] mb-4"
-              data-oid="rcxeh6e"
+              data-oid="xz_gs1k"
             >
               {content.examples.sectionTitle}
             </h2>
-            <p className="text-[#999999] max-w-2xl mx-auto" data-oid="2guh1qi">
+            <p className="text-[#999999] max-w-2xl mx-auto" data-oid="fmrw2h0">
               {content.examples.sectionSubtitle}
             </p>
           </div>
@@ -1315,27 +1315,27 @@ function ExamplesSection({ content }: { content: PageContent }) {
           {/* Templates Grid */}
           <div
             className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
-            data-oid=".hgn8wr"
+            data-oid="5lz9vh1"
           >
             {templates.map((template) => (
               <TemplateCard
                 key={template.id}
                 template={template}
                 onClick={() => setSelectedTemplate(template)}
-                data-oid="8iv4e5-"
+                data-oid=".hlka1f"
               />
             ))}
           </div>
 
           {/* Call to Action */}
-          <div className="text-center mt-12" data-oid="77.11tx">
-            <p className="text-[#999999] mb-4" data-oid="08:60so">
+          <div className="text-center mt-12" data-oid="uhd4roe">
+            <p className="text-[#999999] mb-4" data-oid="6c2dymj">
               Alla mallar anpassas efter ditt företags varumärke och behov
             </p>
             <Link
               href="#contact"
               className="inline-block px-8 py-3 bg-[#c8a46e] text-[#111111] font-semibold rounded-lg hover:bg-[#d4b480] transition-colors"
-              data-oid="5yhubpb"
+              data-oid="_zub74j"
             >
               Beställ din hemsida
             </Link>
@@ -1348,7 +1348,7 @@ function ExamplesSection({ content }: { content: PageContent }) {
         <TemplateModal
           template={selectedTemplate}
           onClose={() => setSelectedTemplate(null)}
-          data-oid="hks.5k8"
+          data-oid="cnr8pbh"
         />
       )}
     </>
@@ -1451,47 +1451,47 @@ function ContactSection({ content }: { content: PageContent }) {
       id="contact"
       className="py-24 bg-[#0a0a0a] relative overflow-hidden"
       ref={sectionRef}
-      data-oid="s-.425g"
+      data-oid="-9ah-l_"
     >
       {/* Background */}
       {content.contact.image && (
         <div
           className="absolute inset-0 bg-cover bg-center opacity-10"
           style={{ backgroundImage: `url(${content.contact.image})` }}
-          data-oid="lo055x5"
+          data-oid="rqz0g-:"
         />
       )}
       <div
         className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-[#0a0a0a]"
-        data-oid="1pw3dv4"
+        data-oid="c2d1s9d"
       />
 
       <div
         className="relative z-10 max-w-3xl mx-auto px-6 text-center"
-        data-oid="00bt7_9"
+        data-oid="qofqc05"
       >
         <h2
           className="text-3xl md:text-4xl font-bold text-[#f5f5f0] mb-4"
-          data-oid="5o5umn7"
+          data-oid="81nsr7h"
         >
           {content.contact.sectionTitle}
         </h2>
-        <p className="text-[#999999] mb-10" data-oid="0..7qoy">
+        <p className="text-[#999999] mb-10" data-oid="-w4ts-3">
           {content.contact.sectionSubtitle}
         </p>
 
         {status === "success" ? (
           <div
             className="max-w-lg mx-auto py-8 px-6 bg-[#111111] border border-[#2a2a2a] rounded-xl text-[#f5f5f0]"
-            data-oid="bglkqkv"
+            data-oid="h2kfhut"
           >
             <p
               className="text-lg font-medium text-[#c8a46e] mb-2"
-              data-oid="orjeap-"
+              data-oid="u70h.g2"
             >
               Tack för din förfrågan!
             </p>
-            <p className="text-[#999999]" data-oid="0i2xqn3">
+            <p className="text-[#999999]" data-oid="_6u8q2_">
               Vi återkommer inom 24 timmar.
             </p>
           </div>
@@ -1499,22 +1499,22 @@ function ContactSection({ content }: { content: PageContent }) {
           <form
             onSubmit={handleSubmit}
             className="space-y-4 text-left max-w-lg mx-auto"
-            data-oid=":x:ifby"
+            data-oid="ygrvshf"
           >
             {errorMessage && (
               <p
                 className="text-red-400 text-sm"
                 role="alert"
-                data-oid="-crhz86"
+                data-oid="nij5fw-"
               >
                 {errorMessage}
               </p>
             )}
-            <div data-oid="9hlm8d0">
+            <div data-oid="wqv04:1">
               <label
                 htmlFor="contact-name"
                 className="block text-[#e5e5e0] text-sm font-medium mb-1.5"
-                data-oid="2w1kbjt"
+                data-oid="o.y5ey8"
               >
                 Namn
               </label>
@@ -1528,14 +1528,14 @@ function ContactSection({ content }: { content: PageContent }) {
                 onChange={(e) => setName(e.target.value)}
                 disabled={status === "loading"}
                 className="w-full px-4 py-3 bg-[#111111] border border-[#2a2a2a] rounded-lg text-[#f5f5f0] placeholder-[#666666] focus:border-[#c8a46e] focus:outline-none disabled:opacity-60"
-                data-oid="x-g0snq"
+                data-oid="te8jxu."
               />
             </div>
-            <div data-oid="7.vpq:7">
+            <div data-oid="gtq5ozq">
               <label
                 htmlFor="contact-email"
                 className="block text-[#e5e5e0] text-sm font-medium mb-1.5"
-                data-oid="w_enb89"
+                data-oid=".vlcejc"
               >
                 E-post
               </label>
@@ -1549,14 +1549,14 @@ function ContactSection({ content }: { content: PageContent }) {
                 onChange={(e) => setEmail(e.target.value)}
                 disabled={status === "loading"}
                 className="w-full px-4 py-3 bg-[#111111] border border-[#2a2a2a] rounded-lg text-[#f5f5f0] placeholder-[#666666] focus:border-[#c8a46e] focus:outline-none disabled:opacity-60"
-                data-oid="--u9sh:"
+                data-oid="0xu_s1a"
               />
             </div>
-            <div data-oid="eb7187e">
+            <div data-oid="3l_v0dq">
               <label
                 htmlFor="contact-template"
                 className="block text-[#e5e5e0] text-sm font-medium mb-1.5"
-                data-oid="zhfm5:d"
+                data-oid="107nclo"
               >
                 Vilken mall är du intresserad av? (valfritt)
               </label>
@@ -1567,26 +1567,26 @@ function ContactSection({ content }: { content: PageContent }) {
                 onChange={(e) => setTemplateId(e.target.value)}
                 disabled={status === "loading"}
                 className="w-full px-4 py-3 bg-[#111111] border border-[#2a2a2a] rounded-lg text-[#f5f5f0] focus:border-[#c8a46e] focus:outline-none disabled:opacity-60"
-                data-oid="oodc2g8"
+                data-oid="--:lqv8"
               >
-                <option value="" data-oid="49nvwly">
+                <option value="" data-oid="ieka2:q">
                   — Välj mall —
                 </option>
                 {templates.map((t) => (
-                  <option key={t.id} value={t.id} data-oid="gc062rt">
+                  <option key={t.id} value={t.id} data-oid="viu.rx6">
                     {t.name}
                   </option>
                 ))}
-                <option value="other" data-oid="v5.q56n">
+                <option value="other" data-oid="7l93q_8">
                   Övrigt / ingen specifik
                 </option>
               </select>
             </div>
-            <div data-oid="4w8nsal">
+            <div data-oid="1gq4w0y">
               <label
                 htmlFor="contact-message"
                 className="block text-[#e5e5e0] text-sm font-medium mb-1.5"
-                data-oid="rjyzbj8"
+                data-oid="dyxgh-1"
               >
                 Meddelande
               </label>
@@ -1600,14 +1600,14 @@ function ContactSection({ content }: { content: PageContent }) {
                 onChange={(e) => setMessage(e.target.value)}
                 disabled={status === "loading"}
                 className="w-full px-4 py-3 bg-[#111111] border border-[#2a2a2a] rounded-lg text-[#f5f5f0] placeholder-[#666666] focus:border-[#c8a46e] focus:outline-none resize-none disabled:opacity-60"
-                data-oid="u8n7.gi"
+                data-oid="_znfqhq"
               />
             </div>
             <button
               type="submit"
               disabled={status === "loading"}
               className="w-full py-4 bg-[#c8a46e] text-[#111111] font-semibold rounded-lg hover:bg-[#d4b480] transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
-              data-oid="5kgt2:4"
+              data-oid="fb_gtqc"
             >
               {status === "loading" ? "Skickar..." : "Skicka förfrågan"}
             </button>
@@ -1805,15 +1805,15 @@ export default function Home() {
   const content = mergePageIntoContent(pageData?.page ?? defaultPageQuery.page);
 
   return (
-    <main className="min-h-screen bg-[#0a0a0a]" data-oid="hq:a37l">
-      <HeroSection content={content} data-oid="f0-8p3p" />
-      <ServicesSection content={content} data-oid="._ni8mz" />
-      <ExamplesSection content={content} data-oid="okr72j7" />
+    <main className="min-h-screen bg-[#0a0a0a]" data-oid="htxyil2">
+      <HeroSection content={content} data-oid="9wl_fmc" />
+      <ServicesSection content={content} data-oid="o0:bqw_" />
+      <ExamplesSection content={content} data-oid="xc9pp54" />
       <Suspense
-        fallback={<div className="py-24 min-h-[40vh]" data-oid="yjg2swt" />}
-        data-oid="kpxjdwg"
+        fallback={<div className="py-24 min-h-[40vh]" data-oid="yn5b0.3" />}
+        data-oid="6dzjzwg"
       >
-        <ContactSection content={content} data-oid="q-apt5f" />
+        <ContactSection content={content} data-oid="w-pau53" />
       </Suspense>
     </main>
   );

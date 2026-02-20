@@ -5,6 +5,8 @@
 :root {
   --background: #0a0a0a;
   --foreground: #f5f5f0;
+  --gold: #5724b7;
+  --gold-light: #ea171f;
 }
 
 html {

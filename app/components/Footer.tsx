@@ -8,34 +8,34 @@ export default function Footer() {
   return (
     <footer
       className="bg-[#0a0a0a] border-t border-[#2a2a2a] py-16"
-      data-oid="9ha.zo:"
+      data-oid="2jpw83m"
     >
-      <div className="max-w-6xl mx-auto px-6" data-oid="0yy09df">
-        <div className="grid md:grid-cols-3 gap-12" data-oid="awmlp_d">
+      <div className="max-w-6xl mx-auto px-6" data-oid="jgxqo.x">
+        <div className="grid md:grid-cols-3 gap-12" data-oid="li317e4">
           {/* Company Info */}
-          <div data-oid="4zq2rn1">
-            <div className="flex items-center gap-2 mb-4" data-oid="9s66i5g">
+          <div data-oid="c:xjkvz">
+            <div className="flex items-center gap-2 mb-4" data-oid="12t_6ge">
               <div
                 className="w-10 h-10 rounded-xl bg-[#c8a46e] flex items-center justify-center"
-                data-oid="n-yt8kg"
+                data-oid="qx1d.g4"
               >
                 <span
                   className="text-xl font-bold text-[#111111]"
-                  data-oid="-ca:k5t"
+                  data-oid="xgmant:"
                 >
                   F
                 </span>
               </div>
               <span
                 className="text-xl font-semibold text-[#f5f5f0]"
-                data-oid="m4vk01h"
+                data-oid="3yl975j"
               >
                 FSwebworks
               </span>
             </div>
             <p
               className="text-[#666666] text-sm leading-relaxed"
-              data-oid="3_95bh1"
+              data-oid="o8hfe5f"
             >
               Vi skapar enkla och professionella hemsidor för småföretag i
               Stockholm. Vårt mål är att hjälpa hantverkare och företag att
@@ -44,37 +44,37 @@ export default function Footer() {
           </div>
 
           {/* Quick Links - with smooth scroll */}
-          <div data-oid="v5yq865">
+          <div data-oid="xylbaiz">
             <h3
               className="text-[#f5f5f0] font-semibold mb-4"
-              data-oid="gx-op:6"
+              data-oid="co2q8_5"
             >
               Länkar
             </h3>
-            <ul className="space-y-3" data-oid="vrbt1iv">
-              <li data-oid="fgv5c6j">
+            <ul className="space-y-3" data-oid="d8iric5">
+              <li data-oid="4845pht">
                 <Link
                   href="#services"
                   className="text-[#666666] hover:text-[#c8a46e] transition-colors text-sm text-left"
-                  data-oid="3aqj0pk"
+                  data-oid=":8mlpqf"
                 >
                   Tjänster & Priser
                 </Link>
               </li>
-              <li data-oid="d1aa9m:">
+              <li data-oid="dh-txi6">
                 <Link
                   href="#examples"
                   className="text-[#666666] hover:text-[#c8a46e] transition-colors text-sm text-left"
-                  data-oid="4eqihg7"
+                  data-oid="09zffl1"
                 >
                   Våra Mallar
                 </Link>
               </li>
-              <li data-oid="9.q3ddx">
+              <li data-oid="94a2ded">
                 <Link
                   href="#contact"
                   className="text-[#666666] hover:text-[#c8a46e] transition-colors text-sm text-left"
-                  data-oid="04grl-2"
+                  data-oid="cij7hzn"
                 >
                   Kontakta oss
                 </Link>
@@ -83,22 +83,22 @@ export default function Footer() {
           </div>
 
           {/* Contact Info */}
-          <div data-oid="m_fr7-5">
+          <div data-oid="i.qk8sz">
             <h3
               className="text-[#f5f5f0] font-semibold mb-4"
-              data-oid="wei_05e"
+              data-oid="fo5fqeb"
             >
               Kontakt
             </h3>
-            <ul className="space-y-3" data-oid="a45yj5c">
-              <li className="text-[#666666] text-sm" data-oid="t.1rkas">
+            <ul className="space-y-3" data-oid="s38i5vh">
+              <li className="text-[#666666] text-sm" data-oid="x7i9jat">
                 Stockholm, Sverige
               </li>
-              <li data-oid="oi4qwx5">
+              <li data-oid="v.cqvhu">
                 <a
                   href="mailto:fredrik@fswebworks.se"
                   className="text-[#666666] hover:text-[#c8a46e] transition-colors text-sm"
-                  data-oid="o5994su"
+                  data-oid="pc5w:ho"
                 >
                   fredrik@fswebworks.se
                 </a>
@@ -110,9 +110,9 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div
           className="mt-12 pt-8 border-t border-[#2a2a2a]"
-          data-oid="qp9k7sw"
+          data-oid="w-8i2gp"
         >
-          <p className="text-[#666666] text-sm text-center" data-oid="i2zjbjn">
+          <p className="text-[#666666] text-sm text-center" data-oid="lsnk1gy">
             © {currentYear} FSwebworks. Alla rättigheter reserverade.
           </p>
         </div>

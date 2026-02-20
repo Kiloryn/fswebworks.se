@@ -16,22 +16,22 @@ export default function Error({
   return (
     <div
       className="min-h-[60vh] flex flex-col items-center justify-center px-6 text-center"
-      data-oid="i1muzzf"
+      data-oid="v6:l3ha"
     >
       <h1
         className="text-2xl font-semibold text-[#f5f5f0] mb-2"
-        data-oid="wldk:5-"
+        data-oid="bpt9ykr"
       >
         Något gick fel
       </h1>
-      <p className="text-[#999999] mb-6 max-w-md" data-oid=":_wab2u">
+      <p className="text-[#999999] mb-6 max-w-md" data-oid="z-.ozc.">
         Vi kunde inte ladda sidan. Försök igen.
       </p>
       <button
         type="button"
         onClick={reset}
         className="px-6 py-3 bg-[#c8a46e] text-[#111111] font-semibold rounded-lg hover:bg-[#d4b480] transition-colors"
-        data-oid="xx1xhlt"
+        data-oid="7om-684"
       >
         Försök igen
       </button>
