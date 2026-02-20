@@ -59,8 +59,19 @@ function HeroSection({ content }: { content: PageContent }) {
     >
       {/* Background */}
       <div
-        className="inset-0 bg-gradient-to-br from-[#0a0a0a] via-[#111111] to-[#0a0a0a] right-auto bottom-auto absolute left-[713px] top-[512px]"
+        className="absolute inset-0 bg-gradient-to-br from-[#0a0a0a] via-[#111111] to-[#0a0a0a]"
         data-oid="so1dcx6"
+      />
+
+      {/* Soft gold radial glow */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(ellipse 80% 50% at 50% 0%, rgba(200, 164, 110, 0.08), transparent 50%)",
+        }}
+        aria-hidden
+        data-oid="z08-9d7"
       />
 
       {content.hero.heroImage && (
@@ -77,7 +88,7 @@ function HeroSection({ content }: { content: PageContent }) {
       >
         {/* Badge */}
         <div
-          className="inline-block px-4 py-2 bg-[#c8a46e]/10 border border-[#c8a46e]/20 text-[#c8a46e] text-sm mb-8 w-[334px] h-[55px] rounded-[9998px]"
+          className="hero-badge-entrance inline-block px-4 py-2.5 bg-[#c8a46e]/10 border border-[#c8a46e]/20 text-[#c8a46e] text-sm mb-8 rounded-full min-h-[44px] inline-flex items-center justify-center"
           data-oid="bj.ynsa"
         >
           {content.hero.badge}
@@ -97,7 +108,7 @@ function HeroSection({ content }: { content: PageContent }) {
 
         {/* Heading */}
         <h1
-          className="text-4xl md:text-6xl font-bold text-[#f5f5f0] mb-6 max-w-4xl mx-auto leading-tight"
+          className="text-4xl md:text-6xl font-bold mb-6 max-w-4xl mx-auto leading-tight bg-gradient-to-r from-[#f5f5f0] via-[#d4b480] to-[#f5f5f0] bg-clip-text text-transparent"
           data-oid="z94mjfc"
         >
           {content.hero.heading}
@@ -119,7 +130,8 @@ function HeroSection({ content }: { content: PageContent }) {
           {content.hero.benefits?.map((benefit: string, i: number) => (
             <div
               key={i}
-              className="flex items-center gap-2 text-[#999999]"
+              className="hero-benefit-entrance flex items-center gap-2 text-[#999999]"
+              style={{ animationDelay: `${0.2 + i * 0.08}s` }}
               data-oid="m1_k3c0"
             >
               <svg
@@ -149,14 +161,14 @@ function HeroSection({ content }: { content: PageContent }) {
         >
           <Link
             href="#services"
-            className="px-8 py-4 bg-[#c8a46e] text-[#111111] font-semibold rounded-lg hover:bg-[#d4b480] transition-colors text-center"
+            className="px-8 py-4 bg-[#c8a46e] text-[#111111] font-semibold rounded-lg hover:bg-[#d4b480] transition-all duration-200 text-center hover:scale-[1.02] hover:shadow-lg hover:shadow-[#c8a46e]/20"
             data-oid="gfi:kff"
           >
             {content.hero.ctaPrimary}
           </Link>
           <Link
             href="#examples"
-            className="px-8 py-4 bg-transparent border border-[#333333] text-[#f5f5f0] font-semibold rounded-lg hover:border-[#c8a46e] hover:text-[#c8a46e] transition-colors text-center"
+            className="px-8 py-4 bg-transparent border border-[#333333] text-[#f5f5f0] font-semibold rounded-lg hover:border-[#c8a46e] hover:text-[#c8a46e] transition-all duration-200 text-center hover:shadow-[0_0_0_1px_var(--gold)]"
             data-oid="n4bojf:"
           >
             {content.hero.ctaSecondary}

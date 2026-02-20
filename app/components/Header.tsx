@@ -11,12 +11,31 @@ const MENU_LINKS = [
   { href: "#contact", label: "Kontakt" },
 ] as const;
 
+const SCROLL_THRESHOLD = 24;
+
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    let tick: ReturnType<typeof setTimeout> | null = null;
+    const onScroll = () => {
+      if (tick != null) return;
+      tick = setTimeout(() => {
+        setScrolled(
+          typeof window !== "undefined" && window.scrollY > SCROLL_THRESHOLD,
+        );
+        tick = null;
+      }, 100);
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   const toggleMenu = () => setMobileMenuOpen((prev) => !prev);
@@ -82,7 +101,11 @@ export default function Header() {
   return (
     <>
       <header
-        className="fixed top-0 left-0 right-0 z-50 bg-[#0a0a0a]/90 backdrop-blur-md border-b border-[#2a2a2a]/80 transition-all duration-300"
+        className={`fixed top-0 left-0 right-0 z-50 backdrop-blur-md border-b transition-all duration-300 ${
+          scrolled
+            ? "bg-[#0a0a0a] border-[#2a2a2a] shadow-lg shadow-black/20"
+            : "bg-[#0a0a0a]/90 border-[#2a2a2a]/80"
+        }`}
         data-oid="k73da8-"
       >
         <div className="max-w-6xl mx-auto px-6" data-oid=":xthq-8">
@@ -93,7 +116,7 @@ export default function Header() {
             {/* Logo */}
             <Link
               href="/"
-              className="flex items-center gap-2 shrink-0"
+              className="flex items-center gap-2 shrink-0 transition-transform duration-200 hover:scale-105"
               data-oid="h21:88y"
             >
               <div
@@ -124,7 +147,7 @@ export default function Header() {
                 <Link
                   key={href}
                   href={href}
-                  className="text-[#999999] hover:text-[#f5f5f0] transition-colors"
+                  className="nav-link-header py-1"
                   data-oid="s_ia9c8"
                 >
                   {label}

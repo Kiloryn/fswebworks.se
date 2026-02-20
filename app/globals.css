@@ -58,4 +58,53 @@ body {
   .mobile-menu-link:active {
     @apply bg-[#c8a46e]/15;
   }
+
+  /* Desktop nav link with sliding gold underline */
+  .nav-link-header {
+    @apply relative text-[#999999] transition-colors duration-200;
+  }
+  .nav-link-header:hover {
+    @apply text-[#c8a46e];
+  }
+  .nav-link-header::after {
+    content: "";
+    @apply absolute left-1/2 bottom-0 h-px w-0 bg-[#c8a46e] transition-all duration-200 -translate-x-1/2;
+  }
+  .nav-link-header:hover::after {
+    @apply w-full;
+  }
+
+  /* Hero entrance animations */
+  .hero-badge-entrance {
+    animation: hero-badge-in 0.4s ease-out forwards;
+  }
+  .hero-benefit-entrance {
+    opacity: 0;
+    animation: hero-benefit-in 0.4s ease-out forwards;
+  }
+  @keyframes hero-badge-in {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes hero-benefit-in {
+    to {
+      opacity: 1;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
