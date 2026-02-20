@@ -13,6 +13,9 @@ const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://fswebworks.se';
 export const metadata: Metadata = {
   title,
   description,
+  icons: {
+    icon: '/favicon.ico',
+  },
   openGraph: {
     type: 'website',
     locale: 'sv_SE',
