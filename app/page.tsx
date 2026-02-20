@@ -88,7 +88,8 @@ function HeroSection({ content }: { content: PageContent }) {
       >
         {/* Badge */}
         <div
-          className="hero-badge-entrance inline-block px-4 py-2.5 bg-[#c8a46e]/10 border border-[#c8a46e]/20 text-[#c8a46e] text-sm mb-8 rounded-full min-h-[44px] inline-flex items-center justify-center"
+          className="inline-block px-4 py-2.5 bg-[#c8a46e]/10 border border-[#c8a46e]/20 text-[#c8a46e] text-sm mb-8 rounded-full min-h-[44px] inline-flex items-center justify-center"
+          data-aos="fade-up"
           data-oid="bj.ynsa"
         >
           {content.hero.badge}
@@ -106,79 +107,83 @@ function HeroSection({ content }: { content: PageContent }) {
           </div>
         )}
 
-        {/* Heading */}
-        <h1
-          className="text-4xl md:text-6xl font-bold mb-6 max-w-4xl mx-auto leading-tight bg-gradient-to-r from-[#f5f5f0] via-[#d4b480] to-[#f5f5f0] bg-clip-text text-transparent"
-          data-oid="z94mjfc"
-        >
-          {content.hero.heading}
-        </h1>
+        {/* Headline + 4 value props */}
+        <div data-aos="fade-up" data-oid="hero-headline-block">
+          <h1
+            className="text-4xl md:text-6xl font-bold mb-6 max-w-4xl mx-auto leading-tight bg-gradient-to-r from-[#f5f5f0] via-[#d4b480] to-[#f5f5f0] bg-clip-text text-transparent"
+            data-oid="z94mjfc"
+          >
+            {content.hero.heading}
+          </h1>
 
-        {/* Subheading */}
-        <p
-          className="text-lg md:text-xl text-[#999999] mb-10 max-w-2xl mx-auto leading-relaxed"
-          data-oid="9bsi-z4"
-        >
-          {content.hero.subheading}
-        </p>
+          <p
+            className="text-lg md:text-xl text-[#999999] mb-10 max-w-2xl mx-auto leading-relaxed"
+            data-oid="9bsi-z4"
+          >
+            {content.hero.subheading}
+          </p>
 
-        {/* Benefits */}
-        <div
-          className="flex flex-wrap justify-center gap-4 mb-10"
-          data-oid="e.i0ao8"
-        >
-          {content.hero.benefits?.map((benefit: string, i: number) => (
-            <div
-              key={i}
-              className="hero-benefit-entrance flex items-center gap-2 text-[#999999]"
-              style={{ animationDelay: `${0.2 + i * 0.08}s` }}
-              data-oid="m1_k3c0"
-            >
-              <svg
-                className="w-5 h-5 text-[#c8a46e]"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                data-oid="ol85lnn"
+          <div
+            className="flex flex-wrap justify-center gap-4 mb-10"
+            data-oid="e.i0ao8"
+          >
+            {content.hero.benefits?.map((benefit: string, i: number) => (
+              <div
+                key={i}
+                className="flex items-center gap-2 text-[#999999]"
+                data-oid="m1_k3c0"
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M5 13l4 4L19 7"
-                  data-oid="_0e_o-h"
-                />
-              </svg>
-              {benefit}
-            </div>
-          ))}
+                <svg
+                  className="w-5 h-5 text-[#c8a46e]"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  data-oid="ol85lnn"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M5 13l4 4L19 7"
+                    data-oid="_0e_o-h"
+                  />
+                </svg>
+                {benefit}
+              </div>
+            ))}
+          </div>
         </div>
 
-        {/* CTAs */}
+        {/* CTAs + trust (pop in 200ms later) */}
         <div
-          className="flex flex-col sm:flex-row gap-4 justify-center"
+          className="flex flex-col items-center"
+          data-aos="fade-up"
+          data-aos-delay="200"
           data-oid="a9418o8"
         >
-          <Link
-            href="#services"
-            className="px-8 py-4 bg-[#c8a46e] text-[#111111] font-semibold rounded-lg hover:bg-[#d4b480] transition-all duration-200 text-center hover:scale-[1.02] hover:shadow-lg hover:shadow-[#c8a46e]/20"
-            data-oid="gfi:kff"
+          <div
+            className="flex flex-col sm:flex-row gap-4 justify-center"
+            data-oid="cj:orrl"
           >
-            {content.hero.ctaPrimary}
-          </Link>
-          <Link
-            href="#examples"
-            className="px-8 py-4 bg-transparent border border-[#333333] text-[#f5f5f0] font-semibold rounded-lg hover:border-[#c8a46e] hover:text-[#c8a46e] transition-all duration-200 text-center hover:shadow-[0_0_0_1px_var(--gold)]"
-            data-oid="n4bojf:"
-          >
-            {content.hero.ctaSecondary}
-          </Link>
+            <Link
+              href="#services"
+              className="px-8 py-4 bg-[#c8a46e] text-[#111111] font-semibold rounded-lg hover:bg-[#d4b480] transition-all duration-200 text-center hover:scale-[1.02] hover:shadow-lg hover:shadow-[#c8a46e]/20"
+              data-oid="gfi:kff"
+            >
+              {content.hero.ctaPrimary}
+            </Link>
+            <Link
+              href="#examples"
+              className="px-8 py-4 bg-transparent border border-[#333333] text-[#f5f5f0] font-semibold rounded-lg hover:border-[#c8a46e] hover:text-[#c8a46e] transition-all duration-200 text-center hover:shadow-[0_0_0_1px_var(--gold)]"
+              data-oid="n4bojf:"
+            >
+              {content.hero.ctaSecondary}
+            </Link>
+          </div>
+          <p className="text-[#666666] mt-8 text-sm" data-oid="vg454i1">
+            {content.hero.trustText}
+          </p>
         </div>
-
-        {/* Trust Text */}
-        <p className="text-[#666666] mt-8 text-sm" data-oid="vg454i1">
-          {content.hero.trustText}
-        </p>
       </div>
     </section>
   );
@@ -205,17 +210,18 @@ function ServicesSection({ content }: { content: PageContent }) {
 
       <div className="relative max-w-6xl mx-auto px-6" data-oid="2o5s9e5">
         {/* Section Header */}
-        <div className="text-center mb-16" data-oid="6kj:74t">
+        <div
+          className="text-center mb-16"
+          data-aos="fade-up"
+          data-oid="6kj:74t"
+        >
           <h2
-            className="services-section-title text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-[#f5f5f0] via-[#d4b480] to-[#f5f5f0] bg-clip-text text-transparent max-w-2xl mx-auto"
+            className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-[#f5f5f0] via-[#d4b480] to-[#f5f5f0] bg-clip-text text-transparent max-w-2xl mx-auto"
             data-oid="_0ulb4x"
           >
             {content.services.sectionTitle}
           </h2>
-          <p
-            className="services-section-subtitle text-[#999999] max-w-2xl mx-auto"
-            data-oid="vzfe_39"
-          >
+          <p className="text-[#999999] max-w-2xl mx-auto" data-oid="vzfe_39">
             {content.services.sectionSubtitle}
           </p>
         </div>
@@ -224,8 +230,9 @@ function ServicesSection({ content }: { content: PageContent }) {
         <div className="grid md:grid-cols-2 gap-8" data-oid="ouwfl7q">
           {/* Package 1 */}
           <div
-            className="group services-card-entrance bg-[#111111] border border-[#2a2a2a] rounded-2xl p-8 hover:border-[#c8a46e]/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-[#c8a46e]/10 overflow-hidden"
-            style={{ animationDelay: "0.15s" }}
+            className="group bg-[#111111] border border-[#2a2a2a] rounded-2xl p-8 hover:border-[#c8a46e]/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-[#c8a46e]/10 overflow-hidden"
+            data-aos="fade-up"
+            data-aos-delay="0"
             data-oid="lo3nz5h"
           >
             {content.services.package1.image ? (
@@ -309,8 +316,9 @@ function ServicesSection({ content }: { content: PageContent }) {
 
           {/* Package 2 */}
           <div
-            className="group services-card-entrance bg-[#111111] border border-[#2a2a2a] rounded-2xl p-8 hover:border-[#c8a46e]/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-[#c8a46e]/10 overflow-hidden"
-            style={{ animationDelay: "0.25s" }}
+            className="group bg-[#111111] border border-[#2a2a2a] rounded-2xl p-8 hover:border-[#c8a46e]/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-[#c8a46e]/10 overflow-hidden"
+            data-aos="fade-up"
+            data-aos-delay="150"
             data-oid="v6c81h-"
           >
             {content.services.package2.image ? (
@@ -1375,13 +1383,19 @@ function ExamplesSection({ content }: { content: PageContent }) {
             className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
             data-oid="5lz9vh1"
           >
-            {templates.map((template) => (
-              <TemplateCard
+            {templates.map((template, i) => (
+              <div
                 key={template.id}
-                template={template}
-                onClick={() => setSelectedTemplate(template)}
-                data-oid=".hlka1f"
-              />
+                data-aos="fade-up"
+                data-aos-delay={i * 100}
+                data-oid="uzrps0g"
+              >
+                <TemplateCard
+                  template={template}
+                  onClick={() => setSelectedTemplate(template)}
+                  data-oid=".hlka1f"
+                />
+              </div>
             ))}
           </div>
 
@@ -1527,6 +1541,8 @@ function ContactSection({ content }: { content: PageContent }) {
       <div
         className="relative z-10 max-w-3xl mx-auto px-6 text-center"
         data-oid="qofqc05"
+        data-aos="fade-up"
+        data-aos-delay="300"
       >
         <h2
           className="text-3xl md:text-4xl font-bold text-[#f5f5f0] mb-4"

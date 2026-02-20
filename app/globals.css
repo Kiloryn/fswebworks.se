@@ -148,3 +148,24 @@ body {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* Optional: scroll reveal fallback (zero deps). Use with ScrollRevealFallback.tsx instead of AOS. */
+.scroll-reveal-fallback {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity var(--reveal-duration, 750ms) ease-out,
+    transform var(--reveal-duration, 750ms) ease-out;
+  transition-delay: var(--reveal-delay, 0ms);
+}
+.scroll-reveal-fallback--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .scroll-reveal-fallback {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

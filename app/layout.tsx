@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import SmoothScroll from "./components/SmoothScroll";
+import AosInit from "./components/AosInit";
 
 const siteName = "FSwebworks";
 const title = "FSwebworks - Webbdesign för småföretag i Stockholm";
@@ -47,6 +48,7 @@ export default function RootLayout({
         <Suspense fallback={null} data-oid="4zqj2qg">
           <SmoothScroll data-oid="qi0ihxh" />
         </Suspense>
+        <AosInit data-oid="_7aw6fi" />
         <Header data-oid="bknud7a" />
         <main className="pt-20" data-oid="2su3yaf">
           {children}
