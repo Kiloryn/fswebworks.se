@@ -16,20 +16,23 @@ export default function SmoothScroll() {
   const searchParams = useSearchParams();
   const router = useRouter();
 
-  // After client-side navigation: scroll from URL hash, or from sessionStorage (when we navigated without hash)
+  // After client-side navigation: scroll from URL hash, or from sessionStorage (when we navigated without hash).
+  // We never show the hash in the URL – scroll to section then replace with clean URL.
   useEffect(() => {
     const pendingId = typeof window !== 'undefined' ? sessionStorage.getItem(SMOOTH_SCROLL_TO_KEY) : null;
     if (pendingId) {
       sessionStorage.removeItem(SMOOTH_SCROLL_TO_KEY);
       scrollToId(pendingId, true);
-      const hash = `#${pendingId}`;
-      if (window.location.hash !== hash) {
-        window.history.replaceState(null, '', window.location.pathname + window.location.search + hash);
+      const cleanUrl = window.location.pathname + window.location.search;
+      if (window.location.hash) {
+        window.history.replaceState(null, '', cleanUrl);
       }
       return;
     }
     if (typeof window !== 'undefined' && window.location.hash) {
-      scrollToId(window.location.hash.slice(1), true);
+      const id = window.location.hash.slice(1);
+      scrollToId(id, true);
+      window.history.replaceState(null, '', window.location.pathname + window.location.search);
     }
   }, [pathname, searchParams]);
 
@@ -60,8 +63,10 @@ export default function SmoothScroll() {
         if (!el) return;
         e.preventDefault();
         scrollToId(id, true);
-        if (window.location.hash !== hash) {
-          window.history.pushState(null, '', window.location.pathname + window.location.search + hash);
+        // Keep URL clean (no hash) after scrolling
+        const cleanUrl = window.location.pathname + window.location.search;
+        if (window.location.hash) {
+          window.history.replaceState(null, '', cleanUrl);
         }
       }
     };
