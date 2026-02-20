@@ -1189,15 +1189,31 @@ function TemplateModal({
               </ul>
             </div>
 
-            {/* CTA – close modal on click so contact form is visible when we navigate */}
-            <Link
-              href={`/?mall=${template.id}#contact`}
-              onClick={onClose}
+            {/* CTA – close modal and scroll to contact */}
+            <button
+              onClick={() => {
+                onClose();
+                // Set the template ID in the URL without navigation
+                const url = new URL(window.location.href);
+                url.searchParams.set("mall", template.id);
+                window.history.replaceState({}, "", url.toString());
+
+                // Smooth scroll to contact section
+                setTimeout(() => {
+                  const contactSection = document.getElementById("contact");
+                  if (contactSection) {
+                    contactSection.scrollIntoView({
+                      behavior: "smooth",
+                      block: "start",
+                    });
+                  }
+                }, 100);
+              }}
               className="block w-full py-4 bg-[#c8a46e] text-[#111111] font-bold rounded-xl hover:bg-[#d4b480] transition-colors text-center"
               data-oid="ua2z83h"
             >
               Välj denna mall
-            </Link>
+            </button>
           </div>
         </div>
       </div>
