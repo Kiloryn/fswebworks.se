@@ -8,20 +8,15 @@ export default function Footer() {
   return (
     <footer className="bg-[#0a0a0a] border-t border-[#2a2a2a] py-16">
       <div className="max-w-6xl mx-auto px-6">
-        <div className="grid md:grid-cols-3 gap-12">
+        <div className="grid md:grid-cols-3 gap-12 text-center md:text-left">
           {/* Company Info */}
           <div>
-            <div className="flex items-center gap-2 mb-4">
-              <span className="rounded-[1.5rem] bg-[#c8a46e] p-1 flex items-center justify-center">
-                <img
-                  src="/fswebworks.svg"
-                  alt="FSwebworks logo"
-                  className="h-12 w-auto rounded-lg object-contain"
-                />
-              </span>
-              <span className="text-xl font-semibold text-[#f5f5f0]">
-                FSwebworks
-              </span>
+            <div className="flex items-center justify-center md:justify-start h-16 overflow-hidden mb-4">
+              <img
+                src="/fswebworks.svg"
+                alt="FSwebworks logo"
+                className="min-h-[380px] w-auto object-contain object-center"
+              />
             </div>
             <p className="text-[#666666] text-sm leading-relaxed">
               Vi skapar enkla och professionella hemsidor för småföretag i
@@ -37,7 +32,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="#services"
-                  className="text-[#666666] hover:text-[#c8a46e] transition-colors text-sm text-left"
+                  className="text-[#666666] hover:text-[#c8a46e] transition-colors text-sm"
                 >
                   Tjänster & Priser
                 </Link>
@@ -45,7 +40,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="#examples"
-                  className="text-[#666666] hover:text-[#c8a46e] transition-colors text-sm text-left"
+                  className="text-[#666666] hover:text-[#c8a46e] transition-colors text-sm"
                 >
                   Våra Mallar
                 </Link>
@@ -53,7 +48,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="#contact"
-                  className="text-[#666666] hover:text-[#c8a46e] transition-colors text-sm text-left"
+                  className="text-[#666666] hover:text-[#c8a46e] transition-colors text-sm"
                 >
                   Kontakta oss
                 </Link>

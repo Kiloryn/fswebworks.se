@@ -111,27 +111,20 @@ export default function Header() {
               scrolled ? "h-14" : "h-20"
             }`}
           >
-            {/* Logo */}
+            {/* Logo – SVG viewBox 1000×1000, logotexten i mitten; på mobil begränsad bredd så menyknappen syns */}
             <Link
               href="/"
-              className="flex items-center gap-2 shrink-0 transition-all duration-300 hover:scale-105"
+              className={`flex items-center justify-center shrink-0 overflow-hidden transition-all duration-300 hover:scale-105 max-w-[50%] md:max-w-none ${
+                scrolled ? "h-14" : "h-20"
+              }`}
             >
-              <span className="rounded-[1.5rem] bg-[#c8a46e] p-1 flex items-center justify-center">
-                <img
-                  src="/fswebworks.svg"
-                  alt="FSwebworks logo"
-                  className={`rounded-lg object-contain object-left transition-all duration-300 ${
-                    scrolled ? "h-10" : "h-14"
-                  }`}
-                />
-              </span>
-              <span
-                className={`font-semibold text-[#f5f5f0] opacity-[100%] border-0 border-[rgb(229,_231,_235)] transition-all duration-300 ${
-                  scrolled ? "text-xl" : "text-3xl"
+              <img
+                src="/fswebworks.svg"
+                alt="FSwebworks logo"
+                className={`w-auto object-contain object-center transition-all duration-300 min-h-[320px] md:min-h-[420px] ${
+                  scrolled ? "md:min-h-[320px]" : ""
                 }`}
-              >
-                FSwebworks
-              </span>
+              />
             </Link>
 
             {/* Desktop Navigation */}

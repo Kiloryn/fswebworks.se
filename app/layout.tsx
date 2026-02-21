@@ -16,7 +16,11 @@ export const metadata: Metadata = {
   title,
   description,
   icons: {
-    icon: "/favicon.ico",
+    icon: [
+      { url: "/favicon.svg", type: "image/svg+xml", sizes: "any" },
+      { url: "/favicon.ico", type: "image/x-icon", sizes: "any" },
+      { url: `${baseUrl}/favicon.svg`, type: "image/svg+xml", sizes: "any" },
+    ],
   },
   openGraph: {
     type: "website",
@@ -41,6 +45,11 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="sv" className="scroll-smooth">
+      <head>
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+        <link rel="icon" href="/favicon.ico" type="image/x-icon" sizes="any" />
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+      </head>
       <body className="min-h-screen bg-[#0a0a0a] antialiased">
         <Suspense fallback={null}>
           <SmoothScroll />
