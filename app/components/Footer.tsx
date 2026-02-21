@@ -12,11 +12,13 @@ export default function Footer() {
           {/* Company Info */}
           <div>
             <div className="flex items-center gap-2 mb-4">
-              <img
-                src="/fswebworks.svg"
-                alt="FSwebworks logo"
-                className="h-12 w-auto rounded-lg object-contain"
-              />
+              <span className="rounded-[1.5rem] bg-[#c8a46e] p-1 flex items-center justify-center">
+                <img
+                  src="/fswebworks.svg"
+                  alt="FSwebworks logo"
+                  className="h-12 w-auto rounded-lg object-contain"
+                />
+              </span>
               <span className="text-xl font-semibold text-[#f5f5f0]">
                 FSwebworks
               </span>

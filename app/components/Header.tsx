@@ -116,13 +116,15 @@ export default function Header() {
               href="/"
               className="flex items-center gap-2 shrink-0 transition-all duration-300 hover:scale-105"
             >
-              <img
-                src="/fswebworks.svg"
-                alt="FSwebworks logo"
-                className={`rounded-lg object-contain object-left transition-all duration-300 ${
-                  scrolled ? "h-10" : "h-14"
-                }`}
-              />
+              <span className="rounded-[1.5rem] bg-[#c8a46e] p-1 flex items-center justify-center">
+                <img
+                  src="/fswebworks.svg"
+                  alt="FSwebworks logo"
+                  className={`rounded-lg object-contain object-left transition-all duration-300 ${
+                    scrolled ? "h-10" : "h-14"
+                  }`}
+                />
+              </span>
               <span
                 className={`font-semibold text-[#f5f5f0] opacity-[100%] border-0 border-[rgb(229,_231,_235)] transition-all duration-300 ${
                   scrolled ? "text-xl" : "text-3xl"
