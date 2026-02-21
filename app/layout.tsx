@@ -44,13 +44,13 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="sv" className="scroll-smooth">
+    <html lang="sv" suppressHydrationWarning>
       <head>
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
         <link rel="icon" href="/favicon.ico" type="image/x-icon" sizes="any" />
         <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
       </head>
-      <body className="min-h-screen bg-[#0a0a0a] antialiased">
+      <body className="min-h-screen bg-[#0a0a0a] antialiased" suppressHydrationWarning>
         <Suspense fallback={null}>
           <SmoothScroll />
         </Suspense>
