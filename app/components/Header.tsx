@@ -62,7 +62,6 @@ export default function Header() {
           role="dialog"
           aria-modal="true"
           aria-label="Meny"
-          data-oid="9j35zgb"
         >
           {/* Light backdrop – tap to close */}
           <button
@@ -70,23 +69,22 @@ export default function Header() {
             aria-label="Stäng meny"
             className="mobile-menu-backdrop absolute inset-0 z-0"
             onClick={closeMobileMenu}
-            data-oid="ykdwn9s"
           />
 
           {/* Compact dropdown – centered below header */}
           <div
-            className="mobile-menu-panel absolute left-1/2 top-[5.25rem] z-10 w-[min(calc(100vw-2rem),16rem)] -translate-x-1/2 overflow-hidden py-2"
+            className={`mobile-menu-panel absolute left-1/2 z-10 w-[min(calc(100vw-2rem),16rem)] -translate-x-1/2 overflow-hidden py-2 transition-all duration-300 ${
+              scrolled ? "top-14" : "top-[5.25rem]"
+            }`}
             onClick={(e) => e.stopPropagation()}
-            data-oid="lzunw2u"
           >
-            <nav className="flex flex-col" data-oid="_9tqyr4">
+            <nav className="flex flex-col">
               {MENU_LINKS.map(({ href, label }) => (
                 <Link
                   key={href}
                   href={href}
                   onClick={closeMobileMenu}
                   className="mobile-menu-link"
-                  data-oid="o_124c6"
                 >
                   {label}
                 </Link>
@@ -103,53 +101,41 @@ export default function Header() {
       <header
         className={`fixed top-0 left-0 right-0 z-50 backdrop-blur-md border-b transition-all duration-300 ${
           scrolled
-            ? "bg-[#0a0a0a] border-[#2a2a2a] shadow-lg shadow-black/20"
+            ? "bg-[#0a0a0a]/75 border-[#2a2a2a]/70 shadow-lg shadow-black/20"
             : "bg-[#0a0a0a]/90 border-[#2a2a2a]/80"
         }`}
-        data-oid="k73da8-"
       >
-        <div className="max-w-6xl mx-auto px-6" data-oid=":xthq-8">
+        <div className="max-w-6xl mx-auto px-6">
           <div
-            className="flex items-center justify-between h-20"
-            data-oid="blr73-e"
+            className={`flex items-center justify-between transition-all duration-300 ${
+              scrolled ? "h-14" : "h-20"
+            }`}
           >
             {/* Logo */}
             <Link
               href="/"
-              className="flex items-center gap-2 shrink-0 transition-transform duration-200 hover:scale-105"
-              data-oid="h21:88y"
+              className="flex items-center gap-2 shrink-0 transition-all duration-300 hover:scale-105"
             >
-              <div
-                className="w-10 h-10 rounded-xl bg-[#c8a46e] flex items-center justify-center p-1"
-                data-oid="_v6:33b"
-              >
-                <img
-                  src="/favicon.ico"
-                  alt="FSwebworks logo"
-                  className="w-full h-full object-contain text-start"
-                  data-oid=":2awrv3"
-                />
-              </div>
+              <img
+                src="/fswebworks.svg"
+                alt="FSwebworks logo"
+                className={`rounded-lg object-contain object-left transition-all duration-300 ${
+                  scrolled ? "h-10" : "h-14"
+                }`}
+              />
               <span
-                className="text-3xl font-semibold text-[#f5f5f0] opacity-[100%] border-0 border-[rgb(229,_231,_235)]"
-                data-oid="664c3.y"
+                className={`font-semibold text-[#f5f5f0] opacity-[100%] border-0 border-[rgb(229,_231,_235)] transition-all duration-300 ${
+                  scrolled ? "text-xl" : "text-3xl"
+                }`}
               >
                 FSwebworks
               </span>
             </Link>
 
             {/* Desktop Navigation */}
-            <nav
-              className="hidden md:flex items-center gap-8"
-              data-oid="vshb3m1"
-            >
+            <nav className="hidden md:flex items-center gap-8">
               {MENU_LINKS.map(({ href, label }) => (
-                <Link
-                  key={href}
-                  href={href}
-                  className="nav-link-header py-1"
-                  data-oid="s_ia9c8"
-                >
+                <Link key={href} href={href} className="nav-link-header py-1">
                   {label}
                 </Link>
               ))}
@@ -173,7 +159,6 @@ export default function Header() {
                 e.stopPropagation();
                 toggleMenu();
               }}
-              data-oid="sh:xpml"
             >
               <svg
                 className="w-6 h-6"
@@ -181,7 +166,6 @@ export default function Header() {
                 stroke="currentColor"
                 viewBox="0 0 24 24"
                 aria-hidden
-                data-oid="v14p_j:"
               >
                 {mobileMenuOpen ? (
                   <path
@@ -189,7 +173,6 @@ export default function Header() {
                     strokeLinejoin="round"
                     strokeWidth={2}
                     d="M6 18L18 6M6 6l12 12"
-                    data-oid="-ip9iki"
                   />
                 ) : (
                   <path
@@ -197,7 +180,6 @@ export default function Header() {
                     strokeLinejoin="round"
                     strokeWidth={2}
                     d="M4 6h16M4 12h16M4 18h16"
-                    data-oid="_80yt:f"
                   />
                 )}
               </svg>

@@ -61,7 +61,6 @@ export default function ScrollRevealFallback({
           "--reveal-duration": `${DEFAULT_DURATION}ms`,
         } as React.CSSProperties
       }
-      data-oid="4zm3yf3"
     >
       {children}
     </div>

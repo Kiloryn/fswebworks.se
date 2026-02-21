@@ -40,20 +40,15 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="sv" className="scroll-smooth" data-oid="0fvt2-z">
-      <body
-        className="min-h-screen bg-[#0a0a0a] antialiased"
-        data-oid="a_bawft"
-      >
-        <Suspense fallback={null} data-oid="4zqj2qg">
-          <SmoothScroll data-oid="qi0ihxh" />
+    <html lang="sv" className="scroll-smooth">
+      <body className="min-h-screen bg-[#0a0a0a] antialiased">
+        <Suspense fallback={null}>
+          <SmoothScroll />
         </Suspense>
-        <AosInit data-oid="_7aw6fi" />
-        <Header data-oid="bknud7a" />
-        <main className="pt-20" data-oid="2su3yaf">
-          {children}
-        </main>
-        <Footer data-oid="h6jjx38" />
+        <AosInit />
+        <Header />
+        <main className="pt-20">{children}</main>
+        <Footer />
       </body>
     </html>
   );
