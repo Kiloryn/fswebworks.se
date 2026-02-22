@@ -11,11 +11,11 @@ export default function Footer() {
         <div className="grid md:grid-cols-3 gap-12 text-center md:text-left">
           {/* Company Info */}
           <div>
-            <div className="flex items-center justify-center md:justify-start h-16 overflow-hidden mb-4">
+            <div className="flex items-center justify-center md:justify-start mb-4">
               <img
-                src="/fswebworks.svg"
+                src="/fswebworks-footer.svg"
                 alt="FSwebworks logo"
-                className="min-h-[380px] w-auto object-contain object-center"
+                className="h-10 w-auto max-w-full object-contain object-center md:h-12"
               />
             </div>
             <p className="text-[#666666] text-sm leading-relaxed">

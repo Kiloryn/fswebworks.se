@@ -56,7 +56,7 @@ export default function RootLayout({
         </Suspense>
         <AosInit />
         <Header />
-        <main className="pt-20">{children}</main>
+        <main>{children}</main>
         <Footer />
       </body>
     </html>
