@@ -31,29 +31,29 @@ export default function ExamplesPage() {
             <Link
               key={cat.slug}
               href={`/${cat.slug}`}
-              className="block bg-white dark:bg-[#1a1a1a] border border-gray-200 dark:border-[#2a2a2a] rounded-2xl p-6 hover:border-[#c8a46e]/50 transition-all hover:-translate-y-1"
+              className="group block bg-white dark:bg-[#1a1a1a] border border-gray-200 dark:border-[#2a2a2a] rounded-2xl p-6 hover:border-[#c8a46e]/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-[#c8a46e]/10"
               data-aos="fade-up"
               data-aos-anchor="#examples-grid"
               data-aos-delay="0"
               data-oid="jozmfyk"
             >
               <h2
-                className="text-xl font-semibold text-gray-900 dark:text-[#f5f5f0] mb-2"
+                className="text-xl font-semibold text-gray-900 dark:text-[#f5f5f0] mb-2 group-hover:text-[#c8a46e] transition-colors duration-300"
                 data-oid="q0209q:"
               >
                 {cat.name}
               </h2>
               <p
-                className="text-gray-600 dark:text-[#999999] text-sm"
+                className="text-gray-600 dark:text-[#cccccc] text-sm leading-relaxed"
                 data-oid="hor315k"
               >
                 {cat.description}
               </p>
               <span
-                className="inline-block mt-4 text-[#c8a46e] text-sm font-medium"
+                className="inline-flex items-center gap-1 mt-4 text-[#c8a46e] text-sm font-medium group-hover:gap-2 transition-all duration-300"
                 data-oid="ql1_.9u"
               >
-                Se demosida →
+                Se demosida <span className="transition-transform duration-300 group-hover:translate-x-0.5">→</span>
               </span>
             </Link>
           ))}

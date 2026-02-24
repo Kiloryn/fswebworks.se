@@ -7,7 +7,7 @@ export default function Footer() {
 
   return (
     <footer
-      className="bg-gray-50 dark:bg-[#0a0a0a] border-t border-gray-200 dark:border-[#2a2a2a] py-16"
+      className="bg-gray-50 dark:bg-[#0a0a0a] border-t border-[#c8a46e]/30 py-16"
       data-oid=".vrqwzm"
     >
       <div className="max-w-6xl mx-auto px-6" data-oid="mczg6rf">
@@ -86,7 +86,7 @@ export default function Footer() {
               </svg>
             </Link>
             <p
-              className="text-gray-500 dark:text-[#666666] text-sm leading-relaxed"
+              className="text-gray-700 dark:text-[#d4d4d0] text-sm leading-relaxed"
               data-oid="k.bs9w:"
             >
               Vi skapar enkla och professionella hemsidor för småföretag i
@@ -107,7 +107,7 @@ export default function Footer() {
               <li data-oid="yicb6g:">
                 <Link
                   href="/#pricing"
-                  className="text-gray-500 dark:text-[#666666] hover:text-[#c8a46e] text-sm"
+                  className="text-gray-700 dark:text-[#d4d4d0] hover:text-[#c8a46e] transition-colors duration-200 text-sm"
                   data-oid="h2iw:f9"
                 >
                   Priser
@@ -116,7 +116,7 @@ export default function Footer() {
               <li data-oid="mu0j5pm">
                 <Link
                   href="/process"
-                  className="text-gray-500 dark:text-[#666666] hover:text-[#c8a46e] text-sm"
+                  className="text-gray-700 dark:text-[#d4d4d0] hover:text-[#c8a46e] transition-colors duration-200 text-sm"
                   data-oid="4ii8j_2"
                 >
                   Så här går det till
@@ -125,7 +125,7 @@ export default function Footer() {
               <li data-oid="hsl4tux">
                 <Link
                   href="/examples"
-                  className="text-gray-500 dark:text-[#666666] hover:text-[#c8a46e] text-sm"
+                  className="text-gray-700 dark:text-[#d4d4d0] hover:text-[#c8a46e] transition-colors duration-200 text-sm"
                   data-oid=".jl-27g"
                 >
                   Exempel på sidor
@@ -134,7 +134,7 @@ export default function Footer() {
               <li data-oid="ov:idcq">
                 <Link
                   href="/#contact"
-                  className="text-gray-500 dark:text-[#666666] hover:text-[#c8a46e] text-sm"
+                  className="text-gray-700 dark:text-[#d4d4d0] hover:text-[#c8a46e] transition-colors duration-200 text-sm"
                   data-oid="we9q.av"
                 >
                   Kontakta oss
@@ -153,7 +153,7 @@ export default function Footer() {
             </h3>
             <ul className="space-y-3" data-oid="eq3._7c">
               <li
-                className="text-gray-500 dark:text-[#666666] text-sm"
+                className="text-gray-700 dark:text-[#d4d4d0] text-sm"
                 data-oid=":1jbtfr"
               >
                 Stockholm, Sverige
@@ -161,7 +161,7 @@ export default function Footer() {
               <li data-oid="-ru5p.l">
                 <a
                   href="mailto:fredrik@fswebworks.se"
-                  className="text-gray-500 dark:text-[#666666] hover:text-[#c8a46e] text-sm"
+                  className="text-gray-700 dark:text-[#d4d4d0] hover:text-[#c8a46e] transition-colors duration-200 text-sm"
                   data-oid="d8evhr:"
                 >
                   fredrik@fswebworks.se
@@ -177,7 +177,7 @@ export default function Footer() {
           data-oid="6iwrl11"
         >
           <p
-            className="text-gray-500 dark:text-[#666666] text-sm text-center"
+            className="text-gray-600 dark:text-[#b0b0a8] text-sm text-center"
             data-oid="kyzmwm9"
           >
             © {currentYear} FSwebworks. Alla rättigheter reserverade.
