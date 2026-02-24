@@ -5,10 +5,11 @@ import { createPortal } from 'react-dom';
 import Link from 'next/link';
 
 const MENU_LINKS = [
-  { href: '#hero', label: 'Hem' },
-  { href: '#services', label: 'Tjänster' },
-  { href: '#examples', label: 'Mallar' },
-  { href: '#contact', label: 'Kontakt' },
+  { href: "/", label: "Hem" },
+  { href: "/process", label: "Så här går det till" },
+  { href: "/#pricing", label: "Priser" },
+  { href: "/examples", label: "Exempel" },
+  { href: "/#contact", label: "Kontakt" },
 ] as const;
 
 export default function Header() {

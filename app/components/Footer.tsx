@@ -23,22 +23,39 @@ export default function Footer() {
             </p>
           </div>
 
-          {/* Quick Links - with smooth scroll */}
+          {/* Quick Links */}
           <div>
             <h3 className="text-[#f5f5f0] font-semibold mb-4">Länkar</h3>
             <ul className="space-y-3">
               <li>
-                <Link href="#services" className="text-[#666666] hover:text-[#c8a46e] transition-colors text-sm text-left">
-                  Tjänster & Priser
+                <Link
+                  href="/#pricing"
+                  className="text-[#666666] hover:text-[#c8a46e] transition-colors text-sm"
+                >
+                  Priser
                 </Link>
               </li>
               <li>
-                <Link href="#examples" className="text-[#666666] hover:text-[#c8a46e] transition-colors text-sm text-left">
-                  Våra Mallar
+                <Link
+                  href="/process"
+                  className="text-[#666666] hover:text-[#c8a46e] transition-colors text-sm"
+                >
+                  Så här går det till
                 </Link>
               </li>
               <li>
-                <Link href="#contact" className="text-[#666666] hover:text-[#c8a46e] transition-colors text-sm text-left">
+                <Link
+                  href="/examples"
+                  className="text-[#666666] hover:text-[#c8a46e] transition-colors text-sm"
+                >
+                  Exempel på sidor
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/#contact"
+                  className="text-[#666666] hover:text-[#c8a46e] transition-colors text-sm"
+                >
                   Kontakta oss
                 </Link>
               </li>
