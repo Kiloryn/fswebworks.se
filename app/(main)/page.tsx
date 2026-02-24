@@ -437,6 +437,55 @@ const FAQ_ITEMS: { q: string; a: string }[] = [
   },
 ];
 
+function FAQItem({ item, index }: { item: { q: string; a: string }; index: number }) {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <li
+      className={`bg-gray-50 dark:bg-[#1a1a1a] border rounded-xl transition-all duration-300 ${
+        open
+          ? "border-[#c8a46e]/40 shadow-md shadow-[#c8a46e]/5"
+          : "border-gray-200 dark:border-[#2a2a2a] hover:border-[#c8a46e]/20"
+      }`}
+      data-aos="fade-up"
+      data-aos-delay={index * 50}
+    >
+      <button
+        type="button"
+        onClick={() => setOpen(!open)}
+        className="w-full flex items-center justify-between gap-4 p-6 text-left cursor-pointer"
+        aria-expanded={open}
+      >
+        <span className="text-lg font-semibold text-gray-900 dark:text-[#f5f5f0]">
+          {item.q}
+        </span>
+        <svg
+          className={`shrink-0 w-5 h-5 text-[#c8a46e] transition-transform duration-300 ${
+            open ? "rotate-45" : "rotate-0"
+          }`}
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          strokeWidth={2}
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
+        </svg>
+      </button>
+      <div
+        className={`grid transition-all duration-300 ease-in-out ${
+          open ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+        }`}
+      >
+        <div className="overflow-hidden">
+          <p className="px-6 pb-6 text-gray-600 dark:text-[#cccccc] leading-relaxed">
+            {item.a}
+          </p>
+        </div>
+      </div>
+    </li>
+  );
+}
+
 function FAQSection() {
   return (
     <section
@@ -444,45 +493,16 @@ function FAQSection() {
       data-oid="7bu:.ml"
     >
       <div className="relative max-w-3xl mx-auto px-6" data-oid="89xhhdi">
-        <div className="text-center mb-12">
-          <div
-            className="inline-flex items-center px-3 py-1.5 mb-4 bg-[#c8a46e]/10 border border-[#c8a46e]/20 rounded-full text-xs text-[#8b7355] dark:text-[#c8a46e] font-medium"
-            data-aos="fade-up"
-          >
-            FAQ
-          </div>
-          <h2
-            className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-[#f5f5f0]"
-            data-aos="fade-up"
-            data-aos-delay="50"
-            data-oid="iqjffx_"
-          >
-            Vanliga frågor
-          </h2>
-        </div>
-        <ul className="space-y-4" data-oid="twx44y5">
+        <h2
+          className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-[#f5f5f0] mb-12 text-center"
+          data-aos="fade-up"
+          data-oid="iqjffx_"
+        >
+          FAQ
+        </h2>
+        <ul className="space-y-3" data-oid="twx44y5">
           {FAQ_ITEMS.map((item, i) => (
-            <li
-              key={i}
-              className="bg-gray-50 dark:bg-[#1a1a1a] border border-gray-200 dark:border-[#2a2a2a] rounded-xl p-6 transition-all duration-300 hover:border-[#c8a46e]/30"
-              data-aos="fade-up"
-              data-aos-delay={i * 50}
-              data-oid="twbdgw8"
-            >
-              <h3
-                className="text-lg font-semibold text-gray-900 dark:text-[#f5f5f0] mb-2 flex items-start gap-3"
-                data-oid="0g6_0.e"
-              >
-                <span className="shrink-0 inline-flex items-center justify-center w-6 h-6 mt-0.5 rounded-full bg-[#c8a46e]/15 text-[#8b7355] dark:text-[#c8a46e] text-xs font-bold">?</span>
-                {item.q}
-              </h3>
-              <p
-                className="text-gray-600 dark:text-[#cccccc] leading-relaxed ml-9"
-                data-oid="an42hw6"
-              >
-                {item.a}
-              </p>
-            </li>
+            <FAQItem key={i} item={item} index={i} />
           ))}
         </ul>
       </div>
@@ -752,52 +772,115 @@ function ContactSection() {
   );
 }
 
+const SHOWCASE_ITEMS = [
+  { slug: "vvs", name: "VVS & Rörmokare", accent: "#3b82f6" },
+  { slug: "elektriker", name: "Elektriker", accent: "#eab308" },
+  { slug: "salong", name: "Salong/Skönhet", accent: "#ec4899" },
+  { slug: "restaurang", name: "Restaurang", accent: "#ef4444" },
+  { slug: "malare", name: "Målare", accent: "#22c55e" },
+  { slug: "konsult", name: "Konsult", accent: "#8b5cf6" },
+];
+
 function ExamplesTeaserSection() {
+  const doubled = [...SHOWCASE_ITEMS, ...SHOWCASE_ITEMS];
+
   return (
     <section
-      className="relative py-20 bg-white dark:bg-[#0a0a0a] border-t border-gray-200/50 dark:border-[#2a2a2a]/50 overflow-hidden"
+      className="relative py-24 bg-gray-50 dark:bg-[#0a0a0a] border-t border-gray-200/50 dark:border-[#2a2a2a]/50 overflow-hidden"
       data-oid="nl0opgt"
     >
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse 80% 60% at 50% 50%, rgba(200, 164, 110, 0.05), transparent 60%)",
+            "radial-gradient(ellipse 80% 60% at 50% 50%, rgba(200, 164, 110, 0.06), transparent 60%)",
         }}
         aria-hidden
       />
-      <div className="relative max-w-6xl mx-auto px-6 text-center" data-oid="kmncg_z">
-        <div
-          className="inline-flex items-center px-3 py-1.5 mb-4 bg-[#c8a46e]/10 border border-[#c8a46e]/20 rounded-full text-xs text-[#8b7355] dark:text-[#c8a46e] font-medium"
-          data-aos="fade-up"
-        >
-          Demosidor
-        </div>
+
+      <div className="relative text-center mb-12 px-6" data-oid="kmncg_z">
         <h2
           className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-[#f5f5f0] mb-4"
           data-aos="fade-up"
-          data-aos-delay="50"
           data-oid="0rmqedd"
         >
-          Exempel på sidor
+          Exempel på hemsidor vi bygger
         </h2>
         <p
-          className="text-gray-600 dark:text-[#cccccc] mb-8 max-w-xl mx-auto leading-relaxed"
+          className="text-gray-600 dark:text-[#cccccc] max-w-xl mx-auto leading-relaxed"
           data-aos="fade-up"
-          data-aos-delay="100"
+          data-aos-delay="50"
           data-oid="ix-2unm"
         >
-          Se demosidor för VVS, elektriker, salong, restaurang, målare och
-          konsult.
+          Varje mall anpassas efter ditt företags varumärke och behov.
+          Klicka för att se en live-demo.
         </p>
+      </div>
+
+      {/* Scrolling showcase row */}
+      <div className="relative" data-aos="fade-up" data-aos-delay="100">
+        {/* Fade edges */}
+        <div className="absolute left-0 top-0 bottom-0 w-24 z-10 bg-gradient-to-r from-gray-50 dark:from-[#0a0a0a] to-transparent pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-24 z-10 bg-gradient-to-l from-gray-50 dark:from-[#0a0a0a] to-transparent pointer-events-none" />
+
+        <div className="flex gap-6 animate-marquee">
+          {doubled.map((item, i) => (
+            <Link
+              key={`${item.slug}-${i}`}
+              href={`/${item.slug}`}
+              className="group shrink-0 w-[280px] h-[180px] relative rounded-2xl overflow-hidden border border-gray-200 dark:border-[#2a2a2a] bg-white dark:bg-[#1a1a1a] transition-all duration-300 hover:border-[#c8a46e]/50 hover:shadow-2xl hover:shadow-[#c8a46e]/10 hover:-translate-y-1"
+            >
+              {/* Accent bar at top */}
+              <div
+                className="h-1 w-full transition-all duration-300 group-hover:h-1.5"
+                style={{ backgroundColor: item.accent }}
+              />
+
+              {/* Decorative browser chrome */}
+              <div className="flex items-center gap-1.5 px-4 py-2 border-b border-gray-100 dark:border-[#2a2a2a]">
+                <div className="w-2 h-2 rounded-full bg-red-400/60" />
+                <div className="w-2 h-2 rounded-full bg-yellow-400/60" />
+                <div className="w-2 h-2 rounded-full bg-green-400/60" />
+                <div className="ml-2 flex-1 h-4 rounded bg-gray-100 dark:bg-[#2a2a2a] flex items-center px-2">
+                  <span className="text-[8px] text-gray-400 dark:text-[#555] truncate">
+                    fswebworks.se/{item.slug}
+                  </span>
+                </div>
+              </div>
+
+              {/* Content preview area */}
+              <div className="p-4 flex flex-col justify-between h-[calc(100%-41px)]">
+                <div>
+                  <div className="w-16 h-1.5 rounded-full mb-3" style={{ backgroundColor: `${item.accent}40` }} />
+                  <div className="w-full h-1 rounded-full bg-gray-200 dark:bg-[#2a2a2a] mb-1.5" />
+                  <div className="w-3/4 h-1 rounded-full bg-gray-200 dark:bg-[#2a2a2a] mb-1.5" />
+                  <div className="w-1/2 h-1 rounded-full bg-gray-200 dark:bg-[#2a2a2a]" />
+                </div>
+                <div className="flex items-center justify-between mt-3">
+                  <span className="text-sm font-semibold text-gray-900 dark:text-[#f5f5f0] group-hover:text-[#c8a46e] transition-colors">
+                    {item.name}
+                  </span>
+                  <span className="text-[#c8a46e] text-xs font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center gap-1">
+                    Se demo
+                    <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                    </svg>
+                  </span>
+                </div>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </div>
+
+      <div className="relative text-center mt-10 px-6">
         <Link
           href="/examples"
-          className="inline-block px-8 py-4 border-2 border-[#c8a46e] text-[#8b7355] dark:text-[#c8a46e] font-semibold rounded-lg hover:bg-[#c8a46e] hover:text-[#111111] transition-all duration-300 hover:scale-[1.02] hover:shadow-lg hover:shadow-[#c8a46e]/25"
+          className="inline-block px-8 py-4 bg-[#c8a46e] text-[#111111] font-semibold rounded-lg hover:bg-[#d4b480] transition-all duration-300 hover:scale-[1.02] hover:shadow-lg hover:shadow-[#c8a46e]/25"
           data-aos="fade-up"
-          data-aos-delay="150"
           data-oid="a5lwg.i"
         >
-          Visa exempel
+          Se alla exempel
         </Link>
       </div>
     </section>
