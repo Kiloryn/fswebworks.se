@@ -1,37 +1,5 @@
 import Link from "next/link";
-
-const EXAMPLE_CATEGORIES = [
-  {
-    slug: "vvs",
-    name: "VVS & Rörmokare",
-    description: "Akut service, jourdygnet runt, offertförfrågan. Perfekt för dig som vill synas och få fler kunder.",
-  },
-  {
-    slug: "elektriker",
-    name: "Elektriker",
-    description: "Elinstallation, säkerhet, certifierad. Bygg förtroende med dokumenterad kompetens.",
-  },
-  {
-    slug: "salong",
-    name: "Salong/Skönhet",
-    description: "Bokning, behandlingar, priser. Låt kunder boka direkt online.",
-  },
-  {
-    slug: "restaurang",
-    name: "Restaurang",
-    description: "Meny, bordsbokning, evenemang. Visa upp mat och skapa stämning.",
-  },
-  {
-    slug: "malare",
-    name: "Målare",
-    description: "Måleritjänster, inomhus/utomhus, kostnadsfri offert, professionellt utförande.",
-  },
-  {
-    slug: "konsult",
-    name: "Konsult/Företagstjänster",
-    description: "Expertis, tjänster, kontakt. Bygg trovärdighet och få fler uppdrag.",
-  },
-];
+import { EXAMPLE_CATEGORIES } from "@/lib/example-categories";
 
 export default function ExamplesPage() {
   return (
@@ -44,14 +12,15 @@ export default function ExamplesPage() {
           Klicka på en kategori för att se en demosida. Alla exempel kan anpassas efter ditt företags varumärke och behov.
         </p>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div id="examples-grid" className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {EXAMPLE_CATEGORIES.map((cat, i) => (
             <Link
               key={cat.slug}
               href={`/${cat.slug}`}
               className="block bg-[#1a1a1a] border border-[#2a2a2a] rounded-2xl p-6 hover:border-[#c8a46e]/50 transition-all hover:-translate-y-1"
               data-aos="fade-up"
-              data-aos-delay={i * 80}
+              data-aos-anchor="#examples-grid"
+              data-aos-delay="0"
             >
               <h2 className="text-xl font-semibold text-[#f5f5f0] mb-2">{cat.name}</h2>
               <p className="text-[#999999] text-sm">{cat.description}</p>
@@ -62,7 +31,12 @@ export default function ExamplesPage() {
           ))}
         </div>
 
-        <div className="text-center mt-16">
+        <div
+          className="text-center mt-16"
+          data-aos="fade-up"
+          data-aos-anchor="#examples-grid"
+          data-aos-delay="200"
+        >
           <Link
             href="/#contact"
             className="inline-block px-8 py-4 bg-[#c8a46e] text-[#111111] font-semibold rounded-lg hover:bg-[#d4b480] transition-colors"

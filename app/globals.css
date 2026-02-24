@@ -56,4 +56,7 @@ body {
   .mobile-menu-link:active {
     @apply bg-[#c8a46e]/15;
   }
+  .nav-link-header {
+    @apply text-[#999999] hover:text-[#c8a46e] transition-colors duration-150 no-underline;
+  }
 }
