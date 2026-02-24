@@ -447,9 +447,10 @@ function FAQItem({ item, index }: { item: { q: string; a: string }; index: numbe
   useEffect(() => {
     if (open && bodyRef.current) {
       setHeight(bodyRef.current.scrollHeight);
-      requestAnimationFrame(() => {
+      const timer = setTimeout(() => {
         itemRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest" });
-      });
+      }, 220);
+      return () => clearTimeout(timer);
     } else {
       setHeight(0);
     }
