@@ -440,12 +440,22 @@ const FAQ_ITEMS: { q: string; a: string }[] = [
 
 function FAQItem({ item, index }: { item: { q: string; a: string }; index: number }) {
   const [open, setOpen] = useState(false);
+  const bodyRef = useRef<HTMLDivElement>(null);
+  const [height, setHeight] = useState(0);
+
+  useEffect(() => {
+    if (open && bodyRef.current) {
+      setHeight(bodyRef.current.scrollHeight);
+    } else {
+      setHeight(0);
+    }
+  }, [open]);
 
   return (
     <li
-      className={`bg-gray-50 dark:bg-[#1a1a1a] border rounded-xl transition-all duration-300 ${
+      className={`bg-gray-50 dark:bg-[#1a1a1a] border rounded-xl transition-colors duration-200 ${
         open
-          ? "border-[#c8a46e]/40 shadow-md shadow-[#c8a46e]/5"
+          ? "border-[#c8a46e]/40"
           : "border-gray-200 dark:border-[#2a2a2a] hover:border-[#c8a46e]/20"
       }`}
       data-aos="fade-up"
@@ -461,7 +471,7 @@ function FAQItem({ item, index }: { item: { q: string; a: string }; index: numbe
           {item.q}
         </span>
         <svg
-          className={`shrink-0 w-5 h-5 text-[#c8a46e] transition-transform duration-300 ${
+          className={`shrink-0 w-5 h-5 text-[#c8a46e] transition-transform duration-200 ${
             open ? "rotate-45" : "rotate-0"
           }`}
           fill="none"
@@ -473,15 +483,13 @@ function FAQItem({ item, index }: { item: { q: string; a: string }; index: numbe
         </svg>
       </button>
       <div
-        className={`grid transition-all duration-300 ease-in-out ${
-          open ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
-        }`}
+        ref={bodyRef}
+        className="overflow-hidden transition-[height] duration-200 ease-out"
+        style={{ height }}
       >
-        <div className="overflow-hidden">
-          <p className="px-6 pb-6 text-gray-600 dark:text-[#cccccc] leading-relaxed">
-            {item.a}
-          </p>
-        </div>
+        <p className="px-6 pb-6 text-gray-600 dark:text-[#cccccc] leading-relaxed">
+          {item.a}
+        </p>
       </div>
     </li>
   );
