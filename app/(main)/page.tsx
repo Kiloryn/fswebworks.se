@@ -2,6 +2,7 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 
 const TEMPLATE_OPTIONS = [
@@ -773,12 +774,12 @@ function ContactSection() {
 }
 
 const SHOWCASE_ITEMS = [
-  { slug: "vvs", name: "VVS & Rörmokare", accent: "#3b82f6" },
-  { slug: "elektriker", name: "Elektriker", accent: "#eab308" },
-  { slug: "salong", name: "Salong/Skönhet", accent: "#ec4899" },
-  { slug: "restaurang", name: "Restaurang", accent: "#ef4444" },
-  { slug: "malare", name: "Målare", accent: "#22c55e" },
-  { slug: "konsult", name: "Konsult", accent: "#8b5cf6" },
+  { slug: "vvs", name: "VVS & Rörmokare", img: "/examples/vvs.webp" },
+  { slug: "elektriker", name: "Elektriker", img: "/examples/elektriker.webp" },
+  { slug: "salong", name: "Salong/Skönhet", img: "/examples/salong.webp" },
+  { slug: "restaurang", name: "Restaurang", img: "/examples/restaurang.webp" },
+  { slug: "malare", name: "Målare", img: "/examples/malare.webp" },
+  { slug: "konsult", name: "Konsult", img: "/examples/konsult.webp" },
 ];
 
 function ExamplesTeaserSection() {
@@ -828,45 +829,34 @@ function ExamplesTeaserSection() {
             <Link
               key={`${item.slug}-${i}`}
               href={`/${item.slug}`}
-              className="group shrink-0 w-[280px] h-[180px] relative rounded-2xl overflow-hidden border border-gray-200 dark:border-[#2a2a2a] bg-white dark:bg-[#1a1a1a] transition-all duration-300 hover:border-[#c8a46e]/50 hover:shadow-2xl hover:shadow-[#c8a46e]/10 hover:-translate-y-1"
+              className="group shrink-0 w-[320px] relative rounded-2xl overflow-hidden border border-gray-200 dark:border-[#2a2a2a] bg-white dark:bg-[#1a1a1a] transition-all duration-300 hover:border-[#c8a46e]/50 hover:shadow-2xl hover:shadow-[#c8a46e]/10 hover:-translate-y-1"
             >
-              {/* Accent bar at top */}
-              <div
-                className="h-1 w-full transition-all duration-300 group-hover:h-1.5"
-                style={{ backgroundColor: item.accent }}
-              />
-
-              {/* Decorative browser chrome */}
-              <div className="flex items-center gap-1.5 px-4 py-2 border-b border-gray-100 dark:border-[#2a2a2a]">
-                <div className="w-2 h-2 rounded-full bg-red-400/60" />
-                <div className="w-2 h-2 rounded-full bg-yellow-400/60" />
-                <div className="w-2 h-2 rounded-full bg-green-400/60" />
-                <div className="ml-2 flex-1 h-4 rounded bg-gray-100 dark:bg-[#2a2a2a] flex items-center px-2">
-                  <span className="text-[8px] text-gray-400 dark:text-[#555] truncate">
-                    fswebworks.se/{item.slug}
+              {/* Screenshot preview */}
+              <div className="relative aspect-video overflow-hidden bg-gray-100 dark:bg-[#111]">
+                <Image
+                  src={item.img}
+                  alt={`${item.name} exempelsida`}
+                  width={640}
+                  height={360}
+                  loading="lazy"
+                  className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                />
+                {/* Hover overlay */}
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all duration-300 flex items-center justify-center">
+                  <span className="text-white text-sm font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300 px-4 py-2 bg-[#c8a46e] rounded-lg">
+                    Se demo →
                   </span>
                 </div>
               </div>
 
-              {/* Content preview area */}
-              <div className="p-4 flex flex-col justify-between h-[calc(100%-41px)]">
-                <div>
-                  <div className="w-16 h-1.5 rounded-full mb-3" style={{ backgroundColor: `${item.accent}40` }} />
-                  <div className="w-full h-1 rounded-full bg-gray-200 dark:bg-[#2a2a2a] mb-1.5" />
-                  <div className="w-3/4 h-1 rounded-full bg-gray-200 dark:bg-[#2a2a2a] mb-1.5" />
-                  <div className="w-1/2 h-1 rounded-full bg-gray-200 dark:bg-[#2a2a2a]" />
-                </div>
-                <div className="flex items-center justify-between mt-3">
-                  <span className="text-sm font-semibold text-gray-900 dark:text-[#f5f5f0] group-hover:text-[#c8a46e] transition-colors">
-                    {item.name}
-                  </span>
-                  <span className="text-[#c8a46e] text-xs font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center gap-1">
-                    Se demo
-                    <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                    </svg>
-                  </span>
-                </div>
+              {/* Label */}
+              <div className="px-4 py-3 flex items-center justify-between">
+                <span className="text-sm font-semibold text-gray-900 dark:text-[#f5f5f0] group-hover:text-[#c8a46e] transition-colors">
+                  {item.name}
+                </span>
+                <svg className="w-4 h-4 text-gray-400 dark:text-[#555] group-hover:text-[#c8a46e] transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                </svg>
               </div>
             </Link>
           ))}

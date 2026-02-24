@@ -13,6 +13,8 @@ export default function AosInit() {
       duration: 600,
       once: true,
       offset: 40,
+      easing: "ease-out-cubic",
+      disable: window.innerWidth < 640,
     });
   }, []);
   return null;
