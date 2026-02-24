@@ -15,8 +15,8 @@ export default function Error({
 
   return (
     <div className="min-h-[60vh] flex flex-col items-center justify-center px-6 text-center">
-      <h1 className="text-2xl font-semibold text-[#f5f5f0] mb-2">Något gick fel</h1>
-      <p className="text-[#999999] mb-6 max-w-md">
+      <h1 className="text-2xl font-semibold text-gray-900 dark:text-[#f5f5f0] mb-2">Något gick fel</h1>
+      <p className="text-gray-600 dark:text-[#999999] mb-6 max-w-md">
         Vi kunde inte ladda sidan. Försök igen.
       </p>
       <button

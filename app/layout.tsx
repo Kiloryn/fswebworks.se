@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { ThemeProvider } from "./providers";
 
 const siteName = "FSwebworks";
 const title = "FSwebworks - Webbdesign för småföretag i Stockholm";
@@ -45,8 +46,10 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.ico" type="image/x-icon" sizes="any" />
         <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
       </head>
-      <body className="min-h-screen bg-[#0a0a0a] antialiased" suppressHydrationWarning>
-        {children}
+      <body className="min-h-screen bg-white dark:bg-[#0a0a0a] antialiased" suppressHydrationWarning>
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem storageKey="fswebworks-theme">
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

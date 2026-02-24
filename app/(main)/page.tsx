@@ -19,7 +19,7 @@ function HeroSection() {
       id="hero"
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
-      <div className="absolute inset-0 bg-gradient-to-br from-[#0a0a0a] via-[#111111] to-[#0a0a0a]" />
+      <div className="absolute inset-0 bg-gradient-to-br from-gray-50 via-white to-gray-50 dark:from-[#0a0a0a] dark:via-[#111111] dark:to-[#0a0a0a]" />
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
@@ -29,7 +29,7 @@ function HeroSection() {
         aria-hidden
       />
       <div className="relative z-10 max-w-6xl mx-auto px-6 py-20 text-center">
-        <h1 className="text-4xl md:text-6xl font-bold mb-8 max-w-4xl mx-auto leading-tight bg-gradient-to-r from-[#f5f5f0] via-[#d4b480] to-[#f5f5f0] bg-clip-text text-transparent" data-aos="fade-up">
+        <h1 className="text-4xl md:text-6xl font-bold mb-8 max-w-4xl mx-auto leading-tight bg-gradient-to-r from-gray-900 via-[#c8a46e] to-gray-900 dark:from-[#f5f5f0] dark:via-[#d4b480] dark:to-[#f5f5f0] bg-clip-text text-transparent" data-aos="fade-up">
           Webbdesign för små företag i Stockholm
         </h1>
         <div className="flex flex-col items-center" data-aos="fade-up" data-aos-delay="200">
@@ -39,7 +39,7 @@ function HeroSection() {
           >
             Så här går det till
           </Link>
-          <p className="text-[#999999] mt-6 max-w-xl mx-auto text-sm md:text-base">
+          <p className="text-gray-600 dark:text-[#999999] mt-6 max-w-xl mx-auto text-sm md:text-base">
             Du bidrar med information om ditt företag – vi ser till att innehållet presenteras tydligt och snyggt på hemsidan.
           </p>
         </div>
@@ -50,7 +50,7 @@ function HeroSection() {
 
 function ValueSection() {
   return (
-    <section className="relative py-24 bg-[#0a0a0a] overflow-hidden">
+    <section className="relative py-24 bg-gray-50 dark:bg-[#0a0a0a] overflow-hidden">
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
@@ -60,10 +60,10 @@ function ValueSection() {
         aria-hidden
       />
       <div className="relative max-w-3xl mx-auto px-6 text-center">
-        <h2 className="text-3xl md:text-4xl font-bold mb-6 text-[#f5f5f0]" data-aos="fade-up">
+        <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900 dark:text-[#f5f5f0]" data-aos="fade-up">
           En hemsida som gör jobbet
         </h2>
-        <p className="text-[#999999] text-lg leading-relaxed" data-aos="fade-up" data-aos-delay="100">
+        <p className="text-gray-600 dark:text-[#999999] text-lg leading-relaxed" data-aos="fade-up" data-aos-delay="100">
           Alla företag behöver inte en stor eller avancerad webbplats. Ofta räcker det med en tydlig, snygg och mobilanpassad hemsida som visar vad du gör, var du finns och hur kunder kontaktar dig. Det är precis vad vi hjälper till med.
         </p>
       </div>
@@ -94,32 +94,32 @@ function PricingSection() {
   ];
 
   return (
-    <section id="pricing" className="relative py-24 bg-[#111111] overflow-hidden">
+    <section id="pricing" className="relative py-24 bg-gray-100 dark:bg-[#111111] overflow-hidden">
       <div className="relative max-w-6xl mx-auto px-6">
         <div className="text-center mb-12" data-aos="fade-up">
-          <h2 className="text-3xl md:text-4xl font-bold text-[#f5f5f0] mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-[#f5f5f0] mb-4">
             Priser
           </h2>
-          <p className="text-[#999999] mb-2">
-            Engångspris: <span className="text-[#f5f5f0] font-semibold">Från 9 900 kr</span>{" "}
-            <span className="text-[#666666] text-sm align-baseline">exkl. moms</span>
+          <p className="text-gray-600 dark:text-[#999999] mb-2">
+            Engångspris: <span className="text-gray-900 dark:text-[#f5f5f0] font-semibold">Från 9 900 kr</span>{" "}
+            <span className="text-gray-500 dark:text-[#666666] text-sm align-baseline">exkl. moms</span>
           </p>
-          <p className="text-[#666666] text-sm mt-4">Hosting & Drift – exkl. <span className="text-[#666666] text-xs">moms</span></p>
+          <p className="text-gray-500 dark:text-[#666666] text-sm mt-4">Hosting & Drift – exkl. <span className="text-gray-500 dark:text-[#666666] text-xs">moms</span></p>
         </div>
         <div className="grid md:grid-cols-3 gap-6 mb-12">
           {tiers.map((tier, i) => (
             <div
               key={tier.name}
-              className="bg-[#1a1a1a] border border-[#2a2a2a] rounded-2xl p-6 hover:border-[#c8a46e]/40 transition-colors"
+              className="bg-white dark:bg-[#1a1a1a] border border-gray-200 dark:border-[#2a2a2a] rounded-2xl p-6 hover:border-[#c8a46e]/40 transition-colors"
               data-aos="fade-up"
               data-aos-delay={i * 80}
             >
-              <h3 className="text-xl font-semibold text-[#f5f5f0] mb-2">{tier.name}</h3>
-              <p className="text-2xl font-bold text-[#f5f5f0]">
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-[#f5f5f0] mb-2">{tier.name}</h3>
+              <p className="text-2xl font-bold text-gray-900 dark:text-[#f5f5f0]">
                 {tier.price} {tier.period}
               </p>
-              <p className="text-xs text-[#666666] mb-4">exkl. <span className="text-[10px]">moms</span></p>
-              <p className="text-[#999999] text-sm">{tier.description}</p>
+              <p className="text-xs text-gray-500 dark:text-[#666666] mb-4">exkl. <span className="text-[10px]">moms</span></p>
+              <p className="text-gray-600 dark:text-[#999999] text-sm">{tier.description}</p>
             </div>
           ))}
         </div>
@@ -157,16 +157,16 @@ const FAQ_ITEMS: { q: string; a: string }[] = [
 
 function FAQSection() {
   return (
-    <section className="relative py-24 bg-[#0a0a0a] overflow-hidden">
+    <section className="relative py-24 bg-white dark:bg-[#0a0a0a] overflow-hidden">
       <div className="relative max-w-3xl mx-auto px-6">
-        <h2 className="text-3xl md:text-4xl font-bold text-[#f5f5f0] mb-12 text-center" data-aos="fade-up">
+        <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-[#f5f5f0] mb-12 text-center" data-aos="fade-up">
           Vanliga frågor
         </h2>
         <ul className="space-y-8">
           {FAQ_ITEMS.map((item, i) => (
-            <li key={i} className="border-b border-[#2a2a2a] pb-8 last:border-0" data-aos="fade-up" data-aos-delay={i * 50}>
-              <h3 className="text-lg font-semibold text-[#f5f5f0] mb-2">{item.q}</h3>
-              <p className="text-[#999999] leading-relaxed">{item.a}</p>
+            <li key={i} className="border-b border-gray-200 dark:border-[#2a2a2a] pb-8 last:border-0" data-aos="fade-up" data-aos-delay={i * 50}>
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-[#f5f5f0] mb-2">{item.q}</h3>
+              <p className="text-gray-600 dark:text-[#999999] leading-relaxed">{item.a}</p>
             </li>
           ))}
         </ul>
@@ -259,19 +259,19 @@ function ContactSection() {
   };
 
   return (
-    <section id="contact" className="py-24 bg-[#111111] relative overflow-hidden" ref={sectionRef}>
+    <section id="contact" className="py-24 bg-gray-100 dark:bg-[#111111] relative overflow-hidden" ref={sectionRef}>
       <div className="relative z-10 max-w-3xl mx-auto px-6 text-center" data-aos="fade-up">
-        <h2 className="text-3xl md:text-4xl font-bold text-[#f5f5f0] mb-4">
+        <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-[#f5f5f0] mb-4">
           Kontakta oss
         </h2>
-        <p className="text-[#999999] mb-10">
+        <p className="text-gray-600 dark:text-[#999999] mb-10">
           Osäker på vad du behöver? Hör av dig så pratar vi igenom det – helt utan förpliktelser.
         </p>
 
         {status === "success" ? (
-          <div className="max-w-lg mx-auto py-8 px-6 bg-[#1a1a1a] border border-[#2a2a2a] rounded-xl text-[#f5f5f0]">
+          <div className="max-w-lg mx-auto py-8 px-6 bg-white dark:bg-[#1a1a1a] border border-gray-200 dark:border-[#2a2a2a] rounded-xl text-gray-900 dark:text-[#f5f5f0]">
             <p className="text-lg font-medium text-[#c8a46e] mb-2">Tack för din förfrågan!</p>
-            <p className="text-[#999999]">Vi återkommer inom 24 timmar.</p>
+            <p className="text-gray-600 dark:text-[#999999]">Vi återkommer inom 24 timmar.</p>
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-4 text-left max-w-lg mx-auto">
@@ -281,7 +281,7 @@ function ContactSection() {
               </p>
             )}
             <div>
-              <label htmlFor="contact-name" className="block text-[#e5e5e0] text-sm font-medium mb-1.5">
+              <label htmlFor="contact-name" className="block text-gray-700 dark:text-[#e5e5e0] text-sm font-medium mb-1.5">
                 Namn
               </label>
               <input
@@ -293,11 +293,11 @@ function ContactSection() {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 disabled={status === "loading"}
-                className="w-full px-4 py-3 bg-[#1a1a1a] border border-[#2a2a2a] rounded-lg text-[#f5f5f0] placeholder-[#666666] focus:border-[#c8a46e] focus:outline-none disabled:opacity-60"
+                className="w-full px-4 py-3 bg-white dark:bg-[#1a1a1a] border border-gray-200 dark:border-[#2a2a2a] rounded-lg text-gray-900 dark:text-[#f5f5f0] placeholder-gray-400 dark:placeholder-[#666666] focus:border-[#c8a46e] focus:outline-none disabled:opacity-60"
               />
             </div>
             <div>
-              <label htmlFor="contact-email" className="block text-[#e5e5e0] text-sm font-medium mb-1.5">
+              <label htmlFor="contact-email" className="block text-gray-700 dark:text-[#e5e5e0] text-sm font-medium mb-1.5">
                 E-post
               </label>
               <input
@@ -309,11 +309,11 @@ function ContactSection() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 disabled={status === "loading"}
-                className="w-full px-4 py-3 bg-[#1a1a1a] border border-[#2a2a2a] rounded-lg text-[#f5f5f0] placeholder-[#666666] focus:border-[#c8a46e] focus:outline-none disabled:opacity-60"
+                className="w-full px-4 py-3 bg-white dark:bg-[#1a1a1a] border border-gray-200 dark:border-[#2a2a2a] rounded-lg text-gray-900 dark:text-[#f5f5f0] placeholder-gray-400 dark:placeholder-[#666666] focus:border-[#c8a46e] focus:outline-none disabled:opacity-60"
               />
             </div>
             <div>
-              <label htmlFor="contact-template" className="block text-[#e5e5e0] text-sm font-medium mb-1.5">
+              <label htmlFor="contact-template" className="block text-gray-700 dark:text-[#e5e5e0] text-sm font-medium mb-1.5">
                 Vilken typ av sida? (valfritt)
               </label>
               <select
@@ -322,7 +322,7 @@ function ContactSection() {
                 value={templateId}
                 onChange={(e) => setTemplateId(e.target.value)}
                 disabled={status === "loading"}
-                className="w-full px-4 py-3 bg-[#1a1a1a] border border-[#2a2a2a] rounded-lg text-[#f5f5f0] focus:border-[#c8a46e] focus:outline-none disabled:opacity-60"
+                className="w-full px-4 py-3 bg-white dark:bg-[#1a1a1a] border border-gray-200 dark:border-[#2a2a2a] rounded-lg text-gray-900 dark:text-[#f5f5f0] focus:border-[#c8a46e] focus:outline-none disabled:opacity-60"
               >
                 <option value="">— Välj —</option>
                 {TEMPLATE_OPTIONS.map((t) => (
@@ -334,7 +334,7 @@ function ContactSection() {
               </select>
             </div>
             <div>
-              <label htmlFor="contact-message" className="block text-[#e5e5e0] text-sm font-medium mb-1.5">
+              <label htmlFor="contact-message" className="block text-gray-700 dark:text-[#e5e5e0] text-sm font-medium mb-1.5">
                 Meddelande
               </label>
               <textarea
@@ -346,7 +346,7 @@ function ContactSection() {
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
                 disabled={status === "loading"}
-                className="w-full px-4 py-3 bg-[#1a1a1a] border border-[#2a2a2a] rounded-lg text-[#f5f5f0] placeholder-[#666666] focus:border-[#c8a46e] focus:outline-none resize-none disabled:opacity-60"
+                className="w-full px-4 py-3 bg-white dark:bg-[#1a1a1a] border border-gray-200 dark:border-[#2a2a2a] rounded-lg text-gray-900 dark:text-[#f5f5f0] placeholder-gray-400 dark:placeholder-[#666666] focus:border-[#c8a46e] focus:outline-none resize-none disabled:opacity-60"
               />
             </div>
             <button
@@ -365,12 +365,12 @@ function ContactSection() {
 
 function ExamplesTeaserSection() {
   return (
-    <section className="relative py-16 bg-[#0a0a0a] border-t border-[#2a2a2a]">
+    <section className="relative py-16 bg-white dark:bg-[#0a0a0a] border-t border-gray-200 dark:border-[#2a2a2a]">
       <div className="max-w-6xl mx-auto px-6 text-center">
-        <h2 className="text-2xl md:text-3xl font-bold text-[#f5f5f0] mb-4">
+        <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-[#f5f5f0] mb-4">
           Exempel på sidor
         </h2>
-        <p className="text-[#999999] mb-6 max-w-xl mx-auto">
+        <p className="text-gray-600 dark:text-[#999999] mb-6 max-w-xl mx-auto">
           Se demosidor för VVS, elektriker, salong, restaurang, målare och konsult.
         </p>
         <Link
@@ -386,7 +386,7 @@ function ExamplesTeaserSection() {
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-[#0a0a0a]">
+    <div className="min-h-screen bg-white dark:bg-[#0a0a0a]">
       <HeroSection />
       <ValueSection />
       <PricingSection />

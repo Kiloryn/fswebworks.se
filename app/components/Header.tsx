@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import Link from "next/link";
+import ThemeToggle from "./ThemeToggle";
 
 const MENU_LINKS = [
   { href: "/", label: "Hem" },
@@ -97,7 +98,7 @@ export default function Header() {
             onClick={closeMobileMenu}
           />
           <div
-            className="mobile-menu-panel absolute left-1/2 z-10 w-[min(calc(100vw-2rem),16rem)] -translate-x-1/2 top-14 overflow-hidden py-2 transition-all duration-300"
+            className="mobile-menu-panel absolute left-1/2 z-10 w-[min(calc(100vw-2rem),16rem)] -translate-x-1/2 top-14 overflow-hidden py-2"
             onClick={(e) => e.stopPropagation()}
           >
             <nav className="flex flex-col">
@@ -121,10 +122,10 @@ export default function Header() {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 backdrop-blur-md border-b transition-all duration-300 ${
+        className={`fixed top-0 left-0 right-0 z-50 backdrop-blur-md border-b ${
           scrolled
-            ? "bg-[#0a0a0a]/75 border-[#2a2a2a]/70 shadow-lg shadow-black/20"
-            : "bg-[#0a0a0a]/90 border-[#2a2a2a]/80"
+            ? "bg-white/75 dark:bg-[#0a0a0a]/75 border-gray-200/70 dark:border-[#2a2a2a]/70 shadow-lg shadow-black/10 dark:shadow-black/20"
+            : "bg-white/90 dark:bg-[#0a0a0a]/90 border-gray-200/80 dark:border-[#2a2a2a]/80"
         }`}
       >
         <div className="max-w-6xl mx-auto px-6">
@@ -213,6 +214,8 @@ export default function Header() {
               ))}
             </nav>
 
+            <div className="flex items-center gap-0">
+              <ThemeToggle />
             <button
               type="button"
               {...(mobileMenuOpen
@@ -224,7 +227,7 @@ export default function Header() {
                     "aria-label": "Öppna meny",
                     "aria-expanded": "false" as const,
                   })}
-              className="md:hidden flex items-center justify-center min-w-[44px] min-h-[44px] -mr-2 text-[#f5f5f0] hover:text-[#c8a46e] active:opacity-80 transition-colors cursor-pointer touch-manipulation"
+              className="md:hidden flex items-center justify-center min-w-[44px] min-h-[44px] -mr-2 text-gray-700 dark:text-[#f5f5f0] hover:text-[#c8a46e] active:opacity-80 cursor-pointer touch-manipulation"
               onClick={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
@@ -255,6 +258,7 @@ export default function Header() {
                 )}
               </svg>
             </button>
+            </div>
           </div>
         </div>
       </header>

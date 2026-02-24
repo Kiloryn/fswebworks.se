@@ -22,12 +22,12 @@ export default function ExamplesNavBar() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
   return (
-    <div className="bg-[#1a1a1a] border-b border-[#2a2a2a] py-2 px-4">
+    <div className="bg-gray-100 dark:bg-[#1a1a1a] border-b border-gray-200 dark:border-[#2a2a2a] py-2 px-4">
       <div className="max-w-6xl mx-auto flex flex-wrap items-center justify-center gap-3 sm:gap-6 text-sm">
-        <p className="text-[#999999] shrink-0">
+        <p className="text-gray-600 dark:text-[#999999] shrink-0">
           Exempelsida från FS Webworks.
         </p>
-        <span className="text-[#444] hidden sm:inline">·</span>
+        <span className="text-gray-400 dark:text-[#444] hidden sm:inline">·</span>
         <Link
           href="/"
           className="text-[#c8a46e] hover:text-[#d4b480] underline font-medium shrink-0"
@@ -42,7 +42,7 @@ export default function ExamplesNavBar() {
         </Link>
         {isExamplePage && (
           <>
-            <span className="text-[#444] hidden sm:inline">·</span>
+            <span className="text-gray-400 dark:text-[#444] hidden sm:inline">·</span>
             <div className="relative shrink-0" ref={dropdownRef}>
               <button
                 type="button"
@@ -58,7 +58,7 @@ export default function ExamplesNavBar() {
               </button>
               {open && (
                 <nav
-                  className="absolute top-full left-0 mt-1 py-1 min-w-[180px] bg-[#252525] border border-[#2a2a2a] rounded-lg shadow-lg z-50 max-h-[70vh] overflow-y-auto"
+                  className="absolute top-full left-0 mt-1 py-1 min-w-[180px] bg-white dark:bg-[#252525] border border-gray-200 dark:border-[#2a2a2a] rounded-lg shadow-lg z-50 max-h-[70vh] overflow-y-auto"
                   aria-label="Välj annat exempel"
                 >
                   {EXAMPLE_CATEGORIES.map((cat) => {
@@ -70,8 +70,8 @@ export default function ExamplesNavBar() {
                         onClick={() => setOpen(false)}
                         className={`block px-3 py-2 text-left text-sm transition-colors ${
                           isCurrent
-                            ? "text-[#c8a46e] bg-[#2a2a2a] font-medium"
-                            : "text-[#e0e0e0] hover:bg-[#2a2a2a] hover:text-[#f5f5f0]"
+                            ? "text-[#c8a46e] bg-gray-100 dark:bg-[#2a2a2a] font-medium"
+                            : "text-gray-800 dark:text-[#e0e0e0] hover:bg-gray-100 dark:hover:bg-[#2a2a2a] hover:text-gray-900 dark:hover:text-[#f5f5f0]"
                         }`}
                       >
                         {cat.name}
