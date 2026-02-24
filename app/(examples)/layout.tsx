@@ -12,8 +12,8 @@ export default function ExamplesLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <div className="min-h-screen flex flex-col">
-      <ExamplesNavBar />
+    <div className="min-h-screen flex flex-col" data-oid="yu296la">
+      <ExamplesNavBar data-oid="pzxr676" />
       {children}
     </div>
   );

@@ -40,14 +40,40 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="sv" suppressHydrationWarning>
-      <head>
-        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-        <link rel="icon" href="/favicon.ico" type="image/x-icon" sizes="any" />
-        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <html lang="sv" suppressHydrationWarning data-oid="e0tujkx">
+      <head data-oid="v5o36id">
+        <link
+          rel="icon"
+          href="/favicon.svg"
+          type="image/svg+xml"
+          data-oid="71y-qwz"
+        />
+        <link
+          rel="icon"
+          href="/favicon.ico"
+          type="image/x-icon"
+          sizes="any"
+          data-oid="pdz:o4k"
+        />
+        <link
+          rel="shortcut icon"
+          href="/favicon.ico"
+          type="image/x-icon"
+          data-oid="v-w36tv"
+        />
       </head>
-      <body className="min-h-screen bg-white dark:bg-[#0a0a0a] antialiased" suppressHydrationWarning>
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem storageKey="fswebworks-theme">
+      <body
+        className="min-h-screen bg-white dark:bg-[#0a0a0a] antialiased"
+        suppressHydrationWarning
+        data-oid="z6wv_7p"
+      >
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem
+          storageKey="fswebworks-theme"
+          data-oid="jkp280d"
+        >
           {children}
         </ThemeProvider>
       </body>

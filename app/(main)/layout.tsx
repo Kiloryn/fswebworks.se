@@ -9,13 +9,13 @@ export default function MainLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <>
-      <Suspense fallback={null}>
-        <SmoothScroll />
+      <Suspense fallback={null} data-oid="1yu7e17">
+        <SmoothScroll data-oid="i.ck8_l" />
       </Suspense>
-      <AosInit />
-      <Header />
-      <main>{children}</main>
-      <Footer />
+      <AosInit data-oid="edo8coe" />
+      <Header data-oid="mmkiop_" />
+      <main data-oid="blxlslr">{children}</main>
+      <Footer data-oid="qb34sn." />
     </>
   );
 }
