@@ -21,52 +21,155 @@ function HeroSection() {
       data-oid="mf6_b0q"
     >
       <div
-        className="absolute inset-0 bg-gradient-to-br from-gray-50 via-white to-gray-50 dark:from-[#0a0a0a] dark:via-[#111111] dark:to-[#0a0a0a] bg-[rgba(0,_0,_0,_0)]"
+        className="absolute inset-0 bg-gradient-to-br from-gray-50 via-white to-gray-50 dark:from-[#0a0a0a] dark:via-[#111111] dark:to-[#0a0a0a]"
         data-oid="6fi35q_"
       />
 
+      {/* Enhanced background gradients */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse 80% 50% at 50% 0%, rgba(200, 164, 110, 0.08), transparent 50%)",
+            "radial-gradient(ellipse 80% 50% at 50% 0%, rgba(200, 164, 110, 0.12), transparent 50%)",
         }}
         aria-hidden
         data-oid="t9cgml9"
       />
 
       <div
-        className="relative z-10 max-w-6xl mx-auto px-6 py-20 text-center border-solid rounded-[3px] text-[#9E9E2F] bg-[#00000000] border-[3px]"
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(ellipse 60% 40% at 20% 80%, rgba(200, 164, 110, 0.06), transparent 40%)",
+        }}
+        aria-hidden
+        data-oid="aygc6gf"
+      />
+
+      {/* Floating decorative elements */}
+      <div
+        className="absolute inset-0 pointer-events-none overflow-hidden"
+        data-oid="1nnf65p"
+      >
+        <div
+          className="absolute top-1/4 left-1/4 w-2 h-2 bg-[#c8a46e]/20 rounded-full animate-pulse"
+          style={{ animationDelay: "0s", animationDuration: "3s" }}
+          data-oid="ts4b6:m"
+        />
+
+        <div
+          className="absolute top-1/3 right-1/3 w-1 h-1 bg-[#c8a46e]/30 rounded-full animate-pulse"
+          style={{ animationDelay: "1s", animationDuration: "4s" }}
+          data-oid="-rm66wl"
+        />
+
+        <div
+          className="absolute bottom-1/3 left-1/5 w-1.5 h-1.5 bg-[#c8a46e]/15 rounded-full animate-pulse"
+          style={{ animationDelay: "2s", animationDuration: "5s" }}
+          data-oid="qqfzmjm"
+        />
+      </div>
+
+      <div
+        className="relative z-10 max-w-6xl mx-auto px-6 py-20 text-center"
         data-oid="0epof2t"
       >
-        <h1
-          className="text-4xl md:text-6xl font-bold mb-8 max-w-4xl mx-auto leading-tight bg-gradient-to-r from-gray-900 via-[#c8a46e] to-gray-900 dark:from-[#f5f5f0] dark:via-[#d4b480] dark:to-[#f5f5f0] bg-clip-text text-transparent"
+        {/* Subtle badge/tag above headline */}
+        <div
+          className="inline-flex items-center px-4 py-2 mb-6 bg-[#c8a46e]/10 border border-[#c8a46e]/20 rounded-full text-sm text-[#c8a46e] font-medium"
           data-aos="fade-up"
+          data-aos-delay="100"
+          data-oid="6imuasy"
+        >
+          <span
+            className="w-2 h-2 bg-[#c8a46e] rounded-full mr-2 animate-pulse"
+            data-oid="rz91:-f"
+          ></span>
+          Professionell webbdesign
+        </div>
+
+        <h1
+          className="text-4xl md:text-6xl font-bold mb-6 max-w-4xl mx-auto leading-tight bg-gradient-to-r from-gray-900 via-[#c8a46e] to-gray-900 dark:from-[#f5f5f0] dark:via-[#d4b480] dark:to-[#f5f5f0] bg-clip-text text-transparent"
+          data-aos="fade-up"
+          data-aos-delay="200"
           data-oid="lk-:3lq"
         >
           Webbdesign för små företag i Stockholm
         </h1>
-        <div
-          className="flex flex-col items-center"
+
+        {/* Enhanced subtitle with better spacing */}
+        <p
+          className="text-lg md:text-xl text-gray-600 dark:text-[#999999] mb-10 max-w-2xl mx-auto leading-relaxed"
           data-aos="fade-up"
-          data-aos-delay="200"
+          data-aos-delay="300"
+          data-oid="c6tmx.s"
+        >
+          Vi skapar professionella hemsidor som hjälper ditt företag att synas
+          och växa online
+        </p>
+
+        <div
+          className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8"
+          data-aos="fade-up"
+          data-aos-delay="400"
           data-oid="kwo4cpp"
         >
           <Link
             href="/process"
-            className="px-10 py-5 text-lg bg-[#c8a46e] text-[#111111] font-semibold rounded-lg hover:bg-[#d4b480] transition-all duration-200 hover:scale-[1.02] hover:shadow-lg hover:shadow-[#c8a46e]/20"
+            className="px-10 py-5 text-lg bg-[#c8a46e] text-[#111111] font-semibold rounded-lg hover:bg-[#d4b480] transition-all duration-300 hover:scale-[1.02] hover:shadow-xl hover:shadow-[#c8a46e]/25 transform"
             data-oid="z9q-f_p"
           >
             Så här går det till
           </Link>
-          <p
-            className="text-gray-600 dark:text-[#999999] mt-6 max-w-xl mx-auto text-sm md:text-base"
-            data-oid="oaoys0u"
+
+          <Link
+            href="#contact"
+            className="px-10 py-5 text-lg border-2 border-[#c8a46e] text-[#c8a46e] font-semibold rounded-lg hover:bg-[#c8a46e] hover:text-[#111111] transition-all duration-300 hover:scale-[1.02] hover:shadow-lg"
+            data-oid="3h3i2u_"
           >
-            Du bidrar med information om ditt företag – vi ser till att
-            innehållet presenteras tydligt och snyggt på hemsidan.
-          </p>
+            Kontakta oss
+          </Link>
         </div>
+
+        {/* Key benefits with icons */}
+        <div
+          className="flex flex-wrap justify-center gap-6 text-sm text-gray-600 dark:text-[#999999]"
+          data-aos="fade-up"
+          data-aos-delay="500"
+          data-oid="e64q:nn"
+        >
+          <div className="flex items-center gap-2" data-oid="cwfma49">
+            <div
+              className="w-2 h-2 bg-[#c8a46e] rounded-full"
+              data-oid="pqtuny4"
+            ></div>
+            <span data-oid="qgm9ck3">Mobilanpassat</span>
+          </div>
+          <div className="flex items-center gap-2" data-oid="k9n51gx">
+            <div
+              className="w-2 h-2 bg-[#c8a46e] rounded-full"
+              data-oid="2_rwx.q"
+            ></div>
+            <span data-oid="8wjhv8t">SEO-optimerat</span>
+          </div>
+          <div className="flex items-center gap-2" data-oid="0sy4fpz">
+            <div
+              className="w-2 h-2 bg-[#c8a46e] rounded-full"
+              data-oid="8hiuq5e"
+            ></div>
+            <span data-oid="wpaoyxh">Snabb leverans</span>
+          </div>
+        </div>
+
+        <p
+          className="text-gray-500 dark:text-[#666666] mt-8 max-w-xl mx-auto text-sm leading-relaxed"
+          data-aos="fade-up"
+          data-aos-delay="600"
+          data-oid="oaoys0u"
+        >
+          Du bidrar med information om ditt företag – vi ser till att innehållet
+          presenteras tydligt och snyggt på hemsidan.
+        </p>
       </div>
     </section>
   );
