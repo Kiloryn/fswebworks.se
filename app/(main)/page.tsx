@@ -440,12 +440,16 @@ const FAQ_ITEMS: { q: string; a: string }[] = [
 
 function FAQItem({ item, index }: { item: { q: string; a: string }; index: number }) {
   const [open, setOpen] = useState(false);
+  const itemRef = useRef<HTMLLIElement>(null);
   const bodyRef = useRef<HTMLDivElement>(null);
   const [height, setHeight] = useState(0);
 
   useEffect(() => {
     if (open && bodyRef.current) {
       setHeight(bodyRef.current.scrollHeight);
+      requestAnimationFrame(() => {
+        itemRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      });
     } else {
       setHeight(0);
     }
@@ -453,6 +457,7 @@ function FAQItem({ item, index }: { item: { q: string; a: string }; index: numbe
 
   return (
     <li
+      ref={itemRef}
       className={`bg-gray-50 dark:bg-[#1a1a1a] border rounded-xl transition-colors duration-200 ${
         open
           ? "border-[#c8a46e]/40"
