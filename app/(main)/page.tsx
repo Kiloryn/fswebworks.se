@@ -2,6 +2,7 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 
 const TEMPLATE_OPTIONS = [
@@ -176,6 +177,36 @@ function HeroSection() {
 }
 
 function ValueSection() {
+  const features = [
+    {
+      icon: (
+        <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3" />
+        </svg>
+      ),
+      title: "Mobilanpassad",
+      desc: "Ser bra ut på alla skärmar – mobil, surfplatta och dator.",
+    },
+    {
+      icon: (
+        <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+        </svg>
+      ),
+      title: "SEO-optimerad",
+      desc: "Grundläggande sökmotoroptimering så att kunder hittar dig.",
+    },
+    {
+      icon: (
+        <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+        </svg>
+      ),
+      title: "Snabb leverans",
+      desc: "Din hemsida klar inom 1–2 veckor efter godkänt material.",
+    },
+  ];
+
   return (
     <section
       className="relative py-24 bg-gray-50 dark:bg-[#0a0a0a] overflow-hidden"
@@ -192,7 +223,7 @@ function ValueSection() {
       />
 
       <div
-        className="relative max-w-3xl mx-auto px-6 text-center"
+        className="relative max-w-4xl mx-auto px-6 text-center"
         data-oid="03gxzyv"
       >
         <h2
@@ -203,7 +234,7 @@ function ValueSection() {
           En hemsida som gör jobbet
         </h2>
         <p
-          className="text-gray-600 dark:text-[#999999] text-lg leading-relaxed"
+          className="text-gray-600 dark:text-[#cccccc] text-lg leading-relaxed max-w-2xl mx-auto mb-16"
           data-aos="fade-up"
           data-aos-delay="100"
           data-oid="u6s9t5w"
@@ -213,6 +244,27 @@ function ValueSection() {
           vad du gör, var du finns och hur kunder kontaktar dig. Det är precis
           vad vi hjälper till med.
         </p>
+
+        <div className="grid md:grid-cols-3 gap-8">
+          {features.map((f, i) => (
+            <div
+              key={f.title}
+              className="group relative bg-white dark:bg-[#1a1a1a] border border-gray-200 dark:border-[#2a2a2a] rounded-2xl p-6 text-center transition-all duration-300 hover:border-[#c8a46e]/40 hover:-translate-y-1 hover:shadow-lg hover:shadow-[#c8a46e]/5"
+              data-aos="fade-up"
+              data-aos-delay={i * 100}
+            >
+              <div className="inline-flex items-center justify-center w-12 h-12 mb-4 rounded-xl bg-[#c8a46e]/10 text-[#8b7355] dark:text-[#c8a46e] group-hover:bg-[#c8a46e]/20 transition-colors duration-300">
+                {f.icon}
+              </div>
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-[#f5f5f0] mb-2">
+                {f.title}
+              </h3>
+              <p className="text-gray-600 dark:text-[#cccccc] text-sm leading-relaxed">
+                {f.desc}
+              </p>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -225,6 +277,7 @@ function PricingSection() {
       price: "690",
       period: "kr/mån",
       description: "Hosting, SSL, Backup, säkerhetsuppdateringar",
+      popular: false,
     },
     {
       name: "Standard",
@@ -232,6 +285,7 @@ function PricingSection() {
       period: "kr/mån",
       description:
         "Bas + mindre uppdateringar, SEO-grund, prestandaövervakning",
+      popular: true,
     },
     {
       name: "Premium",
@@ -239,6 +293,7 @@ function PricingSection() {
       period: "kr/mån",
       description:
         "Standard + prioriterad support, innehållsuppdateringar, månatliga rapporter",
+      popular: false,
     },
   ];
 
@@ -248,6 +303,14 @@ function PricingSection() {
       className="relative py-24 bg-gray-100 dark:bg-[#111111] overflow-hidden"
       data-oid="5n7-w4w"
     >
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(ellipse 60% 50% at 50% 0%, rgba(200, 164, 110, 0.08), transparent 60%)",
+        }}
+        aria-hidden
+      />
       <div className="relative max-w-6xl mx-auto px-6" data-oid="spmzqk5">
         <div
           className="text-center mb-12"
@@ -261,7 +324,7 @@ function PricingSection() {
             Priser
           </h2>
           <p
-            className="text-gray-600 dark:text-[#999999] mb-2"
+            className="text-gray-600 dark:text-[#cccccc] mb-2"
             data-oid="yazyh:7"
           >
             Engångspris:{" "}
@@ -272,19 +335,19 @@ function PricingSection() {
               Från 9 900 kr
             </span>{" "}
             <span
-              className="text-gray-500 dark:text-[#666666] text-sm align-baseline"
+              className="text-gray-500 dark:text-[#999999] text-sm align-baseline"
               data-oid="8jlfemq"
             >
               exkl. moms
             </span>
           </p>
           <p
-            className="text-gray-500 dark:text-[#666666] text-sm mt-4"
+            className="text-gray-500 dark:text-[#999999] text-sm mt-4"
             data-oid="jrz_ack"
           >
             Hosting & Drift – exkl.{" "}
             <span
-              className="text-gray-500 dark:text-[#666666] text-xs"
+              className="text-gray-500 dark:text-[#999999] text-xs"
               data-oid="pruu_::"
             >
               moms
@@ -295,11 +358,20 @@ function PricingSection() {
           {tiers.map((tier, i) => (
             <div
               key={tier.name}
-              className="bg-white dark:bg-[#1a1a1a] border border-gray-200 dark:border-[#2a2a2a] rounded-2xl p-6 hover:border-[#c8a46e]/40 transition-colors"
+              className={`relative bg-white dark:bg-[#1a1a1a] rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl ${
+                tier.popular
+                  ? "border-2 border-[#c8a46e] shadow-lg shadow-[#c8a46e]/10 dark:shadow-[#c8a46e]/20 scale-[1.02]"
+                  : "border border-gray-200 dark:border-[#2a2a2a] hover:border-[#c8a46e]/40 hover:shadow-[#c8a46e]/10"
+              }`}
               data-aos="fade-up"
               data-aos-delay={i * 80}
               data-oid="4e9_wgp"
             >
+              {tier.popular && (
+                <span className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-[#c8a46e] text-[#111111] text-xs font-bold rounded-full uppercase tracking-wider">
+                  Populärast
+                </span>
+              )}
               <h3
                 className="text-xl font-semibold text-gray-900 dark:text-[#f5f5f0] mb-2"
                 data-oid="3gmsip-"
@@ -310,10 +382,13 @@ function PricingSection() {
                 className="text-2xl font-bold text-gray-900 dark:text-[#f5f5f0]"
                 data-oid="08-woyd"
               >
-                {tier.price} {tier.period}
+                {tier.price}{" "}
+                <span className="text-base font-medium text-gray-500 dark:text-[#999999]">
+                  {tier.period}
+                </span>
               </p>
               <p
-                className="text-xs text-gray-500 dark:text-[#666666] mb-4"
+                className="text-xs text-gray-500 dark:text-[#999999] mb-4"
                 data-oid="q1ndi.s"
               >
                 exkl.{" "}
@@ -322,7 +397,7 @@ function PricingSection() {
                 </span>
               </p>
               <p
-                className="text-gray-600 dark:text-[#999999] text-sm"
+                className="text-gray-600 dark:text-[#cccccc] text-sm leading-relaxed"
                 data-oid="9bravw9"
               >
                 {tier.description}
@@ -333,7 +408,7 @@ function PricingSection() {
         <div className="text-center" data-aos="fade-up" data-oid="p3orjq0">
           <Link
             href="/process"
-            className="inline-block px-8 py-4 bg-[#c8a46e] text-[#111111] font-semibold rounded-lg hover:bg-[#d4b480] transition-colors"
+            className="inline-block px-8 py-4 bg-[#c8a46e] text-[#111111] font-semibold rounded-lg hover:bg-[#d4b480] transition-all duration-300 hover:scale-[1.02] hover:shadow-lg hover:shadow-[#c8a46e]/25"
             data-oid="_ucn3bd"
           >
             Så här går det till
@@ -363,6 +438,69 @@ const FAQ_ITEMS: { q: string; a: string }[] = [
   },
 ];
 
+function FAQItem({ item, index }: { item: { q: string; a: string }; index: number }) {
+  const [open, setOpen] = useState(false);
+  const itemRef = useRef<HTMLLIElement>(null);
+  const bodyRef = useRef<HTMLDivElement>(null);
+  const [height, setHeight] = useState(0);
+
+  useEffect(() => {
+    if (open && bodyRef.current) {
+      setHeight(bodyRef.current.scrollHeight);
+      const timer = setTimeout(() => {
+        itemRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      }, 220);
+      return () => clearTimeout(timer);
+    } else {
+      setHeight(0);
+    }
+  }, [open]);
+
+  return (
+    <li
+      ref={itemRef}
+      className={`bg-gray-50 dark:bg-[#1a1a1a] border rounded-xl transition-colors duration-200 ${
+        open
+          ? "border-[#c8a46e]/40"
+          : "border-gray-200 dark:border-[#2a2a2a] hover:border-[#c8a46e]/20"
+      }`}
+      data-aos="fade-up"
+      data-aos-delay={index * 50}
+    >
+      <button
+        type="button"
+        onClick={() => setOpen(!open)}
+        className="w-full flex items-center justify-between gap-4 p-6 text-left cursor-pointer"
+        aria-expanded={open}
+      >
+        <span className="text-lg font-semibold text-gray-900 dark:text-[#f5f5f0]">
+          {item.q}
+        </span>
+        <svg
+          className={`shrink-0 w-5 h-5 text-[#c8a46e] transition-transform duration-200 ${
+            open ? "rotate-45" : "rotate-0"
+          }`}
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          strokeWidth={2}
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
+        </svg>
+      </button>
+      <div
+        ref={bodyRef}
+        className="overflow-hidden transition-[height] duration-200 ease-out"
+        style={{ height }}
+      >
+        <p className="px-6 pb-6 text-gray-600 dark:text-[#cccccc] leading-relaxed">
+          {item.a}
+        </p>
+      </div>
+    </li>
+  );
+}
+
 function FAQSection() {
   return (
     <section
@@ -375,30 +513,11 @@ function FAQSection() {
           data-aos="fade-up"
           data-oid="iqjffx_"
         >
-          Vanliga frågor
+          FAQ
         </h2>
-        <ul className="space-y-8" data-oid="twx44y5">
+        <ul className="space-y-3" data-oid="twx44y5">
           {FAQ_ITEMS.map((item, i) => (
-            <li
-              key={i}
-              className="border-b border-gray-200 dark:border-[#2a2a2a] pb-8 last:border-0"
-              data-aos="fade-up"
-              data-aos-delay={i * 50}
-              data-oid="twbdgw8"
-            >
-              <h3
-                className="text-lg font-semibold text-gray-900 dark:text-[#f5f5f0] mb-2"
-                data-oid="0g6_0.e"
-              >
-                {item.q}
-              </h3>
-              <p
-                className="text-gray-600 dark:text-[#999999] leading-relaxed"
-                data-oid="an42hw6"
-              >
-                {item.a}
-              </p>
-            </li>
+            <FAQItem key={i} item={item} index={i} />
           ))}
         </ul>
       </div>
@@ -503,6 +622,14 @@ function ContactSection() {
       ref={sectionRef}
       data-oid="m8p5t8f"
     >
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(ellipse 70% 50% at 50% 0%, rgba(200, 164, 110, 0.08), transparent 50%)",
+        }}
+        aria-hidden
+      />
       <div
         className="relative z-10 max-w-3xl mx-auto px-6 text-center"
         data-aos="fade-up"
@@ -660,32 +787,104 @@ function ContactSection() {
   );
 }
 
+const SHOWCASE_ITEMS = [
+  { slug: "vvs", name: "VVS & Rörmokare", img: "/examples/vvs.webp" },
+  { slug: "elektriker", name: "Elektriker", img: "/examples/elektriker.webp" },
+  { slug: "salong", name: "Salong/Skönhet", img: "/examples/salong.webp" },
+  { slug: "restaurang", name: "Restaurang", img: "/examples/restaurang.webp" },
+  { slug: "malare", name: "Målare", img: "/examples/malare.webp" },
+  { slug: "konsult", name: "Konsult", img: "/examples/konsult.webp" },
+];
+
 function ExamplesTeaserSection() {
+  const doubled = [...SHOWCASE_ITEMS, ...SHOWCASE_ITEMS];
+
   return (
     <section
-      className="relative py-16 bg-white dark:bg-[#0a0a0a] border-t border-gray-200 dark:border-[#2a2a2a]"
+      className="relative py-24 bg-gray-50 dark:bg-[#0a0a0a] border-t border-gray-200/50 dark:border-[#2a2a2a]/50 overflow-hidden"
       data-oid="nl0opgt"
     >
-      <div className="max-w-6xl mx-auto px-6 text-center" data-oid="kmncg_z">
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(ellipse 80% 60% at 50% 50%, rgba(200, 164, 110, 0.06), transparent 60%)",
+        }}
+        aria-hidden
+      />
+
+      <div className="relative text-center mb-12 px-6" data-oid="kmncg_z">
         <h2
           className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-[#f5f5f0] mb-4"
+          data-aos="fade-up"
           data-oid="0rmqedd"
         >
-          Exempel på sidor
+          Exempel på hemsidor vi bygger
         </h2>
         <p
-          className="text-gray-600 dark:text-[#999999] mb-6 max-w-xl mx-auto"
+          className="text-gray-600 dark:text-[#cccccc] max-w-xl mx-auto leading-relaxed"
+          data-aos="fade-up"
+          data-aos-delay="50"
           data-oid="ix-2unm"
         >
-          Se demosidor för VVS, elektriker, salong, restaurang, målare och
-          konsult.
+          Varje mall anpassas efter ditt företags varumärke och behov.
+          Klicka för att se en live-demo.
         </p>
+      </div>
+
+      {/* Scrolling showcase row */}
+      <div className="relative" data-aos="fade-up" data-aos-delay="100">
+        {/* Fade edges */}
+        <div className="absolute left-0 top-0 bottom-0 w-24 z-10 bg-gradient-to-r from-gray-50 dark:from-[#0a0a0a] to-transparent pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-24 z-10 bg-gradient-to-l from-gray-50 dark:from-[#0a0a0a] to-transparent pointer-events-none" />
+
+        <div className="flex gap-6 animate-marquee">
+          {doubled.map((item, i) => (
+            <Link
+              key={`${item.slug}-${i}`}
+              href={`/${item.slug}`}
+              className="group shrink-0 w-[320px] relative rounded-2xl overflow-hidden border border-gray-200 dark:border-[#2a2a2a] bg-white dark:bg-[#1a1a1a] transition-all duration-300 hover:border-[#c8a46e]/50 hover:shadow-2xl hover:shadow-[#c8a46e]/10 hover:-translate-y-1"
+            >
+              {/* Screenshot preview */}
+              <div className="relative aspect-video overflow-hidden bg-gray-100 dark:bg-[#111]">
+                <Image
+                  src={item.img}
+                  alt={`${item.name} exempelsida`}
+                  width={640}
+                  height={360}
+                  loading="lazy"
+                  className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                />
+                {/* Hover overlay */}
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all duration-300 flex items-center justify-center">
+                  <span className="text-white text-sm font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300 px-4 py-2 bg-[#c8a46e] rounded-lg">
+                    Se demo →
+                  </span>
+                </div>
+              </div>
+
+              {/* Label */}
+              <div className="px-4 py-3 flex items-center justify-between">
+                <span className="text-sm font-semibold text-gray-900 dark:text-[#f5f5f0] group-hover:text-[#c8a46e] transition-colors">
+                  {item.name}
+                </span>
+                <svg className="w-4 h-4 text-gray-400 dark:text-[#555] group-hover:text-[#c8a46e] transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                </svg>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </div>
+
+      <div className="relative text-center mt-10 px-6">
         <Link
           href="/examples"
-          className="inline-block px-6 py-3 border border-[#c8a46e] text-[#c8a46e] font-semibold rounded-lg hover:bg-[#c8a46e]/10 transition-colors"
+          className="inline-block px-8 py-4 bg-[#c8a46e] text-[#111111] font-semibold rounded-lg hover:bg-[#d4b480] transition-all duration-300 hover:scale-[1.02] hover:shadow-lg hover:shadow-[#c8a46e]/25"
+          data-aos="fade-up"
           data-oid="a5lwg.i"
         >
-          Visa exempel
+          Se alla exempel
         </Link>
       </div>
     </section>

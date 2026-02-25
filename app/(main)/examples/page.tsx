@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { EXAMPLE_CATEGORIES } from "@/lib/example-categories";
 
 export default function ExamplesPage() {
@@ -27,34 +28,45 @@ export default function ExamplesPage() {
           className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
           data-oid="6zi_g:_"
         >
-          {EXAMPLE_CATEGORIES.map((cat, i) => (
+          {EXAMPLE_CATEGORIES.map((cat) => (
             <Link
               key={cat.slug}
               href={`/${cat.slug}`}
-              className="block bg-white dark:bg-[#1a1a1a] border border-gray-200 dark:border-[#2a2a2a] rounded-2xl p-6 hover:border-[#c8a46e]/50 transition-all hover:-translate-y-1"
+              className="group block bg-white dark:bg-[#1a1a1a] border border-gray-200 dark:border-[#2a2a2a] rounded-2xl overflow-hidden hover:border-[#c8a46e]/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-[#c8a46e]/10"
               data-aos="fade-up"
               data-aos-anchor="#examples-grid"
               data-aos-delay="0"
               data-oid="jozmfyk"
             >
-              <h2
-                className="text-xl font-semibold text-gray-900 dark:text-[#f5f5f0] mb-2"
-                data-oid="q0209q:"
-              >
-                {cat.name}
-              </h2>
-              <p
-                className="text-gray-600 dark:text-[#999999] text-sm"
-                data-oid="hor315k"
-              >
-                {cat.description}
-              </p>
-              <span
-                className="inline-block mt-4 text-[#c8a46e] text-sm font-medium"
-                data-oid="ql1_.9u"
-              >
-                Se demosida →
-              </span>
+              <div className="relative aspect-video overflow-hidden bg-gray-100 dark:bg-[#111]">
+                <Image
+                  src={`/examples/${cat.slug}.webp`}
+                  alt={`${cat.name} exempelsida`}
+                  width={640}
+                  height={360}
+                  loading="lazy"
+                  className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-300 flex items-center justify-center">
+                  <span className="text-white text-sm font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300 px-4 py-2 bg-[#c8a46e] rounded-lg">
+                    Se demosida →
+                  </span>
+                </div>
+              </div>
+              <div className="p-5">
+                <h2
+                  className="text-xl font-semibold text-gray-900 dark:text-[#f5f5f0] mb-2 group-hover:text-[#c8a46e] transition-colors duration-300"
+                  data-oid="q0209q:"
+                >
+                  {cat.name}
+                </h2>
+                <p
+                  className="text-gray-600 dark:text-[#cccccc] text-sm leading-relaxed"
+                  data-oid="hor315k"
+                >
+                  {cat.description}
+                </p>
+              </div>
             </Link>
           ))}
         </div>

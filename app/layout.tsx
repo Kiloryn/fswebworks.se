@@ -42,6 +42,8 @@ export default function RootLayout({
   return (
     <html lang="sv" suppressHydrationWarning data-oid="e0tujkx">
       <head data-oid="v5o36id">
+        <link rel="dns-prefetch" href="https://images.unsplash.com" />
+        <link rel="preconnect" href="https://images.unsplash.com" crossOrigin="anonymous" />
         <link
           rel="icon"
           href="/favicon.svg"
