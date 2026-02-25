@@ -15,69 +15,129 @@ const TEMPLATE_OPTIONS = [
 ];
 
 function HeroSection() {
+  const [heroMedia, setHeroMedia] = useState<{
+    heroImage: string;
+    heroVideo: string;
+  }>({ heroImage: "", heroVideo: "" });
+
+  useEffect(() => {
+    fetch("/api/page-data")
+      .then((res) => res.ok ? res.json() : null)
+      .then((data) => {
+        const hero = data?.page?.hero ?? data?.hero;
+        if (hero) {
+          setHeroMedia({
+            heroImage: hero.heroImage ?? "",
+            heroVideo: hero.heroVideo ?? "",
+          });
+        }
+      })
+      .catch(() => {});
+  }, []);
+
+  const hasVideo = Boolean(heroMedia.heroVideo?.trim());
+  const hasImage = !hasVideo && Boolean(heroMedia.heroImage?.trim());
+  const hasMedia = hasVideo || hasImage;
+
   return (
     <section
       id="hero"
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
       data-oid="mf6_b0q"
     >
+      {/* Background: video, image, or gradient */}
+      {hasVideo && (
+        <>
+          {/* Video hidden on mobile to save data and avoid autoplay issues; gradient shown instead */}
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            poster="/hero-frame.jpg"
+            className="absolute inset-0 w-full h-full object-cover hidden md:block"
+            aria-hidden
+          >
+            <source src="/hero.webm" type="video/webm" />
+            <source src="/hero.mp4" type="video/mp4" />
+          </video>
+          {/* Mobile-only: gradient background when video is hidden */}
+          <div
+            className="absolute inset-0 md:hidden bg-gradient-to-br from-stone-50 via-white to-stone-50 dark:from-[#0a0a0a] dark:via-[#111111] dark:to-[#0a0a0a]"
+            aria-hidden
+          />
+          <div
+            className="absolute inset-0 bg-black/30 pointer-events-none hidden md:block"
+            aria-hidden
+          />
+          <div
+            className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-black/50 pointer-events-none hidden md:block"
+            aria-hidden
+          />
+        </>
+      )}
+      {hasImage && (
+        <>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={heroMedia.heroImage}
+            alt=""
+            className="absolute inset-0 w-full h-full object-cover"
+            aria-hidden
+          />
+          <div
+            className="absolute inset-0 bg-black/30 pointer-events-none"
+            aria-hidden
+          />
+          <div
+            className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-black/50 pointer-events-none"
+            aria-hidden
+          />
+        </>
+      )}
+      {!hasMedia && (
+        <>
+          <div
+            className="absolute inset-0 bg-gradient-to-br from-stone-50 via-white to-stone-50 dark:from-[#0a0a0a] dark:via-[#111111] dark:to-[#0a0a0a]"
+            data-oid="6fi35q_"
+          />
+          <div
+            className="absolute inset-0 pointer-events-none hero-bg-gradient-top"
+            aria-hidden
+            data-oid="t9cgml9"
+          />
+          <div
+            className="absolute inset-0 pointer-events-none hero-bg-gradient-bottom"
+            aria-hidden
+            data-oid="aygc6gf"
+          />
+          <div
+            className="absolute inset-0 pointer-events-none overflow-hidden"
+            data-oid="1nnf65p"
+          >
+            <div
+              className="absolute top-1/4 left-1/4 w-2 h-2 bg-[#c8a46e]/20 rounded-full animate-pulse hero-dot-1"
+              data-oid="ts4b6:m"
+            />
+            <div
+              className="absolute top-1/3 right-1/3 w-1 h-1 bg-[#c8a46e]/30 rounded-full animate-pulse hero-dot-2"
+              data-oid="-rm66wl"
+            />
+            <div
+              className="absolute bottom-1/3 left-1/5 w-1.5 h-1.5 bg-[#c8a46e]/15 rounded-full animate-pulse hero-dot-3"
+              data-oid="qqfzmjm"
+            />
+          </div>
+        </>
+      )}
+
       <div
-        className="absolute inset-0 bg-gradient-to-br from-gray-50 via-white to-gray-50 dark:from-[#0a0a0a] dark:via-[#111111] dark:to-[#0a0a0a]"
-        data-oid="6fi35q_"
-      />
-
-      {/* Enhanced background gradients */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(ellipse 80% 50% at 50% 0%, rgba(200, 164, 110, 0.12), transparent 50%)",
-        }}
-        aria-hidden
-        data-oid="t9cgml9"
-      />
-
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(ellipse 60% 40% at 20% 80%, rgba(200, 164, 110, 0.06), transparent 40%)",
-        }}
-        aria-hidden
-        data-oid="aygc6gf"
-      />
-
-      {/* Floating decorative elements */}
-      <div
-        className="absolute inset-0 pointer-events-none overflow-hidden"
-        data-oid="1nnf65p"
-      >
-        <div
-          className="absolute top-1/4 left-1/4 w-2 h-2 bg-[#c8a46e]/20 rounded-full animate-pulse"
-          style={{ animationDelay: "0s", animationDuration: "3s" }}
-          data-oid="ts4b6:m"
-        />
-
-        <div
-          className="absolute top-1/3 right-1/3 w-1 h-1 bg-[#c8a46e]/30 rounded-full animate-pulse"
-          style={{ animationDelay: "1s", animationDuration: "4s" }}
-          data-oid="-rm66wl"
-        />
-
-        <div
-          className="absolute bottom-1/3 left-1/5 w-1.5 h-1.5 bg-[#c8a46e]/15 rounded-full animate-pulse"
-          style={{ animationDelay: "2s", animationDuration: "5s" }}
-          data-oid="qqfzmjm"
-        />
-      </div>
-
-      <div
-        className="relative z-10 max-w-6xl mx-auto px-6 py-20 text-center"
+        className={`relative z-10 max-w-6xl mx-auto px-6 py-20 text-center ${hasMedia ? "hero-over-media" : ""}`}
         data-oid="0epof2t"
       >
         {/* Subtle badge/tag above headline */}
         <div
-          className="inline-flex items-center px-4 py-2 mb-6 bg-[#c8a46e]/15 border border-[#c8a46e]/30 rounded-full text-sm text-[#8b7355] dark:text-[#c8a46e] font-medium"
+          className="inline-flex items-center px-4 py-2 mb-6 bg-[#c8a46e]/15 border border-[#c8a46e]/30 rounded-full text-sm text-[#8b7355] dark:text-[#c8a46e] font-medium hero-badge"
           data-aos="fade-up"
           data-aos-delay="100"
           data-oid="6imuasy"
@@ -90,17 +150,17 @@ function HeroSection() {
         </div>
 
         <h1
-          className="text-4xl md:text-6xl font-bold mb-6 max-w-4xl mx-auto leading-tight bg-gradient-to-r from-gray-900 via-[#c8a46e] to-gray-900 dark:from-[#f5f5f0] dark:via-[#d4b480] dark:to-[#f5f5f0] bg-clip-text text-transparent"
+          className="text-4xl md:text-6xl font-bold mb-6 max-w-4xl mx-auto leading-tight text-[#c8a46e] hero-headline"
           data-aos="fade-up"
           data-aos-delay="200"
           data-oid="lk-:3lq"
         >
-          Webbdesign för små företag i Stockholm
+          Webbdesign för små företag
         </h1>
 
         {/* Enhanced subtitle with better spacing */}
         <p
-          className="text-lg md:text-xl text-gray-700 dark:text-[#cccccc] mb-10 max-w-2xl mx-auto leading-relaxed"
+          className="text-lg md:text-xl text-stone-700 dark:text-[#d4d0c8] mb-10 max-w-2xl mx-auto leading-relaxed hero-subheading"
           data-aos="fade-up"
           data-aos-delay="300"
           data-oid="c6tmx.s"
@@ -134,7 +194,7 @@ function HeroSection() {
 
         {/* Key benefits with icons */}
         <div
-          className="flex flex-wrap justify-center gap-6 text-sm text-gray-700 dark:text-[#cccccc]"
+          className="flex flex-wrap justify-center gap-6 text-sm text-stone-700 dark:text-[#d4d0c8] hero-benefits"
           data-aos="fade-up"
           data-aos-delay="500"
           data-oid="e64q:nn"
@@ -163,7 +223,7 @@ function HeroSection() {
         </div>
 
         <p
-          className="text-gray-600 dark:text-[#999999] mt-8 max-w-xl mx-auto text-sm leading-relaxed"
+          className="text-stone-600 dark:text-[#b8b4a8] mt-8 max-w-xl mx-auto text-base md:text-lg leading-relaxed hero-disclaimer"
           data-aos="fade-up"
           data-aos-delay="600"
           data-oid="oaoys0u"
@@ -209,32 +269,33 @@ function ValueSection() {
 
   return (
     <section
-      className="relative py-24 bg-gray-50 dark:bg-[#0a0a0a] overflow-hidden"
+      id="vad-vi-erbjuder"
+      className="relative pt-0 pb-32 bg-stone-50 dark:bg-[#0a0a0a] overflow-hidden border-t border-stone-200/80 dark:border-[#2a2a2a]"
       data-oid="hw7i-w9"
     >
       <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(ellipse 70% 40% at 50% 100%, rgba(200, 164, 110, 0.06), transparent 60%)",
-        }}
+        className="absolute inset-0 pointer-events-none section-bg-gradient-value"
         aria-hidden
         data-oid="6iqd7:a"
       />
-
+      <div className="custom-shape-divider-top-1772059326" aria-hidden>
+        <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none" className="block w-full">
+          <path d="M1200 120L0 16.48 0 0 1200 0 1200 120z" className="shape-fill" />
+        </svg>
+      </div>
       <div
-        className="relative max-w-4xl mx-auto px-6 text-center"
+        className="relative max-w-4xl mx-auto px-6 pt-24 text-center"
         data-oid="03gxzyv"
       >
         <h2
-          className="text-3xl md:text-4xl font-bold mb-6 text-gray-900 dark:text-[#f5f5f0]"
+          className="text-3xl md:text-4xl font-bold mb-6 text-stone-900 dark:text-[#f5f5f0]"
           data-aos="fade-up"
           data-oid="_d9nv07"
         >
           En hemsida som gör jobbet
         </h2>
         <p
-          className="text-gray-600 dark:text-[#cccccc] text-lg leading-relaxed max-w-2xl mx-auto mb-16"
+          className="text-stone-600 dark:text-[#d4d0c8] text-lg leading-relaxed max-w-2xl mx-auto mb-16"
           data-aos="fade-up"
           data-aos-delay="100"
           data-oid="u6s9t5w"
@@ -249,22 +310,37 @@ function ValueSection() {
           {features.map((f, i) => (
             <div
               key={f.title}
-              className="group relative bg-white dark:bg-[#1a1a1a] border border-gray-200 dark:border-[#2a2a2a] rounded-2xl p-6 text-center transition-all duration-300 hover:border-[#c8a46e]/40 hover:-translate-y-1 hover:shadow-lg hover:shadow-[#c8a46e]/5"
+              className="group relative bg-white dark:bg-[#1a1a1a] border border-stone-200 dark:border-[#2a2a2a] rounded-2xl p-6 text-center transition-all duration-300 hover:border-[#c8a46e]/40 hover:-translate-y-1 hover:shadow-lg hover:shadow-[#c8a46e]/5"
               data-aos="fade-up"
               data-aos-delay={i * 100}
             >
               <div className="inline-flex items-center justify-center w-12 h-12 mb-4 rounded-xl bg-[#c8a46e]/10 text-[#8b7355] dark:text-[#c8a46e] group-hover:bg-[#c8a46e]/20 transition-colors duration-300">
                 {f.icon}
               </div>
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-[#f5f5f0] mb-2">
+              <h3 className="text-lg font-semibold text-stone-900 dark:text-[#f5f5f0] mb-2">
                 {f.title}
               </h3>
-              <p className="text-gray-600 dark:text-[#cccccc] text-sm leading-relaxed">
+              <p className="text-stone-600 dark:text-[#d4d0c8] text-sm leading-relaxed">
                 {f.desc}
               </p>
             </div>
           ))}
         </div>
+      </div>
+
+      <div className="custom-shape-divider-bottom-1772061112" aria-hidden>
+        <svg
+          data-name="Layer 1"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 1200 120"
+          preserveAspectRatio="none"
+          className="block w-full"
+        >
+          <path
+            d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
+            className="shape-fill"
+          />
+        </svg>
       </div>
     </section>
   );
@@ -296,19 +372,15 @@ function PricingSection() {
       popular: false,
     },
   ];
-
+  
   return (
     <section
       id="pricing"
-      className="relative py-24 bg-gray-100 dark:bg-[#111111] overflow-hidden"
+      className="relative py-24 pb-32 bg-stone-100 dark:bg-[#111111] overflow-hidden border-t border-stone-200/80 dark:border-[#2a2a2a]"
       data-oid="5n7-w4w"
     >
       <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(ellipse 60% 50% at 50% 0%, rgba(200, 164, 110, 0.08), transparent 60%)",
-        }}
+        className="absolute inset-0 pointer-events-none section-bg-gradient-pricing"
         aria-hidden
       />
       <div className="relative max-w-6xl mx-auto px-6" data-oid="spmzqk5">
@@ -318,36 +390,36 @@ function PricingSection() {
           data-oid="396-z35"
         >
           <h2
-            className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-[#f5f5f0] mb-4"
+            className="text-3xl md:text-4xl font-bold text-stone-900 dark:text-[#f5f5f0] mb-4"
             data-oid="wu795ht"
           >
             Priser
           </h2>
           <p
-            className="text-gray-600 dark:text-[#cccccc] mb-2"
+            className="text-stone-600 dark:text-[#d4d0c8] mb-2"
             data-oid="yazyh:7"
           >
             Engångspris:{" "}
             <span
-              className="text-gray-900 dark:text-[#f5f5f0] font-semibold"
+              className="text-stone-900 dark:text-[#f5f5f0] font-semibold"
               data-oid="q0yc:v-"
             >
               Från 9 900 kr
             </span>{" "}
             <span
-              className="text-gray-500 dark:text-[#999999] text-sm align-baseline"
+              className="text-stone-500 dark:text-[#a8a49c] text-sm align-baseline"
               data-oid="8jlfemq"
             >
               exkl. moms
             </span>
           </p>
           <p
-            className="text-gray-500 dark:text-[#999999] text-sm mt-4"
+            className="text-stone-500 dark:text-[#a8a49c] text-sm mt-4"
             data-oid="jrz_ack"
           >
             Hosting & Drift – exkl.{" "}
             <span
-              className="text-gray-500 dark:text-[#999999] text-xs"
+              className="text-stone-500 dark:text-[#a8a49c] text-xs"
               data-oid="pruu_::"
             >
               moms
@@ -361,7 +433,7 @@ function PricingSection() {
               className={`relative bg-white dark:bg-[#1a1a1a] rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl ${
                 tier.popular
                   ? "border-2 border-[#c8a46e] shadow-lg shadow-[#c8a46e]/10 dark:shadow-[#c8a46e]/20 scale-[1.02]"
-                  : "border border-gray-200 dark:border-[#2a2a2a] hover:border-[#c8a46e]/40 hover:shadow-[#c8a46e]/10"
+                  : "border border-stone-200 dark:border-[#2a2a2a] hover:border-[#c8a46e]/40 hover:shadow-[#c8a46e]/10"
               }`}
               data-aos="fade-up"
               data-aos-delay={i * 80}
@@ -373,22 +445,22 @@ function PricingSection() {
                 </span>
               )}
               <h3
-                className="text-xl font-semibold text-gray-900 dark:text-[#f5f5f0] mb-2"
+                className="text-xl font-semibold text-stone-900 dark:text-[#f5f5f0] mb-2"
                 data-oid="3gmsip-"
               >
                 {tier.name}
               </h3>
               <p
-                className="text-2xl font-bold text-gray-900 dark:text-[#f5f5f0]"
+                className="text-2xl font-bold text-stone-900 dark:text-[#f5f5f0]"
                 data-oid="08-woyd"
               >
                 {tier.price}{" "}
-                <span className="text-base font-medium text-gray-500 dark:text-[#999999]">
+                <span className="text-base font-medium text-stone-500 dark:text-[#a8a49c]">
                   {tier.period}
                 </span>
               </p>
               <p
-                className="text-xs text-gray-500 dark:text-[#999999] mb-4"
+                className="text-xs text-stone-500 dark:text-[#a8a49c] mb-4"
                 data-oid="q1ndi.s"
               >
                 exkl.{" "}
@@ -397,7 +469,7 @@ function PricingSection() {
                 </span>
               </p>
               <p
-                className="text-gray-600 dark:text-[#cccccc] text-sm leading-relaxed"
+                className="text-stone-600 dark:text-[#d4d0c8] text-sm leading-relaxed"
                 data-oid="9bravw9"
               >
                 {tier.description}
@@ -414,6 +486,11 @@ function PricingSection() {
             Så här går det till
           </Link>
         </div>
+      </div>
+      <div className="shape-divider-section-bottom-2" aria-hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none" className="block w-full">
+          <path d="M0,60 C300,0 900,120 1200,60 L1200,120 L0,120 Z" className="shape-fill-examples" />
+        </svg>
       </div>
     </section>
   );
@@ -445,35 +522,46 @@ function FAQItem({ item, index }: { item: { q: string; a: string }; index: numbe
   const [height, setHeight] = useState(0);
 
   useEffect(() => {
-    if (open && bodyRef.current) {
-      setHeight(bodyRef.current.scrollHeight);
-      const timer = setTimeout(() => {
-        itemRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest" });
-      }, 220);
-      return () => clearTimeout(timer);
-    } else {
+    if (!open) {
       setHeight(0);
+      return;
     }
+    if (!bodyRef.current) return;
+    // Measure after layout so scrollHeight is correct (fixes answer not showing until scroll)
+    const id = requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        if (bodyRef.current) setHeight(bodyRef.current.scrollHeight);
+      });
+    });
+    const timer = setTimeout(() => {
+      itemRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }, 220);
+    return () => {
+      cancelAnimationFrame(id);
+      clearTimeout(timer);
+    };
   }, [open]);
+
+  useEffect(() => {
+    if (bodyRef.current) bodyRef.current.style.height = `${height}px`;
+  }, [height]);
 
   return (
     <li
       ref={itemRef}
-      className={`bg-gray-50 dark:bg-[#1a1a1a] border rounded-xl transition-colors duration-200 ${
+      className={`bg-stone-50 dark:bg-[#1a1a1a] border rounded-xl transition-colors duration-200 ${
         open
           ? "border-[#c8a46e]/40"
-          : "border-gray-200 dark:border-[#2a2a2a] hover:border-[#c8a46e]/20"
+          : "border-stone-200 dark:border-[#2a2a2a] hover:border-[#c8a46e]/20"
       }`}
-      data-aos="fade-up"
-      data-aos-delay={index * 50}
     >
       <button
         type="button"
         onClick={() => setOpen(!open)}
         className="w-full flex items-center justify-between gap-4 p-6 text-left cursor-pointer"
-        aria-expanded={open}
+        {...(open ? { "aria-expanded": "true" } : { "aria-expanded": "false" })}
       >
-        <span className="text-lg font-semibold text-gray-900 dark:text-[#f5f5f0]">
+        <span className="text-lg font-semibold text-stone-900 dark:text-[#f5f5f0]">
           {item.q}
         </span>
         <svg
@@ -490,10 +578,9 @@ function FAQItem({ item, index }: { item: { q: string; a: string }; index: numbe
       </button>
       <div
         ref={bodyRef}
-        className="overflow-hidden transition-[height] duration-200 ease-out"
-        style={{ height }}
+        className="faq-body overflow-hidden transition-[height] duration-200 ease-out"
       >
-        <p className="px-6 pb-6 text-gray-600 dark:text-[#cccccc] leading-relaxed">
+        <p className="px-6 pb-6 text-stone-600 dark:text-[#d4d0c8] leading-relaxed">
           {item.a}
         </p>
       </div>
@@ -504,12 +591,12 @@ function FAQItem({ item, index }: { item: { q: string; a: string }; index: numbe
 function FAQSection() {
   return (
     <section
-      className="relative py-24 bg-white dark:bg-[#0a0a0a] overflow-hidden"
+      className="relative py-24 pb-32 bg-white dark:bg-[#0a0a0a] overflow-hidden border-t border-stone-200/80 dark:border-[#2a2a2a]"
       data-oid="7bu:.ml"
     >
       <div className="relative max-w-3xl mx-auto px-6" data-oid="89xhhdi">
         <h2
-          className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-[#f5f5f0] mb-12 text-center"
+          className="text-3xl md:text-4xl font-bold text-stone-900 dark:text-[#f5f5f0] mb-12 text-center"
           data-aos="fade-up"
           data-oid="iqjffx_"
         >
@@ -520,6 +607,11 @@ function FAQSection() {
             <FAQItem key={i} item={item} index={i} />
           ))}
         </ul>
+      </div>
+      <div className="shape-divider-section-bottom-2" aria-hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none" className="block w-full">
+          <path d="M0,50 C400,120 800,0 1200,50 L1200,120 L0,120 Z" className="shape-fill-gold" />
+        </svg>
       </div>
     </section>
   );
@@ -618,16 +710,12 @@ function ContactSection() {
   return (
     <section
       id="contact"
-      className="py-24 bg-gray-100 dark:bg-[#111111] relative overflow-hidden"
+      className="py-24 pb-32 bg-stone-100 dark:bg-[#111111] relative overflow-hidden"
       ref={sectionRef}
       data-oid="m8p5t8f"
     >
       <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(ellipse 70% 50% at 50% 0%, rgba(200, 164, 110, 0.08), transparent 50%)",
-        }}
+        className="absolute inset-0 pointer-events-none section-bg-gradient-contact"
         aria-hidden
       />
       <div
@@ -636,13 +724,13 @@ function ContactSection() {
         data-oid="7rdzyvs"
       >
         <h2
-          className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-[#f5f5f0] mb-4"
+          className="text-3xl md:text-4xl font-bold text-stone-900 dark:text-[#f5f5f0] mb-4"
           data-oid="dixt8nq"
         >
           Kontakta oss
         </h2>
         <p
-          className="text-gray-600 dark:text-[#999999] mb-10"
+          className="text-stone-600 dark:text-[#b8b4a8] mb-10"
           data-oid="chocs18"
         >
           Osäker på vad du behöver? Hör av dig så pratar vi igenom det – helt
@@ -651,7 +739,7 @@ function ContactSection() {
 
         {status === "success" ? (
           <div
-            className="max-w-lg mx-auto py-8 px-6 bg-white dark:bg-[#1a1a1a] border border-gray-200 dark:border-[#2a2a2a] rounded-xl text-gray-900 dark:text-[#f5f5f0]"
+            className="max-w-lg mx-auto py-8 px-6 bg-white dark:bg-[#1a1a1a] border border-stone-200 dark:border-[#2a2a2a] rounded-xl text-stone-900 dark:text-[#f5f5f0]"
             data-oid="doxvmxl"
           >
             <p
@@ -660,7 +748,7 @@ function ContactSection() {
             >
               Tack för din förfrågan!
             </p>
-            <p className="text-gray-600 dark:text-[#999999]" data-oid="80j372d">
+            <p className="text-stone-600 dark:text-[#b8b4a8]" data-oid="80j372d">
               Vi återkommer inom 24 timmar.
             </p>
           </div>
@@ -682,7 +770,7 @@ function ContactSection() {
             <div data-oid="hu-qbs1">
               <label
                 htmlFor="contact-name"
-                className="block text-gray-700 dark:text-[#e5e5e0] text-sm font-medium mb-1.5"
+                className="block text-stone-700 dark:text-[#e5e5e0] text-sm font-medium mb-1.5"
                 data-oid="w2yk654"
               >
                 Namn
@@ -696,14 +784,14 @@ function ContactSection() {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 disabled={status === "loading"}
-                className="w-full px-4 py-3 bg-white dark:bg-[#1a1a1a] border border-gray-200 dark:border-[#2a2a2a] rounded-lg text-gray-900 dark:text-[#f5f5f0] placeholder-gray-400 dark:placeholder-[#666666] focus:border-[#c8a46e] focus:outline-none disabled:opacity-60"
+                className="w-full px-4 py-3 bg-white dark:bg-[#1a1a1a] border border-stone-200 dark:border-[#2a2a2a] rounded-lg text-stone-900 dark:text-[#f5f5f0] placeholder-stone-400 dark:placeholder-[#6b6962] focus:border-[#c8a46e] focus:outline-none disabled:opacity-60"
                 data-oid="euar4ue"
               />
             </div>
             <div data-oid="3x5cuo_">
               <label
                 htmlFor="contact-email"
-                className="block text-gray-700 dark:text-[#e5e5e0] text-sm font-medium mb-1.5"
+                className="block text-stone-700 dark:text-[#e5e5e0] text-sm font-medium mb-1.5"
                 data-oid="mf2icrx"
               >
                 E-post
@@ -717,14 +805,14 @@ function ContactSection() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 disabled={status === "loading"}
-                className="w-full px-4 py-3 bg-white dark:bg-[#1a1a1a] border border-gray-200 dark:border-[#2a2a2a] rounded-lg text-gray-900 dark:text-[#f5f5f0] placeholder-gray-400 dark:placeholder-[#666666] focus:border-[#c8a46e] focus:outline-none disabled:opacity-60"
+                className="w-full px-4 py-3 bg-white dark:bg-[#1a1a1a] border border-stone-200 dark:border-[#2a2a2a] rounded-lg text-stone-900 dark:text-[#f5f5f0] placeholder-stone-400 dark:placeholder-[#6b6962] focus:border-[#c8a46e] focus:outline-none disabled:opacity-60"
                 data-oid="h-qte9:"
               />
             </div>
             <div data-oid="rx0.r:c">
               <label
                 htmlFor="contact-template"
-                className="block text-gray-700 dark:text-[#e5e5e0] text-sm font-medium mb-1.5"
+                className="block text-stone-700 dark:text-[#e5e5e0] text-sm font-medium mb-1.5"
                 data-oid="0dif6od"
               >
                 Vilken typ av sida? (valfritt)
@@ -735,7 +823,7 @@ function ContactSection() {
                 value={templateId}
                 onChange={(e) => setTemplateId(e.target.value)}
                 disabled={status === "loading"}
-                className="w-full px-4 py-3 bg-white dark:bg-[#1a1a1a] border border-gray-200 dark:border-[#2a2a2a] rounded-lg text-gray-900 dark:text-[#f5f5f0] focus:border-[#c8a46e] focus:outline-none disabled:opacity-60"
+                className="w-full px-4 py-3 bg-white dark:bg-[#1a1a1a] border border-stone-200 dark:border-[#2a2a2a] rounded-lg text-stone-900 dark:text-[#f5f5f0] focus:border-[#c8a46e] focus:outline-none disabled:opacity-60"
                 data-oid="-mf8:ce"
               >
                 <option value="" data-oid="ted3ziq">
@@ -754,7 +842,7 @@ function ContactSection() {
             <div data-oid="h4ccbrm">
               <label
                 htmlFor="contact-message"
-                className="block text-gray-700 dark:text-[#e5e5e0] text-sm font-medium mb-1.5"
+                className="block text-stone-700 dark:text-[#e5e5e0] text-sm font-medium mb-1.5"
                 data-oid="b8q7d2n"
               >
                 Meddelande
@@ -768,7 +856,7 @@ function ContactSection() {
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
                 disabled={status === "loading"}
-                className="w-full px-4 py-3 bg-white dark:bg-[#1a1a1a] border border-gray-200 dark:border-[#2a2a2a] rounded-lg text-gray-900 dark:text-[#f5f5f0] placeholder-gray-400 dark:placeholder-[#666666] focus:border-[#c8a46e] focus:outline-none resize-none disabled:opacity-60"
+                className="w-full px-4 py-3 bg-white dark:bg-[#1a1a1a] border border-stone-200 dark:border-[#2a2a2a] rounded-lg text-stone-900 dark:text-[#f5f5f0] placeholder-stone-400 dark:placeholder-[#6b6962] focus:border-[#c8a46e] focus:outline-none resize-none disabled:opacity-60"
                 data-oid=".scee5:"
               />
             </div>
@@ -782,6 +870,11 @@ function ContactSection() {
             </button>
           </form>
         )}
+      </div>
+      <div className="shape-divider-section-bottom-2" aria-hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none" className="block w-full">
+          <path d="M0,50 C400,120 800,0 1200,50 L1200,120 L0,120 Z" className="shape-fill-gold" />
+        </svg>
       </div>
     </section>
   );
@@ -801,28 +894,24 @@ function ExamplesTeaserSection() {
 
   return (
     <section
-      className="relative py-24 bg-gray-50 dark:bg-[#0a0a0a] border-t border-gray-200/50 dark:border-[#2a2a2a]/50 overflow-hidden"
+      className="relative py-24 pb-32 bg-stone-50 dark:bg-[#0a0a0a] border-t border-stone-200/50 dark:border-[#2a2a2a]/50 overflow-hidden"
       data-oid="nl0opgt"
     >
       <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(ellipse 80% 60% at 50% 50%, rgba(200, 164, 110, 0.06), transparent 60%)",
-        }}
+        className="absolute inset-0 pointer-events-none section-bg-gradient-examples"
         aria-hidden
       />
 
       <div className="relative text-center mb-12 px-6" data-oid="kmncg_z">
         <h2
-          className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-[#f5f5f0] mb-4"
+          className="text-2xl md:text-3xl font-bold text-stone-900 dark:text-[#f5f5f0] mb-4"
           data-aos="fade-up"
           data-oid="0rmqedd"
         >
           Exempel på hemsidor vi bygger
         </h2>
         <p
-          className="text-gray-600 dark:text-[#cccccc] max-w-xl mx-auto leading-relaxed"
+          className="text-stone-600 dark:text-[#d4d0c8] max-w-xl mx-auto leading-relaxed"
           data-aos="fade-up"
           data-aos-delay="50"
           data-oid="ix-2unm"
@@ -832,21 +921,21 @@ function ExamplesTeaserSection() {
         </p>
       </div>
 
-      {/* Scrolling showcase row */}
-      <div className="relative" data-aos="fade-up" data-aos-delay="100">
-        {/* Fade edges */}
-        <div className="absolute left-0 top-0 bottom-0 w-24 z-10 bg-gradient-to-r from-gray-50 dark:from-[#0a0a0a] to-transparent pointer-events-none" />
-        <div className="absolute right-0 top-0 bottom-0 w-24 z-10 bg-gradient-to-l from-gray-50 dark:from-[#0a0a0a] to-transparent pointer-events-none" />
+      {/* Scrolling showcase row: touch scroll on mobile, marquee on desktop */}
+      <div className="relative examples-scroll-mobile" data-aos="fade-up" data-aos-delay="100">
+        {/* Fade edges – desktop only so mobile scroll isn’t obscured */}
+        <div className="absolute left-0 top-0 bottom-0 w-24 z-10 bg-gradient-to-r from-stone-50 dark:from-[#0a0a0a] to-transparent pointer-events-none hidden md:block" />
+        <div className="absolute right-0 top-0 bottom-0 w-24 z-10 bg-gradient-to-l from-stone-50 dark:from-[#0a0a0a] to-transparent pointer-events-none hidden md:block" />
 
-        <div className="flex gap-6 animate-marquee">
+        <div className="flex gap-6 pl-[calc(50vw-10rem)] pr-[calc(50vw-10rem)] md:pl-0 md:pr-0 min-w-max animate-marquee">
           {doubled.map((item, i) => (
             <Link
               key={`${item.slug}-${i}`}
               href={`/${item.slug}`}
-              className="group shrink-0 w-[320px] relative rounded-2xl overflow-hidden border border-gray-200 dark:border-[#2a2a2a] bg-white dark:bg-[#1a1a1a] transition-all duration-300 hover:border-[#c8a46e]/50 hover:shadow-2xl hover:shadow-[#c8a46e]/10 hover:-translate-y-1"
+              className="group shrink-0 w-[280px] sm:w-[320px] snap-center rounded-2xl overflow-hidden border border-stone-200 dark:border-[#2a2a2a] bg-white dark:bg-[#1a1a1a] transition-all duration-300 hover:border-[#c8a46e]/50 hover:shadow-2xl hover:shadow-[#c8a46e]/10 hover:-translate-y-1 active:scale-[0.98]"
             >
               {/* Screenshot preview */}
-              <div className="relative aspect-video overflow-hidden bg-gray-100 dark:bg-[#111]">
+              <div className="relative aspect-video overflow-hidden bg-stone-100 dark:bg-[#111]">
                 <Image
                   src={item.img}
                   alt={`${item.name} exempelsida`}
@@ -865,10 +954,10 @@ function ExamplesTeaserSection() {
 
               {/* Label */}
               <div className="px-4 py-3 flex items-center justify-between">
-                <span className="text-sm font-semibold text-gray-900 dark:text-[#f5f5f0] group-hover:text-[#c8a46e] transition-colors">
+                <span className="text-sm font-semibold text-stone-900 dark:text-[#f5f5f0] group-hover:text-[#c8a46e] transition-colors">
                   {item.name}
                 </span>
-                <svg className="w-4 h-4 text-gray-400 dark:text-[#555] group-hover:text-[#c8a46e] transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <svg className="w-4 h-4 text-stone-500 dark:text-[#6b6962] group-hover:text-[#c8a46e] transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
                 </svg>
               </div>
@@ -886,6 +975,11 @@ function ExamplesTeaserSection() {
         >
           Se alla exempel
         </Link>
+      </div>
+      <div className="shape-divider-section-bottom-2" aria-hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none" className="block w-full">
+          <path d="M0,80 Q600,0 1200,80 L1200,120 L0,120 Z" className="shape-fill-faq" />
+        </svg>
       </div>
     </section>
   );

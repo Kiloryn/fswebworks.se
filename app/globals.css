@@ -28,7 +28,7 @@ body {
   }
 }
 
-/* Infinite horizontal marquee for example showcase */
+/* Infinite horizontal marquee for example showcase – desktop only (mobile uses touch scroll) */
 @keyframes marquee {
   0% {
     transform: translateX(0);
@@ -38,11 +38,135 @@ body {
   }
 }
 .animate-marquee {
-  animation: marquee 30s linear infinite;
+  animation: none; /* off on mobile so touch scroll works */
   will-change: transform;
 }
 .animate-marquee:hover {
   animation-play-state: paused;
+}
+@media (min-width: 768px) {
+  .animate-marquee {
+    animation: marquee 30s linear infinite;
+  }
+}
+
+/* Mobile: touch-friendly horizontal scroll for example showcase */
+.examples-scroll-mobile {
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.examples-scroll-mobile::-webkit-scrollbar {
+  display: none;
+}
+@media (min-width: 768px) {
+  .examples-scroll-mobile {
+    scroll-snap-type: none;
+    overflow: hidden;
+  }
+}
+
+/* Hero background gradients (when no video/image) */
+.hero-bg-gradient-top {
+  background: radial-gradient(
+    ellipse 80% 50% at 50% 0%,
+    rgba(200, 164, 110, 0.12),
+    transparent 50%
+  );
+}
+.hero-bg-gradient-bottom {
+  background: radial-gradient(
+    ellipse 60% 40% at 20% 80%,
+    rgba(200, 164, 110, 0.06),
+    transparent 40%
+  );
+}
+.hero-dot-1 {
+  animation-delay: 0s;
+  animation-duration: 3s;
+}
+.hero-dot-2 {
+  animation-delay: 1s;
+  animation-duration: 4s;
+}
+.hero-dot-3 {
+  animation-delay: 2s;
+  animation-duration: 5s;
+}
+
+/* Hero headline: default shadow when on gradient background */
+.hero-headline {
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+}
+
+/* When hero has video/image: light text so it’s readable on dark overlay */
+.hero-over-media .hero-headline {
+  color: #c8a46e !important;
+  background: none !important;
+  -webkit-background-clip: unset !important;
+  background-clip: unset !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+.hero-over-media .hero-badge {
+  background: #2a2520 !important;
+  border-color: #c8a46e !important;
+  color: #f5f0e8 !important;
+}
+.hero-over-media .hero-badge .w-2 {
+  background: #d4b480 !important;
+}
+.hero-over-media .hero-subheading {
+  color: #f2f0eb !important;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+.hero-over-media .hero-benefits {
+  color: #e8e6e0 !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+.hero-over-media .hero-benefits .w-2 {
+  background: #c8a46e !important;
+}
+.hero-over-media .hero-disclaimer {
+  color: #ddd9d0 !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+/* Section background gradients */
+.section-bg-gradient-value {
+  background: radial-gradient(
+    ellipse 70% 40% at 50% 100%,
+    rgba(200, 164, 110, 0.06),
+    transparent 60%
+  );
+}
+.section-bg-gradient-pricing {
+  background: radial-gradient(
+    ellipse 60% 50% at 50% 0%,
+    rgba(200, 164, 110, 0.08),
+    transparent 60%
+  );
+}
+.section-bg-gradient-contact {
+  background: radial-gradient(
+    ellipse 70% 50% at 50% 0%,
+    rgba(200, 164, 110, 0.08),
+    transparent 50%
+  );
+}
+.section-bg-gradient-examples {
+  background: radial-gradient(
+    ellipse 80% 60% at 50% 50%,
+    rgba(200, 164, 110, 0.06),
+    transparent 60%
+  );
+}
+
+/* FAQ accordion body – height set in JS (dynamic expand/collapse) */
+.faq-body {
+  box-sizing: border-box;
 }
 
 /* Mobile menu dropdown – compact, modern */
@@ -58,7 +182,7 @@ body {
       0 20px 40px -12px rgba(0, 0, 0, 0.5);
   }
   .mobile-menu-link {
-    @apply block w-full py-3 px-4 text-center text-[15px] font-medium text-gray-800 no-underline rounded-lg touch-manipulation dark:text-[#e5e5e0];
+    @apply block w-full py-3 px-4 text-center text-[15px] font-medium text-stone-800 no-underline rounded-lg touch-manipulation dark:text-[#e5e5e0];
   }
   .mobile-menu-link:hover,
   .mobile-menu-link:focus-visible {
@@ -68,6 +192,106 @@ body {
     @apply bg-[#c8a46e]/15;
   }
   .nav-link-header {
-    @apply text-gray-800 hover:text-[#c8a46e] no-underline transition-colors duration-200 dark:text-[#f5f5f0] dark:hover:text-[#d4b480];
+    @apply text-stone-800 hover:text-[#c8a46e] no-underline transition-colors duration-200 dark:text-[#f5f5f0] dark:hover:text-[#d4b480];
   }
 }
+.shape-divider-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  z-index: 10; /* Ensures it sits on top of the video */
+}
+
+.shape-divider-container svg {
+  position: relative;
+  display: block;
+  /* The 150% prevents tiny gaps on the edges */
+  width: calc(150% + 1.3px);
+  height: 120px; /* Adjust this to make the slant steeper or shallower */
+}
+
+.shape-divider-container .shape-fill {
+  fill: #FFFFFF; /* Matches your white background below */
+}
+
+/* ValueSection top wave – flush with hero, gold */
+.custom-shape-divider-top-1772059326 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  z-index: 5;
+}
+.custom-shape-divider-top-1772059326 svg {
+  position: relative;
+  display: block;
+  width: calc(100% + 1.3px);
+  height: 120px;
+}
+.custom-shape-divider-top-1772059326 .shape-fill {
+  fill: #c8a46e;
+}
+
+/* First section (ValueSection) bottom wave – gold brand color, flipped */
+.custom-shape-divider-bottom-1772061112 {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  z-index: 5;
+  transform: scaleY(-1);
+}
+.custom-shape-divider-bottom-1772061112 svg {
+  position: relative;
+  display: block;
+  width: calc(100% + 1.3px);
+  height: 120px;
+}
+.custom-shape-divider-bottom-1772061112 .shape-fill {
+  fill: #c8a46e;
+}
+
+/* Section dividers – similar wave family, different paths in markup */
+.shape-divider-section-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  z-index: 5;
+}
+.shape-divider-section-top svg {
+  position: relative;
+  display: block;
+  width: calc(100% + 1.3px);
+  height: 80px;
+}
+.shape-divider-section-bottom-2 {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  z-index: 5;
+}
+.shape-divider-section-bottom-2 svg {
+  position: relative;
+  display: block;
+  width: calc(100% + 1.3px);
+  height: 80px;
+}
+/* All section dividers use gold #c8a46e */
+.shape-fill-pricing,
+.shape-fill-examples,
+.shape-fill-faq,
+.shape-fill-contact,
+.shape-fill-gold { fill: #c8a46e; }

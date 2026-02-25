@@ -269,7 +269,7 @@ export default function Header() {
                       "aria-label": "Öppna meny",
                       "aria-expanded": "false" as const,
                     })}
-                className="md:hidden flex items-center justify-center min-w-[44px] min-h-[44px] -mr-2 text-gray-700 dark:text-[#f5f5f0] hover:text-[#c8a46e] active:opacity-80 cursor-pointer touch-manipulation"
+                className="md:hidden flex items-center justify-center min-w-[44px] min-h-[44px] -mr-2 text-stone-700 dark:text-[#f5f5f0] hover:text-[#c8a46e] active:opacity-80 cursor-pointer touch-manipulation"
                 onClick={(e) => {
                   e.preventDefault();
                   e.stopPropagation();

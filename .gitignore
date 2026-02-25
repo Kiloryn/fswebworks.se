@@ -41,3 +41,9 @@ next-env.d.ts
 # OS
 .DS_Store
 Thumbs.db
+
+# Agent / tooling (not part of the app)
+.minimax/
+.agent/
+.claude/
+CLAUDE_MEMORY.md
