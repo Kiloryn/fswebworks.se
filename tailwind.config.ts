@@ -1,5 +1,7 @@
 import type { Config } from "tailwindcss";
+
 const config: Config = {
+  darkMode: "class",
   content: [
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -10,8 +12,8 @@ const config: Config = {
         background: "var(--background)",
         foreground: "var(--foreground)",
         gold: {
-          DEFAULT: "var(--gold)",
-          light: "var(--gold-light)",
+          DEFAULT: "#c8a46e",
+          light: "#d4b480",
           dark: "#b8956a",
         },
       },

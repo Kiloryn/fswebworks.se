@@ -43,9 +43,8 @@ export async function POST(request: Request) {
 
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) {
-    console.warn('Contact form: RESEND_API_KEY is not set.');
     return NextResponse.json(
-      { error: 'Kontaktformuläret är inte tillgängligt just nu. Försök igen senare eller maila oss direkt.' },
+      { error: 'Kontaktfunktionen är inte konfigurerad. Sätt RESEND_API_KEY.' },
       { status: 503 }
     );
   }

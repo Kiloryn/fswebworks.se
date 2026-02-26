@@ -1,21 +1,21 @@
 "use client";
 
 import { useEffect } from "react";
+import AOS from "aos";
 import "aos/dist/aos.css";
 
+/**
+ * Initialiserar AOS (Animate On Scroll) så att data-aos-attribut på sidan animeras.
+ */
 export default function AosInit() {
   useEffect(() => {
-    import("aos").then((AOS) => {
-      AOS.default.init({
-        duration: 750,
-        easing: "ease-out-cubic",
-        once: true,
-        offset: 120,
-      });
+    AOS.init({
+      duration: 600,
+      once: true,
+      offset: 40,
+      easing: "ease-out-cubic",
+      disable: window.innerWidth < 640,
     });
-    return () => {
-      import("aos").then((AOS) => AOS.default.refresh());
-    };
   }, []);
   return null;
 }

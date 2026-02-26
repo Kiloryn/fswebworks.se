@@ -3,10 +3,13 @@
 @tailwind utilities;
 
 :root {
+  --background: #ffffff;
+  --foreground: #111827;
+}
+
+.dark {
   --background: #0a0a0a;
   --foreground: #f5f5f0;
-  --gold: #c8a46e;
-  --gold-light: #d4b480;
 }
 
 html {
@@ -25,31 +28,161 @@ body {
   }
 }
 
+/* Infinite horizontal marquee for example showcase – desktop only (mobile uses touch scroll) */
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+.animate-marquee {
+  animation: none; /* off on mobile so touch scroll works */
+  will-change: transform;
+}
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+@media (min-width: 768px) {
+  .animate-marquee {
+    animation: marquee 30s linear infinite;
+  }
+}
+
+/* Mobile: touch-friendly horizontal scroll for example showcase */
+.examples-scroll-mobile {
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.examples-scroll-mobile::-webkit-scrollbar {
+  display: none;
+}
+@media (min-width: 768px) {
+  .examples-scroll-mobile {
+    scroll-snap-type: none;
+    overflow: hidden;
+  }
+}
+
+/* Hero background gradients (when no video/image) */
+.hero-bg-gradient-top {
+  background: radial-gradient(
+    ellipse 80% 50% at 50% 0%,
+    rgba(200, 164, 110, 0.12),
+    transparent 50%
+  );
+}
+.hero-bg-gradient-bottom {
+  background: radial-gradient(
+    ellipse 60% 40% at 20% 80%,
+    rgba(200, 164, 110, 0.06),
+    transparent 40%
+  );
+}
+.hero-dot-1 {
+  animation-delay: 0s;
+  animation-duration: 3s;
+}
+.hero-dot-2 {
+  animation-delay: 1s;
+  animation-duration: 4s;
+}
+.hero-dot-3 {
+  animation-delay: 2s;
+  animation-duration: 5s;
+}
+
+/* Hero headline: default shadow when on gradient background */
+.hero-headline {
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+}
+
+/* When hero has video/image: light text so it’s readable on dark overlay */
+.hero-over-media .hero-headline {
+  color: #c8a46e !important;
+  background: none !important;
+  -webkit-background-clip: unset !important;
+  background-clip: unset !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+.hero-over-media .hero-badge {
+  background: #2a2520 !important;
+  border-color: #c8a46e !important;
+  color: #f5f0e8 !important;
+}
+.hero-over-media .hero-badge .w-2 {
+  background: #d4b480 !important;
+}
+.hero-over-media .hero-subheading {
+  color: #f2f0eb !important;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+.hero-over-media .hero-benefits {
+  color: #e8e6e0 !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+.hero-over-media .hero-benefits .w-2 {
+  background: #c8a46e !important;
+}
+.hero-over-media .hero-disclaimer {
+  color: #ddd9d0 !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+/* Section background gradients */
+.section-bg-gradient-value {
+  background: radial-gradient(
+    ellipse 70% 40% at 50% 100%,
+    rgba(200, 164, 110, 0.06),
+    transparent 60%
+  );
+}
+.section-bg-gradient-pricing {
+  background: radial-gradient(
+    ellipse 60% 50% at 50% 0%,
+    rgba(200, 164, 110, 0.08),
+    transparent 60%
+  );
+}
+.section-bg-gradient-contact {
+  background: radial-gradient(
+    ellipse 70% 50% at 50% 0%,
+    rgba(200, 164, 110, 0.08),
+    transparent 50%
+  );
+}
+.section-bg-gradient-examples {
+  background: radial-gradient(
+    ellipse 80% 60% at 50% 50%,
+    rgba(200, 164, 110, 0.06),
+    transparent 60%
+  );
+}
+
+/* FAQ accordion body – height set in JS (dynamic expand/collapse) */
+.faq-body {
+  box-sizing: border-box;
+}
+
 /* Mobile menu dropdown – compact, modern */
 @layer components {
   .mobile-menu-backdrop {
     @apply bg-black/35 backdrop-blur-sm;
   }
   .mobile-menu-panel {
-    @apply rounded-2xl border border-[#2a2a2a] bg-[#111111];
+    @apply rounded-2xl border border-gray-200 bg-white dark:border-[#2a2a2a] dark:bg-[#111111];
     box-shadow:
       0 0 0 1px rgba(200, 164, 110, 0.06),
       0 4px 6px -2px rgba(0, 0, 0, 0.3),
       0 20px 40px -12px rgba(0, 0, 0, 0.5);
-    animation: mobile-menu-in 0.25s cubic-bezier(0.32, 0.72, 0, 1) forwards;
-  }
-  @keyframes mobile-menu-in {
-    from {
-      opacity: 0;
-      transform: translateY(-10px) scale(0.97);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-    }
   }
   .mobile-menu-link {
-    @apply block w-full py-3 px-4 text-center text-[15px] font-medium text-[#e5e5e0] no-underline transition-colors duration-150 rounded-lg touch-manipulation;
+    @apply block w-full py-3 px-4 text-center text-[15px] font-medium text-stone-800 no-underline rounded-lg touch-manipulation dark:text-[#e5e5e0];
   }
   .mobile-menu-link:hover,
   .mobile-menu-link:focus-visible {
@@ -58,114 +191,107 @@ body {
   .mobile-menu-link:active {
     @apply bg-[#c8a46e]/15;
   }
-
-  /* Desktop nav link with sliding gold underline */
   .nav-link-header {
-    @apply relative text-[#999999] transition-colors duration-200;
+    @apply text-stone-800 hover:text-[#c8a46e] no-underline transition-colors duration-200 dark:text-[#f5f5f0] dark:hover:text-[#d4b480];
   }
-  .nav-link-header:hover {
-    @apply text-[#c8a46e];
-  }
-  .nav-link-header::after {
-    content: "";
-    @apply absolute left-1/2 bottom-0 h-px w-0 bg-[#c8a46e] transition-all duration-200 -translate-x-1/2;
-  }
-  .nav-link-header:hover::after {
-    @apply w-full;
-  }
-
-  /* Hero entrance animations */
-  .hero-badge-entrance {
-    animation: hero-badge-in 0.4s ease-out forwards;
-  }
-  .hero-benefit-entrance {
-    opacity: 0;
-    animation: hero-benefit-in 0.4s ease-out forwards;
-  }
-  @keyframes hero-badge-in {
-    from {
-      opacity: 0;
-      transform: translateY(8px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  @keyframes hero-benefit-in {
-    to {
-      opacity: 1;
-    }
-  }
-
-  /* Services section entrance */
-  .services-section-title {
-    animation: services-title-in 0.5s ease-out forwards;
-  }
-  .services-section-subtitle {
-    opacity: 0;
-    animation: services-subtitle-in 0.5s ease-out forwards;
-    animation-delay: 0.1s;
-    animation-fill-mode: forwards;
-  }
-  .services-card-entrance {
-    opacity: 0;
-    animation: services-card-in 0.5s ease-out forwards;
-  }
-  @keyframes services-title-in {
-    from {
-      opacity: 0;
-      transform: translateY(10px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  @keyframes services-subtitle-in {
-    to {
-      opacity: 1;
-    }
-  }
-  @keyframes services-card-in {
-    from {
-      opacity: 0;
-      transform: translateY(16px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
+}
+.shape-divider-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  z-index: 10; /* Ensures it sits on top of the video */
 }
 
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
+.shape-divider-container svg {
+  position: relative;
+  display: block;
+  /* The 150% prevents tiny gaps on the edges */
+  width: calc(150% + 1.3px);
+  height: 120px; /* Adjust this to make the slant steeper or shallower */
 }
 
-/* Optional: scroll reveal fallback (zero deps). Use with ScrollRevealFallback.tsx instead of AOS. */
-.scroll-reveal-fallback {
-  opacity: 0;
-  transform: translateY(24px);
-  transition:
-    opacity var(--reveal-duration, 750ms) ease-out,
-    transform var(--reveal-duration, 750ms) ease-out;
-  transition-delay: var(--reveal-delay, 0ms);
+.shape-divider-container .shape-fill {
+  fill: #FFFFFF; /* Matches your white background below */
 }
-.scroll-reveal-fallback--visible {
-  opacity: 1;
-  transform: translateY(0);
+
+/* ValueSection top wave – flush with hero, gold */
+.custom-shape-divider-top-1772059326 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  z-index: 5;
 }
-@media (prefers-reduced-motion: reduce) {
-  .scroll-reveal-fallback {
-    opacity: 1;
-    transform: none;
-    transition: none;
-  }
+.custom-shape-divider-top-1772059326 svg {
+  position: relative;
+  display: block;
+  width: calc(100% + 1.3px);
+  height: 120px;
 }
+.custom-shape-divider-top-1772059326 .shape-fill {
+  fill: #c8a46e;
+}
+
+/* First section (ValueSection) bottom wave – gold brand color, flipped */
+.custom-shape-divider-bottom-1772061112 {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  z-index: 5;
+  transform: scaleY(-1);
+}
+.custom-shape-divider-bottom-1772061112 svg {
+  position: relative;
+  display: block;
+  width: calc(100% + 1.3px);
+  height: 120px;
+}
+.custom-shape-divider-bottom-1772061112 .shape-fill {
+  fill: #c8a46e;
+}
+
+/* Section dividers – similar wave family, different paths in markup */
+.shape-divider-section-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  z-index: 5;
+}
+.shape-divider-section-top svg {
+  position: relative;
+  display: block;
+  width: calc(100% + 1.3px);
+  height: 80px;
+}
+.shape-divider-section-bottom-2 {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  z-index: 5;
+}
+.shape-divider-section-bottom-2 svg {
+  position: relative;
+  display: block;
+  width: calc(100% + 1.3px);
+  height: 80px;
+}
+/* All section dividers use gold #c8a46e */
+.shape-fill-pricing,
+.shape-fill-examples,
+.shape-fill-faq,
+.shape-fill-contact,
+.shape-fill-gold { fill: #c8a46e; }

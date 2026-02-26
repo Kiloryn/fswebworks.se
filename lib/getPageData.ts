@@ -26,6 +26,7 @@ export type PageData = {
     trustText?: string | null
     logo?: string | null
     heroImage?: string | null
+    heroVideo?: string | null
   } | null
   services?: {
     sectionTitle?: string | null
@@ -98,6 +99,7 @@ export async function getPageData(): Promise<{ page: PageData }> {
           trustText: asString(hero.trustText),
           logo: asString(hero.logo),
           heroImage: asString(hero.heroImage),
+          heroVideo: asString(hero.heroVideo),
         }
       : null,
     services: services
@@ -139,6 +141,7 @@ function getDefaultPageQuery(): { page: PageData } {
         trustText: 'Fast pris • Ingen bindning • Du äger hemsidan',
         logo: null,
         heroImage: null,
+        heroVideo: null,
       },
       services: {
         sectionTitle: 'Våra tjänster',

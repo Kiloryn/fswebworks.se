@@ -16,8 +16,7 @@ export default function SmoothScroll() {
   const searchParams = useSearchParams();
   const router = useRouter();
 
-  // After client-side navigation: scroll from URL hash, or from sessionStorage (when we navigated without hash).
-  // We never show the hash in the URL – scroll to section then replace with clean URL.
+  // After client-side navigation: scroll from URL hash, or from sessionStorage (when we navigated without hash)
   useEffect(() => {
     const pendingId =
       typeof window !== "undefined"
@@ -26,20 +25,18 @@ export default function SmoothScroll() {
     if (pendingId) {
       sessionStorage.removeItem(SMOOTH_SCROLL_TO_KEY);
       scrollToId(pendingId, true);
-      const cleanUrl = window.location.pathname + window.location.search;
-      if (window.location.hash) {
-        window.history.replaceState(null, "", cleanUrl);
+      const hash = `#${pendingId}`;
+      if (window.location.hash !== hash) {
+        window.history.replaceState(
+          null,
+          "",
+          window.location.pathname + window.location.search + hash,
+        );
       }
       return;
     }
     if (typeof window !== "undefined" && window.location.hash) {
-      const id = window.location.hash.slice(1);
-      scrollToId(id, true);
-      window.history.replaceState(
-        null,
-        "",
-        window.location.pathname + window.location.search,
-      );
+      scrollToId(window.location.hash.slice(1), true);
     }
   }, [pathname, searchParams]);
 
@@ -73,10 +70,12 @@ export default function SmoothScroll() {
         if (!el) return;
         e.preventDefault();
         scrollToId(id, true);
-        // Keep URL clean (no hash) after scrolling
-        const cleanUrl = window.location.pathname + window.location.search;
-        if (window.location.hash) {
-          window.history.replaceState(null, "", cleanUrl);
+        if (window.location.hash !== hash) {
+          window.history.pushState(
+            null,
+            "",
+            window.location.pathname + window.location.search + hash,
+          );
         }
       }
     };
