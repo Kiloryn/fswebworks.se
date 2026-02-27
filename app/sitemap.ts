@@ -2,9 +2,26 @@ import { MetadataRoute } from 'next';
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://fswebworks.se';
 
+const publicRoutes = [
+  '/',
+  '/process',
+  '/examples',
+  '/vvs',
+  '/elektriker',
+  '/salong',
+  '/restaurang',
+  '/malare',
+  '/konsult',
+  '/clients/kund1',
+] as const;
+
 export default function sitemap(): MetadataRoute.Sitemap {
-  return [
-    { url: baseUrl, lastModified: new Date(), changeFrequency: 'monthly', priority: 1 },
-    { url: `${baseUrl}/admin`, lastModified: new Date(), changeFrequency: 'yearly', priority: 0.3 },
-  ];
+  const lastModified = new Date();
+
+  return publicRoutes.map((route) => ({
+    url: `${baseUrl}${route}`,
+    lastModified,
+    changeFrequency: route === '/' ? 'monthly' : 'yearly',
+    priority: route === '/' ? 1 : 0.7,
+  }));
 }
