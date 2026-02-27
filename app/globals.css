@@ -23,8 +23,8 @@ body {
 }
 
 /* AOS safety fallback: never keep content hidden before/without init */
-[data-aos]:not(.aos-init),
-.aos-disabled [data-aos] {
+html:not(.aos-init) [data-aos],
+html.aos-disabled [data-aos] {
   opacity: 1 !important;
   transform: none !important;
 }
