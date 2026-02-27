@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import Link from "next/link";
 import ThemeToggle from "./ThemeToggle";
@@ -46,6 +46,9 @@ export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const menuPanelRef = useRef<HTMLDivElement>(null);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const wasMenuOpenRef = useRef(false);
 
   useEffect(() => {
     setMounted(true);
@@ -81,6 +84,66 @@ export default function Header() {
     };
   }, [mobileMenuOpen]);
 
+
+  useEffect(() => {
+    if (!mobileMenuOpen) return;
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setMobileMenuOpen(false);
+        return;
+      }
+
+      if (event.key !== "Tab") return;
+
+      const panel = menuPanelRef.current;
+      if (!panel) return;
+
+      const focusable = panel.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
+      );
+
+      if (!focusable.length) return;
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      const active = document.activeElement as HTMLElement | null;
+
+      if (event.shiftKey && active === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && active === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+
+    document.addEventListener("keydown", onKeyDown);
+    return () => document.removeEventListener("keydown", onKeyDown);
+  }, [mobileMenuOpen]);
+
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      const firstMenuLink = menuPanelRef.current?.querySelector<HTMLAnchorElement>("a");
+      firstMenuLink?.focus();
+    } else if (wasMenuOpenRef.current) {
+      menuButtonRef.current?.focus();
+    }
+
+    wasMenuOpenRef.current = mobileMenuOpen;
+  }, [mobileMenuOpen]);
+
+  useEffect(() => {
+    const onResize = () => {
+      if (window.innerWidth >= 768) {
+        setMobileMenuOpen(false);
+      }
+    };
+
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
+
   const mobileMenuPortal =
     mounted &&
     createPortal(
@@ -101,6 +164,8 @@ export default function Header() {
           />
 
           <div
+            id="mobile-site-menu"
+            ref={menuPanelRef}
             className="mobile-menu-panel absolute left-1/2 z-10 w-[min(calc(100vw-2rem),16rem)] -translate-x-1/2 top-14 overflow-hidden py-2"
             onClick={(e) => e.stopPropagation()}
             data-oid="w:a_i95"
@@ -269,7 +334,10 @@ export default function Header() {
                       "aria-label": "Öppna meny",
                       "aria-expanded": "false" as const,
                     })}
-                className="md:hidden flex items-center justify-center min-w-[44px] min-h-[44px] -mr-2 text-stone-700 dark:text-[#f5f5f0] hover:text-[#c8a46e] active:opacity-80 cursor-pointer touch-manipulation"
+                aria-controls="mobile-site-menu"
+                aria-haspopup="menu"
+                ref={menuButtonRef}
+                className="focus-ring md:hidden flex items-center justify-center min-w-[44px] min-h-[44px] -mr-2 rounded-md text-stone-700 dark:text-[#f5f5f0] hover:text-[#c8a46e] active:opacity-80 cursor-pointer touch-manipulation"
                 onClick={(e) => {
                   e.preventDefault();
                   e.stopPropagation();

@@ -28,7 +28,7 @@ export default function ThemeToggle() {
       type="button"
       onClick={() => setTheme(isDark ? "light" : "dark")}
       aria-label={isDark ? "Byt till ljust tema" : "Byt till mörkt tema"}
-      className="flex items-center justify-center min-w-[44px] min-h-[44px] -mr-1 text-[#c8a46e] hover:text-[#d4b480] active:opacity-80 cursor-pointer touch-manipulation"
+      className="focus-ring flex items-center justify-center min-w-[44px] min-h-[44px] -mr-1 rounded-md text-[#c8a46e] hover:text-[#d4b480] active:opacity-80 cursor-pointer touch-manipulation"
       data-oid="rkqoyp9"
     >
       {isDark ? (

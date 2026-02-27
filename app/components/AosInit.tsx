@@ -9,13 +9,18 @@ import "aos/dist/aos.css";
  */
 export default function AosInit() {
   useEffect(() => {
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
     AOS.init({
       duration: 600,
       once: true,
       offset: 40,
       easing: "ease-out-cubic",
-      disable: window.innerWidth < 640,
+      disable: reducedMotion,
     });
+
+    AOS.refreshHard();
   }, []);
+
   return null;
 }
