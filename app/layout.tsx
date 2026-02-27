@@ -47,29 +47,6 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="sv" suppressHydrationWarning data-oid="e0tujkx">
-      <head data-oid="v5o36id">
-        <link rel="dns-prefetch" href="https://images.unsplash.com" />
-        <link rel="preconnect" href="https://images.unsplash.com" crossOrigin="anonymous" />
-        <link
-          rel="icon"
-          href="/favicon.svg"
-          type="image/svg+xml"
-          data-oid="71y-qwz"
-        />
-        <link
-          rel="icon"
-          href="/favicon.ico"
-          type="image/x-icon"
-          sizes="any"
-          data-oid="pdz:o4k"
-        />
-        <link
-          rel="shortcut icon"
-          href="/favicon.ico"
-          type="image/x-icon"
-          data-oid="v-w36tv"
-        />
-      </head>
       <body
         className="min-h-screen bg-white dark:bg-[#0a0a0a] antialiased"
         suppressHydrationWarning

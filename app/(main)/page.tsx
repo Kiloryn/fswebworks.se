@@ -15,28 +15,60 @@ const TEMPLATE_OPTIONS = [
 ];
 
 function HeroSection() {
-  const [heroMedia, setHeroMedia] = useState<{
+  const [heroState, setHeroState] = useState<{
     heroImage: string;
     heroVideo: string;
-  }>({ heroImage: "", heroVideo: "" });
+    badge: string;
+    heading: string;
+    subheading: string;
+    ctaPrimary: string;
+    ctaSecondary: string;
+    benefits: string[];
+    trustText: string;
+  }>({
+    heroImage: "",
+    heroVideo: "",
+    badge: "Professionell webbdesign",
+    heading: "Webbdesign för små företag",
+    subheading: "Vi skapar professionella hemsidor som hjälper ditt företag att synas och växa online",
+    ctaPrimary: "Så här går det till",
+    ctaSecondary: "Kontakta oss",
+    benefits: ["Mobilanpassat", "SEO-optimerat", "Snabb leverans"],
+    trustText: "Du bidrar med information om ditt företag – vi ser till att innehållet presenteras tydligt och snyggt på hemsidan.",
+  });
 
   useEffect(() => {
     fetch("/api/page-data")
-      .then((res) => res.ok ? res.json() : null)
+      .then((res) => (res.ok ? res.json() : null))
       .then((data) => {
         const hero = data?.page?.hero ?? data?.hero;
         if (hero) {
-          setHeroMedia({
+          setHeroState((prev) => ({
             heroImage: hero.heroImage ?? "",
             heroVideo: hero.heroVideo ?? "",
-          });
+            badge: hero.badge ?? prev.badge,
+            heading: hero.heading ?? prev.heading,
+            subheading: hero.subheading ?? prev.subheading,
+            ctaPrimary: hero.ctaPrimary ?? prev.ctaPrimary,
+            ctaSecondary: hero.ctaSecondary ?? prev.ctaSecondary,
+            benefits:
+              Array.isArray(hero.benefits) && hero.benefits.length > 0
+                ? hero.benefits.filter((item: unknown): item is string => typeof item === "string")
+                : prev.benefits,
+            trustText: hero.trustText ?? prev.trustText,
+          }));
         }
       })
       .catch(() => {});
   }, []);
 
-  const hasVideo = Boolean(heroMedia.heroVideo?.trim());
-  const hasImage = !hasVideo && Boolean(heroMedia.heroImage?.trim());
+  const heroVideoSrc = heroState.heroVideo?.trim() || "/hero.webm";
+  const videoIsMp4 = heroVideoSrc.toLowerCase().includes(".mp4");
+  const mp4FallbackSrc = videoIsMp4
+    ? heroVideoSrc
+    : heroVideoSrc.replace(/\.webm(\?.*)?$/i, ".mp4$1");
+  const hasVideo = Boolean(heroVideoSrc);
+  const hasImage = !hasVideo && Boolean(heroState.heroImage?.trim());
   const hasMedia = hasVideo || hasImage;
 
   return (
@@ -54,12 +86,14 @@ function HeroSection() {
             muted
             loop
             playsInline
-            poster="/hero-frame.jpg"
+            preload="metadata"
             className="absolute inset-0 w-full h-full object-cover hidden md:block"
             aria-hidden
           >
-            <source src="/hero.webm" type="video/webm" />
-            <source src="/hero.mp4" type="video/mp4" />
+            <source src={heroVideoSrc} type={videoIsMp4 ? "video/mp4" : "video/webm"} />
+            {!videoIsMp4 && mp4FallbackSrc !== heroVideoSrc && (
+              <source src={mp4FallbackSrc} type="video/mp4" />
+            )}
           </video>
           {/* Mobile-only: gradient background when video is hidden */}
           <div
@@ -80,7 +114,7 @@ function HeroSection() {
         <>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src={heroMedia.heroImage}
+            src={heroState.heroImage}
             alt=""
             className="absolute inset-0 w-full h-full object-cover"
             aria-hidden
@@ -146,7 +180,7 @@ function HeroSection() {
             className="w-2 h-2 bg-[#8b7355] dark:bg-[#c8a46e] rounded-full mr-2 animate-pulse"
             data-oid="rz91:-f"
           ></span>
-          Professionell webbdesign
+          {heroState.badge}
         </div>
 
         <h1
@@ -155,7 +189,7 @@ function HeroSection() {
           data-aos-delay="200"
           data-oid="lk-:3lq"
         >
-          Webbdesign för små företag
+          {heroState.heading}
         </h1>
 
         {/* Enhanced subtitle with better spacing */}
@@ -165,30 +199,29 @@ function HeroSection() {
           data-aos-delay="300"
           data-oid="c6tmx.s"
         >
-          Vi skapar professionella hemsidor som hjälper ditt företag att synas
-          och växa online
+          {heroState.subheading}
         </p>
 
         <div
-          className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8"
+          className="flex w-full flex-col sm:w-auto sm:flex-row items-center justify-center gap-4 mb-8"
           data-aos="fade-up"
           data-aos-delay="400"
           data-oid="kwo4cpp"
         >
           <Link
             href="/process"
-            className="px-10 py-5 text-lg bg-[#c8a46e] text-[#111111] font-semibold rounded-lg hover:bg-[#d4b480] transition-all duration-300 hover:scale-[1.02] hover:shadow-xl hover:shadow-[#c8a46e]/25 transform"
+            className="focus-ring w-full max-w-xs sm:w-auto px-10 py-5 text-lg bg-[#c8a46e] text-[#111111] font-semibold rounded-lg hover:bg-[#d4b480] transition-all duration-300 hover:scale-[1.02] hover:shadow-xl hover:shadow-[#c8a46e]/25 transform"
             data-oid="z9q-f_p"
           >
-            Så här går det till
+            Se hur det går till
           </Link>
 
           <Link
             href="#contact"
-            className="px-10 py-5 text-lg border-2 border-[#8b7355] text-[#8b7355] dark:border-[#c8a46e] dark:text-[#c8a46e] font-semibold rounded-lg hover:bg-[#8b7355] hover:text-white dark:hover:bg-[#c8a46e] dark:hover:text-[#111111] transition-all duration-300 hover:scale-[1.02] hover:shadow-lg"
+            className="focus-ring w-full max-w-xs sm:w-auto px-10 py-5 text-lg border-2 border-[#8b7355] text-[#8b7355] dark:border-[#c8a46e] dark:text-[#c8a46e] font-semibold rounded-lg hover:bg-[#8b7355] hover:text-white dark:hover:bg-[#c8a46e] dark:hover:text-[#111111] transition-all duration-300 hover:scale-[1.02] hover:shadow-lg"
             data-oid="3h3i2u_"
           >
-            Kontakta oss
+            {heroState.ctaSecondary}
           </Link>
         </div>
 
@@ -199,27 +232,12 @@ function HeroSection() {
           data-aos-delay="500"
           data-oid="e64q:nn"
         >
-          <div className="flex items-center gap-2" data-oid="cwfma49">
-            <div
-              className="w-2 h-2 bg-[#8b7355] dark:bg-[#c8a46e] rounded-full"
-              data-oid="pqtuny4"
-            ></div>
-            <span data-oid="qgm9ck3">Mobilanpassat</span>
-          </div>
-          <div className="flex items-center gap-2" data-oid="k9n51gx">
-            <div
-              className="w-2 h-2 bg-[#8b7355] dark:bg-[#c8a46e] rounded-full"
-              data-oid="2_rwx.q"
-            ></div>
-            <span data-oid="8wjhv8t">SEO-optimerat</span>
-          </div>
-          <div className="flex items-center gap-2" data-oid="0sy4fpz">
-            <div
-              className="w-2 h-2 bg-[#8b7355] dark:bg-[#c8a46e] rounded-full"
-              data-oid="8hiuq5e"
-            ></div>
-            <span data-oid="wpaoyxh">Snabb leverans</span>
-          </div>
+          {heroState.benefits.slice(0, 4).map((benefit) => (
+            <div key={benefit} className="flex items-center gap-2">
+              <div className="w-2 h-2 bg-[#8b7355] dark:bg-[#c8a46e] rounded-full" />
+              <span>{benefit}</span>
+            </div>
+          ))}
         </div>
 
         <p
@@ -228,8 +246,7 @@ function HeroSection() {
           data-aos-delay="600"
           data-oid="oaoys0u"
         >
-          Du bidrar med information om ditt företag – vi ser till att innehållet
-          presenteras tydligt och snyggt på hemsidan.
+          {heroState.trustText}
         </p>
       </div>
     </section>
@@ -483,7 +500,7 @@ function PricingSection() {
             className="inline-block px-8 py-4 bg-[#c8a46e] text-[#111111] font-semibold rounded-lg hover:bg-[#d4b480] transition-all duration-300 hover:scale-[1.02] hover:shadow-lg hover:shadow-[#c8a46e]/25"
             data-oid="_ucn3bd"
           >
-            Så här går det till
+            Se hur det går till
           </Link>
         </div>
       </div>
@@ -627,6 +644,7 @@ function ContactSection() {
     "idle" | "loading" | "success" | "error"
   >("idle");
   const [errorMessage, setErrorMessage] = useState("");
+  const [fieldErrors, setFieldErrors] = useState<{ name?: string; email?: string; message?: string }>({});
   const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -648,26 +666,31 @@ function ContactSection() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrorMessage("");
+    setFieldErrors({});
     const trimmedName = name.trim();
     const trimmedEmail = email.trim();
     const trimmedMessage = message.trim();
     if (!trimmedName) {
       setErrorMessage("Namn krävs");
+      setFieldErrors({ name: "Namn krävs" });
       setStatus("error");
       return;
     }
     if (!trimmedEmail) {
       setErrorMessage("E-post krävs");
+      setFieldErrors({ email: "E-post krävs" });
       setStatus("error");
       return;
     }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmedEmail)) {
       setErrorMessage("Ogiltig e-postadress");
+      setFieldErrors({ email: "Ogiltig e-postadress" });
       setStatus("error");
       return;
     }
     if (!trimmedMessage) {
       setErrorMessage("Meddelande krävs");
+      setFieldErrors({ message: "Meddelande krävs" });
       setStatus("error");
       return;
     }
@@ -701,6 +724,7 @@ function ContactSection() {
       setEmail("");
       setMessage("");
       setTemplateId("");
+      setFieldErrors({});
     } catch {
       setErrorMessage("Kunde inte skicka. Försök igen.");
       setStatus("error");
@@ -736,6 +760,14 @@ function ContactSection() {
           Osäker på vad du behöver? Hör av dig så pratar vi igenom det – helt
           utan förpliktelser.
         </p>
+
+        <div className="sr-only" aria-live="polite" role="status">
+          {status === "success"
+            ? "Din förfrågan skickades. Vi återkommer inom 24 timmar."
+            : status === "error"
+              ? errorMessage
+              : ""}
+        </div>
 
         {status === "success" ? (
           <div
@@ -780,13 +812,24 @@ function ContactSection() {
                 name="name"
                 type="text"
                 autoComplete="name"
+                required
+                aria-invalid={Boolean(fieldErrors.name)}
+                aria-describedby={fieldErrors.name ? "contact-name-error" : undefined}
                 placeholder="Ditt namn"
                 value={name}
-                onChange={(e) => setName(e.target.value)}
+                onChange={(e) => {
+                  setName(e.target.value);
+                  setFieldErrors((prev) => ({ ...prev, name: undefined }));
+                }}
                 disabled={status === "loading"}
-                className="w-full px-4 py-3 bg-white dark:bg-[#1a1a1a] border border-stone-200 dark:border-[#2a2a2a] rounded-lg text-stone-900 dark:text-[#f5f5f0] placeholder-stone-400 dark:placeholder-[#6b6962] focus:border-[#c8a46e] focus:outline-none disabled:opacity-60"
+                className="w-full px-4 py-3 bg-white dark:bg-[#1a1a1a] border border-stone-200 dark:border-[#2a2a2a] rounded-lg text-stone-900 dark:text-[#f5f5f0] placeholder-stone-400 dark:placeholder-[#6b6962] focus:border-[#c8a46e] focus:outline-none focus-ring disabled:opacity-60"
                 data-oid="euar4ue"
               />
+              {fieldErrors.name && (
+                <p id="contact-name-error" className="mt-1 text-sm text-red-400" role="alert">
+                  {fieldErrors.name}
+                </p>
+              )}
             </div>
             <div data-oid="3x5cuo_">
               <label
@@ -801,13 +844,24 @@ function ContactSection() {
                 name="email"
                 type="email"
                 autoComplete="email"
+                required
+                aria-invalid={Boolean(fieldErrors.email)}
+                aria-describedby={fieldErrors.email ? "contact-email-error" : undefined}
                 placeholder="din@epost.se"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                  setFieldErrors((prev) => ({ ...prev, email: undefined }));
+                }}
                 disabled={status === "loading"}
-                className="w-full px-4 py-3 bg-white dark:bg-[#1a1a1a] border border-stone-200 dark:border-[#2a2a2a] rounded-lg text-stone-900 dark:text-[#f5f5f0] placeholder-stone-400 dark:placeholder-[#6b6962] focus:border-[#c8a46e] focus:outline-none disabled:opacity-60"
+                className="w-full px-4 py-3 bg-white dark:bg-[#1a1a1a] border border-stone-200 dark:border-[#2a2a2a] rounded-lg text-stone-900 dark:text-[#f5f5f0] placeholder-stone-400 dark:placeholder-[#6b6962] focus:border-[#c8a46e] focus:outline-none focus-ring disabled:opacity-60"
                 data-oid="h-qte9:"
               />
+              {fieldErrors.email && (
+                <p id="contact-email-error" className="mt-1 text-sm text-red-400" role="alert">
+                  {fieldErrors.email}
+                </p>
+              )}
             </div>
             <div data-oid="rx0.r:c">
               <label
@@ -823,7 +877,7 @@ function ContactSection() {
                 value={templateId}
                 onChange={(e) => setTemplateId(e.target.value)}
                 disabled={status === "loading"}
-                className="w-full px-4 py-3 bg-white dark:bg-[#1a1a1a] border border-stone-200 dark:border-[#2a2a2a] rounded-lg text-stone-900 dark:text-[#f5f5f0] focus:border-[#c8a46e] focus:outline-none disabled:opacity-60"
+                className="w-full px-4 py-3 bg-white dark:bg-[#1a1a1a] border border-stone-200 dark:border-[#2a2a2a] rounded-lg text-stone-900 dark:text-[#f5f5f0] focus:border-[#c8a46e] focus:outline-none focus-ring disabled:opacity-60"
                 data-oid="-mf8:ce"
               >
                 <option value="" data-oid="ted3ziq">
@@ -852,18 +906,29 @@ function ContactSection() {
                 name="message"
                 placeholder="Skriv ditt meddelande..."
                 rows={4}
+                required
+                aria-invalid={Boolean(fieldErrors.message)}
+                aria-describedby={fieldErrors.message ? "contact-message-error" : undefined}
                 autoComplete="off"
                 value={message}
-                onChange={(e) => setMessage(e.target.value)}
+                onChange={(e) => {
+                  setMessage(e.target.value);
+                  setFieldErrors((prev) => ({ ...prev, message: undefined }));
+                }}
                 disabled={status === "loading"}
-                className="w-full px-4 py-3 bg-white dark:bg-[#1a1a1a] border border-stone-200 dark:border-[#2a2a2a] rounded-lg text-stone-900 dark:text-[#f5f5f0] placeholder-stone-400 dark:placeholder-[#6b6962] focus:border-[#c8a46e] focus:outline-none resize-none disabled:opacity-60"
+                className="w-full px-4 py-3 bg-white dark:bg-[#1a1a1a] border border-stone-200 dark:border-[#2a2a2a] rounded-lg text-stone-900 dark:text-[#f5f5f0] placeholder-stone-400 dark:placeholder-[#6b6962] focus:border-[#c8a46e] focus:outline-none focus-ring disabled:opacity-60"
                 data-oid=".scee5:"
               />
+              {fieldErrors.message && (
+                <p id="contact-message-error" className="mt-1 text-sm text-red-400" role="alert">
+                  {fieldErrors.message}
+                </p>
+              )}
             </div>
             <button
               type="submit"
               disabled={status === "loading"}
-              className="w-full py-4 bg-[#c8a46e] text-[#111111] font-semibold rounded-lg hover:bg-[#d4b480] transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+              className="focus-ring w-full py-4 bg-[#c8a46e] text-[#111111] font-semibold rounded-lg hover:bg-[#d4b480] transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
               data-oid="_ze946l"
             >
               {status === "loading" ? "Skickar..." : "Skicka förfrågan"}
