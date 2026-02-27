@@ -22,6 +22,20 @@ body {
   font-family: Inter, system-ui, sans-serif;
 }
 
+/* AOS safety fallback: never keep content hidden before/without init */
+html:not(.aos-init) [data-aos],
+html.aos-disabled [data-aos] {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+@media (max-width: 639px) {
+  [data-aos] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
@@ -171,6 +185,9 @@ body {
 
 /* Mobile menu dropdown – compact, modern */
 @layer components {
+  .focus-ring {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c8a46e] focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-[#0a0a0a];
+  }
   .mobile-menu-backdrop {
     @apply bg-black/35 backdrop-blur-sm;
   }
@@ -182,7 +199,7 @@ body {
       0 20px 40px -12px rgba(0, 0, 0, 0.5);
   }
   .mobile-menu-link {
-    @apply block w-full py-3 px-4 text-center text-[15px] font-medium text-stone-800 no-underline rounded-lg touch-manipulation dark:text-[#e5e5e0];
+    @apply block w-full py-3 px-4 text-center text-[15px] font-medium text-stone-800 no-underline rounded-lg touch-manipulation dark:text-[#e5e5e0] focus-ring;
   }
   .mobile-menu-link:hover,
   .mobile-menu-link:focus-visible {
@@ -192,7 +209,7 @@ body {
     @apply bg-[#c8a46e]/15;
   }
   .nav-link-header {
-    @apply text-stone-800 hover:text-[#c8a46e] no-underline transition-colors duration-200 dark:text-[#f5f5f0] dark:hover:text-[#d4b480];
+    @apply text-stone-800 hover:text-[#c8a46e] no-underline transition-colors duration-200 dark:text-[#f5f5f0] dark:hover:text-[#d4b480] rounded-md focus-ring;
   }
 }
 .shape-divider-container {
@@ -295,3 +312,18 @@ body {
 .shape-fill-faq,
 .shape-fill-contact,
 .shape-fill-gold { fill: #c8a46e; }
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee {
+    animation: none !important;
+  }
+
+  .logo-bracket-left,
+  .logo-bracket-right,
+  .logo-text {
+    animation: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+    clip-path: inset(0 0 0 0) !important;
+  }
+}
