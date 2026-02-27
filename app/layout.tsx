@@ -9,8 +9,12 @@ const description =
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://fswebworks.se";
 
 export const metadata: Metadata = {
+  metadataBase: new URL(baseUrl),
   title,
   description,
+  alternates: {
+    canonical: "/",
+  },
   icons: {
     icon: [
       { url: "/favicon.svg", type: "image/svg+xml", sizes: "any" },
@@ -33,7 +37,9 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title,
     description,
+    images: [`${baseUrl}/og.png`],
   },
+  category: "business",
 };
 
 export default function RootLayout({
