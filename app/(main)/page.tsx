@@ -3,16 +3,9 @@
 import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { useSearchParams } from "next/navigation";
 
-const TEMPLATE_OPTIONS = [
-  { id: "vvs", name: "VVS & Rörmokare" },
-  { id: "elektriker", name: "Elektriker" },
-  { id: "salong", name: "Salong/Skönhet" },
-  { id: "restaurang", name: "Restaurang" },
-  { id: "malare", name: "Målare" },
-  { id: "konsult", name: "Konsult/Företagstjänster" },
-];
+/** Matchar `content/pageData.json` så video syns direkt – inte först efter API-anrop. */
+const DEFAULT_HERO_VIDEO = "/hero.webm";
 
 function HeroSection() {
   const [heroState, setHeroState] = useState<{
@@ -27,14 +20,16 @@ function HeroSection() {
     trustText: string;
   }>({
     heroImage: "",
-    heroVideo: "",
-    badge: "Professionell webbdesign",
-    heading: "Webbdesign för små företag",
-    subheading: "Vi skapar professionella hemsidor som hjälper ditt företag att synas och växa online",
+    heroVideo: DEFAULT_HERO_VIDEO,
+    badge: "Webbdesign för småföretag i hela Sverige",
+    heading: "Enkla hemsidor för småföretag",
+    subheading:
+      "Vi hjälper hantverkare och småföretag att få en professionell hemsida som syns, fungerar och är lätt att äga själv.",
     ctaPrimary: "Så här går det till",
     ctaSecondary: "Kontakta oss",
-    benefits: ["Mobilanpassat", "SEO-optimerat", "Snabb leverans"],
-    trustText: "Du bidrar med information om ditt företag – vi ser till att innehållet presenteras tydligt och snyggt på hemsidan.",
+    benefits: ["Mobilanpassat", "Lätt att hitta", "Snabb leverans"],
+    trustText:
+      "Du bidrar med information om ditt företag – vi ser till att innehållet presenteras tydligt och snyggt på hemsidan.",
   });
 
   useEffect(() => {
@@ -44,30 +39,50 @@ function HeroSection() {
         const hero = data?.page?.hero ?? data?.hero;
         if (hero) {
           setHeroState((prev) => ({
-            heroImage: hero.heroImage ?? "",
-            heroVideo: hero.heroVideo ?? "",
-            badge: hero.badge ?? prev.badge,
-            heading: hero.heading ?? prev.heading,
-            subheading: hero.subheading ?? prev.subheading,
-            ctaPrimary: hero.ctaPrimary ?? prev.ctaPrimary,
-            ctaSecondary: hero.ctaSecondary ?? prev.ctaSecondary,
+            heroImage:
+              typeof hero.heroImage === "string" ? hero.heroImage.trim() : "",
+            heroVideo:
+              hero.heroVideo != null && typeof hero.heroVideo === "string"
+                ? hero.heroVideo.trim()
+                : prev.heroVideo,
+            badge: typeof hero.badge === "string" ? hero.badge : prev.badge,
+            heading:
+              typeof hero.heading === "string" ? hero.heading : prev.heading,
+            subheading:
+              typeof hero.subheading === "string"
+                ? hero.subheading
+                : prev.subheading,
+            ctaPrimary:
+              typeof hero.ctaPrimary === "string"
+                ? hero.ctaPrimary
+                : prev.ctaPrimary,
+            ctaSecondary:
+              typeof hero.ctaSecondary === "string"
+                ? hero.ctaSecondary
+                : prev.ctaSecondary,
             benefits:
               Array.isArray(hero.benefits) && hero.benefits.length > 0
-                ? hero.benefits.filter((item: unknown): item is string => typeof item === "string")
+                ? hero.benefits.filter(
+                    (item: unknown): item is string => typeof item === "string",
+                  )
                 : prev.benefits,
-            trustText: hero.trustText ?? prev.trustText,
+            trustText:
+              typeof hero.trustText === "string"
+                ? hero.trustText
+                : prev.trustText,
           }));
         }
       })
       .catch(() => {});
   }, []);
 
-  const heroVideoSrc = heroState.heroVideo?.trim() || "/hero.webm";
+  const trimmedVideo = (heroState.heroVideo || "").trim();
+  const hasVideo = Boolean(trimmedVideo);
+  const heroVideoSrc = trimmedVideo || DEFAULT_HERO_VIDEO;
   const videoIsMp4 = heroVideoSrc.toLowerCase().includes(".mp4");
   const mp4FallbackSrc = videoIsMp4
     ? heroVideoSrc
     : heroVideoSrc.replace(/\.webm(\?.*)?$/i, ".mp4$1");
-  const hasVideo = Boolean(heroVideoSrc);
   const hasImage = !hasVideo && Boolean(heroState.heroImage?.trim());
   const hasMedia = hasVideo || hasImage;
 
@@ -80,32 +95,31 @@ function HeroSection() {
       {/* Background: video, image, or gradient */}
       {hasVideo && (
         <>
-          {/* Video hidden on mobile to save data and avoid autoplay issues; gradient shown instead */}
+          {/* muted + playsInline krävs för autoplay på mobil */}
           <video
+            key={heroVideoSrc}
             autoPlay
             muted
             loop
             playsInline
             preload="metadata"
-            className="absolute inset-0 w-full h-full object-cover hidden md:block"
+            className="absolute inset-0 z-0 w-full h-full object-cover"
             aria-hidden
           >
-            <source src={heroVideoSrc} type={videoIsMp4 ? "video/mp4" : "video/webm"} />
+            <source
+              src={heroVideoSrc}
+              type={videoIsMp4 ? "video/mp4" : "video/webm"}
+            />
             {!videoIsMp4 && mp4FallbackSrc !== heroVideoSrc && (
               <source src={mp4FallbackSrc} type="video/mp4" />
             )}
           </video>
-          {/* Mobile-only: gradient background when video is hidden */}
           <div
-            className="absolute inset-0 md:hidden bg-gradient-to-br from-stone-50 via-white to-stone-50 dark:from-[#0a0a0a] dark:via-[#111111] dark:to-[#0a0a0a]"
+            className="absolute inset-0 z-[1] bg-black/30 pointer-events-none"
             aria-hidden
           />
           <div
-            className="absolute inset-0 bg-black/30 pointer-events-none hidden md:block"
-            aria-hidden
-          />
-          <div
-            className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-black/50 pointer-events-none hidden md:block"
+            className="absolute inset-0 z-[1] bg-gradient-to-b from-black/50 via-black/40 to-black/50 pointer-events-none"
             aria-hidden
           />
         </>
@@ -171,7 +185,7 @@ function HeroSection() {
       >
         {/* Subtle badge/tag above headline */}
         <div
-          className="inline-flex items-center px-4 py-2 mb-6 bg-[#c8a46e]/15 border border-[#c8a46e]/30 rounded-full text-sm text-[#8b7355] dark:text-[#c8a46e] font-medium hero-badge"
+          className="inline-flex items-center max-w-[min(100%,36rem)] px-3 py-2 sm:px-4 sm:py-2 mb-6 bg-[#c8a46e]/15 border border-[#c8a46e]/30 rounded-full text-xs sm:text-sm text-[#8b7355] dark:text-[#c8a46e] font-medium hero-badge text-center"
           data-aos="fade-up"
           data-aos-delay="100"
           data-oid="6imuasy"
@@ -184,7 +198,7 @@ function HeroSection() {
         </div>
 
         <h1
-          className="text-4xl md:text-6xl font-bold mb-6 max-w-4xl mx-auto leading-tight text-[#c8a46e] hero-headline"
+          className="text-4xl md:text-6xl font-bold mb-6 max-w-4xl mx-auto leading-tight text-[#c8a46e] hero-headline text-balance"
           data-aos="fade-up"
           data-aos-delay="200"
           data-oid="lk-:3lq"
@@ -192,7 +206,7 @@ function HeroSection() {
           {heroState.heading}
         </h1>
 
-        {/* Enhanced subtitle with better spacing */}
+        {/* Underrad tydligt mindre än huvudrubriken */}
         <p
           className="text-lg md:text-xl text-stone-700 dark:text-[#d4d0c8] mb-10 max-w-2xl mx-auto leading-relaxed hero-subheading"
           data-aos="fade-up"
@@ -209,15 +223,15 @@ function HeroSection() {
           data-oid="kwo4cpp"
         >
           <Link
-            href="/process"
+            href="/#sa-har-gar-det-till"
             className="focus-ring w-full max-w-xs sm:w-auto px-10 py-5 text-lg bg-[#c8a46e] text-[#111111] font-semibold rounded-lg hover:bg-[#d4b480] transition-all duration-300 hover:scale-[1.02] hover:shadow-xl hover:shadow-[#c8a46e]/25 transform"
             data-oid="z9q-f_p"
           >
-            Se hur det går till
+            {heroState.ctaPrimary}
           </Link>
 
           <Link
-            href="#contact"
+            href="/#contact"
             className="focus-ring w-full max-w-xs sm:w-auto px-10 py-5 text-lg border-2 border-[#8b7355] text-[#8b7355] dark:border-[#c8a46e] dark:text-[#c8a46e] font-semibold rounded-lg hover:bg-[#8b7355] hover:text-white dark:hover:bg-[#c8a46e] dark:hover:text-[#111111] transition-all duration-300 hover:scale-[1.02] hover:shadow-lg"
             data-oid="3h3i2u_"
           >
@@ -270,7 +284,7 @@ function ValueSection() {
           <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
         </svg>
       ),
-      title: "SEO-optimerad",
+      title: "Lätt att hitta",
       desc: "Grundläggande sökmotoroptimering så att kunder hittar dig.",
     },
     {
@@ -363,37 +377,129 @@ function ValueSection() {
   );
 }
 
-function PricingSection() {
-  const tiers = [
-    {
-      name: "Bas",
-      price: "690",
-      period: "kr/mån",
-      description: "Hosting, SSL, Backup, säkerhetsuppdateringar",
-      popular: false,
-    },
-    {
-      name: "Standard",
-      price: "990",
-      period: "kr/mån",
-      description:
-        "Bas + mindre uppdateringar, SEO-grund, prestandaövervakning",
-      popular: true,
-    },
-    {
-      name: "Premium",
-      price: "1 490",
-      period: "kr/mån",
-      description:
-        "Standard + prioriterad support, innehållsuppdateringar, månatliga rapporter",
-      popular: false,
-    },
-  ];
-  
+const PROCESS_STEPS = [
+  {
+    title: "1. Första kontakt",
+    body:
+      "Du hör av dig via formulär eller e-post. Vi bokar ett kort samtal där vi går igenom dina önskemål och behov.",
+  },
+  {
+    title: "2. Offert",
+    body:
+      "Efter samtalet skickar vi en tydlig offert. När du godkänner offerten startar vi arbetet.",
+  },
+  {
+    title: "3. Innehåll till hemsidan",
+    body:
+      "Du skickar texter, bilder och information om ditt företag. Du behöver inte ha allt klart från början – vi hjälper dig att strukturera innehållet.",
+  },
+  {
+    title: "4. Vi bygger hemsidan",
+    body:
+      "Vi designar och bygger din hemsida och ser till att den fungerar lika bra på mobil som på dator.",
+  },
+  {
+    title: "5. Lansering",
+    body:
+      "När allt är klart publiceras hemsidan och vi går igenom den tillsammans.",
+  },
+];
+
+function ProcessSection() {
   return (
     <section
-      id="pricing"
-      className="relative py-24 pb-32 bg-stone-100 dark:bg-[#111111] overflow-hidden border-t border-stone-200/80 dark:border-[#2a2a2a]"
+      id="sa-har-gar-det-till"
+      className="relative py-24 pb-32 bg-white dark:bg-[#0a0a0a] overflow-hidden border-t border-stone-200/80 dark:border-[#2a2a2a]"
+    >
+      <div className="absolute inset-0 pointer-events-none section-bg-gradient-value opacity-40" aria-hidden />
+      <div className="relative max-w-3xl mx-auto px-6">
+        <h2
+          className="text-3xl md:text-4xl font-bold text-stone-900 dark:text-[#f5f5f0] mb-4 text-center"
+          data-aos="fade-up"
+        >
+          Så här går det till
+        </h2>
+        <p
+          className="text-stone-600 dark:text-[#d4d0c8] text-lg leading-relaxed text-center mb-12 max-w-2xl mx-auto"
+          data-aos="fade-up"
+          data-aos-delay="80"
+        >
+          Att komma igång med en ny hemsida behöver inte vara krångligt. Vi
+          håller processen enkel och tydlig.
+        </p>
+        <ol className="space-y-5">
+          {PROCESS_STEPS.map((step, i) => (
+            <li
+              key={step.title}
+              className="relative bg-stone-50 dark:bg-[#1a1a1a] border border-stone-200 dark:border-[#2a2a2a] rounded-xl p-6 transition-all duration-300 hover:border-[#c8a46e]/30"
+              data-aos="fade-up"
+              data-aos-delay={100 + i * 50}
+            >
+              <h3 className="text-lg font-semibold text-stone-900 dark:text-[#f5f5f0] mb-2">
+                {step.title}
+              </h3>
+              <p className="text-stone-600 dark:text-[#d4d0c8] leading-relaxed">
+                {step.body}
+              </p>
+            </li>
+          ))}
+        </ol>
+      </div>
+      <div className="shape-divider-section-bottom-2 mt-8" aria-hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none" className="block w-full">
+          <path d="M0,60 C300,0 900,120 1200,60 L1200,120 L0,120 Z" className="shape-fill-examples" />
+        </svg>
+      </div>
+    </section>
+  );
+}
+
+const SERVICE_CARDS = [
+  {
+    title: "Skapa hemsida",
+    priceLine: "från 9 900 kr",
+    priceNote: "exkl. moms",
+    description:
+      "Vi skapar en enkel och professionell hemsida som presenterar ditt företag och gör det lätt för kunder att ta kontakt. Hemsidan anpassas efter din verksamhet och fungerar lika bra på mobil som på dator.",
+    fitsTitle: "Det här passar för dig som:",
+    fits: [
+      "Saknar en hemsida idag",
+      "Har en gammal hemsida som behöver uppdateras",
+      "Vill ha en enkel och professionell närvaro online",
+    ],
+  },
+  {
+    title: "Serviceavtal (valfritt)",
+    priceLine: "690 kr / månad",
+    priceNote: "exkl. moms",
+    description:
+      "För dig som vill ha löpande hjälp med din hemsida. Vi hjälper till med mindre uppdateringar och ser till att sidan fortsätter fungera bra över tid.",
+    fitsTitle: "Det här passar för dig som:",
+    fits: [
+      "Vill slippa tänka på tekniska uppdateringar",
+      "Ibland behöver ändra texter eller bilder",
+      "Vill ha en kontakt att höra av dig till när något behöver ändras",
+    ],
+  },
+  {
+    title: "Hjälp vid behov",
+    priceLine: "950 kr / timme",
+    priceNote: "exkl. moms",
+    description:
+      "Behöver du bara hjälp ibland? Vi hjälper till med ändringar, uppdateringar eller förbättringar när behov uppstår.",
+    fitsTitle: "Det här passar för dig som:",
+    fits: [
+      "Bara behöver hjälp någon gång ibland",
+      "Vill betala per tillfälle istället för ett avtal",
+    ],
+  },
+];
+
+function ServicesSection() {
+  return (
+    <section
+      id="tjanster"
+      className="relative py-24 pb-16 bg-stone-100 dark:bg-[#111111] overflow-hidden border-t border-stone-200/80 dark:border-[#2a2a2a]"
       data-oid="5n7-w4w"
     >
       <div
@@ -410,98 +516,131 @@ function PricingSection() {
             className="text-3xl md:text-4xl font-bold text-stone-900 dark:text-[#f5f5f0] mb-4"
             data-oid="wu795ht"
           >
-            Priser
+            Tjänster
           </h2>
           <p
-            className="text-stone-600 dark:text-[#d4d0c8] mb-2"
+            className="text-stone-600 dark:text-[#d4d0c8] max-w-2xl mx-auto"
             data-oid="yazyh:7"
           >
-            Engångspris:{" "}
-            <span
-              className="text-stone-900 dark:text-[#f5f5f0] font-semibold"
-              data-oid="q0yc:v-"
-            >
-              Från 9 900 kr
-            </span>{" "}
-            <span
-              className="text-stone-500 dark:text-[#a8a49c] text-sm align-baseline"
-              data-oid="8jlfemq"
-            >
-              exkl. moms
-            </span>
-          </p>
-          <p
-            className="text-stone-500 dark:text-[#a8a49c] text-sm mt-4"
-            data-oid="jrz_ack"
-          >
-            Hosting & Drift – exkl.{" "}
-            <span
-              className="text-stone-500 dark:text-[#a8a49c] text-xs"
-              data-oid="pruu_::"
-            >
-              moms
-            </span>
+            Vi börjar alltid med ett samtal – helt kostnadsfritt.
           </p>
         </div>
-        <div className="grid md:grid-cols-3 gap-6 mb-12" data-oid="ss8j85n">
-          {tiers.map((tier, i) => (
+        <div className="grid md:grid-cols-3 gap-6 mb-10" data-oid="ss8j85n">
+          {SERVICE_CARDS.map((card, i) => (
             <div
-              key={tier.name}
-              className={`relative bg-white dark:bg-[#1a1a1a] rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl ${
-                tier.popular
-                  ? "border-2 border-[#c8a46e] shadow-lg shadow-[#c8a46e]/10 dark:shadow-[#c8a46e]/20 scale-[1.02]"
-                  : "border border-stone-200 dark:border-[#2a2a2a] hover:border-[#c8a46e]/40 hover:shadow-[#c8a46e]/10"
-              }`}
+              key={card.title}
+              className="relative bg-white dark:bg-[#1a1a1a] rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl border border-stone-200 dark:border-[#2a2a2a] hover:border-[#c8a46e]/40 hover:shadow-[#c8a46e]/10"
               data-aos="fade-up"
               data-aos-delay={i * 80}
               data-oid="4e9_wgp"
             >
-              {tier.popular && (
-                <span className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-[#c8a46e] text-[#111111] text-xs font-bold rounded-full uppercase tracking-wider">
-                  Populärast
-                </span>
-              )}
               <h3
                 className="text-xl font-semibold text-stone-900 dark:text-[#f5f5f0] mb-2"
                 data-oid="3gmsip-"
               >
-                {tier.name}
+                {card.title}
               </h3>
               <p
-                className="text-2xl font-bold text-stone-900 dark:text-[#f5f5f0]"
+                className="text-2xl font-bold text-stone-900 dark:text-[#f5f5f0] mb-1"
                 data-oid="08-woyd"
               >
-                {tier.price}{" "}
-                <span className="text-base font-medium text-stone-500 dark:text-[#a8a49c]">
-                  {tier.period}
-                </span>
+                {card.priceLine}
+              </p>
+              <p className="text-xs text-stone-500 dark:text-[#a8a49c] mb-4">
+                {card.priceNote}
               </p>
               <p
-                className="text-xs text-stone-500 dark:text-[#a8a49c] mb-4"
-                data-oid="q1ndi.s"
-              >
-                exkl.{" "}
-                <span className="text-[10px]" data-oid=".138qgu">
-                  moms
-                </span>
-              </p>
-              <p
-                className="text-stone-600 dark:text-[#d4d0c8] text-sm leading-relaxed"
+                className="text-stone-600 dark:text-[#d4d0c8] text-sm leading-relaxed mb-5"
                 data-oid="9bravw9"
               >
-                {tier.description}
+                {card.description}
               </p>
+              <p className="text-sm font-semibold text-stone-900 dark:text-[#f5f5f0] mb-2">
+                {card.fitsTitle}
+              </p>
+              <ul className="space-y-2 text-sm text-stone-600 dark:text-[#d4d0c8]">
+                {card.fits.map((line) => (
+                  <li key={line} className="flex items-start gap-2">
+                    <span className="shrink-0 w-1.5 h-1.5 mt-2 rounded-full bg-[#c8a46e]/60" />
+                    {line}
+                  </li>
+                ))}
+              </ul>
             </div>
           ))}
         </div>
-        <div className="text-center" data-aos="fade-up" data-oid="p3orjq0">
-          <Link
-            href="/process"
-            className="inline-block px-8 py-4 bg-[#c8a46e] text-[#111111] font-semibold rounded-lg hover:bg-[#d4b480] transition-all duration-300 hover:scale-[1.02] hover:shadow-lg hover:shadow-[#c8a46e]/25"
-            data-oid="_ucn3bd"
+        <p
+          className="text-center text-stone-600 dark:text-[#d4d0c8] text-sm md:text-base max-w-2xl mx-auto leading-relaxed"
+          data-aos="fade-up"
+        >
+          Du äger alltid din hemsida och väljer själv om du vill ha fortsatt
+          hjälp.
+        </p>
+      </div>
+    </section>
+  );
+}
+
+const INCLUDES_ITEMS = [
+  "Uppstartssamtal",
+  "Design anpassad efter ditt företag",
+  "1–5 sidor (Start, Om oss, Tjänster, Kontakt etc.)",
+  "Mobilanpassad design",
+  "Kontaktformulär",
+  "Grundläggande SEO",
+  "Genomgång när hemsidan är klar",
+];
+
+function InclusionsCtaSection() {
+  return (
+    <section className="relative py-16 pb-24 bg-stone-100 dark:bg-[#111111] overflow-hidden border-t border-stone-200/60 dark:border-[#2a2a2a]/80">
+      <div className="relative max-w-6xl mx-auto px-6">
+        <div className="grid md:grid-cols-2 gap-8">
+          <div
+            className="bg-white dark:bg-[#1a1a1a] border border-stone-200 dark:border-[#2a2a2a] rounded-2xl p-8 transition-all duration-300 hover:border-[#c8a46e]/30"
+            data-aos="fade-up"
           >
-            Se hur det går till
-          </Link>
+            <h2 className="text-2xl font-bold text-stone-900 dark:text-[#f5f5f0] mb-6">
+              Detta ingår
+            </h2>
+            <ul className="space-y-3 text-stone-600 dark:text-[#d4d0c8] mb-8">
+              {INCLUDES_ITEMS.map((item) => (
+                <li key={item} className="flex items-start gap-3">
+                  <span className="shrink-0 w-1.5 h-1.5 mt-2 rounded-full bg-[#c8a46e]" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+            <div>
+              <h3 className="text-sm font-semibold text-[#c8a46e] uppercase tracking-wide mb-2">
+                Bra att veta
+              </h3>
+              <p className="text-stone-600 dark:text-[#d4d0c8] text-sm leading-relaxed">
+                Du äger alltid din hemsida. Du står själv för webbhotell och
+                domän. Vi kan hjälpa till att sätta upp detta vid behov.
+              </p>
+            </div>
+          </div>
+          <div
+            className="bg-white dark:bg-[#1a1a1a] border border-stone-200 dark:border-[#2a2a2a] rounded-2xl p-8 flex flex-col transition-all duration-300 hover:border-[#c8a46e]/30"
+            data-aos="fade-up"
+            data-aos-delay="80"
+          >
+            <h2 className="text-2xl font-bold text-stone-900 dark:text-[#f5f5f0] mb-4">
+              Så förbereder du innehållet
+            </h2>
+            <p className="text-stone-600 dark:text-[#d4d0c8] leading-relaxed mb-8 flex-1">
+              Här hittar du konkreta tips på vad du kan förbereda inför projektet
+              – från företagsbeskrivning och tjänster till bilder och
+              kontaktuppgifter.
+            </p>
+            <Link
+              href="/process"
+              className="inline-flex items-center justify-center px-8 py-4 bg-[#c8a46e] text-[#111111] font-semibold rounded-lg hover:bg-[#d4b480] transition-all duration-300 hover:scale-[1.02] hover:shadow-lg hover:shadow-[#c8a46e]/25 w-full sm:w-auto"
+            >
+              Öppna guiden
+            </Link>
+          </div>
         </div>
       </div>
       <div className="shape-divider-section-bottom-2" aria-hidden>
@@ -532,75 +671,31 @@ const FAQ_ITEMS: { q: string; a: string }[] = [
   },
 ];
 
-function FAQItem({ item, index }: { item: { q: string; a: string }; index: number }) {
-  const [open, setOpen] = useState(false);
-  const itemRef = useRef<HTMLLIElement>(null);
-  const bodyRef = useRef<HTMLDivElement>(null);
-  const [height, setHeight] = useState(0);
-
-  useEffect(() => {
-    if (!open) {
-      setHeight(0);
-      return;
-    }
-    if (!bodyRef.current) return;
-    // Measure after layout so scrollHeight is correct (fixes answer not showing until scroll)
-    const id = requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        if (bodyRef.current) setHeight(bodyRef.current.scrollHeight);
-      });
-    });
-    const timer = setTimeout(() => {
-      itemRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest" });
-    }, 220);
-    return () => {
-      cancelAnimationFrame(id);
-      clearTimeout(timer);
-    };
-  }, [open]);
-
-  useEffect(() => {
-    if (bodyRef.current) bodyRef.current.style.height = `${height}px`;
-  }, [height]);
-
+function FAQItem({ item }: { item: { q: string; a: string } }) {
   return (
-    <li
-      ref={itemRef}
-      className={`bg-stone-50 dark:bg-[#1a1a1a] border rounded-xl transition-colors duration-200 ${
-        open
-          ? "border-[#c8a46e]/40"
-          : "border-stone-200 dark:border-[#2a2a2a] hover:border-[#c8a46e]/20"
-      }`}
-    >
-      <button
-        type="button"
-        onClick={() => setOpen(!open)}
-        className="w-full flex items-center justify-between gap-4 p-6 text-left cursor-pointer"
-        {...(open ? { "aria-expanded": "true" } : { "aria-expanded": "false" })}
-      >
-        <span className="text-lg font-semibold text-stone-900 dark:text-[#f5f5f0]">
-          {item.q}
-        </span>
-        <svg
-          className={`shrink-0 w-5 h-5 text-[#c8a46e] transition-transform duration-200 ${
-            open ? "rotate-45" : "rotate-0"
-          }`}
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          strokeWidth={2}
-        >
-          <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
-        </svg>
-      </button>
-      <div
-        ref={bodyRef}
-        className="faq-body overflow-hidden transition-[height] duration-200 ease-out"
-      >
-        <p className="px-6 pb-6 text-stone-600 dark:text-[#d4d0c8] leading-relaxed">
-          {item.a}
-        </p>
-      </div>
+    <li className="list-none">
+      <details className="faq-details bg-stone-50 dark:bg-[#1a1a1a] border border-stone-200 dark:border-[#2a2a2a] rounded-xl transition-colors duration-200 hover:border-[#c8a46e]/20 open:border-[#c8a46e]/40">
+        <summary className="flex w-full cursor-pointer items-center justify-between gap-4 p-6 text-left [&::-webkit-details-marker]:hidden">
+          <span className="text-lg font-semibold text-stone-900 dark:text-[#f5f5f0] pr-2">
+            {item.q}
+          </span>
+          <svg
+            className="faq-chevron shrink-0 w-5 h-5 text-[#c8a46e]"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={2}
+            aria-hidden
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
+          </svg>
+        </summary>
+        <div className="border-t border-stone-200/60 px-6 pb-6 pt-2 dark:border-[#2a2a2a]/80">
+          <p className="text-stone-600 dark:text-[#d4d0c8] leading-relaxed">
+            {item.a}
+          </p>
+        </div>
+      </details>
     </li>
   );
 }
@@ -619,9 +714,9 @@ function FAQSection() {
         >
           FAQ
         </h2>
-        <ul className="space-y-3" data-oid="twx44y5">
+        <ul className="list-none space-y-3 p-0 m-0" data-oid="twx44y5">
           {FAQ_ITEMS.map((item, i) => (
-            <FAQItem key={i} item={item} index={i} />
+            <FAQItem key={i} item={item} />
           ))}
         </ul>
       </div>
@@ -634,25 +729,25 @@ function FAQSection() {
   );
 }
 
+const SUBJECT_OPTIONS = [
+  { value: "", label: "— Välj —" },
+  { value: "kontakta-mig", label: "Kontakta mig" },
+  { value: "service", label: "Serviceärende" },
+  { value: "ovrigt", label: "Övrigt" },
+] as const;
+
 function ContactSection() {
-  const searchParams = useSearchParams();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
   const [message, setMessage] = useState("");
-  const [templateId, setTemplateId] = useState("");
+  const [subject, setSubject] = useState("");
   const [status, setStatus] = useState<
     "idle" | "loading" | "success" | "error"
   >("idle");
   const [errorMessage, setErrorMessage] = useState("");
   const [fieldErrors, setFieldErrors] = useState<{ name?: string; email?: string; message?: string }>({});
   const sectionRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const mall = searchParams.get("mall");
-    if (mall && TEMPLATE_OPTIONS.some((t) => t.id === mall)) {
-      setTemplateId(mall);
-    }
-  }, [searchParams]);
 
   useEffect(() => {
     if ((status === "success" || status === "error") && sectionRef.current) {
@@ -694,10 +789,6 @@ function ContactSection() {
       setStatus("error");
       return;
     }
-    const templateName =
-      templateId && templateId !== "other"
-        ? (TEMPLATE_OPTIONS.find((t) => t.id === templateId)?.name ?? "")
-        : "";
     setStatus("loading");
     try {
       const res = await fetch("/api/contact", {
@@ -706,8 +797,9 @@ function ContactSection() {
         body: JSON.stringify({
           name: trimmedName,
           email: trimmedEmail,
+          phone: phone.trim() || undefined,
           message: trimmedMessage,
-          template: templateName,
+          subject: subject || undefined,
         }),
       });
       const data = await res.json().catch(() => ({}));
@@ -722,8 +814,9 @@ function ContactSection() {
       setStatus("success");
       setName("");
       setEmail("");
+      setPhone("");
       setMessage("");
-      setTemplateId("");
+      setSubject("");
       setFieldErrors({});
     } catch {
       setErrorMessage("Kunde inte skicka. Försök igen.");
@@ -863,34 +956,47 @@ function ContactSection() {
                 </p>
               )}
             </div>
+            <div data-oid="contact-phone-wrap">
+              <label
+                htmlFor="contact-phone"
+                className="block text-stone-700 dark:text-[#e5e5e0] text-sm font-medium mb-1.5"
+              >
+                Telefon (valfritt)
+              </label>
+              <input
+                id="contact-phone"
+                name="phone"
+                type="tel"
+                autoComplete="tel"
+                placeholder="070-123 45 67"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                disabled={status === "loading"}
+                className="w-full px-4 py-3 bg-white dark:bg-[#1a1a1a] border border-stone-200 dark:border-[#2a2a2a] rounded-lg text-stone-900 dark:text-[#f5f5f0] placeholder-stone-400 dark:placeholder-[#6b6962] focus:border-[#c8a46e] focus:outline-none disabled:opacity-60"
+              />
+            </div>
             <div data-oid="rx0.r:c">
               <label
-                htmlFor="contact-template"
+                htmlFor="contact-subject"
                 className="block text-stone-700 dark:text-[#e5e5e0] text-sm font-medium mb-1.5"
                 data-oid="0dif6od"
               >
-                Vilken typ av sida? (valfritt)
+                Ämne (valfritt)
               </label>
               <select
-                id="contact-template"
-                name="template"
-                value={templateId}
-                onChange={(e) => setTemplateId(e.target.value)}
+                id="contact-subject"
+                name="subject"
+                value={subject}
+                onChange={(e) => setSubject(e.target.value)}
                 disabled={status === "loading"}
                 className="w-full px-4 py-3 bg-white dark:bg-[#1a1a1a] border border-stone-200 dark:border-[#2a2a2a] rounded-lg text-stone-900 dark:text-[#f5f5f0] focus:border-[#c8a46e] focus:outline-none focus-ring disabled:opacity-60"
                 data-oid="-mf8:ce"
               >
-                <option value="" data-oid="ted3ziq">
-                  — Välj —
-                </option>
-                {TEMPLATE_OPTIONS.map((t) => (
-                  <option key={t.id} value={t.id} data-oid="1j7ykfx">
-                    {t.name}
+                {SUBJECT_OPTIONS.map((o) => (
+                  <option key={o.value || "empty"} value={o.value}>
+                    {o.label}
                   </option>
                 ))}
-                <option value="other" data-oid="w94fzcm">
-                  Övrigt
-                </option>
               </select>
             </div>
             <div data-oid="h4ccbrm">
@@ -1055,7 +1161,9 @@ export default function HomePage() {
     <div className="min-h-screen bg-white dark:bg-[#0a0a0a]" data-oid="p7sj5c7">
       <HeroSection data-oid=".eqyeio" />
       <ValueSection data-oid="pa5uyr7" />
-      <PricingSection data-oid="pzh.q39" />
+      <ProcessSection data-oid="process-home" />
+      <ServicesSection data-oid="pzh.q39" />
+      <InclusionsCtaSection data-oid="inclusions-cta" />
       <ExamplesTeaserSection data-oid="5yu.41u" />
       <FAQSection data-oid="bkk:pdd" />
       <ContactSection data-oid="do64k7q" />

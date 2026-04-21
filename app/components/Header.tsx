@@ -7,8 +7,8 @@ import ThemeToggle from "./ThemeToggle";
 
 const MENU_LINKS = [
   { href: "/", label: "Hem" },
-  { href: "/process", label: "Så här går det till" },
-  { href: "/#pricing", label: "Priser" },
+  { href: "/#sa-har-gar-det-till", label: "Så här går det till" },
+  { href: "/#tjanster", label: "Tjänster" },
   { href: "/examples", label: "Exempel" },
   { href: "/#contact", label: "Kontakt" },
 ] as const;
@@ -149,16 +149,17 @@ export default function Header() {
     createPortal(
       mobileMenuOpen ? (
         <div
-          className="md:hidden fixed inset-0 z-[9999]"
+          className="md:hidden fixed inset-0 z-[200]"
           role="dialog"
           aria-modal="true"
           aria-label="Meny"
+          data-mobile-menu
           data-oid="ms_myox"
         >
           <button
             type="button"
             aria-label="Stäng meny"
-            className="mobile-menu-backdrop absolute inset-0 z-0"
+            className="mobile-menu-backdrop absolute inset-0 z-0 cursor-default"
             onClick={closeMobileMenu}
             data-oid="524dqnw"
           />
@@ -166,7 +167,7 @@ export default function Header() {
           <div
             id="mobile-site-menu"
             ref={menuPanelRef}
-            className="mobile-menu-panel absolute left-1/2 z-10 w-[min(calc(100vw-2rem),16rem)] -translate-x-1/2 top-14 overflow-hidden py-2"
+            className="mobile-menu-panel pointer-events-auto absolute left-1/2 z-10 w-[min(calc(100vw-2rem),18rem)] max-w-[calc(100vw-2rem)] -translate-x-1/2 top-14 overflow-hidden py-2"
             onClick={(e) => e.stopPropagation()}
             data-oid="w:a_i95"
           >
@@ -192,7 +193,7 @@ export default function Header() {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 backdrop-blur-md border-b ${
+        className={`fixed top-0 left-0 right-0 z-[100] backdrop-blur-md border-b ${
           scrolled
             ? "bg-white/75 dark:bg-[#0a0a0a]/75 border-gray-200/70 dark:border-[#2a2a2a]/70 shadow-lg shadow-black/10 dark:shadow-black/20"
             : "bg-white/90 dark:bg-[#0a0a0a]/90 border-gray-200/80 dark:border-[#2a2a2a]/80"

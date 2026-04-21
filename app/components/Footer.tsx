@@ -89,9 +89,9 @@ export default function Footer() {
               className="text-stone-700 dark:text-[#d4d0c8] text-sm leading-relaxed"
               data-oid="k.bs9w:"
             >
-              Vi skapar enkla och professionella hemsidor för småföretag i
-              Stockholm. Vårt mål är att hjälpa hantverkare och företag att
-              synas online.
+              Vi skapar enkla och professionella hemsidor för småföretag i hela
+              Sverige – med bas i Stockholm. Vi hjälper företag att synas online
+              och göra det lätt för kunder att ta kontakt.
             </p>
           </div>
 
@@ -106,16 +106,16 @@ export default function Footer() {
             <ul className="space-y-3" data-oid="_8qhg2:">
               <li data-oid="yicb6g:">
                 <Link
-                  href="/#pricing"
+                  href="/#tjanster"
                   className="text-stone-700 dark:text-[#d4d0c8] hover:text-[#c8a46e] hover:underline transition-colors duration-200 text-sm inline-block"
                   data-oid="h2iw:f9"
                 >
-                  Priser
+                  Tjänster
                 </Link>
               </li>
               <li data-oid="mu0j5pm">
                 <Link
-                  href="/process"
+                  href="/#sa-har-gar-det-till"
                   className="text-stone-700 dark:text-[#d4d0c8] hover:text-[#c8a46e] hover:underline transition-colors duration-200 text-sm inline-block"
                   data-oid="4ii8j_2"
                 >

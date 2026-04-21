@@ -178,9 +178,18 @@ html.aos-disabled [data-aos] {
   );
 }
 
-/* FAQ accordion body – height set in JS (dynamic expand/collapse) */
-.faq-body {
-  box-sizing: border-box;
+/* FAQ: native <details> (chevron rotates when open) */
+.faq-details summary {
+  list-style: none;
+}
+.faq-details summary::-webkit-details-marker {
+  display: none;
+}
+.faq-details > summary .faq-chevron {
+  transition: transform 0.2s ease;
+}
+.faq-details[open] > summary .faq-chevron {
+  transform: rotate(45deg);
 }
 
 /* Mobile menu dropdown – compact, modern */
@@ -284,6 +293,7 @@ html.aos-disabled [data-aos] {
   overflow: hidden;
   line-height: 0;
   z-index: 5;
+  pointer-events: none;
 }
 .shape-divider-section-top svg {
   position: relative;
@@ -299,6 +309,7 @@ html.aos-disabled [data-aos] {
   overflow: hidden;
   line-height: 0;
   z-index: 5;
+  pointer-events: none;
 }
 .shape-divider-section-bottom-2 svg {
   position: relative;

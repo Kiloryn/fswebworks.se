@@ -43,7 +43,11 @@ export default function SmoothScroll() {
   // Intercept in-page anchor clicks so scroll is always smooth
   useEffect(() => {
     const handleClick = (e: MouseEvent) => {
-      const target = (e.target as Element).closest("a");
+      const el = e.target as Element | null;
+      if (!el) return;
+      // Låt mobilmenyn (portal) hantera länkar utan att vi griper in i capture – annars kan klick kännas “döda” på touch.
+      if (el.closest("[data-mobile-menu]")) return;
+      const target = el.closest("a");
       if (!target || !target.getAttribute("href")) return;
       const href = target.getAttribute("href") ?? "";
       const hashIndex = href.indexOf("#");
