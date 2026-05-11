@@ -7,6 +7,14 @@ import Image from "next/image";
 /** Matchar `content/pageData.json` så video syns direkt – inte först efter API-anrop. */
 const DEFAULT_HERO_VIDEO = "/hero.webm";
 
+/** En rad under CTAs – samma typografi som disclaimer (trustText) under. */
+const HERO_VALUE_PARTS = [
+  "Inget krångel",
+  "Tydliga priser",
+  "Ingen bindningstid",
+  "Du äger hemsidan själv",
+] as const;
+
 function HeroSection() {
   const [heroState, setHeroState] = useState<{
     heroImage: string;
@@ -16,7 +24,6 @@ function HeroSection() {
     subheading: string;
     ctaPrimary: string;
     ctaSecondary: string;
-    benefits: string[];
     trustText: string;
   }>({
     heroImage: "",
@@ -27,7 +34,6 @@ function HeroSection() {
       "Vi hjälper hantverkare och småföretag att få en professionell hemsida som syns, fungerar och är lätt att äga själv.",
     ctaPrimary: "Så här går det till",
     ctaSecondary: "Kontakta oss",
-    benefits: ["Mobilanpassat", "Lätt att hitta", "Snabb leverans"],
     trustText:
       "Du bidrar med information om ditt företag – vi ser till att innehållet presenteras tydligt och snyggt på hemsidan.",
   });
@@ -60,12 +66,6 @@ function HeroSection() {
               typeof hero.ctaSecondary === "string"
                 ? hero.ctaSecondary
                 : prev.ctaSecondary,
-            benefits:
-              Array.isArray(hero.benefits) && hero.benefits.length > 0
-                ? hero.benefits.filter(
-                    (item: unknown): item is string => typeof item === "string",
-                  )
-                : prev.benefits,
             trustText:
               typeof hero.trustText === "string"
                 ? hero.trustText
@@ -239,18 +239,23 @@ function HeroSection() {
           </Link>
         </div>
 
-        {/* Key benefits with icons */}
+        {/* Värdestatement – samma textstorlek/vikt som disclaimer under */}
         <div
-          className="flex flex-wrap justify-center gap-6 text-sm text-stone-700 dark:text-[#d4d0c8] hero-benefits"
+          className="flex flex-wrap justify-center items-center gap-x-3 gap-y-2 max-w-3xl mx-auto text-base md:text-lg text-stone-600 dark:text-[#b8b4a8] leading-relaxed hero-benefits"
           data-aos="fade-up"
           data-aos-delay="500"
           data-oid="e64q:nn"
         >
-          {heroState.benefits.slice(0, 4).map((benefit) => (
-            <div key={benefit} className="flex items-center gap-2">
-              <div className="w-2 h-2 bg-[#8b7355] dark:bg-[#c8a46e] rounded-full" />
-              <span>{benefit}</span>
-            </div>
+          {HERO_VALUE_PARTS.map((part, i) => (
+            <React.Fragment key={part}>
+              {i > 0 ? (
+                <span
+                  className="hero-benefit-sep h-1.5 w-1.5 shrink-0 rounded-full bg-[#c8a46e]"
+                  aria-hidden
+                />
+              ) : null}
+              <span>{part}</span>
+            </React.Fragment>
           ))}
         </div>
 
@@ -431,7 +436,7 @@ function ProcessSection() {
           {PROCESS_STEPS.map((step, i) => (
             <li
               key={step.title}
-              className="relative bg-stone-50 dark:bg-[#1a1a1a] border border-stone-200 dark:border-[#2a2a2a] rounded-xl p-6 transition-all duration-300 hover:border-[#c8a46e]/30"
+              className="relative bg-stone-50 dark:bg-[#272727] border border-stone-200 dark:border-[#3a3a3a] rounded-xl p-6 transition-all duration-300 hover:border-[#c8a46e]/30"
               data-aos="fade-up"
               data-aos-delay={100 + i * 50}
             >
@@ -569,13 +574,15 @@ function ServicesSection() {
             </div>
           ))}
         </div>
-        <p
-          className="text-center text-stone-600 dark:text-[#d4d0c8] text-sm md:text-base max-w-2xl mx-auto leading-relaxed"
+        <div
+          className="max-w-2xl mx-auto rounded-2xl border border-[#c8a46e]/45 bg-stone-100/80 px-6 py-6 md:px-8 md:py-8 dark:bg-[#1a1a1a]/90 dark:border-[#c8a46e]/40"
           data-aos="fade-up"
         >
-          Du äger alltid din hemsida och väljer själv om du vill ha fortsatt
-          hjälp.
-        </p>
+          <p className="text-center text-lg md:text-xl lg:text-2xl font-medium text-stone-800 dark:text-[#f5f5f0] leading-snug tracking-tight">
+            Du äger alltid din hemsida och väljer själv om du vill ha fortsatt
+            hjälp.
+          </p>
+        </div>
       </div>
     </section>
   );
