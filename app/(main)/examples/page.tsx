@@ -1,6 +1,14 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { EXAMPLE_CATEGORIES } from "@/lib/example-categories";
+
+export const metadata: Metadata = {
+  title: "Exempel på hemsidor – FSwebworks",
+  description:
+    "Demosidor för hantverkare och småföretag. Se mallar för VVS, elektriker, salong, restaurang med mera – anpassas efter ditt varumärke.",
+  alternates: { canonical: "/examples" },
+};
 
 export default function ExamplesPage() {
   return (
@@ -32,7 +40,7 @@ export default function ExamplesPage() {
             <Link
               key={cat.slug}
               href={`/${cat.slug}`}
-              className="group block bg-white dark:bg-[#1a1a1a] border border-gray-200 dark:border-[#2a2a2a] rounded-2xl overflow-hidden hover:border-[#c8a46e]/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-[#c8a46e]/10"
+              className="group block bg-white dark:bg-[#272727] border border-gray-200 dark:border-[#3a3a3a] rounded-2xl overflow-hidden hover:border-[#c8a46e]/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-[#c8a46e]/10"
               data-aos="fade-up"
               data-aos-anchor="#examples-grid"
               data-aos-delay="0"

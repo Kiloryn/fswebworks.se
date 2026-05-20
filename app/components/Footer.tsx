@@ -140,6 +140,14 @@ export default function Footer() {
                   Kontakta oss
                 </Link>
               </li>
+              <li>
+                <Link
+                  href="/integritet"
+                  className="text-stone-700 dark:text-[#d4d0c8] hover:text-[#c8a46e] hover:underline transition-colors duration-200 text-sm inline-block"
+                >
+                  Integritetspolicy
+                </Link>
+              </li>
             </ul>
           </div>
 

@@ -6,13 +6,13 @@ const publicRoutes = [
   '/',
   '/process',
   '/examples',
+  '/integritet',
   '/vvs',
   '/elektriker',
   '/salong',
   '/restaurang',
   '/malare',
   '/konsult',
-  '/clients/kund1',
 ] as const;
 
 export default function sitemap(): MetadataRoute.Sitemap {

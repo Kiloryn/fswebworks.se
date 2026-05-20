@@ -3,9 +3,9 @@ import "./globals.css";
 import { ThemeProvider } from "./providers";
 
 const siteName = "FSwebworks";
-const title = "FSwebworks - Webbdesign för småföretag i Stockholm";
+const title = "FSwebworks – Webbdesign för småföretag i Sverige";
 const description =
-  "Enkla och professionella hemsidor för hantverkare och småföretag. Fast pris från 9 900 kr.";
+  "Enkla och professionella hemsidor för hantverkare och småföretag i hela Sverige. Med bas i Stockholm. Från 9 900 kr, ingen bindning.";
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://fswebworks.se";
 
 export const metadata: Metadata = {
@@ -30,14 +30,14 @@ export const metadata: Metadata = {
     title,
     description,
     images: [
-      { url: `${baseUrl}/og.png`, width: 1200, height: 630, alt: siteName },
+      { url: "/og.png", width: 1200, height: 630, alt: siteName },
     ],
   },
   twitter: {
     card: "summary_large_image",
     title,
     description,
-    images: [`${baseUrl}/og.png`],
+    images: ["/og.png"],
   },
   category: "business",
 };

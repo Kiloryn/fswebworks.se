@@ -3,11 +3,12 @@
 import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import ExamplesShowcase from "@/app/components/ExamplesShowcase";
 
 /** Matchar `content/pageData.json` så video syns direkt – inte först efter API-anrop. */
 const DEFAULT_HERO_VIDEO = "/hero.webm";
 
-/** En rad under CTAs – samma typografi som disclaimer (trustText) under. */
+/** En rad under CTAs med guldpunkter som avgränsare. */
 const HERO_VALUE_PARTS = [
   "Inget krångel",
   "Tydliga priser",
@@ -24,7 +25,6 @@ function HeroSection() {
     subheading: string;
     ctaPrimary: string;
     ctaSecondary: string;
-    trustText: string;
   }>({
     heroImage: "",
     heroVideo: DEFAULT_HERO_VIDEO,
@@ -34,8 +34,6 @@ function HeroSection() {
       "Vi hjälper hantverkare och småföretag att få en professionell hemsida som syns, fungerar och är lätt att äga själv.",
     ctaPrimary: "Så här går det till",
     ctaSecondary: "Kontakta oss",
-    trustText:
-      "Du bidrar med information om ditt företag – vi ser till att innehållet presenteras tydligt och snyggt på hemsidan.",
   });
 
   useEffect(() => {
@@ -66,10 +64,6 @@ function HeroSection() {
               typeof hero.ctaSecondary === "string"
                 ? hero.ctaSecondary
                 : prev.ctaSecondary,
-            trustText:
-              typeof hero.trustText === "string"
-                ? hero.trustText
-                : prev.trustText,
           }));
         }
       })
@@ -239,7 +233,6 @@ function HeroSection() {
           </Link>
         </div>
 
-        {/* Värdestatement – samma textstorlek/vikt som disclaimer under */}
         <div
           className="flex flex-wrap justify-center items-center gap-x-3 gap-y-2 max-w-3xl mx-auto text-base md:text-lg text-stone-600 dark:text-[#b8b4a8] leading-relaxed hero-benefits"
           data-aos="fade-up"
@@ -258,15 +251,6 @@ function HeroSection() {
             </React.Fragment>
           ))}
         </div>
-
-        <p
-          className="text-stone-600 dark:text-[#b8b4a8] mt-8 max-w-xl mx-auto text-base md:text-lg leading-relaxed hero-disclaimer"
-          data-aos="fade-up"
-          data-aos-delay="600"
-          data-oid="oaoys0u"
-        >
-          {heroState.trustText}
-        </p>
       </div>
     </section>
   );
@@ -277,29 +261,29 @@ function ValueSection() {
     {
       icon: (
         <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-          <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3" />
+          <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
         </svg>
       ),
-      title: "Mobilanpassad",
-      desc: "Ser bra ut på alla skärmar – mobil, surfplatta och dator.",
+      title: "Tydlig presentation",
+      desc: "Företag, tjänster och kontakt samlat – besökaren förstår direkt vad ni gör.",
     },
     {
       icon: (
         <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-          <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+          <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
         </svg>
       ),
-      title: "Lätt att hitta",
-      desc: "Grundläggande sökmotoroptimering så att kunder hittar dig.",
+      title: "Lätt att ta kontakt",
+      desc: "Kontaktformulär och tydliga uppgifter så kunder slipper leta.",
     },
     {
       icon: (
         <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-          <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+          <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941" />
         </svg>
       ),
-      title: "Snabb leverans",
-      desc: "Din hemsida klar inom 1–2 veckor efter godkänt material.",
+      title: "Redo att växa",
+      desc: "Grund för SEO och framtida utbyggnad – utan att börja med ett stort projekt.",
     },
   ];
 
@@ -328,7 +312,7 @@ function ValueSection() {
           data-aos="fade-up"
           data-oid="_d9nv07"
         >
-          En hemsida som gör jobbet
+          Det här får du med en enkel hemsida
         </h2>
         <p
           className="text-stone-600 dark:text-[#d4d0c8] text-lg leading-relaxed max-w-2xl mx-auto mb-16"
@@ -336,17 +320,15 @@ function ValueSection() {
           data-aos-delay="100"
           data-oid="u6s9t5w"
         >
-          Alla företag behöver inte en stor eller avancerad webbplats. Ofta
-          räcker det med en tydlig, snygg och mobilanpassad hemsida som visar
-          vad du gör, var du finns och hur kunder kontaktar dig. Det är precis
-          vad vi hjälper till med.
+          Ingen onödig funktionalitet – bara det som småföretag faktiskt behöver
+          för att synas och ta emot förfrågningar.
         </p>
 
         <div className="grid md:grid-cols-3 gap-8">
           {features.map((f, i) => (
             <div
               key={f.title}
-              className="group relative bg-white dark:bg-[#1a1a1a] border border-stone-200 dark:border-[#2a2a2a] rounded-2xl p-6 text-center transition-all duration-300 hover:border-[#c8a46e]/40 hover:-translate-y-1 hover:shadow-lg hover:shadow-[#c8a46e]/5"
+              className="group relative bg-white dark:bg-[#272727] border border-stone-200 dark:border-[#3a3a3a] rounded-2xl p-6 text-center transition-all duration-300 hover:border-[#c8a46e]/40 hover:-translate-y-1 hover:shadow-lg hover:shadow-[#c8a46e]/5"
               data-aos="fade-up"
               data-aos-delay={i * 100}
             >
@@ -432,20 +414,30 @@ function ProcessSection() {
           Att komma igång med en ny hemsida behöver inte vara krångligt. Vi
           håller processen enkel och tydlig.
         </p>
-        <ol className="space-y-5">
+        <ol className="space-y-5 list-none p-0 m-0">
           {PROCESS_STEPS.map((step, i) => (
             <li
               key={step.title}
-              className="relative bg-stone-50 dark:bg-[#272727] border border-stone-200 dark:border-[#3a3a3a] rounded-xl p-6 transition-all duration-300 hover:border-[#c8a46e]/30"
+              className="group relative bg-stone-50 dark:bg-[#272727] border border-stone-200 dark:border-[#3a3a3a] rounded-xl p-6 transition-all duration-300 hover:border-[#c8a46e]/40 hover:-translate-y-1 hover:shadow-lg hover:shadow-[#c8a46e]/10"
               data-aos="fade-up"
               data-aos-delay={100 + i * 50}
             >
-              <h3 className="text-lg font-semibold text-stone-900 dark:text-[#f5f5f0] mb-2">
-                {step.title}
-              </h3>
-              <p className="text-stone-600 dark:text-[#d4d0c8] leading-relaxed">
-                {step.body}
-              </p>
+              <div className="flex items-start gap-4">
+                <span
+                  className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#c8a46e]/15 text-sm font-bold text-[#8b7355] dark:text-[#c8a46e] ring-1 ring-[#c8a46e]/25 transition-colors duration-300 group-hover:bg-[#c8a46e]/25 group-hover:ring-[#c8a46e]/50"
+                  aria-hidden
+                >
+                  {i + 1}
+                </span>
+                <div className="min-w-0 text-left">
+                  <h3 className="text-lg font-semibold text-stone-900 dark:text-[#f5f5f0] mb-2 transition-colors duration-300 group-hover:text-[#8b7355] dark:group-hover:text-[#d4b480]">
+                    {step.title.replace(/^\d+\.\s*/, "")}
+                  </h3>
+                  <p className="text-stone-600 dark:text-[#d4d0c8] leading-relaxed">
+                    {step.body}
+                  </p>
+                </div>
+              </div>
             </li>
           ))}
         </ol>
@@ -472,6 +464,8 @@ const SERVICE_CARDS = [
       "Har en gammal hemsida som behöver uppdateras",
       "Vill ha en enkel och professionell närvaro online",
     ],
+    ctaLabel: "Begär offert",
+    ctaVariant: "primary" as const,
   },
   {
     title: "Serviceavtal (valfritt)",
@@ -485,6 +479,8 @@ const SERVICE_CARDS = [
       "Ibland behöver ändra texter eller bilder",
       "Vill ha en kontakt att höra av dig till när något behöver ändras",
     ],
+    ctaLabel: "Fråga om serviceavtal",
+    ctaVariant: "outline" as const,
   },
   {
     title: "Hjälp vid behov",
@@ -497,6 +493,8 @@ const SERVICE_CARDS = [
       "Bara behöver hjälp någon gång ibland",
       "Vill betala per tillfälle istället för ett avtal",
     ],
+    ctaLabel: "Hör av dig",
+    ctaVariant: "outline" as const,
   },
 ];
 
@@ -534,7 +532,7 @@ function ServicesSection() {
           {SERVICE_CARDS.map((card, i) => (
             <div
               key={card.title}
-              className="relative bg-white dark:bg-[#1a1a1a] rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl border border-stone-200 dark:border-[#2a2a2a] hover:border-[#c8a46e]/40 hover:shadow-[#c8a46e]/10"
+              className="relative flex flex-col bg-white dark:bg-[#272727] rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl border border-stone-200 dark:border-[#3a3a3a] hover:border-[#c8a46e]/40 hover:shadow-[#c8a46e]/10"
               data-aos="fade-up"
               data-aos-delay={i * 80}
               data-oid="4e9_wgp"
@@ -563,7 +561,7 @@ function ServicesSection() {
               <p className="text-sm font-semibold text-stone-900 dark:text-[#f5f5f0] mb-2">
                 {card.fitsTitle}
               </p>
-              <ul className="space-y-2 text-sm text-stone-600 dark:text-[#d4d0c8]">
+              <ul className="space-y-2 text-sm text-stone-600 dark:text-[#d4d0c8] mb-6">
                 {card.fits.map((line) => (
                   <li key={line} className="flex items-start gap-2">
                     <span className="shrink-0 w-1.5 h-1.5 mt-2 rounded-full bg-[#c8a46e]/60" />
@@ -571,11 +569,21 @@ function ServicesSection() {
                   </li>
                 ))}
               </ul>
+              <Link
+                href="/#contact"
+                className={
+                  card.ctaVariant === "primary"
+                    ? "focus-ring mt-auto inline-flex w-full items-center justify-center px-6 py-3.5 bg-[#c8a46e] text-[#111111] font-semibold rounded-lg hover:bg-[#d4b480] transition-all duration-300 hover:shadow-lg hover:shadow-[#c8a46e]/25"
+                    : "focus-ring mt-auto inline-flex w-full items-center justify-center px-6 py-3.5 border-2 border-[#8b7355] text-[#8b7355] dark:border-[#c8a46e] dark:text-[#c8a46e] font-semibold rounded-lg hover:bg-[#8b7355] hover:text-white dark:hover:bg-[#c8a46e] dark:hover:text-[#111111] transition-all duration-300"
+                }
+              >
+                {card.ctaLabel}
+              </Link>
             </div>
           ))}
         </div>
         <div
-          className="max-w-2xl mx-auto rounded-2xl border border-[#c8a46e]/45 bg-stone-100/80 px-6 py-6 md:px-8 md:py-8 dark:bg-[#1a1a1a]/90 dark:border-[#c8a46e]/40"
+          className="max-w-2xl mx-auto rounded-2xl border border-[#c8a46e]/45 bg-stone-100/80 px-6 py-6 md:px-8 md:py-8 dark:bg-[#272727] dark:border-[#c8a46e]/40"
           data-aos="fade-up"
         >
           <p className="text-center text-lg md:text-xl lg:text-2xl font-medium text-stone-800 dark:text-[#f5f5f0] leading-snug tracking-tight">
@@ -604,13 +612,13 @@ function InclusionsCtaSection() {
       <div className="relative max-w-6xl mx-auto px-6">
         <div className="grid md:grid-cols-2 gap-8">
           <div
-            className="bg-white dark:bg-[#1a1a1a] border border-stone-200 dark:border-[#2a2a2a] rounded-2xl p-8 transition-all duration-300 hover:border-[#c8a46e]/30"
+            className="bg-white dark:bg-[#272727] border border-stone-200 dark:border-[#3a3a3a] rounded-2xl p-8 transition-all duration-300 hover:border-[#c8a46e]/30"
             data-aos="fade-up"
           >
             <h2 className="text-2xl font-bold text-stone-900 dark:text-[#f5f5f0] mb-6">
               Detta ingår
             </h2>
-            <ul className="space-y-3 text-stone-600 dark:text-[#d4d0c8] mb-8">
+            <ul className="space-y-3 text-stone-600 dark:text-[#d4d0c8]">
               {INCLUDES_ITEMS.map((item) => (
                 <li key={item} className="flex items-start gap-3">
                   <span className="shrink-0 w-1.5 h-1.5 mt-2 rounded-full bg-[#c8a46e]" />
@@ -618,18 +626,9 @@ function InclusionsCtaSection() {
                 </li>
               ))}
             </ul>
-            <div>
-              <h3 className="text-sm font-semibold text-[#c8a46e] uppercase tracking-wide mb-2">
-                Bra att veta
-              </h3>
-              <p className="text-stone-600 dark:text-[#d4d0c8] text-sm leading-relaxed">
-                Du äger alltid din hemsida. Du står själv för webbhotell och
-                domän. Vi kan hjälpa till att sätta upp detta vid behov.
-              </p>
-            </div>
           </div>
           <div
-            className="bg-white dark:bg-[#1a1a1a] border border-stone-200 dark:border-[#2a2a2a] rounded-2xl p-8 flex flex-col transition-all duration-300 hover:border-[#c8a46e]/30"
+            className="bg-white dark:bg-[#272727] border border-stone-200 dark:border-[#3a3a3a] rounded-2xl p-8 flex flex-col transition-all duration-300 hover:border-[#c8a46e]/30"
             data-aos="fade-up"
             data-aos-delay="80"
           >
@@ -681,7 +680,7 @@ const FAQ_ITEMS: { q: string; a: string }[] = [
 function FAQItem({ item }: { item: { q: string; a: string } }) {
   return (
     <li className="list-none">
-      <details className="faq-details bg-stone-50 dark:bg-[#1a1a1a] border border-stone-200 dark:border-[#2a2a2a] rounded-xl transition-colors duration-200 hover:border-[#c8a46e]/20 open:border-[#c8a46e]/40">
+      <details className="faq-details bg-stone-50 dark:bg-[#272727] border border-stone-200 dark:border-[#3a3a3a] rounded-xl transition-colors duration-200 hover:border-[#c8a46e]/20 open:border-[#c8a46e]/40">
         <summary className="flex w-full cursor-pointer items-center justify-between gap-4 p-6 text-left [&::-webkit-details-marker]:hidden">
           <span className="text-lg font-semibold text-stone-900 dark:text-[#f5f5f0] pr-2">
             {item.q}
@@ -738,6 +737,7 @@ function FAQSection() {
 
 const SUBJECT_OPTIONS = [
   { value: "", label: "— Välj —" },
+  { value: "offert", label: "Offert / ny hemsida" },
   { value: "kontakta-mig", label: "Kontakta mig" },
   { value: "service", label: "Serviceärende" },
   { value: "ovrigt", label: "Övrigt" },
@@ -749,6 +749,7 @@ function ContactSection() {
   const [phone, setPhone] = useState("");
   const [message, setMessage] = useState("");
   const [subject, setSubject] = useState("");
+  const [honeypot, setHoneypot] = useState("");
   const [status, setStatus] = useState<
     "idle" | "loading" | "success" | "error"
   >("idle");
@@ -807,6 +808,7 @@ function ContactSection() {
           phone: phone.trim() || undefined,
           message: trimmedMessage,
           subject: subject || undefined,
+          website: honeypot,
         }),
       });
       const data = await res.json().catch(() => ({}));
@@ -887,7 +889,7 @@ function ContactSection() {
         ) : (
           <form
             onSubmit={handleSubmit}
-            className="space-y-4 text-left max-w-lg mx-auto"
+            className="relative space-y-4 text-left max-w-lg mx-auto"
             data-oid="4f0t4sv"
           >
             {errorMessage && (
@@ -1038,6 +1040,28 @@ function ContactSection() {
                 </p>
               )}
             </div>
+            <div className="sr-only" aria-hidden>
+              <label htmlFor="contact-website">Webbplats</label>
+              <input
+                id="contact-website"
+                name="website"
+                type="text"
+                tabIndex={-1}
+                autoComplete="off"
+                value={honeypot}
+                onChange={(e) => setHoneypot(e.target.value)}
+              />
+            </div>
+            <p className="text-xs text-stone-500 dark:text-[#a8a49c] leading-relaxed">
+              Genom att skicka godkänner du att vi behandlar dina uppgifter enligt{" "}
+              <Link
+                href="/integritet?return=contact"
+                className="text-[#8b7355] dark:text-[#c8a46e] underline hover:no-underline"
+              >
+                vår integritetspolicy
+              </Link>
+              .
+            </p>
             <button
               type="submit"
               disabled={status === "loading"}
@@ -1049,27 +1073,11 @@ function ContactSection() {
           </form>
         )}
       </div>
-      <div className="shape-divider-section-bottom-2" aria-hidden>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none" className="block w-full">
-          <path d="M0,50 C400,120 800,0 1200,50 L1200,120 L0,120 Z" className="shape-fill-gold" />
-        </svg>
-      </div>
     </section>
   );
 }
 
-const SHOWCASE_ITEMS = [
-  { slug: "vvs", name: "VVS & Rörmokare", img: "/examples/vvs.webp" },
-  { slug: "elektriker", name: "Elektriker", img: "/examples/elektriker.webp" },
-  { slug: "salong", name: "Salong/Skönhet", img: "/examples/salong.webp" },
-  { slug: "restaurang", name: "Restaurang", img: "/examples/restaurang.webp" },
-  { slug: "malare", name: "Målare", img: "/examples/malare.webp" },
-  { slug: "konsult", name: "Konsult", img: "/examples/konsult.webp" },
-];
-
 function ExamplesTeaserSection() {
-  const doubled = [...SHOWCASE_ITEMS, ...SHOWCASE_ITEMS];
-
   return (
     <section
       className="relative py-24 pb-32 bg-stone-50 dark:bg-[#0a0a0a] border-t border-stone-200/50 dark:border-[#2a2a2a]/50 overflow-hidden"
@@ -1099,49 +1107,8 @@ function ExamplesTeaserSection() {
         </p>
       </div>
 
-      {/* Scrolling showcase row: touch scroll on mobile, marquee on desktop */}
-      <div className="relative examples-scroll-mobile" data-aos="fade-up" data-aos-delay="100">
-        {/* Fade edges – desktop only so mobile scroll isn’t obscured */}
-        <div className="absolute left-0 top-0 bottom-0 w-24 z-10 bg-gradient-to-r from-stone-50 dark:from-[#0a0a0a] to-transparent pointer-events-none hidden md:block" />
-        <div className="absolute right-0 top-0 bottom-0 w-24 z-10 bg-gradient-to-l from-stone-50 dark:from-[#0a0a0a] to-transparent pointer-events-none hidden md:block" />
-
-        <div className="flex gap-6 pl-[calc(50vw-10rem)] pr-[calc(50vw-10rem)] md:pl-0 md:pr-0 min-w-max animate-marquee">
-          {doubled.map((item, i) => (
-            <Link
-              key={`${item.slug}-${i}`}
-              href={`/${item.slug}`}
-              className="group shrink-0 w-[280px] sm:w-[320px] snap-center rounded-2xl overflow-hidden border border-stone-200 dark:border-[#2a2a2a] bg-white dark:bg-[#1a1a1a] transition-all duration-300 hover:border-[#c8a46e]/50 hover:shadow-2xl hover:shadow-[#c8a46e]/10 hover:-translate-y-1 active:scale-[0.98]"
-            >
-              {/* Screenshot preview */}
-              <div className="relative aspect-video overflow-hidden bg-stone-100 dark:bg-[#111]">
-                <Image
-                  src={item.img}
-                  alt={`${item.name} exempelsida`}
-                  width={640}
-                  height={360}
-                  loading="lazy"
-                  className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
-                />
-                {/* Hover overlay */}
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all duration-300 flex items-center justify-center">
-                  <span className="text-white text-sm font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300 px-4 py-2 bg-[#c8a46e] rounded-lg">
-                    Se demo →
-                  </span>
-                </div>
-              </div>
-
-              {/* Label */}
-              <div className="px-4 py-3 flex items-center justify-between">
-                <span className="text-sm font-semibold text-stone-900 dark:text-[#f5f5f0] group-hover:text-[#c8a46e] transition-colors">
-                  {item.name}
-                </span>
-                <svg className="w-4 h-4 text-stone-500 dark:text-[#6b6962] group-hover:text-[#c8a46e] transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                </svg>
-              </div>
-            </Link>
-          ))}
-        </div>
+      <div data-aos="fade-up" data-aos-delay="100">
+        <ExamplesShowcase />
       </div>
 
       <div className="relative text-center mt-10 px-6">

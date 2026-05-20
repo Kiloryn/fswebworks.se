@@ -40,6 +40,17 @@ html.aos-disabled [data-aos] {
   .text-balance {
     text-wrap: balance;
   }
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
 }
 
 /* Infinite horizontal marquee for example showcase – desktop only (mobile uses touch scroll) */
@@ -80,6 +91,60 @@ html.aos-disabled [data-aos] {
   .examples-scroll-mobile {
     scroll-snap-type: none;
     overflow: hidden;
+  }
+}
+
+/* Examples showcase – depth by distance from center */
+.examples-showcase-scroll {
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding-left: max(1.5rem, calc(50% - 10rem));
+  padding-right: max(1.5rem, calc(50% - 10rem));
+}
+.examples-showcase-scroll::-webkit-scrollbar {
+  display: none;
+}
+.examples-showcase-scroll.examples-showcase-jumping {
+  scroll-snap-type: none;
+  scroll-behavior: auto;
+}
+.examples-card-active {
+  transform: scale(1.05) translateY(-4px);
+  opacity: 1;
+  border-color: rgba(200, 164, 110, 0.55);
+  box-shadow:
+    0 20px 40px -12px rgba(0, 0, 0, 0.45),
+    0 0 0 1px rgba(200, 164, 110, 0.15);
+}
+.examples-card-near {
+  transform: scale(0.94);
+  opacity: 0.72;
+  border-color: rgba(200, 164, 110, 0.15);
+}
+.examples-card-far {
+  transform: scale(0.88);
+  opacity: 0.48;
+  border-color: rgb(58 58 58);
+}
+:is(.dark) .examples-card-far {
+  border-color: rgb(58 58 58);
+}
+@media (prefers-reduced-motion: reduce) {
+  .examples-card-active,
+  .examples-card-near,
+  .examples-card-far {
+    transform: none;
+  }
+  .examples-card-active {
+    opacity: 1;
+    border-color: rgba(200, 164, 110, 0.55);
+  }
+  .examples-card-near {
+    opacity: 0.85;
+  }
+  .examples-card-far {
+    opacity: 0.7;
   }
 }
 
@@ -142,10 +207,6 @@ html.aos-disabled [data-aos] {
 }
 .hero-over-media .hero-benefits .hero-benefit-sep {
   background: #c8a46e !important;
-}
-.hero-over-media .hero-disclaimer {
-  color: #ddd9d0 !important;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
 }
 
 /* Section background gradients */
@@ -322,7 +383,13 @@ html.aos-disabled [data-aos] {
 .shape-fill-examples,
 .shape-fill-faq,
 .shape-fill-contact,
-.shape-fill-gold { fill: #c8a46e; }
+.shape-fill-gold,
+.shape-fill { fill: #c8a46e; }
+
+/* Footer-länkar ska inte se ut som standardblå länkar om utility saknas */
+footer a {
+  text-decoration: none;
+}
 
 @media (prefers-reduced-motion: reduce) {
   .animate-marquee {

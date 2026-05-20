@@ -1,4 +1,12 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Förbered innehåll till din hemsida – FSwebworks",
+  description:
+    "Checklista för texter, bilder och kontaktuppgifter inför din nya hemsida. Vi börjar alltid med ett kostnadsfritt samtal.",
+  alternates: { canonical: "/process" },
+};
 
 const CHECKLIST = [
   {

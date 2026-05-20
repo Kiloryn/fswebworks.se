@@ -131,7 +131,7 @@ function getDefaultPageQuery(): { page: PageData } {
   return {
     page: {
       hero: {
-        badge: 'Webbdesign för småföretag i Stockholm',
+        badge: 'Webbdesign för småföretag i hela Sverige',
         heading: 'Enkla hemsidor för småföretag – utan krångel',
         subheading:
           'Vi hjälper hantverkare och småföretag att få en professionell hemsida som syns, fungerar och är lätt att äga själv.',
@@ -157,7 +157,7 @@ function getDefaultPageQuery(): { page: PageData } {
         },
         package2: {
           title: 'Webb-hjälp & underhåll',
-          price: '490 kr',
+          price: '690 kr',
           priceLabel: 'från / månad',
           description: 'För dig som vill ha en trygg kontakt.',
           features: ['Textuppdateringar', 'Teknisk support', 'Ingen bindning'],

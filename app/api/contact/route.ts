@@ -1,9 +1,11 @@
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
+import { getClientIp, isContactRateLimited } from '@/lib/contact-rate-limit';
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const SUBJECT_LABELS: Record<string, string> = {
+  offert: 'Offert / ny hemsida',
   'kontakta-mig': 'Kontakta mig',
   service: 'Serviceärende',
   ovrigt: 'Övrigt',
@@ -41,7 +43,7 @@ function validateBody(
   const phoneStr =
     typeof phone === 'string' && phone.trim() ? phone.trim().slice(0, 40) : '';
   const subjectStr = typeof subject === 'string' ? subject.trim() : '';
-  const allowedSubjects = new Set(['', 'kontakta-mig', 'service', 'ovrigt']);
+  const allowedSubjects = new Set(['', 'offert', 'kontakta-mig', 'service', 'ovrigt']);
   if (subjectStr && !allowedSubjects.has(subjectStr)) {
     return { error: 'Ogiltigt ämne' };
   }
@@ -55,11 +57,28 @@ function validateBody(
 }
 
 export async function POST(request: Request) {
+  const clientIp = getClientIp(request);
+  if (isContactRateLimited(clientIp)) {
+    return NextResponse.json(
+      { error: 'För många försök. Vänta en stund och försök igen.' },
+      { status: 429 }
+    );
+  }
+
   let body: unknown;
   try {
     body = await request.json();
   } catch {
     return NextResponse.json({ error: 'Ogiltig JSON' }, { status: 400 });
+  }
+
+  if (
+    body &&
+    typeof body === 'object' &&
+    typeof (body as Record<string, unknown>).website === 'string' &&
+    ((body as Record<string, unknown>).website as string).trim()
+  ) {
+    return NextResponse.json({ success: true });
   }
 
   const validated = validateBody(body);
