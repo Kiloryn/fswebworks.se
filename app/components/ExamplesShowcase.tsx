@@ -99,7 +99,7 @@ export default function ExamplesShowcase() {
     const centerX = rootRect.left + rootRect.width / 2;
     const cards = root.querySelectorAll<HTMLElement>(CARD_SELECTOR);
 
-    let bestScrollIndex = MIDDLE_SET_START;
+    let bestScrollIndex: number = MIDDLE_SET_START;
     let bestDistance = Number.POSITIVE_INFINITY;
 
     cards.forEach((card) => {
