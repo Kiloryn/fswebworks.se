@@ -14,10 +14,11 @@ export const SHOWCASE_ITEMS = [
 ] as const;
 
 const CARD_SELECTOR = "[data-showcase-card]";
-const ITEM_COUNT = SHOWCASE_ITEMS.length;
+/** `as const` gör .length till literal 6 – annotera number för scroll-index-variabler. */
+const ITEM_COUNT: number = SHOWCASE_ITEMS.length;
 /** Tre identiska set – vi startar i mitten och hoppar set vid kanterna (osynligt). */
 const SET_COUNT = 3;
-const MIDDLE_SET_START = ITEM_COUNT;
+const MIDDLE_SET_START: number = ITEM_COUNT;
 
 type TrackCard = {
   item: (typeof SHOWCASE_ITEMS)[number];
