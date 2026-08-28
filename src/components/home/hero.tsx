@@ -114,14 +114,13 @@ export function Hero() {
         <a
           href={`/${current.slug}`}
           className="group relative mx-auto hidden w-full max-w-md md:block"
-          aria-label={`Öppna exempelsida: ${current.name}`}
         >
           <div className="relative rounded-xl border border-line bg-ink-2 p-2 shadow-lift">
             <div className="flex items-center gap-1.5 px-2 py-2">
               <span className="size-2 rounded-full bg-fg/20" />
               <span className="size-2 rounded-full bg-fg/20" />
               <span className="size-2 rounded-full bg-fg/20" />
-              <span className="ml-2 truncate rounded-sm bg-ink px-2 py-0.5 text-[10px] text-muted">
+              <span className="ml-2 truncate rounded-sm bg-ink px-2 py-0.5 text-[10px] text-muted" aria-hidden>
                 exempel · {current.name}
               </span>
             </div>

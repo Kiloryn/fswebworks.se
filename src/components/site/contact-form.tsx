@@ -69,7 +69,7 @@ export function ContactForm({ defaultSubject = "", onPaper = false }: Props) {
     "h-12 w-full rounded-md border px-4 text-sm outline-none transition-[border-color,box-shadow] duration-150",
     onPaper
       ? "border-ink/12 bg-paper text-ink placeholder:text-subtle focus:border-gold"
-      : "border-line bg-ink-2 text-fg placeholder:text-subtle focus:border-gold",
+      : "border-line bg-ink-2 text-fg placeholder:text-muted focus:border-gold",
   );
 
   if (sent) {

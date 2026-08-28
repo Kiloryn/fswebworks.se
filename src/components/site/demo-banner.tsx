@@ -10,7 +10,6 @@ export function DemoBanner({ current }: { current: string }) {
       <div className="mx-auto flex h-14 max-w-6xl items-center gap-2 px-3 md:h-16 md:gap-3 md:px-8">
         <Link
           to="/"
-          aria-label="Tillbaka till startsidan"
           className="inline-flex h-10 shrink-0 items-center justify-center gap-1.5 rounded-sm bg-gold px-2.5 text-sm font-medium text-gold-fg hover:bg-gold-2 md:h-11 md:px-4"
         >
           <ArrowLeft className="size-4" aria-hidden />
