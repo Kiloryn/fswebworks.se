@@ -1,24 +1,62 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { EXAMPLES, PROMISES } from "@/lib/site";
 import { Button } from "@/components/ui/button";
 import { Pic } from "@/components/site/pic";
 
 export function Hero() {
+  const videoRef = useRef<HTMLVideoElement>(null);
   const [i, setI] = useState(0);
 
   useEffect(() => {
+    if (!window.matchMedia("(min-width: 768px)").matches) return;
     const id = window.setInterval(() => {
       setI((n) => (n + 1) % EXAMPLES.length);
     }, 3400);
     return () => window.clearInterval(id);
   }, []);
 
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const mobile = window.matchMedia("(max-width: 767px)").matches;
+    video.src = mobile ? "/videos/hero-720.mp4" : "/videos/hero.mp4";
+    video.muted = true;
+    video.playsInline = true;
+    void video.play().catch(() => {});
+
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry) return;
+        if (entry.isIntersecting) void video.play().catch(() => {});
+        else video.pause();
+      },
+      { threshold: 0.2 },
+    );
+    io.observe(video);
+
+    const onVis = () => {
+      if (document.hidden) video.pause();
+      else if (video.getBoundingClientRect().bottom > 80) {
+        void video.play().catch(() => {});
+      }
+    };
+    document.addEventListener("visibilitychange", onVis);
+
+    return () => {
+      io.disconnect();
+      document.removeEventListener("visibilitychange", onVis);
+      video.pause();
+    };
+  }, []);
+
   const current = EXAMPLES[i] ?? EXAMPLES[0];
 
   return (
-    <section className="relative isolate min-h-dvh overflow-hidden">
+    <section className="relative isolate min-h-dvh overflow-hidden [contain:paint]">
       <img
         src="/videos/hero-poster.jpg"
         alt=""
@@ -27,17 +65,15 @@ export function Hero() {
         decoding="async"
       />
       <video
-        className="absolute inset-0 size-full object-cover motion-reduce:hidden"
-        autoPlay
+        ref={videoRef}
+        className="absolute inset-0 size-full object-cover motion-reduce:hidden [transform:translateZ(0)]"
         muted
         loop
         playsInline
-        preload="auto"
+        preload="metadata"
         poster="/videos/hero-poster.jpg"
         aria-hidden="true"
-      >
-        <source src="/videos/hero.mp4" type="video/mp4" />
-      </video>
+      />
       <div className="absolute inset-0 bg-[linear-gradient(180deg,rgb(11_10_8_/_0.5)_0%,rgb(11_10_8_/_0.72)_42%,rgb(11_10_8_/_0.9)_100%)] md:bg-[linear-gradient(90deg,rgb(11_10_8_/_0.86)_0%,rgb(11_10_8_/_0.58)_48%,rgb(11_10_8_/_0.22)_100%)]" />
 
       <div className="relative mx-auto grid min-h-dvh max-w-6xl items-center gap-12 px-5 pb-16 pt-28 md:grid-cols-[1.15fr_0.85fr] md:px-8 md:pt-24">
