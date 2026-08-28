@@ -10,10 +10,11 @@ export function DemoBanner({ current }: { current: string }) {
         <Link
           to="/"
           aria-label="Tillbaka till startsidan"
-          className="inline-flex size-10 shrink-0 items-center justify-center gap-2 rounded-sm bg-gold text-sm font-medium text-gold-fg hover:bg-gold-2 md:h-11 md:w-auto md:px-4"
+          className="inline-flex h-10 shrink-0 items-center justify-center gap-1.5 rounded-sm bg-gold px-2.5 text-sm font-medium text-gold-fg hover:bg-gold-2 md:h-11 md:px-4"
         >
           <ArrowLeft className="size-4" aria-hidden />
           <span className="hidden md:inline">Tillbaka till startsidan</span>
+          <span className="md:hidden">Start</span>
         </Link>
         <Logo className="hidden lg:inline-flex" />
         <p className="hidden text-[12px] text-muted xl:block">Detta är ett exempel</p>

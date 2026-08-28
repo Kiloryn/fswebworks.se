@@ -3,6 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { PREP } from "@/lib/site";
 import { Button } from "@/components/ui/button";
 import { SiteLayout } from "@/components/site/layout";
+import { PageBack } from "@/components/site/page-back";
 import { Pic } from "@/components/site/pic";
 
 export const Route = createFileRoute("/process")({
@@ -24,6 +25,7 @@ function ProcessPage() {
     <SiteLayout>
       <article className="bg-paper pt-28 text-ink">
         <div className="mx-auto max-w-3xl px-5 pb-8 md:px-8">
+          <PageBack onPaper />
           <p className="text-[11px] uppercase tracking-[0.24em] text-subtle">
             Inför projektet
           </p>

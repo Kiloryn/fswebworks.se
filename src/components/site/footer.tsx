@@ -68,6 +68,16 @@ export function SiteFooter() {
         <div className="mx-auto flex max-w-6xl flex-col gap-2 px-5 py-5 text-xs text-subtle md:flex-row md:items-center md:justify-between md:px-8">
           <p>© {new Date().getFullYear()} {SITE.name}</p>
           <p>Webbdesign för småföretag · bas i Stockholm</p>
+          <button
+            type="button"
+            className="text-left text-gold hover:text-gold-2 md:text-right"
+            onClick={() => {
+              const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+              window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" });
+            }}
+          >
+            Till toppen
+          </button>
         </div>
       </div>
     </footer>

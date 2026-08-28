@@ -3,6 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { EXAMPLES } from "@/lib/site";
 import { Button } from "@/components/ui/button";
 import { SiteLayout } from "@/components/site/layout";
+import { PageBack } from "@/components/site/page-back";
 import { Pic } from "@/components/site/pic";
 
 export const Route = createFileRoute("/examples")({
@@ -24,6 +25,7 @@ function ExamplesPage() {
     <SiteLayout>
       <div className="bg-ink pt-28">
         <div className="mx-auto max-w-6xl px-5 pb-16 md:px-8">
+          <PageBack />
           <p className="text-[11px] uppercase tracking-[0.24em] text-gold">
             Urval
           </p>

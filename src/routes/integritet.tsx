@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SITE } from "@/lib/site";
 import { SiteLayout } from "@/components/site/layout";
+import { PageBack } from "@/components/site/page-back";
 
 export const Route = createFileRoute("/integritet")({
   component: PrivacyPage,
@@ -20,6 +21,7 @@ function PrivacyPage() {
     <SiteLayout>
       <article className="bg-paper pt-28 text-ink">
         <div className="mx-auto max-w-2xl px-5 pb-24 md:px-8">
+          <PageBack onPaper />
           <p className="text-[11px] uppercase tracking-[0.24em] text-subtle">
             Juridik
           </p>

@@ -1,4 +1,4 @@
-import { Link, useRouterState } from "@tanstack/react-router";
+import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
 import { Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { NAV } from "@/lib/site";
@@ -6,10 +6,15 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/site/logo";
 
+const SECTION_IDS = NAV.map((item) => item.hash).filter(Boolean);
+
 export function SiteHeader({ ink = true }: { ink?: boolean }) {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [section, setSection] = useState("");
+  const navigate = useNavigate();
   const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const hash = useRouterState({ select: (s) => s.location.hash });
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -22,7 +27,40 @@ export function SiteHeader({ ink = true }: { ink?: boolean }) {
     setOpen(false);
   }, [pathname]);
 
+  useEffect(() => {
+    if (pathname !== "/") {
+      setSection("");
+      return;
+    }
+    const els = SECTION_IDS.map((id) => document.getElementById(id)).filter(
+      (el): el is HTMLElement => Boolean(el),
+    );
+    if (!els.length) return;
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+        const id = visible[0]?.target.id;
+        if (id) setSection(id);
+        else if (window.scrollY < 200) setSection("");
+      },
+      { rootMargin: "-20% 0px -65% 0px", threshold: [0, 0.2, 0.5, 1] },
+    );
+    els.forEach((el) => io.observe(el));
+    return () => io.disconnect();
+  }, [pathname]);
+
   const solid = !ink || scrolled || open;
+  const currentHash = hash.replace(/^#/, "") || section;
+
+  const goHomeTop = () => {
+    setOpen(false);
+    if (pathname === "/" && hash) void navigate({ to: "/", hash: "" });
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" });
+  };
 
   return (
     <header
@@ -36,21 +74,31 @@ export function SiteHeader({ ink = true }: { ink?: boolean }) {
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 md:h-[4.25rem] md:px-8">
         <Logo onInk />
         <nav className="hidden items-center gap-7 md:flex" aria-label="Huvudmeny">
-          {NAV.map((item) => (
-            <Link
-              key={item.label}
-              to={item.to}
-              hash={item.hash || undefined}
-              className="text-[15px] font-medium tracking-wide text-fg/90 transition-colors duration-150 hover:text-gold"
-            >
-              {item.label}
-            </Link>
-          ))}
+          {NAV.map((item) => {
+            const active =
+              (item.hash && currentHash === item.hash && pathname === "/") ||
+              (item.hash === "exempel" && pathname === "/examples");
+            return (
+              <Link
+                key={item.label}
+                to={item.to}
+                hash={item.hash || undefined}
+                aria-current={active ? "page" : undefined}
+                className={cn(
+                  "text-[15px] font-medium tracking-wide transition-colors duration-150 hover:text-gold",
+                  active ? "text-gold" : "text-fg/90",
+                )}
+              >
+                {item.label}
+              </Link>
+            );
+          })}
         </nav>
         <div className="flex items-center gap-2">
-          <Button asChild size="md" className="hidden md:inline-flex">
+          <Button asChild size="md" className="h-10 px-3 text-sm md:h-11 md:px-5">
             <Link to="/" hash="contact">
-              Begär offert
+              <span className="md:hidden">Offert</span>
+              <span className="hidden md:inline">Begär offert</span>
             </Link>
           </Button>
           <button
@@ -67,22 +115,33 @@ export function SiteHeader({ ink = true }: { ink?: boolean }) {
       {open ? (
         <div className="border-t border-line bg-ink px-5 py-5 md:hidden">
           <nav className="flex flex-col gap-1" aria-label="Mobilmeny">
-            {NAV.map((item) => (
-              <Link
-                key={item.label}
-                to={item.to}
-                hash={item.hash || undefined}
-                className="flex min-h-11 items-center text-base text-fg"
-                onClick={() => setOpen(false)}
-              >
-                {item.label}
-              </Link>
-            ))}
-            <Button asChild className="mt-3 w-full">
-              <Link to="/" hash="contact" onClick={() => setOpen(false)}>
-                Begär offert
-              </Link>
-            </Button>
+            <Link
+              to="/"
+              className="flex min-h-11 items-center text-base text-fg"
+              onClick={goHomeTop}
+            >
+              Startsidan
+            </Link>
+            {NAV.map((item) => {
+              const active =
+                (item.hash && currentHash === item.hash && pathname === "/") ||
+                (item.hash === "exempel" && pathname === "/examples");
+              return (
+                <Link
+                  key={item.label}
+                  to={item.to}
+                  hash={item.hash || undefined}
+                  aria-current={active ? "page" : undefined}
+                  className={cn(
+                    "flex min-h-11 items-center text-base",
+                    active ? "text-gold" : "text-fg",
+                  )}
+                  onClick={() => setOpen(false)}
+                >
+                  {item.label}
+                </Link>
+              );
+            })}
           </nav>
         </div>
       ) : null}

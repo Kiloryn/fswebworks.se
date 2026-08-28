@@ -8,7 +8,7 @@ export const SITE = {
 } as const;
 
 export const NAV = [
-  { label: "Exempel", to: "/examples", hash: "" },
+  { label: "Exempel", to: "/", hash: "exempel" },
   { label: "Priser", to: "/", hash: "priser" },
   { label: "Så går det till", to: "/", hash: "process" },
   { label: "Kontakt", to: "/", hash: "contact" },
