@@ -29,13 +29,17 @@ npm run build
 
 ## Kontaktformulär
 
-Formuläret skickar mejl via [Resend](https://resend.com). På Vercel: sätt
+Kontaktformuläret skickar mejl via [Resend](https://resend.com). Resend kräver en
+verifierad avsändardomän – `beth.t@example.com` fungerar inte längre.
+
+1. Lägg till t.ex. `updates.fswebworks.se` under Domains i Resend
+2. Lägg DNS-posterna Resend visar hos din DNS-leverantör
+3. När den är verified, sätt i Vercel:
 
 - `RESEND_API_KEY`
-- `CONTACT_EMAIL` (mottagare, t.ex. fredrik@fswebworks.se)
-- valfritt `RESEND_FROM` när `fswebworks.se` är verifierad i Resend
+- `CONTACT_EMAIL=fredrik@fswebworks.se`
+- `RESEND_FROM=FSwebworks <updates@updates.fswebworks.se>`
 
-Utan verifierad domän skickas från `beth.t@example.com`.
 
 ## Exempelsidor
 

@@ -2,7 +2,6 @@ import { Link } from "@tanstack/react-router";
 import { Check } from "lucide-react";
 import { useState, type FormEvent } from "react";
 import { SITE, SUBJECTS } from "@/lib/site";
-import { submitContact } from "@/lib/contact";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -35,18 +34,28 @@ export function ContactForm({ defaultSubject = "", onPaper = false }: Props) {
 
     setPending(true);
     try {
-      const result = await submitContact({
-        data: {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
           name,
           email,
           phone: String(data.get("phone") ?? "").trim(),
           subject: String(data.get("subject") ?? ""),
           message,
           website: String(data.get("website") ?? ""),
-        },
+        }),
       });
-      if (!result.ok) {
-        setError(result.error);
+      const result = (await res.json().catch(() => null)) as
+        | { ok: true }
+        | { ok: false; error?: string }
+        | null;
+      if (!res.ok || !result || !result.ok) {
+        setError(
+          result && "error" in result && result.error
+            ? result.error
+            : "Kunde inte skicka just nu. Skriv till oss på " + SITE.email + ".",
+        );
         return;
       }
       setSent(true);
