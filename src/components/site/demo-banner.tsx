@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { ArrowLeft } from "lucide-react";
 import { EXAMPLES } from "@/lib/site";
 import { Logo } from "@/components/site/logo";
+import { SectionLink } from "@/components/site/section-link";
 
 export function DemoBanner({ current }: { current: string }) {
   return (
@@ -65,13 +66,12 @@ export function DemoExit() {
           <ArrowLeft className="size-4" aria-hidden />
           Tillbaka till startsidan
         </Link>
-        <Link
-          to="/"
-          hash="contact"
+        <SectionLink
+          section="contact"
           className="inline-flex h-12 items-center justify-center rounded-sm border border-gold/40 px-5 text-sm text-gold hover:bg-gold/10"
         >
           Kontakta oss
-        </Link>
+        </SectionLink>
       </div>
     </div>
   );

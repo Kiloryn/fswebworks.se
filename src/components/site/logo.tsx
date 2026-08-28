@@ -1,5 +1,6 @@
-import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
+import { Link, useRouterState } from "@tanstack/react-router";
 import { cn } from "@/lib/utils";
+import { scrollToTop } from "@/lib/scroll-to";
 
 export function Logo({
   className,
@@ -7,9 +8,7 @@ export function Logo({
   className?: string;
   onInk?: boolean;
 }) {
-  const navigate = useNavigate();
   const pathname = useRouterState({ select: (s) => s.location.pathname });
-  const hash = useRouterState({ select: (s) => s.location.hash });
 
   return (
     <Link
@@ -19,9 +18,7 @@ export function Logo({
       onClick={(e) => {
         if (pathname !== "/") return;
         e.preventDefault();
-        if (hash) void navigate({ to: "/", hash: "" });
-        const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-        window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" });
+        scrollToTop();
       }}
     >
       <img

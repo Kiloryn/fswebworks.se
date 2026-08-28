@@ -8,10 +8,10 @@ export const SITE = {
 } as const;
 
 export const NAV = [
-  { label: "Exempel", to: "/", hash: "exempel" },
-  { label: "Priser", to: "/", hash: "priser" },
-  { label: "Så går det till", to: "/", hash: "process" },
-  { label: "Kontakt", to: "/", hash: "contact" },
+  { label: "Exempel", section: "exempel" },
+  { label: "Priser", section: "priser" },
+  { label: "Så går det till", section: "process" },
+  { label: "Kontakt", section: "contact" },
 ] as const;
 
 export const PROMISES = [

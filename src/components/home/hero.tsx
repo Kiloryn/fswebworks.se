@@ -1,9 +1,9 @@
-import { Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { EXAMPLES, PROMISES } from "@/lib/site";
 import { Button } from "@/components/ui/button";
 import { Pic } from "@/components/site/pic";
+import { SectionLink } from "@/components/site/section-link";
 
 export function Hero() {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -90,15 +90,15 @@ export function Hero() {
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
             <Button asChild size="xl" className="w-full sm:w-auto">
-              <Link to="/" hash="contact">
+              <SectionLink section="contact">
                 Begär offert
                 <ArrowRight className="size-4" />
-              </Link>
+              </SectionLink>
             </Button>
             <Button asChild variant="ghost" size="xl" className="w-full sm:w-auto">
-              <Link to="/" hash="exempel">
+              <SectionLink section="exempel">
                 Se exempel
-              </Link>
+              </SectionLink>
             </Button>
           </div>
           <ul className="mt-10 flex flex-wrap gap-x-5 gap-y-2 text-sm text-muted">

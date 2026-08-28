@@ -1,10 +1,11 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { EXAMPLES } from "@/lib/site";
 import { Button } from "@/components/ui/button";
 import { SiteLayout } from "@/components/site/layout";
 import { PageBack } from "@/components/site/page-back";
 import { Pic } from "@/components/site/pic";
+import { SectionLink } from "@/components/site/section-link";
 
 export const Route = createFileRoute("/examples")({
   component: ExamplesPage,
@@ -77,9 +78,9 @@ function ExamplesPage() {
               en generisk mall.
             </p>
             <Button asChild className="mt-6">
-              <Link to="/" hash="contact">
+              <SectionLink section="contact">
                 Kontakta oss
-              </Link>
+              </SectionLink>
             </Button>
           </div>
         </div>

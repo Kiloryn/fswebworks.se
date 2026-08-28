@@ -1,20 +1,20 @@
-import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
+import { Link, useRouterState } from "@tanstack/react-router";
 import { Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { NAV } from "@/lib/site";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/site/logo";
+import { SectionLink } from "@/components/site/section-link";
+import { scrollToTop } from "@/lib/scroll-to";
 
-const SECTION_IDS = NAV.map((item) => item.hash).filter(Boolean);
+const SECTION_IDS = NAV.map((item) => item.section);
 
 export function SiteHeader({ ink = true }: { ink?: boolean }) {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [section, setSection] = useState("");
-  const navigate = useNavigate();
   const pathname = useRouterState({ select: (s) => s.location.pathname });
-  const hash = useRouterState({ select: (s) => s.location.hash });
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -53,13 +53,10 @@ export function SiteHeader({ ink = true }: { ink?: boolean }) {
   }, [pathname]);
 
   const solid = !ink || scrolled || open;
-  const currentHash = hash.replace(/^#/, "") || section;
 
   const goHomeTop = () => {
     setOpen(false);
-    if (pathname === "/" && hash) void navigate({ to: "/", hash: "" });
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" });
+    if (pathname === "/") scrollToTop();
   };
 
   return (
@@ -76,13 +73,12 @@ export function SiteHeader({ ink = true }: { ink?: boolean }) {
         <nav className="hidden items-center gap-7 md:flex" aria-label="Huvudmeny">
           {NAV.map((item) => {
             const active =
-              (item.hash && currentHash === item.hash && pathname === "/") ||
-              (item.hash === "exempel" && pathname === "/examples");
+              (pathname === "/" && section === item.section) ||
+              (item.section === "exempel" && pathname === "/examples");
             return (
-              <Link
+              <SectionLink
                 key={item.label}
-                to={item.to}
-                hash={item.hash || undefined}
+                section={item.section}
                 aria-current={active ? "page" : undefined}
                 className={cn(
                   "text-[15px] font-medium tracking-wide transition-colors duration-150 hover:text-gold",
@@ -90,16 +86,16 @@ export function SiteHeader({ ink = true }: { ink?: boolean }) {
                 )}
               >
                 {item.label}
-              </Link>
+              </SectionLink>
             );
           })}
         </nav>
         <div className="flex items-center gap-2">
           <Button asChild size="md" className="h-10 px-3 text-sm md:h-11 md:px-5">
-            <Link to="/" hash="contact">
+            <SectionLink section="contact">
               <span className="md:hidden">Offert</span>
               <span className="hidden md:inline">Begär offert</span>
-            </Link>
+            </SectionLink>
           </Button>
           <button
             type="button"
@@ -124,13 +120,12 @@ export function SiteHeader({ ink = true }: { ink?: boolean }) {
             </Link>
             {NAV.map((item) => {
               const active =
-                (item.hash && currentHash === item.hash && pathname === "/") ||
-                (item.hash === "exempel" && pathname === "/examples");
+                (pathname === "/" && section === item.section) ||
+                (item.section === "exempel" && pathname === "/examples");
               return (
-                <Link
+                <SectionLink
                   key={item.label}
-                  to={item.to}
-                  hash={item.hash || undefined}
+                  section={item.section}
                   aria-current={active ? "page" : undefined}
                   className={cn(
                     "flex min-h-11 items-center text-base",
@@ -139,7 +134,7 @@ export function SiteHeader({ ink = true }: { ink?: boolean }) {
                   onClick={() => setOpen(false)}
                 >
                   {item.label}
-                </Link>
+                </SectionLink>
               );
             })}
           </nav>

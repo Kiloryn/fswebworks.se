@@ -1,10 +1,11 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { PREP } from "@/lib/site";
 import { Button } from "@/components/ui/button";
 import { SiteLayout } from "@/components/site/layout";
 import { PageBack } from "@/components/site/page-back";
 import { Pic } from "@/components/site/pic";
+import { SectionLink } from "@/components/site/section-link";
 
 export const Route = createFileRoute("/process")({
   component: ProcessPage,
@@ -70,10 +71,10 @@ function ProcessPage() {
             anpassa innehållet under arbetets gång.
           </p>
           <Button asChild size="xl" className="mt-4">
-            <Link to="/" hash="contact">
+            <SectionLink section="contact">
               Kontakta oss
               <ArrowRight className="size-4" />
-            </Link>
+            </SectionLink>
           </Button>
         </ol>
       </article>

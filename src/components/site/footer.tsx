@@ -1,6 +1,8 @@
 import { Link } from "@tanstack/react-router";
 import { SITE } from "@/lib/site";
 import { Logo } from "@/components/site/logo";
+import { SectionLink } from "@/components/site/section-link";
+import { scrollToTop } from "@/lib/scroll-to";
 
 export function SiteFooter() {
   return (
@@ -19,19 +21,19 @@ export function SiteFooter() {
           </p>
           <ul className="mt-4 space-y-2.5 text-sm text-muted">
             <li>
-              <Link to="/" hash="exempel" className="hover:text-fg">
+              <SectionLink section="exempel" className="hover:text-fg">
                 Exempel
-              </Link>
+              </SectionLink>
             </li>
             <li>
-              <Link to="/" hash="priser" className="hover:text-fg">
+              <SectionLink section="priser" className="hover:text-fg">
                 Priser
-              </Link>
+              </SectionLink>
             </li>
             <li>
-              <Link to="/" hash="process" className="hover:text-fg">
+              <SectionLink section="process" className="hover:text-fg">
                 Så går det till
-              </Link>
+              </SectionLink>
             </li>
             <li>
               <Link to="/process" className="hover:text-fg">
@@ -39,9 +41,9 @@ export function SiteFooter() {
               </Link>
             </li>
             <li>
-              <Link to="/" hash="contact" className="hover:text-fg">
+              <SectionLink section="contact" className="hover:text-fg">
                 Kontakt
-              </Link>
+              </SectionLink>
             </li>
           </ul>
         </div>
@@ -71,10 +73,7 @@ export function SiteFooter() {
           <button
             type="button"
             className="text-left text-gold hover:text-gold-2 md:text-right"
-            onClick={() => {
-              const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-              window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" });
-            }}
+            onClick={() => scrollToTop()}
           >
             Till toppen
           </button>

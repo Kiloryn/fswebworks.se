@@ -13,6 +13,7 @@ import { ContactForm } from "@/components/site/contact-form";
 import { Reveal } from "@/components/site/reveal";
 import { Pic } from "@/components/site/pic";
 import { Hero } from "@/components/home/hero";
+import { SectionLink } from "@/components/site/section-link";
 import { cn } from "@/lib/utils";
 
 export function HomePage({ defaultSubject = "" }: { defaultSubject?: string }) {
@@ -153,9 +154,9 @@ function Services() {
               ))}
             </ul>
             <Button asChild className="mt-8 w-full">
-              <Link to="/" hash="contact" search={{ amne: main.subject }}>
+              <SectionLink section="contact" search={{ amne: main.subject }}>
                 {main.cta}
-              </Link>
+              </SectionLink>
             </Button>
           </article>
           <div className="grid gap-5">
@@ -186,9 +187,9 @@ function Services() {
                   ))}
                 </ul>
                 <Button asChild variant="ghost" className="mt-6 w-full">
-                  <Link to="/" hash="contact" search={{ amne: s.subject }}>
+                  <SectionLink section="contact" search={{ amne: s.subject }}>
                     {s.cta}
-                  </Link>
+                  </SectionLink>
                 </Button>
               </article>
             ))}

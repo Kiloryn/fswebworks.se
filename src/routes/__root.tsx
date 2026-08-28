@@ -1,7 +1,7 @@
 import { createRootRoute, HeadContent, Outlet, Scripts } from "@tanstack/react-router";
 import { AuthProvider } from "@/lib/auth/provider";
 import { PreviewHostBridge } from "@/components/preview-host-bridge";
-import { HashScroll } from "@/components/site/hash-scroll";
+import { SectionScroll } from "@/components/site/section-scroll";
 import { BackToTop } from "@/components/site/back-to-top";
 import { SITE } from "@/lib/site";
 import appCss from "../styles.css?url";
@@ -45,7 +45,7 @@ function RootDocument() {
       <body className="bg-ink text-fg">
         <PreviewHostBridge />
         <AuthProvider>
-          <HashScroll />
+          <SectionScroll />
           <BackToTop />
           <Outlet />
         </AuthProvider>
