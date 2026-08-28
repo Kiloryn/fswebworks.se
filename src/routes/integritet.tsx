@@ -37,9 +37,9 @@ function PrivacyPage() {
             <div>
               <h2 className="font-display text-2xl">Vilka uppgifter samlar vi in?</h2>
               <p className="mt-3 text-subtle">
-                När du skickar en förfrågan via kontaktformuläret öppnas din
-                e-postklient med namn, e-postadress, telefonnummer (om du anger
-                det), valfritt ämne och ditt meddelande, adresserat till oss.
+                När du skickar en förfrågan via kontaktformuläret tar vi emot
+                namn, e-postadress, telefonnummer (om du anger det), valfritt
+                ämne och ditt meddelande.
               </p>
             </div>
             <div>
@@ -62,9 +62,10 @@ function PrivacyPage() {
             <div>
               <h2 className="font-display text-2xl">Vem delar vi uppgifter med?</h2>
               <p className="mt-3 text-subtle">
-                Meddelandet skickas från din egen e-post till{" "}
-                {SITE.email}. Vi säljer inte dina uppgifter och delar dem inte
-                med tredje part i marknadsföringssyfte.
+                Meddelandet skickas till {SITE.email} via e-posttjänsten Resend,
+                som behandlar uppgifterna som personuppgiftsbiträde för att
+                kunna leverera mejlet. Vi säljer inte dina uppgifter och delar
+                dem inte med tredje part i marknadsföringssyfte.
               </p>
             </div>
             <div>

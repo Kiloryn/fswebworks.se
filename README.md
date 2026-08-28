@@ -16,6 +16,8 @@ Vite 8 + TanStack Start (React 19, TypeScript, Tailwind v4).
 
 ```bash
 npm install
+cp .env.example .env.local
+# fyll i RESEND_API_KEY
 npm run dev
 ```
 
@@ -24,6 +26,16 @@ Bygg:
 ```bash
 npm run build
 ```
+
+## Kontaktformulär
+
+Formuläret skickar mejl via [Resend](https://resend.com). På Vercel: sätt
+
+- `RESEND_API_KEY`
+- `CONTACT_EMAIL` (mottagare, t.ex. fredrik@fswebworks.se)
+- valfritt `RESEND_FROM` när `fswebworks.se` är verifierad i Resend
+
+Utan verifierad domän skickas från `beth.t@example.com`.
 
 ## Exempelsidor
 

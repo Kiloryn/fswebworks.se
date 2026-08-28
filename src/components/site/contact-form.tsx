@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { Check } from "lucide-react";
 import { useState, type FormEvent } from "react";
 import { SITE, SUBJECTS } from "@/lib/site";
+import { submitContact } from "@/lib/contact";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -15,13 +16,11 @@ export function ContactForm({ defaultSubject = "", onPaper = false }: Props) {
   const [error, setError] = useState("");
   const [pending, setPending] = useState(false);
 
-  function onSubmit(e: FormEvent<HTMLFormElement>) {
+  async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setError("");
     const form = e.currentTarget;
     const data = new FormData(form);
-    if (String(data.get("website") ?? "").trim()) return;
-
     const name = String(data.get("name") ?? "").trim();
     const email = String(data.get("email") ?? "").trim();
     const message = String(data.get("message") ?? "").trim();
@@ -35,34 +34,27 @@ export function ContactForm({ defaultSubject = "", onPaper = false }: Props) {
     }
 
     setPending(true);
-    const payload = {
-      name,
-      email,
-      phone: String(data.get("phone") ?? "").trim(),
-      subject: String(data.get("subject") ?? ""),
-      message,
-      at: new Date().toISOString(),
-    };
     try {
-      const prev = JSON.parse(localStorage.getItem("fs-inquiries") ?? "[]") as unknown[];
-      localStorage.setItem("fs-inquiries", JSON.stringify([payload, ...prev].slice(0, 20)));
+      const result = await submitContact({
+        data: {
+          name,
+          email,
+          phone: String(data.get("phone") ?? "").trim(),
+          subject: String(data.get("subject") ?? ""),
+          message,
+          website: String(data.get("website") ?? ""),
+        },
+      });
+      if (!result.ok) {
+        setError(result.error);
+        return;
+      }
+      setSent(true);
     } catch {
-      /* ignore quota */
+      setError("Kunde inte skicka just nu. Skriv till oss på " + SITE.email + ".");
+    } finally {
+      setPending(false);
     }
-    const subjectLine =
-      SUBJECTS.find((s) => s.value === payload.subject)?.label ?? "Förfrågan från webbplatsen";
-    const body = [
-      `Namn: ${name}`,
-      `E-post: ${email}`,
-      payload.phone ? `Telefon: ${payload.phone}` : null,
-      "",
-      message,
-    ]
-      .filter((line) => line !== null)
-      .join("\n");
-    window.location.href = `mailto:${SITE.email}?subject=${encodeURIComponent(subjectLine)}&body=${encodeURIComponent(body)}`;
-    setPending(false);
-    setSent(true);
   }
 
   const field = cn(
@@ -83,13 +75,14 @@ export function ContactForm({ defaultSubject = "", onPaper = false }: Props) {
         <span className="grid size-11 place-items-center rounded-full bg-gold text-gold-fg">
           <Check className="size-5" strokeWidth={2.2} />
         </span>
-        <h3 className="mt-5 font-display text-2xl">Tack – öppna e-posten och skicka.</h3>
+        <h3 className="mt-5 font-display text-2xl">Tack – vi har fått din förfrågan.</h3>
         <p className="mt-2 text-sm leading-relaxed text-muted">
-          Formuläret förbereder ett mejl till{" "}
+          Vi hör av oss så snart vi kan, vanligtvis inom en arbetsdag. Behöver du
+          oss fortare går det bra att mejla{" "}
           <a className="text-gold underline-offset-4 hover:underline" href={`mailto:${SITE.email}`}>
             {SITE.email}
           </a>
-          . Om inget mejlprogram öppnades, skriv till oss där direkt.
+          .
         </p>
       </div>
     );
