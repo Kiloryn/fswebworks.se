@@ -48,7 +48,7 @@ export function Hero() {
           <h1 className="mt-5 max-w-[14ch] font-display text-[2.35rem] leading-[1.05] text-fg italic sm:text-5xl md:text-[4.1rem]">
             En hemsida som ser ut som ditt hantverk.
           </h1>
-          <p className="mt-6 max-w-md text-base leading-relaxed text-muted md:text-lg">
+          <p className="mt-6 max-w-md text-lg leading-relaxed text-muted md:text-xl">
             Professionella hemsidor för hantverkare och småföretag i hela
             Sverige. Från 9 900 kr, ingen bindning – du äger sidan själv.
           </p>
@@ -65,7 +65,7 @@ export function Hero() {
               </Link>
             </Button>
           </div>
-          <ul className="mt-10 flex flex-wrap gap-x-5 gap-y-2 text-[13px] text-muted">
+          <ul className="mt-10 flex flex-wrap gap-x-5 gap-y-2 text-sm text-muted">
             {PROMISES.map((p) => (
               <li key={p} className="flex items-center gap-2">
                 <span className="size-1.5 rounded-full bg-mark" />

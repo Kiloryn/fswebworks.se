@@ -41,7 +41,7 @@ export function SiteHeader({ ink = true }: { ink?: boolean }) {
               key={item.label}
               to={item.to}
               hash={item.hash || undefined}
-              className="text-[13px] tracking-wide text-muted transition-colors duration-150 hover:text-fg"
+              className="text-[15px] font-medium tracking-wide text-fg/90 transition-colors duration-150 hover:text-gold"
             >
               {item.label}
             </Link>
