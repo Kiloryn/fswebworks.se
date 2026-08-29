@@ -176,7 +176,7 @@ export const EXAMPLES = [
     name: "Restaurang",
     brand: "Trattoria Nove",
     blurb:
-      "Meny, bordsbokning och öppettider. Visa maten och skapa hungriga gäster.",
+      "Meny, bordsbokning och karta. Visa maten så gästen blir hungrig – och hittar dit.",
     image: "/images/restaurang.jpg?v=5",
   },
   {
@@ -192,7 +192,7 @@ export const EXAMPLES = [
     name: "Konsult",
     brand: "Anders Eriksson",
     blurb:
-      "Tydlig expertis och enkel kontakt. En sida som får fler att boka ett samtal.",
+      "Ett samtal, tre uppdragstyper, tydlig kontakt. En sida som får fler att boka trettio minuter.",
     image: "/images/konsult.jpg?v=5",
   },
 ] as const;
