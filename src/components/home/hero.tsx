@@ -5,60 +5,127 @@ import { Button } from "@/components/ui/button";
 import { Pic } from "@/components/site/pic";
 import { SectionLink } from "@/components/site/section-link";
 
+type RVFCVideo = HTMLVideoElement & {
+  requestVideoFrameCallback?: (cb: () => void) => number;
+  cancelVideoFrameCallback?: (handle: number) => void;
+};
+
 const HeroVideo = memo(function HeroVideo() {
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const videoRef = useRef<RVFCVideo>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
     const video = videoRef.current;
-    if (!video) return;
+    const canvas = canvasRef.current;
+    if (!video || !canvas) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-    let resume = 0;
-    const play = () => void video.play().catch(() => {});
+    const ctx = canvas.getContext("2d", { alpha: false, desynchronized: true });
+    if (!ctx) return;
+
+    let drawing = false;
+    let raf = 0;
+    let rvfc = 0;
+    let pauseTimer = 0;
+
+    const paint = () => {
+      const vw = video.videoWidth;
+      const vh = video.videoHeight;
+      if (!vw || !vh) return;
+      if (canvas.width !== vw || canvas.height !== vh) {
+        canvas.width = vw;
+        canvas.height = vh;
+      }
+      ctx.drawImage(video, 0, 0, vw, vh);
+    };
+
+    const tick = () => {
+      if (!drawing) return;
+      paint();
+      if (video.requestVideoFrameCallback) {
+        rvfc = video.requestVideoFrameCallback(tick);
+      } else {
+        raf = requestAnimationFrame(tick);
+      }
+    };
+
+    const start = () => {
+      if (drawing) return;
+      drawing = true;
+      void video.play().catch(() => {});
+      tick();
+    };
+
+    const stop = () => {
+      drawing = false;
+      if (video.cancelVideoFrameCallback && rvfc) {
+        video.cancelVideoFrameCallback(rvfc);
+      }
+      cancelAnimationFrame(raf);
+      rvfc = 0;
+      raf = 0;
+    };
 
     const onScroll = () => {
-      if (window.scrollY > 2) {
-        if (!video.paused) video.pause();
-        window.clearTimeout(resume);
+      if (window.scrollY > 64) {
+        stop();
+        window.clearTimeout(pauseTimer);
+        pauseTimer = window.setTimeout(() => video.pause(), 800);
         return;
       }
-      window.clearTimeout(resume);
-      resume = window.setTimeout(play, 180);
+      window.clearTimeout(pauseTimer);
+      start();
     };
 
-    play();
-    window.addEventListener("scroll", onScroll, { passive: true });
     const onVis = () => {
-      if (document.hidden) video.pause();
-      else if (window.scrollY <= 2) play();
+      if (document.hidden) {
+        stop();
+        video.pause();
+      } else if (window.scrollY <= 64) {
+        start();
+      }
     };
+
+    video.addEventListener("loadeddata", paint);
+    window.addEventListener("scroll", onScroll, { passive: true });
     document.addEventListener("visibilitychange", onVis);
+    start();
 
     return () => {
+      stop();
+      window.clearTimeout(pauseTimer);
+      video.removeEventListener("loadeddata", paint);
       window.removeEventListener("scroll", onScroll);
       document.removeEventListener("visibilitychange", onVis);
-      window.clearTimeout(resume);
       video.pause();
     };
   }, []);
 
   return (
-    <video
-      ref={videoRef}
-      className="hero-video motion-reduce:hidden"
-      muted
-      loop
-      playsInline
-      autoPlay
-      preload="metadata"
-      poster="/videos/hero-poster.jpg"
-      width={1280}
-      height={720}
-      aria-hidden="true"
-    >
-      <source src="/videos/hero-720.mp4" media="(max-width: 767px)" type="video/mp4" />
-      <source src="/videos/hero.mp4" type="video/mp4" />
-    </video>
+    <>
+      <canvas
+        ref={canvasRef}
+        className="hero-video motion-reduce:hidden"
+        width={1280}
+        height={720}
+        aria-hidden
+      />
+      <video
+        ref={videoRef}
+        className="pointer-events-none fixed top-0 left-[-9999px] h-[90px] w-[160px] opacity-0"
+        muted
+        loop
+        playsInline
+        preload="metadata"
+        width={1280}
+        height={720}
+        aria-hidden
+        tabIndex={-1}
+      >
+        <source src="/videos/hero-720.mp4" media="(max-width: 767px)" type="video/mp4" />
+        <source src="/videos/hero.mp4" type="video/mp4" />
+      </video>
+    </>
   );
 });
 
