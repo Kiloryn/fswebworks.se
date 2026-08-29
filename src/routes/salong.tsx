@@ -297,6 +297,26 @@ function SalonDemo() {
           </form>
         </div>
       </section>
+
+      <section className="grid lg:grid-cols-2">
+        <div className="px-5 py-12 md:px-8 lg:px-16">
+          <p className="text-[11px] uppercase tracking-[0.22em] text-[#5c4338]">
+            Hitta hit
+          </p>
+          <h2 className="mt-2 font-display text-3xl italic">Nybrogatan 18</h2>
+          <p className="mt-4 max-w-sm text-sm text-[#6b574c]">
+            Östermalm, mellan Östermalmstorg och Karlaplan. Tunnelbana
+            Östermalmstorg, fem minuter till fots.
+          </p>
+        </div>
+        <iframe
+          title="Karta till Ateljé Linné"
+          src="https://maps.google.com/maps?q=Nybrogatan+18,+Stockholm&hl=sv&z=16&output=embed"
+          className="h-72 w-full border-0 lg:h-full lg:min-h-[20rem]"
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+        />
+      </section>
       <DemoExit />
     </div>
   );
