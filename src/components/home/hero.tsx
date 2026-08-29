@@ -18,9 +18,7 @@ const HeroVideo = memo(function HeroVideo() {
   const [hasFrame, setHasFrame] = useState(false);
 
   useEffect(() => {
-    const desktop = window.matchMedia("(min-width: 768px)").matches;
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (!desktop || reduce) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     setOn(true);
   }, []);
 
@@ -34,9 +32,11 @@ const HeroVideo = memo(function HeroVideo() {
     if (!ctx) return;
 
     let drawing = false;
+    let shown = false;
     let raf = 0;
     let rvfc = 0;
     let pauseTimer = 0;
+    let visible = true;
 
     const paint = () => {
       const vw = video.videoWidth;
@@ -47,7 +47,10 @@ const HeroVideo = memo(function HeroVideo() {
         canvas.height = vh;
       }
       ctx.drawImage(video, 0, 0, vw, vh);
-      setHasFrame(true);
+      if (!shown) {
+        shown = true;
+        setHasFrame(true);
+      }
     };
 
     const tick = () => {
@@ -61,8 +64,9 @@ const HeroVideo = memo(function HeroVideo() {
     };
 
     const start = () => {
-      if (drawing) return;
+      if (drawing || !visible || document.hidden) return;
       drawing = true;
+      window.clearTimeout(pauseTimer);
       void video.play().catch(() => {
         drawing = false;
       });
@@ -79,48 +83,39 @@ const HeroVideo = memo(function HeroVideo() {
       raf = 0;
     };
 
-    const onScroll = () => {
-      if (window.scrollY > 64) {
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        visible = Boolean(entry?.isIntersecting);
+        if (visible) {
+          start();
+          return;
+        }
         stop();
         window.clearTimeout(pauseTimer);
-        pauseTimer = window.setTimeout(() => video.pause(), 800);
-        return;
-      }
-      window.clearTimeout(pauseTimer);
-      start();
-    };
+        pauseTimer = window.setTimeout(() => video.pause(), 400);
+      },
+      { threshold: 0 },
+    );
+    io.observe(canvas);
 
     const onVis = () => {
       if (document.hidden) {
         stop();
         video.pause();
-      } else if (window.scrollY <= 64) {
+      } else if (visible) {
         start();
       }
     };
 
     video.addEventListener("loadeddata", paint);
-    window.addEventListener("scroll", onScroll, { passive: true });
     document.addEventListener("visibilitychange", onVis);
-    const kick = () => {
-      if (document.hidden || window.scrollY > 64) return;
-      start();
-    };
-    let idleId = 0;
-    let timeoutId = 0;
-    if (typeof window.requestIdleCallback === "function") {
-      idleId = window.requestIdleCallback(kick, { timeout: 400 });
-    } else {
-      timeoutId = window.setTimeout(kick, 180);
-    }
+    start();
 
     return () => {
       stop();
+      io.disconnect();
       window.clearTimeout(pauseTimer);
-      if (idleId) window.cancelIdleCallback(idleId);
-      if (timeoutId) window.clearTimeout(timeoutId);
       video.removeEventListener("loadeddata", paint);
-      window.removeEventListener("scroll", onScroll);
       document.removeEventListener("visibilitychange", onVis);
       video.pause();
     };
@@ -143,12 +138,13 @@ const HeroVideo = memo(function HeroVideo() {
         muted
         loop
         playsInline
-        preload="metadata"
+        preload="auto"
         width={1280}
         height={720}
         aria-hidden
         tabIndex={-1}
       >
+        <source src="/videos/hero-720.mp4" media="(max-width: 767px)" type="video/mp4" />
         <source src="/videos/hero.mp4" type="video/mp4" />
       </video>
     </>
