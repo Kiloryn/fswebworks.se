@@ -83,7 +83,15 @@
     font-family: var(--font-display);
   }
 
-  .hairline {
+  .hero-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+    backface-visibility: hidden;
+  }
     height: 1px;
     background: linear-gradient(
       90deg,

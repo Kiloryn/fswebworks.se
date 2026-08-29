@@ -8,6 +8,7 @@ import { SectionLink } from "@/components/site/section-link";
 export function Hero() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [i, setI] = useState(0);
+  const [on, setOn] = useState(false);
 
   useEffect(() => {
     if (!window.matchMedia("(min-width: 768px)").matches) return;
@@ -22,27 +23,24 @@ export function Hero() {
     if (!video) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-    const mobile = window.matchMedia("(max-width: 767px)").matches;
-    video.src = mobile ? "/videos/hero-720.mp4" : "/videos/hero.mp4";
-    video.muted = true;
-    video.playsInline = true;
-    void video.play().catch(() => {});
+    const play = () => void video.play().catch(() => {});
+    play();
 
+    // Pause only when the clip is fully off-screen. Crossing a 20% threshold
+    // while scrolling restarts the decoder and hitchar på laptop-iGPU.
     const io = new IntersectionObserver(
       ([entry]) => {
         if (!entry) return;
-        if (entry.isIntersecting) void video.play().catch(() => {});
+        if (entry.isIntersecting) play();
         else video.pause();
       },
-      { threshold: 0.2 },
+      { threshold: 0 },
     );
     io.observe(video);
 
     const onVis = () => {
       if (document.hidden) video.pause();
-      else if (video.getBoundingClientRect().bottom > 80) {
-        void video.play().catch(() => {});
-      }
+      else if (video.getBoundingClientRect().bottom > 0) play();
     };
     document.addEventListener("visibilitychange", onVis);
 
@@ -56,25 +54,34 @@ export function Hero() {
   const current = EXAMPLES[i] ?? EXAMPLES[0];
 
   return (
-    <section className="relative isolate min-h-dvh overflow-hidden [contain:paint]">
-      <img
-        src="/videos/hero-poster.jpg"
-        alt=""
-        className="absolute inset-0 size-full object-cover outline-none"
-        fetchPriority="high"
-        decoding="async"
-      />
+    <section className="relative min-h-dvh overflow-hidden">
+      {!on ? (
+        <img
+          src="/videos/hero-poster.jpg"
+          alt=""
+          className="absolute inset-0 size-full object-cover outline-none"
+          fetchPriority="high"
+          decoding="async"
+        />
+      ) : null}
       <video
         ref={videoRef}
-        className="absolute inset-0 size-full object-cover motion-reduce:hidden [transform:translateZ(0)]"
+        className="hero-video motion-reduce:hidden"
         muted
         loop
         playsInline
+        autoPlay
         preload="metadata"
         poster="/videos/hero-poster.jpg"
+        width={1280}
+        height={720}
         aria-hidden="true"
-      />
-      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgb(11_10_8_/_0.5)_0%,rgb(11_10_8_/_0.72)_42%,rgb(11_10_8_/_0.9)_100%)] md:bg-[linear-gradient(90deg,rgb(11_10_8_/_0.86)_0%,rgb(11_10_8_/_0.58)_48%,rgb(11_10_8_/_0.22)_100%)]" />
+        onPlaying={() => setOn(true)}
+      >
+        <source src="/videos/hero-720.mp4" media="(max-width: 767px)" type="video/mp4" />
+        <source src="/videos/hero.mp4" type="video/mp4" />
+      </video>
+      <div className="hero-veil pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgb(11_10_8_/_0.5)_0%,rgb(11_10_8_/_0.72)_42%,rgb(11_10_8_/_0.9)_100%)] md:bg-[linear-gradient(90deg,rgb(11_10_8_/_0.86)_0%,rgb(11_10_8_/_0.58)_48%,rgb(11_10_8_/_0.22)_100%)]" />
 
       <div className="relative mx-auto grid min-h-dvh max-w-6xl items-center gap-12 px-5 pb-16 pt-28 md:grid-cols-[1.15fr_0.85fr] md:px-8 md:pt-24">
         <div>
