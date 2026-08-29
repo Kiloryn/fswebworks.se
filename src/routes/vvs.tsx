@@ -47,6 +47,12 @@ const reviews = [
   },
 ];
 
+const team = [
+  { name: "Erik Holm", role: "Ägare, rörmokare" },
+  { name: "Amir Hassan", role: "Rörmontör" },
+  { name: "Sofia Lind", role: "Kund och planering" },
+];
+
 const faq = [
   {
     q: "Det läcker – vad gör jag?",
@@ -144,6 +150,32 @@ function VvsDemo() {
               <figcaption className="mt-4 text-sm text-[#e8b89a]">{r.name}</figcaption>
             </figure>
           ))}
+        </div>
+      </section>
+
+      <section className="border-t border-white/10">
+        <div className="mx-auto max-w-5xl px-5 py-16 md:px-8">
+          <p className="text-[11px] uppercase tracking-[0.22em] text-[#e8b89a]">
+            Folket
+          </p>
+          <h2 className="mt-2 font-display text-3xl italic">Ni pratar med dem som gör jobbet.</h2>
+          <p className="mt-3 max-w-xl text-sm text-[#c5d0c8]">
+            Här lägger vi in era foton. Tre rutor räcker – namn, roll, en bild från vardagen.
+          </p>
+          <div className="mt-10 grid gap-6 sm:grid-cols-3">
+            {team.map((p) => (
+              <article key={p.name}>
+                <div className="relative flex aspect-[3/4] flex-col items-center justify-center overflow-hidden border border-white/10 bg-[#151c21]">
+                  <span className="text-[11px] uppercase tracking-[0.22em] text-[#e8b89a]/90">
+                    Bild på personal
+                  </span>
+                  <span className="mt-2 text-xs text-[#c5d0c8]/70">Ert foto här</span>
+                </div>
+                <h3 className="mt-4 font-display text-xl italic">{p.name}</h3>
+                <p className="text-sm text-[#c5d0c8]">{p.role}</p>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
 

@@ -133,6 +133,35 @@ function ElDemo() {
       </section>
       <section className="border-t border-white/10">
         <div className="mx-auto max-w-5xl px-5 py-16 md:px-8">
+          <p className="text-[11px] uppercase tracking-[0.22em] text-[#d4a017]">
+            Folket
+          </p>
+          <h2 className="mt-2 font-display text-3xl">Vi som åker ut.</h2>
+          <p className="mt-3 max-w-xl text-sm text-[#b7c2d4]">
+            Här lägger vi in era foton. Namn, behörighet, en bild.
+          </p>
+          <div className="mt-10 grid gap-6 sm:grid-cols-3">
+            {[
+              { name: "Anna Berg", role: "Elinstallatör, A-behörig" },
+              { name: "Jonas Krantz", role: "Montör" },
+              { name: "Mikael Öberg", role: "Felavhjälpning" },
+            ].map((p) => (
+              <article key={p.name}>
+                <div className="relative flex aspect-[3/4] flex-col items-center justify-center overflow-hidden border border-white/10 bg-[#10151e]">
+                  <span className="text-[11px] uppercase tracking-[0.22em] text-[#d4a017]/90">
+                    Bild på personal
+                  </span>
+                  <span className="mt-2 text-xs text-[#b7c2d4]/70">Ert foto här</span>
+                </div>
+                <h3 className="mt-4 font-display text-xl italic">{p.name}</h3>
+                <p className="text-sm text-[#b7c2d4]">{p.role}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+      <section className="border-t border-white/10">
+        <div className="mx-auto max-w-5xl px-5 py-16 md:px-8">
           <h2 className="font-display text-3xl">Vanliga frågor</h2>
           <div className="mt-8 divide-y divide-white/10 border-y border-white/10">
             {[
