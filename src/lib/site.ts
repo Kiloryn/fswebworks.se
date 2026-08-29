@@ -184,7 +184,7 @@ export const EXAMPLES = [
     name: "Målare",
     brand: "Stockholms Måleri",
     blurb:
-      "Inomhus, utomhus och kostnadsfri offert. Ett rum som säljer hantverket.",
+      "Färg, ROT och kostnadsfri offert. Ett rum som säljer hantverket – och en sida som tar in jobb.",
     image: "/images/malare.jpg?v=5",
   },
   {
