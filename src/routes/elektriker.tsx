@@ -102,6 +102,61 @@ function ElDemo() {
           ))}
         </div>
       </section>
+      <section className="mx-auto max-w-5xl px-5 py-16 md:px-8">
+        <p className="text-[11px] uppercase tracking-[0.22em] text-[#d4a017]">
+          Recensioner
+        </p>
+        <h2 className="mt-2 font-display text-3xl">4,8 på Google</h2>
+        <div className="mt-10 grid gap-8 md:grid-cols-3">
+          {[
+            {
+              q: "Bytte elcentral i radhuset. Protokoll samma dag, försäkringsbolaget nöjda.",
+              n: "Johan, Nacka",
+            },
+            {
+              q: "Jour när säkringen löste ut en söndag. Tydligt, lugnt, inget meck.",
+              n: "Sara, Vasastan",
+            },
+            {
+              q: "A-behörig och visar det. Inte bara en lapp i fönstret.",
+              n: "BRF Eken, Bromma",
+            },
+          ].map((r) => (
+            <figure key={r.n} className="border-t border-white/15 pt-5">
+              <blockquote className="text-[15px] leading-relaxed text-[#b7c2d4]">
+                “{r.q}”
+              </blockquote>
+              <figcaption className="mt-4 text-sm text-[#d4a017]">{r.n}</figcaption>
+            </figure>
+          ))}
+        </div>
+      </section>
+      <section className="border-t border-white/10">
+        <div className="mx-auto max-w-5xl px-5 py-16 md:px-8">
+          <h2 className="font-display text-3xl">Vanliga frågor</h2>
+          <div className="mt-8 divide-y divide-white/10 border-y border-white/10">
+            {[
+              [
+                "Är ni A-behöriga?",
+                "Ja. Registrerade hos Elsäkerhetsverket. Du får protokoll efter jobbet – det som försäkringen vill ha.",
+              ],
+              [
+                "Gör ni ROT?",
+                "Ja, på arbetskostnaden för privatpersoner i befintlig bostad.",
+              ],
+              [
+                "Hur snabbt kan ni komma?",
+                "Fel samma dag när det går. Övrigt bokar vi in inom några vardagar. Stockholm och krans.",
+              ],
+            ].map(([q, a]) => (
+              <details key={q} className="py-5">
+                <summary className="cursor-pointer list-none font-medium">{q}</summary>
+                <p className="mt-3 max-w-2xl text-sm leading-relaxed text-[#b7c2d4]">{a}</p>
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
       <section id="kontakt" className="bg-[#d4a017] px-5 py-16 text-[#111] md:px-8">
         <div className="mx-auto max-w-5xl md:flex md:items-end md:justify-between">
           <div>

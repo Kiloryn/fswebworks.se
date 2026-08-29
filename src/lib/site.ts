@@ -152,7 +152,7 @@ export const EXAMPLES = [
     name: "VVS och rörmokare",
     brand: "Din Rörmokare",
     blurb:
-      "Akut jour, tydliga priser och offert. För den som vill synas när kranen går sönder.",
+      "Akut jour, recensioner och ROT. Så syns en rörmokare när någon googlar VVS Stockholm.",
     image: "/images/vvs.jpg?v=6",
   },
   {
