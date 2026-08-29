@@ -89,11 +89,23 @@ const HeroVideo = memo(function HeroVideo() {
     video.addEventListener("loadeddata", paint);
     window.addEventListener("scroll", onScroll, { passive: true });
     document.addEventListener("visibilitychange", onVis);
-    start();
+    const kick = () => {
+      if (document.hidden || window.scrollY > 64) return;
+      start();
+    };
+    let idleId = 0;
+    let timeoutId = 0;
+    if (typeof window.requestIdleCallback === "function") {
+      idleId = window.requestIdleCallback(kick, { timeout: 400 });
+    } else {
+      timeoutId = window.setTimeout(kick, 180);
+    }
 
     return () => {
       stop();
       window.clearTimeout(pauseTimer);
+      if (idleId) window.cancelIdleCallback(idleId);
+      if (timeoutId) window.clearTimeout(timeoutId);
       video.removeEventListener("loadeddata", paint);
       window.removeEventListener("scroll", onScroll);
       document.removeEventListener("visibilitychange", onVis);
@@ -129,21 +141,38 @@ const HeroVideo = memo(function HeroVideo() {
   );
 });
 
-export function Hero() {
+export const Hero = memo(function Hero() {
   const [i, setI] = useState(0);
+  const rootRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
+    const el = rootRef.current;
+    if (!el) return;
     if (!window.matchMedia("(min-width: 768px)").matches) return;
-    const id = window.setInterval(() => {
-      setI((n) => (n + 1) % EXAMPLES.length);
-    }, 3400);
-    return () => window.clearInterval(id);
+
+    let id = 0;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        window.clearInterval(id);
+        id = 0;
+        if (!entry?.isIntersecting) return;
+        id = window.setInterval(() => {
+          setI((n) => (n + 1) % EXAMPLES.length);
+        }, 3400);
+      },
+      { threshold: 0.15 },
+    );
+    io.observe(el);
+    return () => {
+      io.disconnect();
+      window.clearInterval(id);
+    };
   }, []);
 
   const current = EXAMPLES[i] ?? EXAMPLES[0];
 
   return (
-    <section className="relative min-h-dvh overflow-hidden">
+    <section ref={rootRef} className="relative min-h-dvh overflow-hidden">
       <img
         src="/videos/hero-poster.jpg"
         alt=""
@@ -221,4 +250,4 @@ export function Hero() {
       </div>
     </section>
   );
-}
+});

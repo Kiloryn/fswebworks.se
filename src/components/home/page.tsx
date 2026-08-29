@@ -1,6 +1,5 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowRight, Check, ChevronDown } from "lucide-react";
-import { useState } from "react";
 import {
   EXAMPLES,
   FAQ,
@@ -14,7 +13,6 @@ import { Reveal } from "@/components/site/reveal";
 import { Pic } from "@/components/site/pic";
 import { Hero } from "@/components/home/hero";
 import { SectionLink } from "@/components/site/section-link";
-import { cn } from "@/lib/utils";
 
 export function HomePage({ defaultSubject = "" }: { defaultSubject?: string }) {
   return (
@@ -248,41 +246,31 @@ function Process() {
 }
 
 function Faq() {
-  const [open, setOpen] = useState<number | null>(0);
   return (
-    <section className="bg-ink py-24 md:py-32">
+    <section className="cv-auto bg-ink py-24 md:py-32">
       <div className="mx-auto max-w-3xl px-5 md:px-8">
         <h2 className="text-center font-display text-[2.15rem] italic md:text-5xl">
           Vanliga frågor
         </h2>
-        <ul className="mt-12 space-y-3">
-          {FAQ.map((item, i) => {
-            const isOpen = open === i;
-            return (
-              <li key={item.q} className="rounded-xl border border-line bg-ink-2">
-                <button
-                  type="button"
-                  className="flex min-h-14 w-full items-center justify-between gap-4 px-6 py-5 text-left"
-                  aria-expanded={isOpen}
-                  onClick={() => setOpen(isOpen ? null : i)}
-                >
-                  <span className="font-display text-base leading-snug md:text-xl">{item.q}</span>
-                  <ChevronDown
-                    className={cn(
-                      "size-5 shrink-0 text-gold transition-transform duration-200",
-                      isOpen && "rotate-180",
-                    )}
-                  />
-                </button>
-                {isOpen ? (
-                  <p className="border-t border-line px-6 py-5 text-sm leading-relaxed text-muted">
-                    {item.a}
-                  </p>
-                ) : null}
-              </li>
-            );
-          })}
-        </ul>
+        <div className="mt-12 space-y-3">
+          {FAQ.map((item, i) => (
+            <details
+              key={item.q}
+              className="group rounded-xl border border-line bg-ink-2"
+              open={i === 0}
+            >
+              <summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-4 px-6 py-5 text-left marker:content-none [&::-webkit-details-marker]:hidden">
+                <span className="font-display text-base leading-snug md:text-xl">
+                  {item.q}
+                </span>
+                <ChevronDown className="size-5 shrink-0 text-gold transition-transform duration-200 group-open:rotate-180" />
+              </summary>
+              <p className="border-t border-line px-6 py-5 text-sm leading-relaxed text-muted">
+                {item.a}
+              </p>
+            </details>
+          ))}
+        </div>
       </div>
     </section>
   );

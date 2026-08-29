@@ -119,6 +119,11 @@
     filter: none;
   }
 
+  .cv-auto {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 720px;
+  }
+
   .marquee-track {
     animation: marquee 36s linear infinite;
   }
