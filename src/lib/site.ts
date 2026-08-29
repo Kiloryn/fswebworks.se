@@ -168,7 +168,7 @@ export const EXAMPLES = [
     name: "Salong och skönhet",
     brand: "Ateljé Linné",
     blurb:
-      "Behandlingar, priser och bokning. Låt kunden känna stämningen redan på startsidan.",
+      "Boka tid, frisör med namn och prislista. Det en salong behöver för att fylla stolen.",
     image: "/images/salong.jpg?v=5",
   },
   {
