@@ -90,8 +90,11 @@
     height: 100%;
     object-fit: cover;
     pointer-events: none;
-    backface-visibility: hidden;
+    /* Kick the clip off Chromium's hardware overlay so it scrolls with the page. */
+    opacity: 0.999;
   }
+
+  .hairline {
     height: 1px;
     background: linear-gradient(
       90deg,
