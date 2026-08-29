@@ -49,8 +49,8 @@ function VvsDemo() {
       </a>
       <section className="relative isolate">
         <Pic
-          src="/images/hero-workshop.jpg?v=5"
-          alt="Badrumsrenovering med synliga rör"
+          src="/images/vvs.jpg?v=6"
+          alt="Rörmokare drar åt kopparrör"
           className="h-[70dvh] w-full object-cover md:h-[85vh]"
           width={1400}
           height={788}

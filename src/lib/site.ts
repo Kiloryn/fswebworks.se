@@ -153,7 +153,7 @@ export const EXAMPLES = [
     brand: "Din Rörmokare",
     blurb:
       "Akut jour, tydliga priser och offert. För den som vill synas när kranen går sönder.",
-    image: "/images/hero-workshop.jpg?v=5",
+    image: "/images/vvs.jpg?v=6",
   },
   {
     slug: "elektriker",
