@@ -4,6 +4,7 @@ import { EXAMPLES, PROMISES } from "@/lib/site";
 import { Button } from "@/components/ui/button";
 import { Pic } from "@/components/site/pic";
 import { SectionLink } from "@/components/site/section-link";
+import { cn } from "@/lib/utils";
 
 type RVFCVideo = HTMLVideoElement & {
   requestVideoFrameCallback?: (cb: () => void) => number;
@@ -13,12 +14,21 @@ type RVFCVideo = HTMLVideoElement & {
 const HeroVideo = memo(function HeroVideo() {
   const videoRef = useRef<RVFCVideo>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [on, setOn] = useState(false);
+  const [hasFrame, setHasFrame] = useState(false);
 
   useEffect(() => {
+    const desktop = window.matchMedia("(min-width: 768px)").matches;
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!desktop || reduce) return;
+    setOn(true);
+  }, []);
+
+  useEffect(() => {
+    if (!on) return;
     const video = videoRef.current;
     const canvas = canvasRef.current;
     if (!video || !canvas) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     const ctx = canvas.getContext("2d", { alpha: false, desynchronized: true });
     if (!ctx) return;
@@ -37,6 +47,7 @@ const HeroVideo = memo(function HeroVideo() {
         canvas.height = vh;
       }
       ctx.drawImage(video, 0, 0, vw, vh);
+      setHasFrame(true);
     };
 
     const tick = () => {
@@ -52,7 +63,9 @@ const HeroVideo = memo(function HeroVideo() {
     const start = () => {
       if (drawing) return;
       drawing = true;
-      void video.play().catch(() => {});
+      void video.play().catch(() => {
+        drawing = false;
+      });
       tick();
     };
 
@@ -111,13 +124,15 @@ const HeroVideo = memo(function HeroVideo() {
       document.removeEventListener("visibilitychange", onVis);
       video.pause();
     };
-  }, []);
+  }, [on]);
+
+  if (!on) return null;
 
   return (
     <>
       <canvas
         ref={canvasRef}
-        className="hero-video motion-reduce:hidden"
+        className={cn("hero-video", !hasFrame && "opacity-0")}
         width={1280}
         height={720}
         aria-hidden
@@ -134,7 +149,6 @@ const HeroVideo = memo(function HeroVideo() {
         aria-hidden
         tabIndex={-1}
       >
-        <source src="/videos/hero-720.mp4" media="(max-width: 767px)" type="video/mp4" />
         <source src="/videos/hero.mp4" type="video/mp4" />
       </video>
     </>
@@ -182,7 +196,7 @@ export const Hero = memo(function Hero() {
         aria-hidden
       />
       <HeroVideo />
-      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgb(11_10_8_/_0.5)_0%,rgb(11_10_8_/_0.72)_42%,rgb(11_10_8_/_0.9)_100%)] md:bg-[linear-gradient(90deg,rgb(11_10_8_/_0.86)_0%,rgb(11_10_8_/_0.58)_48%,rgb(11_10_8_/_0.22)_100%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgb(11_10_8_/_0.38)_0%,rgb(11_10_8_/_0.62)_48%,rgb(11_10_8_/_0.82)_100%)] md:bg-[linear-gradient(90deg,rgb(11_10_8_/_0.86)_0%,rgb(11_10_8_/_0.58)_48%,rgb(11_10_8_/_0.22)_100%)]" />
 
       <div className="relative mx-auto grid min-h-dvh max-w-6xl items-center gap-12 px-5 pb-16 pt-28 md:grid-cols-[1.15fr_0.85fr] md:px-8 md:pt-24">
         <div>
