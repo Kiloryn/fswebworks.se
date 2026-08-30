@@ -11,19 +11,59 @@ type RVFCVideo = HTMLVideoElement & {
   cancelVideoFrameCallback?: (handle: number) => void;
 };
 
-const HeroVideo = memo(function HeroVideo() {
+const NativeHeroVideo = memo(function NativeHeroVideo() {
+  const ref = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const video = ref.current;
+    if (!video) return;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry?.isIntersecting && !document.hidden) {
+          void video.play().catch(() => {});
+        } else {
+          video.pause();
+        }
+      },
+      { threshold: 0 },
+    );
+    io.observe(video);
+    const onVis = () => {
+      if (document.hidden) video.pause();
+      else void video.play().catch(() => {});
+    };
+    document.addEventListener("visibilitychange", onVis);
+    void video.play().catch(() => {});
+    return () => {
+      io.disconnect();
+      document.removeEventListener("visibilitychange", onVis);
+      video.pause();
+    };
+  }, []);
+
+  return (
+    <video
+      ref={ref}
+      className="hero-video"
+      poster="/videos/hero-poster.jpg"
+      muted
+      loop
+      playsInline
+      autoPlay
+      preload="auto"
+      aria-hidden
+    >
+      <source src="/videos/hero-720.mp4" type="video/mp4" />
+    </video>
+  );
+});
+
+const CanvasHeroVideo = memo(function CanvasHeroVideo() {
   const videoRef = useRef<RVFCVideo>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [on, setOn] = useState(false);
   const [hasFrame, setHasFrame] = useState(false);
 
   useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    setOn(true);
-  }, []);
-
-  useEffect(() => {
-    if (!on) return;
     const video = videoRef.current;
     const canvas = canvasRef.current;
     if (!video || !canvas) return;
@@ -86,13 +126,12 @@ const HeroVideo = memo(function HeroVideo() {
     const io = new IntersectionObserver(
       ([entry]) => {
         visible = Boolean(entry?.isIntersecting);
-        if (visible) {
-          start();
-          return;
+        if (visible) start();
+        else {
+          stop();
+          window.clearTimeout(pauseTimer);
+          pauseTimer = window.setTimeout(() => video.pause(), 400);
         }
-        stop();
-        window.clearTimeout(pauseTimer);
-        pauseTimer = window.setTimeout(() => video.pause(), 400);
       },
       { threshold: 0 },
     );
@@ -102,9 +141,7 @@ const HeroVideo = memo(function HeroVideo() {
       if (document.hidden) {
         stop();
         video.pause();
-      } else if (visible) {
-        start();
-      }
+      } else if (visible) start();
     };
 
     video.addEventListener("playing", start);
@@ -119,15 +156,13 @@ const HeroVideo = memo(function HeroVideo() {
       document.removeEventListener("visibilitychange", onVis);
       video.pause();
     };
-  }, [on]);
-
-  if (!on) return null;
+  }, []);
 
   return (
     <>
       <canvas
         ref={canvasRef}
-        className={cn("hero-video", !hasFrame && "hidden")}
+        className={cn("hero-video", !hasFrame && "opacity-0")}
         width={1280}
         height={720}
         aria-hidden
@@ -144,11 +179,23 @@ const HeroVideo = memo(function HeroVideo() {
         aria-hidden
         tabIndex={-1}
       >
-        <source src="/videos/hero-720.mp4" media="(max-width: 767px)" type="video/mp4" />
         <source src="/videos/hero.mp4" type="video/mp4" />
       </video>
     </>
   );
+});
+
+const HeroVideo = memo(function HeroVideo() {
+  const [mode, setMode] = useState<"none" | "native" | "canvas">("none");
+
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    setMode(window.matchMedia("(max-width: 767px)").matches ? "native" : "canvas");
+  }, []);
+
+  if (mode === "native") return <NativeHeroVideo />;
+  if (mode === "canvas") return <CanvasHeroVideo />;
+  return null;
 });
 
 export const Hero = memo(function Hero() {
