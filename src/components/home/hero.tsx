@@ -41,21 +41,21 @@ const HeroVideo = memo(function HeroVideo() {
     const paint = () => {
       const vw = video.videoWidth;
       const vh = video.videoHeight;
-      if (!vw || !vh) return;
+      if (!vw || !vh || video.readyState < 2) return false;
       if (canvas.width !== vw || canvas.height !== vh) {
         canvas.width = vw;
         canvas.height = vh;
       }
       ctx.drawImage(video, 0, 0, vw, vh);
-      if (!shown) {
-        shown = true;
-        setHasFrame(true);
-      }
+      return true;
     };
 
     const tick = () => {
       if (!drawing) return;
-      paint();
+      if (paint() && !shown) {
+        shown = true;
+        setHasFrame(true);
+      }
       if (video.requestVideoFrameCallback) {
         rvfc = video.requestVideoFrameCallback(tick);
       } else {
@@ -96,7 +96,7 @@ const HeroVideo = memo(function HeroVideo() {
       },
       { threshold: 0 },
     );
-    io.observe(canvas);
+    io.observe(canvas.parentElement ?? canvas);
 
     const onVis = () => {
       if (document.hidden) {
@@ -107,15 +107,15 @@ const HeroVideo = memo(function HeroVideo() {
       }
     };
 
-    video.addEventListener("loadeddata", paint);
+    video.addEventListener("playing", start);
     document.addEventListener("visibilitychange", onVis);
-    start();
+    void video.play().catch(() => {});
 
     return () => {
       stop();
       io.disconnect();
       window.clearTimeout(pauseTimer);
-      video.removeEventListener("loadeddata", paint);
+      video.removeEventListener("playing", start);
       document.removeEventListener("visibilitychange", onVis);
       video.pause();
     };
@@ -127,7 +127,7 @@ const HeroVideo = memo(function HeroVideo() {
     <>
       <canvas
         ref={canvasRef}
-        className={cn("hero-video", !hasFrame && "opacity-0")}
+        className={cn("hero-video", !hasFrame && "hidden")}
         width={1280}
         height={720}
         aria-hidden
@@ -182,7 +182,11 @@ export const Hero = memo(function Hero() {
   const current = EXAMPLES[i] ?? EXAMPLES[0];
 
   return (
-    <section ref={rootRef} className="relative min-h-dvh overflow-hidden">
+    <section
+      ref={rootRef}
+      className="relative min-h-dvh overflow-hidden bg-ink bg-cover bg-center"
+      style={{ backgroundImage: "url(/videos/hero-poster.jpg)" }}
+    >
       <img
         src="/videos/hero-poster.jpg"
         alt=""
