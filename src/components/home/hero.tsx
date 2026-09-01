@@ -11,35 +11,65 @@ type RVFCVideo = HTMLVideoElement & {
   cancelVideoFrameCallback?: (handle: number) => void;
 };
 
-const NativeHeroVideo = memo(function NativeHeroVideo() {
+type SectionRef = { current: HTMLElement | null };
+
+function heroIsOnScreen(el: HTMLElement) {
+  const r = el.getBoundingClientRect();
+  const vh = window.visualViewport?.height ?? window.innerHeight;
+  return r.bottom > 8 && r.top < vh - 8;
+}
+
+function watchHeroOnScreen(el: HTMLElement, onShow: () => void, onHide: () => void) {
+  let timer = 0;
+  const apply = () => {
+    if (heroIsOnScreen(el)) {
+      window.clearTimeout(timer);
+      onShow();
+      return;
+    }
+    window.clearTimeout(timer);
+    timer = window.setTimeout(() => {
+      if (!heroIsOnScreen(el)) onHide();
+    }, 320);
+  };
+  const io = new IntersectionObserver(apply, { threshold: 0 });
+  io.observe(el);
+  apply();
+  return () => {
+    io.disconnect();
+    window.clearTimeout(timer);
+  };
+}
+
+const NativeHeroVideo = memo(function NativeHeroVideo({
+  sectionRef,
+}: {
+  sectionRef: SectionRef;
+}) {
   const ref = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     const video = ref.current;
-    if (!video) return;
-    const io = new IntersectionObserver(
-      ([entry]) => {
-        if (entry?.isIntersecting && !document.hidden) {
-          void video.play().catch(() => {});
-        } else {
-          video.pause();
-        }
-      },
-      { threshold: 0 },
-    );
-    io.observe(video);
+    const section = sectionRef.current;
+    if (!video || !section) return;
+    const show = () => {
+      void video.play().catch(() => {});
+    };
+    const hide = () => {
+      video.pause();
+    };
+    const stopWatch = watchHeroOnScreen(section, show, hide);
     const onVis = () => {
-      if (document.hidden) video.pause();
-      else void video.play().catch(() => {});
+      if (document.hidden) hide();
+      else if (heroIsOnScreen(section)) show();
     };
     document.addEventListener("visibilitychange", onVis);
-    void video.play().catch(() => {});
     return () => {
-      io.disconnect();
+      stopWatch();
       document.removeEventListener("visibilitychange", onVis);
       video.pause();
     };
-  }, []);
+  }, [sectionRef]);
 
   return (
     <video
@@ -58,7 +88,11 @@ const NativeHeroVideo = memo(function NativeHeroVideo() {
   );
 });
 
-const CanvasHeroVideo = memo(function CanvasHeroVideo() {
+const CanvasHeroVideo = memo(function CanvasHeroVideo({
+  sectionRef,
+}: {
+  sectionRef: SectionRef;
+}) {
   const videoRef = useRef<RVFCVideo>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [hasFrame, setHasFrame] = useState(false);
@@ -66,17 +100,16 @@ const CanvasHeroVideo = memo(function CanvasHeroVideo() {
   useEffect(() => {
     const video = videoRef.current;
     const canvas = canvasRef.current;
-    if (!video || !canvas) return;
+    const section = sectionRef.current;
+    if (!video || !canvas || !section) return;
 
-    const ctx = canvas.getContext("2d", { alpha: false, desynchronized: true });
+    const ctx = canvas.getContext("2d", { alpha: false });
     if (!ctx) return;
 
     let drawing = false;
     let shown = false;
     let raf = 0;
     let rvfc = 0;
-    let pauseTimer = 0;
-    let visible = true;
 
     const paint = () => {
       const vw = video.videoWidth;
@@ -104,9 +137,8 @@ const CanvasHeroVideo = memo(function CanvasHeroVideo() {
     };
 
     const start = () => {
-      if (drawing || !visible || document.hidden) return;
+      if (drawing || document.hidden) return;
       drawing = true;
-      window.clearTimeout(pauseTimer);
       void video.play().catch(() => {
         drawing = false;
       });
@@ -121,42 +153,25 @@ const CanvasHeroVideo = memo(function CanvasHeroVideo() {
       cancelAnimationFrame(raf);
       rvfc = 0;
       raf = 0;
-    };
-
-    const io = new IntersectionObserver(
-      ([entry]) => {
-        visible = Boolean(entry?.isIntersecting);
-        if (visible) start();
-        else {
-          stop();
-          window.clearTimeout(pauseTimer);
-          pauseTimer = window.setTimeout(() => video.pause(), 400);
-        }
-      },
-      { threshold: 0 },
-    );
-    io.observe(canvas.parentElement ?? canvas);
-
-    const onVis = () => {
-      if (document.hidden) {
-        stop();
-        video.pause();
-      } else if (visible) start();
-    };
-
-    video.addEventListener("playing", start);
-    document.addEventListener("visibilitychange", onVis);
-    void video.play().catch(() => {});
-
-    return () => {
-      stop();
-      io.disconnect();
-      window.clearTimeout(pauseTimer);
-      video.removeEventListener("playing", start);
-      document.removeEventListener("visibilitychange", onVis);
       video.pause();
     };
-  }, []);
+
+    const stopWatch = watchHeroOnScreen(section, start, stop);
+    const onVis = () => {
+      if (document.hidden) stop();
+      else if (heroIsOnScreen(section)) start();
+    };
+    video.addEventListener("playing", start);
+    document.addEventListener("visibilitychange", onVis);
+    start();
+
+    return () => {
+      stopWatch();
+      stop();
+      video.removeEventListener("playing", start);
+      document.removeEventListener("visibilitychange", onVis);
+    };
+  }, [sectionRef]);
 
   return (
     <>
@@ -185,7 +200,11 @@ const CanvasHeroVideo = memo(function CanvasHeroVideo() {
   );
 });
 
-const HeroVideo = memo(function HeroVideo() {
+const HeroVideo = memo(function HeroVideo({
+  sectionRef,
+}: {
+  sectionRef: SectionRef;
+}) {
   const [mode, setMode] = useState<"none" | "native" | "canvas">("none");
 
   useEffect(() => {
@@ -193,8 +212,8 @@ const HeroVideo = memo(function HeroVideo() {
     setMode(window.matchMedia("(max-width: 767px)").matches ? "native" : "canvas");
   }, []);
 
-  if (mode === "native") return <NativeHeroVideo />;
-  if (mode === "canvas") return <CanvasHeroVideo />;
+  if (mode === "native") return <NativeHeroVideo sectionRef={sectionRef} />;
+  if (mode === "canvas") return <CanvasHeroVideo sectionRef={sectionRef} />;
   return null;
 });
 
@@ -242,7 +261,7 @@ export const Hero = memo(function Hero() {
         decoding="async"
         aria-hidden
       />
-      <HeroVideo />
+      <HeroVideo sectionRef={rootRef} />
       <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgb(11_10_8_/_0.38)_0%,rgb(11_10_8_/_0.62)_48%,rgb(11_10_8_/_0.82)_100%)] md:bg-[linear-gradient(90deg,rgb(11_10_8_/_0.86)_0%,rgb(11_10_8_/_0.58)_48%,rgb(11_10_8_/_0.22)_100%)]" />
 
       <div className="relative mx-auto grid min-h-dvh max-w-6xl items-center gap-12 px-5 pb-16 pt-28 md:grid-cols-[1.15fr_0.85fr] md:px-8 md:pt-24">
