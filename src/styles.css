@@ -38,6 +38,7 @@
 
 @layer base {
   html {
+    color-scheme: dark;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
@@ -75,6 +76,11 @@
   img {
     outline: 1px solid rgb(255 255 255 / 0.08);
     outline-offset: -1px;
+  }
+
+  .bg-paper,
+  .bg-paper-2 {
+    color-scheme: light;
   }
 }
 
