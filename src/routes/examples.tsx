@@ -24,7 +24,7 @@ export const Route = createFileRoute("/examples")({
 function ExamplesPage() {
   return (
     <SiteLayout>
-      <div className="bg-ink pt-28">
+      <div className="bg-canvas pt-28">
         <div className="mx-auto max-w-6xl px-5 pb-16 md:px-8">
           <PageBack />
           <p className="text-[11px] uppercase tracking-[0.24em] text-gold">

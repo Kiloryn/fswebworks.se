@@ -1,20 +1,59 @@
 @import "tailwindcss";
 
+:root {
+  --bg: #f3eee5;
+  --bg-2: #ebe4d6;
+  --bg-3: #e0d7c8;
+  --fg: #1c1a16;
+  --muted: #5c564c;
+  --subtle: #6a635a;
+  --paper: #faf7f1;
+  --paper-2: #ffffff;
+  --line: rgb(28 26 22 / 0.12);
+  --elev-card:
+    0 0 0 1px rgb(28 26 22 / 0.08),
+    0 18px 40px -24px rgb(28 26 22 / 0.2);
+  --elev-lift:
+    0 0 0 1px rgb(28 26 22 / 0.12),
+    0 22px 50px -20px rgb(28 26 22 / 0.22);
+}
+
+html.dark {
+  --bg: #0b0a08;
+  --bg-2: #141311;
+  --bg-3: #1c1a16;
+  --fg: #f5f1ea;
+  --muted: #c9c2b4;
+  --subtle: #534e46;
+  --paper: #f4efe6;
+  --paper-2: #ebe4d6;
+  --line: rgb(200 164 110 / 0.22);
+  --elev-card:
+    0 0 0 1px rgb(200 164 110 / 0.14),
+    0 18px 40px -24px rgb(0 0 0 / 0.55);
+  --elev-lift:
+    0 0 0 1px rgb(200 164 110 / 0.28),
+    0 22px 50px -20px rgb(0 0 0 / 0.6);
+}
+
 @theme {
-  --color-ink: #0b0a08;
-  --color-ink-2: #141311;
-  --color-ink-3: #1c1a16;
-  --color-paper: #f4efe6;
-  --color-paper-2: #ebe4d6;
+  --color-canvas: var(--bg);
+  --color-canvas-2: var(--bg-2);
+  --color-canvas-3: var(--bg-3);
+  --color-ink: #1c1a16;
+  --color-ink-2: var(--bg-2);
+  --color-ink-3: var(--bg-3);
+  --color-paper: var(--paper);
+  --color-paper-2: var(--paper-2);
   --color-gold: #c8a46e;
   --color-gold-2: #d4b480;
   --color-mark: #c8de6e;
   --color-brass: #8a6234;
   --color-gold-fg: #1a150c;
-  --color-fg: #f5f1ea;
-  --color-muted: #c9c2b4;
-  --color-subtle: #534e46;
-  --color-line: rgb(200 164 110 / 0.22);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-subtle: var(--subtle);
+  --color-line: var(--line);
   --color-danger: #c45c3a;
 
   --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif;
@@ -26,26 +65,26 @@
   --radius-lg: 18px;
   --radius-xl: 28px;
 
-  --shadow-card:
-    0 0 0 1px rgb(200 164 110 / 0.14),
-    0 18px 40px -24px rgb(0 0 0 / 0.55);
-  --shadow-lift:
-    0 0 0 1px rgb(200 164 110 / 0.28),
-    0 22px 50px -20px rgb(0 0 0 / 0.6);
+  --shadow-card: var(--elev-card);
+  --shadow-lift: var(--elev-lift);
 
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 @layer base {
   html {
-    color-scheme: dark;
+    color-scheme: light;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
+  html.dark {
+    color-scheme: dark;
+  }
+
   body {
-    background: var(--color-ink);
-    color: var(--color-fg);
+    background: var(--bg);
+    color: var(--fg);
     font-family: var(--font-sans);
     min-height: 100dvh;
   }

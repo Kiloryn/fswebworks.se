@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/site/logo";
 import { SectionLink } from "@/components/site/section-link";
 import { scrollToTop } from "@/lib/scroll-to";
+import { ThemeToggle } from "@/lib/theme";
 
 const SECTION_IDS = NAV.map((item) => item.section);
 
@@ -62,10 +63,10 @@ export function SiteHeader({ ink = true }: { ink?: boolean }) {
   return (
     <header
       className={cn(
-        "fixed inset-x-0 top-0 z-50 transition-[background-color,border-color] duration-200",
+        "fixed inset-x-0 top-0 z-50 transition-[background-color,border-color,color] duration-200",
         solid
-          ? "border-b border-line bg-ink"
-          : "border-b border-transparent bg-transparent",
+          ? "border-b border-line bg-canvas text-fg"
+          : "border-b border-transparent bg-transparent text-[#f5f1ea]",
       )}
     >
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 md:h-[4.25rem] md:px-8">
@@ -82,7 +83,7 @@ export function SiteHeader({ ink = true }: { ink?: boolean }) {
                 aria-current={active ? "page" : undefined}
                 className={cn(
                   "text-[15px] font-medium tracking-wide transition-colors duration-150 hover:text-gold",
-                  active ? "text-gold" : "text-fg/90",
+                  active ? "text-gold" : solid ? "text-fg/90" : "text-[#f5f1ea]/90",
                 )}
               >
                 {item.label}
@@ -91,6 +92,7 @@ export function SiteHeader({ ink = true }: { ink?: boolean }) {
           })}
         </nav>
         <div className="flex items-center gap-2">
+          <ThemeToggle className="hidden md:flex" />
           <Button asChild size="md" className="h-10 px-3 text-sm md:h-11 md:px-5">
             <SectionLink section="contact">
               <span className="md:hidden">Offert</span>
@@ -99,7 +101,10 @@ export function SiteHeader({ ink = true }: { ink?: boolean }) {
           </Button>
           <button
             type="button"
-            className="inline-flex size-11 items-center justify-center rounded-md text-fg md:hidden"
+            className={cn(
+              "inline-flex size-11 items-center justify-center rounded-md md:hidden",
+              solid ? "text-fg" : "text-[#f5f1ea]",
+            )}
             aria-label={open ? "Stäng meny" : "Öppna meny"}
             aria-expanded={open}
             onClick={() => setOpen((v) => !v)}
@@ -109,7 +114,7 @@ export function SiteHeader({ ink = true }: { ink?: boolean }) {
         </div>
       </div>
       {open ? (
-        <div className="border-t border-line bg-ink px-5 py-5 md:hidden">
+        <div className="border-t border-line bg-canvas px-5 py-5 text-fg md:hidden">
           <nav className="flex flex-col gap-1" aria-label="Mobilmeny">
             <Link
               to="/"
@@ -138,6 +143,7 @@ export function SiteHeader({ ink = true }: { ink?: boolean }) {
               );
             })}
           </nav>
+          <ThemeToggle className="mt-4 w-full justify-stretch *:flex-1" />
         </div>
       ) : null}
     </header>

@@ -113,7 +113,7 @@ function Services() {
   if (!main) return null;
 
   return (
-    <section id="priser" className="scroll-mt-24 bg-ink py-24 md:py-32">
+    <section id="priser" className="scroll-mt-24 bg-canvas py-24 md:py-32">
       <div className="mx-auto max-w-6xl px-5 md:px-8">
         <Reveal>
           <p className="text-[11px] uppercase tracking-[0.24em] text-gold">
@@ -247,7 +247,7 @@ function Process() {
 
 function Faq() {
   return (
-    <section className="cv-auto bg-ink py-24 md:py-32">
+    <section className="cv-auto bg-canvas py-24 md:py-32">
       <div className="mx-auto max-w-3xl px-5 md:px-8">
         <h2 className="text-center font-display text-[2.15rem] italic md:text-5xl">
           Vanliga frågor
@@ -298,7 +298,7 @@ function Contact({ defaultSubject }: { defaultSubject: string }) {
             fredrik@fswebworks.se
           </a>
         </div>
-        <div className="rounded-xl bg-ink p-6 text-fg md:p-8">
+        <div className="rounded-xl bg-canvas p-6 text-fg md:p-8">
           <ContactForm defaultSubject={defaultSubject} />
         </div>
       </div>

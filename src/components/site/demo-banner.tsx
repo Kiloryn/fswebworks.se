@@ -6,7 +6,7 @@ import { SectionLink } from "@/components/site/section-link";
 
 export function DemoBanner({ current }: { current: string }) {
   return (
-    <div className="sticky top-0 z-[60] border-b border-gold/30 bg-ink text-fg">
+    <div className="sticky top-0 z-[60] border-b border-gold/30 bg-canvas text-fg">
       <div className="mx-auto flex h-14 max-w-6xl items-center gap-2 px-3 md:h-16 md:gap-3 md:px-8">
         <Link
           to="/"
@@ -49,7 +49,7 @@ export function DemoBanner({ current }: { current: string }) {
 
 export function DemoExit() {
   return (
-    <div className="border-t border-gold/25 bg-ink px-5 py-8 text-center text-fg">
+    <div className="border-t border-gold/25 bg-canvas px-5 py-8 text-center text-fg">
       <p className="text-[12px] uppercase tracking-[0.18em] text-gold">
         Exempelsida
       </p>

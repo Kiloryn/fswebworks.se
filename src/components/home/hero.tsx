@@ -250,7 +250,7 @@ export const Hero = memo(function Hero() {
   return (
     <section
       ref={rootRef}
-      className="relative min-h-dvh overflow-hidden bg-ink bg-cover bg-center"
+      className="relative min-h-dvh overflow-hidden bg-canvas bg-cover bg-center"
       style={{ backgroundImage: "url(/videos/hero-poster.jpg)" }}
     >
       <img
@@ -265,14 +265,14 @@ export const Hero = memo(function Hero() {
       <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgb(11_10_8_/_0.38)_0%,rgb(11_10_8_/_0.62)_48%,rgb(11_10_8_/_0.82)_100%)] md:bg-[linear-gradient(90deg,rgb(11_10_8_/_0.86)_0%,rgb(11_10_8_/_0.58)_48%,rgb(11_10_8_/_0.22)_100%)]" />
 
       <div className="relative mx-auto grid min-h-dvh max-w-6xl items-center gap-12 px-5 pb-16 pt-28 md:grid-cols-[1.15fr_0.85fr] md:px-8 md:pt-24">
-        <div>
+        <div className="text-[#f5f1ea]">
           <p className="text-[11px] uppercase tracking-[0.28em] text-mark">
             Webbdesign för småföretag
           </p>
-          <h1 className="mt-5 max-w-[14ch] font-display text-[2.35rem] leading-[1.05] text-fg italic sm:text-5xl md:text-[4.1rem]">
+          <h1 className="mt-5 max-w-[14ch] font-display text-[2.35rem] leading-[1.05] italic sm:text-5xl md:text-[4.1rem]">
             En hemsida som ser ut som ditt hantverk.
           </h1>
-          <p className="mt-6 max-w-md text-lg leading-relaxed text-muted md:text-xl">
+          <p className="mt-6 max-w-md text-lg leading-relaxed text-[#c9c2b4] md:text-xl">
             Professionella hemsidor för hantverkare och småföretag i hela
             Sverige. Från 9 900 kr, ingen bindning – du äger sidan själv.
           </p>
@@ -283,13 +283,18 @@ export const Hero = memo(function Hero() {
                 <ArrowRight className="size-4" />
               </SectionLink>
             </Button>
-            <Button asChild variant="ghost" size="xl" className="w-full sm:w-auto">
+            <Button
+              asChild
+              variant="ghost"
+              size="xl"
+              className="w-full border-white/30 text-[#f5f1ea] hover:bg-white/10 sm:w-auto"
+            >
               <SectionLink section="exempel">
                 Se exempel
               </SectionLink>
             </Button>
           </div>
-          <ul className="mt-10 flex flex-wrap gap-x-5 gap-y-2 text-sm text-muted">
+          <ul className="mt-10 flex flex-wrap gap-x-5 gap-y-2 text-sm text-[#c9c2b4]">
             {PROMISES.map((p) => (
               <li key={p} className="flex items-center gap-2">
                 <span className="size-1.5 rounded-full bg-mark" />
@@ -308,7 +313,7 @@ export const Hero = memo(function Hero() {
               <span className="size-2 rounded-full bg-fg/20" />
               <span className="size-2 rounded-full bg-fg/20" />
               <span className="size-2 rounded-full bg-fg/20" />
-              <span className="ml-2 truncate rounded-sm bg-ink px-2 py-0.5 text-[10px] text-muted" aria-hidden>
+              <span className="ml-2 truncate rounded-sm bg-canvas px-2 py-0.5 text-[10px] text-muted" aria-hidden>
                 exempel · {current.name}
               </span>
             </div>

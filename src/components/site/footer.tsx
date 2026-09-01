@@ -6,7 +6,7 @@ import { scrollToTop } from "@/lib/scroll-to";
 
 export function SiteFooter() {
   return (
-    <footer className="border-t border-line bg-ink">
+    <footer className="border-t border-line bg-canvas">
       <div className="mx-auto grid max-w-6xl gap-10 px-5 py-14 md:grid-cols-[1.4fr_1fr_1fr] md:px-8">
         <div>
           <Logo onInk />
