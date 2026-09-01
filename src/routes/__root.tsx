@@ -7,7 +7,7 @@ import { ThemeProvider } from "@/lib/theme";
 import { SITE } from "@/lib/site";
 import appCss from "../styles.css?url";
 
-const THEME_BOOT = `(function(){try{if(localStorage.getItem('fswebworks-theme')==='dark')document.documentElement.classList.add('dark')}catch(e){}})();`;
+const THEME_BOOT = `(function(){try{var d=localStorage.getItem('fswebworks-theme')==='dark';var r=document.documentElement;r.classList.toggle('dark',d);r.style.colorScheme=d?'only dark':'only light'}catch(e){}})();`;
 
 export const Route = createRootRoute({
   head: () => ({
@@ -17,7 +17,7 @@ export const Route = createRootRoute({
       { title: `${SITE.name} – ${SITE.tagline}` },
       { name: "description", content: SITE.description },
       { name: "theme-color", content: "#F3EEE5" },
-      { name: "color-scheme", content: "light dark" },
+      { name: "color-scheme", content: "only light" },
     ],
     links: [
       { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },

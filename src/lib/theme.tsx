@@ -12,12 +12,22 @@ export type Theme = "light" | "dark";
 
 const STORAGE_KEY = "fswebworks-theme";
 
+function scheme(theme: Theme) {
+  return theme === "dark" ? "only dark" : "only light";
+}
+
 function applyTheme(theme: Theme) {
   const root = document.documentElement;
   root.classList.toggle("dark", theme === "dark");
-  root.style.colorScheme = theme;
-  const meta = document.querySelector('meta[name="theme-color"]');
-  meta?.setAttribute("content", theme === "dark" ? "#0B0A08" : "#F3EEE5");
+  root.style.colorScheme = scheme(theme);
+  document.querySelector('meta[name="theme-color"]')?.setAttribute(
+    "content",
+    theme === "dark" ? "#0B0A08" : "#F3EEE5",
+  );
+  document.querySelector('meta[name="color-scheme"]')?.setAttribute(
+    "content",
+    scheme(theme),
+  );
 }
 
 const ThemeContext = createContext<{

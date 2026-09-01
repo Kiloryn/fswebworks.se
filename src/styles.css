@@ -73,13 +73,13 @@ html.dark {
 
 @layer base {
   html {
-    color-scheme: light;
+    color-scheme: only light;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
   html.dark {
-    color-scheme: dark;
+    color-scheme: only dark;
   }
 
   body {
