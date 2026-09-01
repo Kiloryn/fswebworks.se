@@ -22,7 +22,7 @@ function applyTheme(theme: Theme) {
   root.style.colorScheme = scheme(theme);
   document.querySelector('meta[name="theme-color"]')?.setAttribute(
     "content",
-    theme === "dark" ? "#0B0A08" : "#F3EEE5",
+    "#0B0A08",
   );
   document.querySelector('meta[name="color-scheme"]')?.setAttribute(
     "content",

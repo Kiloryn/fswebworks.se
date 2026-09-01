@@ -66,7 +66,7 @@ export function SiteHeader({ ink = true }: { ink?: boolean }) {
         "fixed inset-x-0 top-0 z-50 transition-[background-color,border-color,color] duration-200",
         solid
           ? "border-b border-line bg-canvas text-fg"
-          : "border-b border-transparent bg-transparent text-[#f5f1ea]",
+          : "border-b border-transparent bg-transparent text-fg",
       )}
     >
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 md:h-[4.25rem] md:px-8">
@@ -83,7 +83,7 @@ export function SiteHeader({ ink = true }: { ink?: boolean }) {
                 aria-current={active ? "page" : undefined}
                 className={cn(
                   "text-[15px] font-medium tracking-wide transition-colors duration-150 hover:text-gold",
-                  active ? "text-gold" : solid ? "text-fg/90" : "text-[#f5f1ea]/90",
+                  active ? "text-gold" : "text-fg/90",
                 )}
               >
                 {item.label}
@@ -101,10 +101,7 @@ export function SiteHeader({ ink = true }: { ink?: boolean }) {
           </Button>
           <button
             type="button"
-            className={cn(
-              "inline-flex size-11 items-center justify-center rounded-md md:hidden",
-              solid ? "text-fg" : "text-[#f5f1ea]",
-            )}
+            className="inline-flex size-11 items-center justify-center rounded-md text-fg md:hidden"
             aria-label={open ? "Stäng meny" : "Öppna meny"}
             aria-expanded={open}
             onClick={() => setOpen((v) => !v)}

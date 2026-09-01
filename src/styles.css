@@ -1,24 +1,6 @@
 @import "tailwindcss";
 
 :root {
-  --bg: #f3eee5;
-  --bg-2: #ebe4d6;
-  --bg-3: #e0d7c8;
-  --fg: #1c1a16;
-  --muted: #5c564c;
-  --subtle: #6a635a;
-  --paper: #faf7f1;
-  --paper-2: #ffffff;
-  --line: rgb(28 26 22 / 0.12);
-  --elev-card:
-    0 0 0 1px rgb(28 26 22 / 0.08),
-    0 18px 40px -24px rgb(28 26 22 / 0.2);
-  --elev-lift:
-    0 0 0 1px rgb(28 26 22 / 0.12),
-    0 22px 50px -20px rgb(28 26 22 / 0.22);
-}
-
-html.dark {
   --bg: #0b0a08;
   --bg-2: #141311;
   --bg-3: #1c1a16;
@@ -27,6 +9,7 @@ html.dark {
   --subtle: #534e46;
   --paper: #f4efe6;
   --paper-2: #ebe4d6;
+  --ink: #0b0a08;
   --line: rgb(200 164 110 / 0.22);
   --elev-card:
     0 0 0 1px rgb(200 164 110 / 0.14),
@@ -36,11 +19,18 @@ html.dark {
     0 22px 50px -20px rgb(0 0 0 / 0.6);
 }
 
+html.dark {
+  --paper: #141311;
+  --paper-2: #1c1a16;
+  --subtle: #a39b90;
+  --ink: #f5f1ea;
+}
+
 @theme {
   --color-canvas: var(--bg);
   --color-canvas-2: var(--bg-2);
   --color-canvas-3: var(--bg-3);
-  --color-ink: #1c1a16;
+  --color-ink: var(--ink);
   --color-ink-2: var(--bg-2);
   --color-ink-3: var(--bg-3);
   --color-paper: var(--paper);
@@ -119,7 +109,12 @@ html.dark {
 
   .bg-paper,
   .bg-paper-2 {
-    color-scheme: light;
+    color-scheme: only light;
+  }
+
+  html.dark .bg-paper,
+  html.dark .bg-paper-2 {
+    color-scheme: only dark;
   }
 }
 
