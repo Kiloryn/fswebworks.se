@@ -34,13 +34,13 @@ const services = [
 
 function ElDemo() {
   return (
-    <div className="min-h-dvh bg-[#0b1018] text-[#e8eef6]">
+    <div className="min-h-dvh bg-[#eef1f6] text-[#12161e]">
       <DemoBanner current="elektriker" />
       <div className="bg-[#d4a017] px-3 py-2 text-center text-[11px] font-semibold tracking-[0.12em] text-[#111] uppercase">
         Auktoriserad elinstallatör · A-behörig
       </div>
       <section className="md:grid md:grid-cols-2 md:items-stretch">
-        <div className="flex flex-col justify-center px-5 py-12 md:px-10 lg:px-16">
+        <div className="flex flex-col justify-center bg-[#0b1018] px-5 py-12 text-[#e8eef6] md:px-10 lg:px-16">
           <p className="font-display text-xl md:text-2xl">Stockholms Elkraft</p>
           <p className="mt-8 text-[11px] uppercase tracking-[0.28em] text-[#d4a017]">
             Stockholm och kranskommuner
@@ -73,7 +73,7 @@ function ElDemo() {
           </p>
         </div>
       </section>
-      <section className="border-y border-white/10">
+      <section className="bg-[#dce3ee]">
         <div className="mx-auto grid max-w-5xl gap-8 px-5 py-10 sm:grid-cols-3 md:px-8">
           {[
             ["A-behörig", "Registrerad hos Elsäkerhetsverket"],
@@ -81,57 +81,61 @@ function ElDemo() {
             ["Jour", "Samma dag vid behov"],
           ].map(([k, v]) => (
             <div key={k}>
-              <p className="font-display text-2xl italic text-[#d4a017]">{k}</p>
-              <p className="mt-1 text-sm text-[#b7c2d4]">{v}</p>
+              <p className="font-display text-2xl italic text-[#8a6a0c]">{k}</p>
+              <p className="mt-1 text-sm text-[#3d4656]">{v}</p>
             </div>
           ))}
         </div>
       </section>
-      <section className="mx-auto max-w-5xl px-5 py-16 md:px-8">
-        <h2 className="font-display text-3xl">Tjänster</h2>
-        <div className="mt-8 divide-y divide-white/10 border-y border-white/10">
-          {services.map((s) => (
-            <article
-              key={s.title}
-              className="grid gap-2 py-6 md:grid-cols-[4rem_1fr_2fr] md:items-baseline"
-            >
-              <p className="font-display text-2xl italic text-[#d4a017]">{s.n}</p>
-              <h3 className="text-lg font-medium">{s.title}</h3>
-              <p className="text-sm text-[#b7c2d4]">{s.body}</p>
-            </article>
-          ))}
+      <section className="bg-white">
+        <div className="mx-auto max-w-5xl px-5 py-16 md:px-8">
+          <h2 className="font-display text-3xl">Tjänster</h2>
+          <div className="mt-8 divide-y divide-black/10 border-y border-black/10">
+            {services.map((s) => (
+              <article
+                key={s.title}
+                className="grid gap-2 py-6 md:grid-cols-[4rem_1fr_2fr] md:items-baseline"
+              >
+                <p className="font-display text-2xl italic text-[#8a6a0c]">{s.n}</p>
+                <h3 className="text-lg font-medium">{s.title}</h3>
+                <p className="text-sm text-[#3d4656]">{s.body}</p>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
-      <section className="mx-auto max-w-5xl px-5 py-16 md:px-8">
-        <p className="text-[11px] uppercase tracking-[0.22em] text-[#d4a017]">
-          Recensioner
-        </p>
-        <h2 className="mt-2 font-display text-3xl">4,8 på Google</h2>
-        <div className="mt-10 grid gap-8 md:grid-cols-3">
-          {[
-            {
-              q: "Bytte elcentral i radhuset. Protokoll samma dag, försäkringsbolaget nöjda.",
-              n: "Johan, Nacka",
-            },
-            {
-              q: "Jour när säkringen löste ut en söndag. Tydligt, lugnt, inget meck.",
-              n: "Sara, Vasastan",
-            },
-            {
-              q: "A-behörig och visar det. Inte bara en lapp i fönstret.",
-              n: "BRF Eken, Bromma",
-            },
-          ].map((r) => (
-            <figure key={r.n} className="border-t border-white/15 pt-5">
-              <blockquote className="text-[15px] leading-relaxed text-[#b7c2d4]">
-                “{r.q}”
-              </blockquote>
-              <figcaption className="mt-4 text-sm text-[#d4a017]">{r.n}</figcaption>
-            </figure>
-          ))}
+      <section className="bg-[#eef1f6]">
+        <div className="mx-auto max-w-5xl px-5 py-16 md:px-8">
+          <p className="text-[11px] uppercase tracking-[0.22em] text-[#8a6a0c]">
+            Recensioner
+          </p>
+          <h2 className="mt-2 font-display text-3xl">4,8 på Google</h2>
+          <div className="mt-10 grid gap-8 md:grid-cols-3">
+            {[
+              {
+                q: "Bytte elcentral i radhuset. Protokoll samma dag, försäkringsbolaget nöjda.",
+                n: "Johan, Nacka",
+              },
+              {
+                q: "Jour när säkringen löste ut en söndag. Tydligt, lugnt, inget meck.",
+                n: "Sara, Vasastan",
+              },
+              {
+                q: "A-behörig och visar det. Inte bara en lapp i fönstret.",
+                n: "BRF Eken, Bromma",
+              },
+            ].map((r) => (
+              <figure key={r.n} className="border-t border-black/15 pt-5">
+                <blockquote className="text-[15px] leading-relaxed text-[#3d4656]">
+                  “{r.q}”
+                </blockquote>
+                <figcaption className="mt-4 text-sm text-[#8a6a0c]">{r.n}</figcaption>
+              </figure>
+            ))}
+          </div>
         </div>
       </section>
-      <section className="border-t border-white/10">
+      <section className="bg-[#1a2230] text-[#e8eef6]">
         <div className="mx-auto max-w-5xl px-5 py-16 md:px-8">
           <p className="text-[11px] uppercase tracking-[0.22em] text-[#d4a017]">
             Folket
@@ -147,7 +151,7 @@ function ElDemo() {
               { name: "Mikael Öberg", role: "Felavhjälpning" },
             ].map((p) => (
               <article key={p.name}>
-                <div className="relative flex aspect-[3/4] flex-col items-center justify-center overflow-hidden border border-white/10 bg-[#10151e]">
+                <div className="relative flex aspect-[3/4] flex-col items-center justify-center overflow-hidden bg-[#242c3a]">
                   <span className="text-[11px] uppercase tracking-[0.22em] text-[#d4a017]/90">
                     Bild på personal
                   </span>
@@ -160,10 +164,10 @@ function ElDemo() {
           </div>
         </div>
       </section>
-      <section className="border-t border-white/10">
+      <section className="bg-white">
         <div className="mx-auto max-w-5xl px-5 py-16 md:px-8">
           <h2 className="font-display text-3xl">Vanliga frågor</h2>
-          <div className="mt-8 divide-y divide-white/10 border-y border-white/10">
+          <div className="mt-8 divide-y divide-black/10 border-y border-black/10">
             {[
               [
                 "Är ni A-behöriga?",
@@ -180,7 +184,7 @@ function ElDemo() {
             ].map(([q, a]) => (
               <details key={q} className="py-5">
                 <summary className="cursor-pointer list-none font-medium">{q}</summary>
-                <p className="mt-3 max-w-2xl text-sm leading-relaxed text-[#b7c2d4]">{a}</p>
+                <p className="mt-3 max-w-2xl text-sm leading-relaxed text-[#3d4656]">{a}</p>
               </details>
             ))}
           </div>

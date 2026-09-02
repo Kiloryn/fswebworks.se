@@ -127,7 +127,7 @@ function ConsultDemo() {
         </div>
       </section>
 
-      <section className="bg-[#1c1a16] px-5 py-20 text-[#f7f4ee] md:py-28">
+      <section className="bg-[#2c2924] px-5 py-20 text-[#f7f4ee] md:py-28">
         <blockquote className="mx-auto max-w-4xl font-display text-3xl italic leading-[1.15] md:text-5xl">
           «De flesta vet vad som är fel. De behöver hjälp att välja vad som
           kommer först.»
@@ -181,7 +181,7 @@ function ConsultDemo() {
       </section>
 
       <section id="kontakt" className="px-5 pb-16 md:px-8">
-        <div className="mx-auto grid max-w-6xl gap-0 bg-[#1c1a16] text-[#f7f4ee] lg:grid-cols-2">
+        <div className="mx-auto grid max-w-6xl gap-0 bg-[#2c2924] text-[#f7f4ee] lg:grid-cols-2">
           <div className="px-6 py-12 md:px-12 md:py-16">
             <p className="text-[11px] uppercase tracking-[0.2em] text-[#c9c2b6]">
               Kostnadsfritt

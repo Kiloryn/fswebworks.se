@@ -39,9 +39,9 @@ const reviews = [
 
 function RestaurantDemo() {
   return (
-    <div className="min-h-dvh bg-[#1a0f0d] text-[#f3e6d8]">
+    <div className="min-h-dvh bg-[#f6eee4] text-[#1a0f0d]">
       <DemoBanner current="restaurang" />
-      <header className="border-b border-white/10">
+      <header className="border-b border-[#1a0f0d]/10 bg-[#1a0f0d] text-[#f3e6d8]">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-5 py-4 md:px-8">
           <p className="min-w-0 truncate font-display text-xl italic md:text-2xl">
             Trattoria Nove
@@ -66,7 +66,7 @@ function RestaurantDemo() {
         </div>
       </header>
 
-      <section className="relative isolate">
+      <section className="relative isolate text-[#f3e6d8]">
         <Pic
           src="/images/restaurang.jpg?v=5"
           alt="Tagliatelle och ett glas vin"
@@ -104,7 +104,7 @@ function RestaurantDemo() {
         </div>
       </section>
 
-      <section className="border-y border-white/10">
+      <section className="bg-[#eadccb]">
         <div className="mx-auto grid max-w-6xl gap-8 px-5 py-8 sm:grid-cols-3 md:px-8">
           {[
             ["Lunch", "mån–fre 11–14"],
@@ -112,39 +112,39 @@ function RestaurantDemo() {
             ["Bord", "2–8 personer"],
           ].map(([k, v]) => (
             <div key={k}>
-              <p className="font-display text-2xl italic text-[#d4b480]">{k}</p>
-              <p className="mt-1 text-sm text-[#e2d0c0]">{v}</p>
+              <p className="font-display text-2xl italic text-[#8a6234]">{k}</p>
+              <p className="mt-1 text-sm text-[#5c4338]">{v}</p>
             </div>
           ))}
         </div>
       </section>
 
-      <section id="meny" className="px-5 py-16 md:px-8">
+      <section id="meny" className="bg-[#f6eee4] px-5 py-16 md:px-8">
         <div className="mx-auto grid max-w-6xl gap-12 md:grid-cols-2">
           <div>
-            <p className="text-[11px] uppercase tracking-[0.28em] text-[#d4b480]">
+            <p className="text-[11px] uppercase tracking-[0.28em] text-[#8a6234]">
               Lunch · mån–fre
             </p>
             <h2 className="mt-2 font-display text-3xl italic">Kort och klart.</h2>
-            <ul className="mt-8 divide-y divide-white/10 border-y border-white/10">
+            <ul className="mt-8 divide-y divide-[#1a0f0d]/10 border-y border-[#1a0f0d]/10">
               {lunch.map(([n, p]) => (
                 <li key={n} className="flex items-baseline justify-between gap-4 py-5">
                   <p className="font-display text-xl italic md:text-2xl">{n}</p>
-                  <p className="shrink-0 tabular-nums text-[#d4b480]">{p}</p>
+                  <p className="shrink-0 tabular-nums text-[#8a6234]">{p}</p>
                 </li>
               ))}
             </ul>
           </div>
           <div>
-            <p className="text-[11px] uppercase tracking-[0.28em] text-[#d4b480]">
+            <p className="text-[11px] uppercase tracking-[0.28em] text-[#8a6234]">
               Kväll · tis–sön
             </p>
             <h2 className="mt-2 font-display text-3xl italic">Huset lagar pasta.</h2>
-            <ul className="mt-8 divide-y divide-white/10 border-y border-white/10">
+            <ul className="mt-8 divide-y divide-[#1a0f0d]/10 border-y border-[#1a0f0d]/10">
               {dinner.map(([n, p]) => (
                 <li key={n} className="flex items-baseline justify-between gap-4 py-5">
                   <p className="font-display text-xl italic md:text-2xl">{n}</p>
-                  <p className="shrink-0 tabular-nums text-[#d4b480]">{p}</p>
+                  <p className="shrink-0 tabular-nums text-[#8a6234]">{p}</p>
                 </li>
               ))}
             </ul>
@@ -152,12 +152,12 @@ function RestaurantDemo() {
         </div>
       </section>
 
-      <section className="border-t border-white/10 px-5 py-16 md:px-8">
+      <section className="bg-[#2a1814] px-5 py-16 text-[#f3e6d8] md:px-8">
         <div className="mx-auto max-w-6xl">
           <h2 className="font-display text-3xl italic">De tar samma bord igen.</h2>
           <div className="mt-10 grid gap-4 md:grid-cols-3">
             {reviews.map((r) => (
-              <figure key={r.name} className="bg-[#241614] p-6 md:p-8">
+              <figure key={r.name} className="bg-[#3a221c] p-6 md:p-8">
                 <blockquote className="font-display text-xl italic leading-snug">
                   “{r.quote}”
                 </blockquote>
@@ -230,18 +230,18 @@ function RestaurantDemo() {
         </div>
       </section>
 
-      <section id="hitta" className="border-t border-white/10">
+      <section id="hitta" className="bg-[#eadccb]">
         <div className="mx-auto grid max-w-6xl lg:grid-cols-2">
           <div className="px-5 py-12 md:px-8">
-            <p className="text-[11px] uppercase tracking-[0.22em] text-[#d4b480]">
+            <p className="text-[11px] uppercase tracking-[0.22em] text-[#8a6234]">
               Hitta hit
             </p>
             <h2 className="mt-2 font-display text-3xl italic">Folkungagatan 48</h2>
-            <p className="mt-4 max-w-sm text-sm text-[#e2d0c0]">
+            <p className="mt-4 max-w-sm text-sm text-[#5c4338]">
               Södermalm, ett stenkast från Medborgarplatsen. Tunnelbana
               Medborgarplatsen, buss längs Folkungagatan.
             </p>
-            <p className="mt-6 text-sm text-[#e2d0c0]">
+            <p className="mt-6 text-sm text-[#5c4338]">
               08-567 890 12
               <br />
               bord@trattorianove.se

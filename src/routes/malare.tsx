@@ -177,12 +177,12 @@ function PainterDemo() {
         ))}
       </section>
 
-      <section id="tjanster" className="px-5 py-16 md:px-8">
+      <section id="tjanster" className="bg-[#e4ebe3] px-5 py-16 md:px-8">
         <div className="mx-auto max-w-6xl">
           <h2 className="font-display text-3xl italic md:text-4xl">Vad vi gör</h2>
           <div className="mt-10 grid gap-4 sm:grid-cols-2">
             {services.map((s) => (
-              <article key={s.title} className="bg-white p-6 md:p-8">
+              <article key={s.title} className="bg-[#f3f1ea] p-6 md:p-8">
                 <h3 className="font-display text-2xl italic">{s.title}</h3>
                 <p className="mt-3 text-sm leading-relaxed text-[#4d5b52]">{s.body}</p>
               </article>
@@ -225,7 +225,7 @@ function PainterDemo() {
         </div>
       </section>
 
-      <section className="px-5 py-16 md:px-8">
+      <section className="bg-[#e4ebe3] px-5 py-16 md:px-8">
         <div className="mx-auto max-w-6xl">
           <h2 className="font-display text-3xl italic md:text-4xl">De ringer tillbaka.</h2>
           <div className="mt-10 grid gap-4 md:grid-cols-3">

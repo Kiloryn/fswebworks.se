@@ -74,7 +74,7 @@ const faq = [
 
 function VvsDemo() {
   return (
-    <div className="min-h-dvh bg-[#0e1418] text-[#e8efe9]">
+    <div className="min-h-dvh bg-[#eef3ef] text-[#1a2420]">
       <DemoBanner current="vvs" />
       <a
         href="tel:0812345678"
@@ -87,7 +87,7 @@ function VvsDemo() {
         </span>
       </a>
 
-      <section className="relative isolate">
+      <section className="relative isolate text-[#e8efe9]">
         <Pic
           src="/images/vvs.jpg?v=6"
           alt="Rörmokare drar åt kopparrör"
@@ -120,7 +120,7 @@ function VvsDemo() {
         </div>
       </section>
 
-      <section className="border-y border-white/10">
+      <section className="border-b border-[#1a2420]/10 bg-[#dce6e0]">
         <div className="mx-auto grid max-w-5xl gap-8 px-5 py-10 sm:grid-cols-4 md:px-8">
           {[
             ["4,9", "på Google"],
@@ -129,31 +129,33 @@ function VvsDemo() {
             ["15 min", "till återkoppling"],
           ].map(([k, v]) => (
             <div key={k}>
-              <p className="font-display text-3xl italic text-[#e8b89a]">{k}</p>
-              <p className="mt-1 text-sm text-[#c5d0c8]">{v}</p>
+              <p className="font-display text-3xl italic text-[#c45c3a]">{k}</p>
+              <p className="mt-1 text-sm text-[#3d4a44]">{v}</p>
             </div>
           ))}
         </div>
       </section>
 
-      <section className="mx-auto max-w-5xl px-5 py-16 md:px-8">
-        <p className="text-[11px] uppercase tracking-[0.22em] text-[#e8b89a]">
-          Recensioner
-        </p>
-        <h2 className="mt-2 font-display text-3xl italic">Folk ringer tillbaka.</h2>
-        <div className="mt-10 grid gap-8 md:grid-cols-3">
-          {reviews.map((r) => (
-            <figure key={r.name} className="border-t border-white/15 pt-5">
-              <blockquote className="text-[15px] leading-relaxed text-[#c5d0c8]">
-                “{r.quote}”
-              </blockquote>
-              <figcaption className="mt-4 text-sm text-[#e8b89a]">{r.name}</figcaption>
-            </figure>
-          ))}
+      <section className="bg-white">
+        <div className="mx-auto max-w-5xl px-5 py-16 md:px-8">
+          <p className="text-[11px] uppercase tracking-[0.22em] text-[#c45c3a]">
+            Recensioner
+          </p>
+          <h2 className="mt-2 font-display text-3xl italic">Folk ringer tillbaka.</h2>
+          <div className="mt-10 grid gap-8 md:grid-cols-3">
+            {reviews.map((r) => (
+              <figure key={r.name} className="border-t border-[#1a2420]/15 pt-5">
+                <blockquote className="text-[15px] leading-relaxed text-[#3d4a44]">
+                  “{r.quote}”
+                </blockquote>
+                <figcaption className="mt-4 text-sm text-[#c45c3a]">{r.name}</figcaption>
+              </figure>
+            ))}
+          </div>
         </div>
       </section>
 
-      <section className="border-t border-white/10">
+      <section className="bg-[#1a2420] text-[#e8efe9]">
         <div className="mx-auto max-w-5xl px-5 py-16 md:px-8">
           <p className="text-[11px] uppercase tracking-[0.22em] text-[#e8b89a]">
             Folket
@@ -165,7 +167,7 @@ function VvsDemo() {
           <div className="mt-10 grid gap-6 sm:grid-cols-3">
             {team.map((p) => (
               <article key={p.name}>
-                <div className="relative flex aspect-[3/4] flex-col items-center justify-center overflow-hidden border border-white/10 bg-[#151c21]">
+                <div className="relative flex aspect-[3/4] flex-col items-center justify-center overflow-hidden bg-[#24302c]">
                   <span className="text-[11px] uppercase tracking-[0.22em] text-[#e8b89a]/90">
                     Bild på personal
                   </span>
@@ -179,30 +181,30 @@ function VvsDemo() {
         </div>
       </section>
 
-      <section className="border-t border-white/10">
+      <section className="bg-[#eef3ef]">
         <div className="mx-auto max-w-5xl px-5 py-16 md:px-8">
           <h2 className="font-display text-3xl italic">Vad vi gör</h2>
-          <p className="mt-3 max-w-xl text-sm text-[#c5d0c8]">
+          <p className="mt-3 max-w-xl text-sm text-[#3d4a44]">
             Service, reparation och nyinstallation. Privat, villa och förening.
           </p>
-          <div className="mt-10 grid gap-px bg-white/10 sm:grid-cols-2">
+          <div className="mt-10 grid gap-4 sm:grid-cols-2">
             {services.map((s) => (
-              <article key={s.title} className="bg-[#0e1418] p-6 md:p-8">
+              <article key={s.title} className="bg-white p-6 md:p-8">
                 <h3 className="font-display text-2xl italic">{s.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-[#c5d0c8]">{s.body}</p>
+                <p className="mt-3 text-sm leading-relaxed text-[#3d4a44]">{s.body}</p>
               </article>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="border-t border-white/10 py-16">
+      <section className="bg-white py-16">
         <div className="mx-auto max-w-5xl px-5 md:px-8">
           <h2 className="font-display text-3xl italic">Riktpriser</h2>
-          <p className="mt-2 text-sm text-[#c5d0c8]">
+          <p className="mt-2 text-sm text-[#3d4a44]">
             Exkl. moms. Fast pris innan vi börjar – inga överraskningar.
           </p>
-          <dl className="mt-8 divide-y divide-white/10 border-y border-white/10">
+          <dl className="mt-8 divide-y divide-[#1a2420]/10 border-y border-[#1a2420]/10">
             {[
               ["Utryckning, akuttid", "från 1 290 kr"],
               ["Enklare reparation", "från 690 kr/tim"],
@@ -211,23 +213,23 @@ function VvsDemo() {
             ].map(([k, v]) => (
               <div key={k} className="flex items-baseline justify-between gap-4 py-4">
                 <dt className="min-w-0">{k}</dt>
-                <dd className="shrink-0 tabular-nums text-[#e8b89a]">{v}</dd>
+                <dd className="shrink-0 tabular-nums text-[#c45c3a]">{v}</dd>
               </div>
             ))}
           </dl>
         </div>
       </section>
 
-      <section className="border-t border-white/10">
+      <section className="bg-[#dce6e0]">
         <div className="mx-auto max-w-5xl px-5 py-16 md:px-8">
           <h2 className="font-display text-3xl italic">Vanliga frågor</h2>
-          <div className="mt-8 divide-y divide-white/10 border-y border-white/10">
+          <div className="mt-8 divide-y divide-[#1a2420]/10 border-y border-[#1a2420]/10">
             {faq.map((item) => (
               <details key={item.q} className="group py-5">
                 <summary className="cursor-pointer list-none font-medium marker:content-none">
                   {item.q}
                 </summary>
-                <p className="mt-3 max-w-2xl text-sm leading-relaxed text-[#c5d0c8]">
+                <p className="mt-3 max-w-2xl text-sm leading-relaxed text-[#3d4a44]">
                   {item.a}
                 </p>
               </details>

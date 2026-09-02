@@ -129,11 +129,11 @@ function SalonDemo() {
         </div>
       </section>
 
-      <section id="prislista" className="bg-[#3a2f28] py-20 text-[#f6efe6]">
+      <section id="prislista" className="bg-[#efe6da] py-20">
         <div className="mx-auto grid max-w-6xl items-stretch gap-0 md:grid-cols-2">
           <div className="px-5 py-4 md:px-10 lg:px-16">
             <h2 className="font-display text-4xl italic">Prislista</h2>
-            <p className="mt-3 max-w-md text-sm text-[#d9c8b8]">
+            <p className="mt-3 max-w-md text-sm text-[#6b574c]">
               Riktpriser. Längd och utgångsläge sätter det exakta priset när du
               bokar. Konsultation ingår.
             </p>
@@ -141,10 +141,10 @@ function SalonDemo() {
               {treatments.map((t) => (
                 <div
                   key={t.name}
-                  className="flex items-baseline justify-between gap-4 border-b border-white/10 py-4"
+                  className="flex items-baseline justify-between gap-4 border-b border-[#3a2f28]/12 py-4"
                 >
                   <dt className="font-display text-xl italic md:text-2xl">{t.name}</dt>
-                  <dd className="shrink-0 tabular-nums text-[#d4b480]">{t.price}</dd>
+                  <dd className="shrink-0 tabular-nums text-[#8a6234]">{t.price}</dd>
                 </div>
               ))}
             </dl>
