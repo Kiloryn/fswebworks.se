@@ -7,7 +7,6 @@ import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/site/logo";
 import { SectionLink } from "@/components/site/section-link";
 import { scrollToTop } from "@/lib/scroll-to";
-import { ThemeToggle } from "@/lib/theme";
 
 const SECTION_IDS = NAV.map((item) => item.section);
 
@@ -92,7 +91,6 @@ export function SiteHeader({ ink = true }: { ink?: boolean }) {
           })}
         </nav>
         <div className="flex items-center gap-2">
-          <ThemeToggle className="hidden md:flex" />
           <Button asChild size="md" className="h-10 px-3 text-sm md:h-11 md:px-5">
             <SectionLink section="contact">
               <span className="md:hidden">Offert</span>
@@ -140,7 +138,6 @@ export function SiteHeader({ ink = true }: { ink?: boolean }) {
               );
             })}
           </nav>
-          <ThemeToggle className="mt-4 w-full justify-stretch *:flex-1" />
         </div>
       ) : null}
     </header>

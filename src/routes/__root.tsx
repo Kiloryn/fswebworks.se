@@ -3,11 +3,8 @@ import { AuthProvider } from "@/lib/auth/provider";
 import { PreviewHostBridge } from "@/components/preview-host-bridge";
 import { SectionScroll } from "@/components/site/section-scroll";
 import { BackToTop } from "@/components/site/back-to-top";
-import { ThemeProvider } from "@/lib/theme";
 import { SITE } from "@/lib/site";
 import appCss from "../styles.css?url";
-
-const THEME_BOOT = `(function(){try{var d=localStorage.getItem('fswebworks-theme')==='dark';var r=document.documentElement;r.classList.toggle('dark',d);r.style.colorScheme=d?'only dark':'only light'}catch(e){}})();`;
 
 export const Route = createRootRoute({
   head: () => ({
@@ -44,18 +41,15 @@ function RootDocument() {
   return (
     <html lang="sv" className="antialiased" suppressHydrationWarning>
       <head>
-        <script dangerouslySetInnerHTML={{ __html: THEME_BOOT }} />
         <HeadContent />
       </head>
       <body className="bg-canvas text-fg">
         <PreviewHostBridge />
-        <ThemeProvider>
-          <AuthProvider>
-            <SectionScroll />
-            <BackToTop />
-            <Outlet />
-          </AuthProvider>
-        </ThemeProvider>
+        <AuthProvider>
+          <SectionScroll />
+          <BackToTop />
+          <Outlet />
+        </AuthProvider>
         <Scripts />
       </body>
     </html>

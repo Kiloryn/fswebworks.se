@@ -1,49 +1,23 @@
 @import "tailwindcss";
 
-:root {
-  --bg: #0b0a08;
-  --bg-2: #141311;
-  --bg-3: #1c1a16;
-  --fg: #f5f1ea;
-  --muted: #c9c2b4;
-  --subtle: #534e46;
-  --paper: #f4efe6;
-  --paper-2: #ebe4d6;
-  --ink: #0b0a08;
-  --line: rgb(200 164 110 / 0.22);
-  --elev-card:
-    0 0 0 1px rgb(200 164 110 / 0.14),
-    0 18px 40px -24px rgb(0 0 0 / 0.55);
-  --elev-lift:
-    0 0 0 1px rgb(200 164 110 / 0.28),
-    0 22px 50px -20px rgb(0 0 0 / 0.6);
-}
-
-html.dark {
-  --paper: #141311;
-  --paper-2: #1c1a16;
-  --subtle: #a39b90;
-  --ink: #f5f1ea;
-}
-
 @theme {
-  --color-canvas: var(--bg);
-  --color-canvas-2: var(--bg-2);
-  --color-canvas-3: var(--bg-3);
-  --color-ink: var(--ink);
-  --color-ink-2: var(--bg-2);
-  --color-ink-3: var(--bg-3);
-  --color-paper: var(--paper);
-  --color-paper-2: var(--paper-2);
+  --color-ink: #0b0a08;
+  --color-ink-2: #141311;
+  --color-ink-3: #1c1a16;
+  --color-canvas: #0b0a08;
+  --color-canvas-2: #141311;
+  --color-canvas-3: #1c1a16;
+  --color-paper: #f4efe6;
+  --color-paper-2: #ebe4d6;
   --color-gold: #c8a46e;
   --color-gold-2: #d4b480;
   --color-mark: #c8de6e;
   --color-brass: #8a6234;
   --color-gold-fg: #1a150c;
-  --color-fg: var(--fg);
-  --color-muted: var(--muted);
-  --color-subtle: var(--subtle);
-  --color-line: var(--line);
+  --color-fg: #f5f1ea;
+  --color-muted: #c9c2b4;
+  --color-subtle: #534e46;
+  --color-line: rgb(200 164 110 / 0.22);
   --color-danger: #c45c3a;
 
   --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif;
@@ -55,8 +29,12 @@ html.dark {
   --radius-lg: 18px;
   --radius-xl: 28px;
 
-  --shadow-card: var(--elev-card);
-  --shadow-lift: var(--elev-lift);
+  --shadow-card:
+    0 0 0 1px rgb(200 164 110 / 0.14),
+    0 18px 40px -24px rgb(0 0 0 / 0.55);
+  --shadow-lift:
+    0 0 0 1px rgb(200 164 110 / 0.28),
+    0 22px 50px -20px rgb(0 0 0 / 0.6);
 
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
 }
@@ -68,13 +46,9 @@ html.dark {
     -moz-osx-font-smoothing: grayscale;
   }
 
-  html.dark {
-    color-scheme: only dark;
-  }
-
   body {
-    background: var(--bg);
-    color: var(--fg);
+    background: var(--color-canvas);
+    color: var(--color-fg);
     font-family: var(--font-sans);
     min-height: 100dvh;
   }
@@ -110,11 +84,6 @@ html.dark {
   .bg-paper,
   .bg-paper-2 {
     color-scheme: only light;
-  }
-
-  html.dark .bg-paper,
-  html.dark .bg-paper-2 {
-    color-scheme: only dark;
   }
 }
 
