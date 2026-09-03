@@ -18,9 +18,9 @@ export function DemoBanner({ current }: { current: string }) {
           <span className="md:hidden">Start</span>
         </Link>
         <Logo className="hidden lg:inline-flex" />
-        <p className="hidden text-[12px] text-muted xl:block">Detta är ett exempel</p>
+        <p className="hidden text-[12px] text-muted xl:block">Interaktivt exempel från FSwebworks</p>
         <label className="sr-only" htmlFor="demo-switch">
-          Byt exempel
+          Byt branschexempel
         </label>
         <select
           id="demo-switch"
@@ -52,11 +52,11 @@ export function DemoExit() {
   return (
     <div className="border-t border-gold/25 bg-canvas px-5 py-8 text-center text-fg">
       <p className="text-[12px] uppercase tracking-[0.18em] text-gold">
-        Exempelsida
+        Interaktiv exempelsida
       </p>
       <p className="mx-auto mt-3 max-w-md text-sm text-muted">
-        Så här kan en enkel hemsida se ut. Vill du ha en egen, anpassad efter
-        ditt företag?
+        Detta är ett branschanpassat exempel byggt av FSwebworks. Vill du att vi
+        skapar en hemsida anpassad efter ditt företag?
       </p>
       <div className="mx-auto mt-5 flex max-w-sm flex-col gap-3 sm:max-w-none sm:flex-row sm:justify-center">
         <Link

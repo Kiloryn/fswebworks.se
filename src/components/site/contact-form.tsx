@@ -99,6 +99,10 @@ export function ContactForm({ defaultSubject = "", onPaper = false }: Props) {
 
   return (
     <form className="space-y-4 text-left" onSubmit={onSubmit} noValidate>
+      <p className={cn("text-xs leading-relaxed", onPaper ? "text-subtle" : "text-muted")}>
+        Berätta kort om ditt företag och vad du behöver hjälp med. Vi återkommer
+        vanligtvis inom en arbetsdag.
+      </p>
       <div>
         <label htmlFor="contact-name" className="mb-1.5 block text-sm font-medium">
           Namn

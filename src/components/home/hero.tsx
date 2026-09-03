@@ -92,34 +92,10 @@ const HeroVideo = memo(function HeroVideo({
 });
 
 export const Hero = memo(function Hero() {
-  const [i, setI] = useState(0);
+  const [selectedSlug, setSelectedSlug] = useState<string>(EXAMPLES[0].slug);
   const rootRef = useRef<HTMLElement>(null);
 
-  useEffect(() => {
-    const el = rootRef.current;
-    if (!el) return;
-    if (!window.matchMedia("(min-width: 768px)").matches) return;
-
-    let id = 0;
-    const io = new IntersectionObserver(
-      ([entry]) => {
-        window.clearInterval(id);
-        id = 0;
-        if (!entry?.isIntersecting) return;
-        id = window.setInterval(() => {
-          setI((n) => (n + 1) % EXAMPLES.length);
-        }, 3400);
-      },
-      { threshold: 0.15 },
-    );
-    io.observe(el);
-    return () => {
-      io.disconnect();
-      window.clearInterval(id);
-    };
-  }, []);
-
-  const current = EXAMPLES[i] ?? EXAMPLES[0];
+  const current = EXAMPLES.find((ex) => ex.slug === selectedSlug) ?? EXAMPLES[0];
 
   return (
     <section
@@ -173,34 +149,66 @@ export const Hero = memo(function Hero() {
           </ul>
         </div>
 
-        <a
-          href={`/${current.slug}`}
-          className="group relative mx-auto hidden w-full max-w-md md:block"
-        >
-          <div className="relative rounded-xl border border-line bg-ink-2 p-2 shadow-lift">
-            <div className="flex items-center gap-1.5 px-2 py-2">
-              <span className="size-2 rounded-full bg-fg/20" />
-              <span className="size-2 rounded-full bg-fg/20" />
-              <span className="size-2 rounded-full bg-fg/20" />
-              <span className="ml-2 truncate rounded-sm bg-canvas px-2 py-0.5 text-[10px] text-muted" aria-hidden>
-                exempel · {current.name}
-              </span>
-            </div>
-            <div className="relative overflow-hidden rounded-lg">
-              <Pic
-                src={current.image}
-                alt=""
-                className="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-              />
-              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink to-transparent p-4">
-                <p className="text-[11px] uppercase tracking-[0.18em] text-mark">
-                  Exempelsida
-                </p>
-                <p className="font-display text-xl italic">{current.name}</p>
+        <div className="hidden flex-col items-center gap-3 md:flex">
+          <div
+            className="flex flex-wrap items-center justify-center gap-1.5 rounded-lg border border-line bg-ink-2/80 p-1.5"
+            role="tablist"
+            aria-label="Välj branschexempel"
+          >
+            {EXAMPLES.map((ex) => {
+              const active = ex.slug === current.slug;
+              return (
+                <button
+                  key={ex.slug}
+                  type="button"
+                  role="tab"
+                  aria-selected={active}
+                  onClick={() => setSelectedSlug(ex.slug)}
+                  className={`rounded-md px-2.5 py-1 text-xs font-medium transition-colors ${
+                    active
+                      ? "bg-gold text-gold-fg"
+                      : "text-muted hover:bg-fg/5 hover:text-fg"
+                  }`}
+                >
+                  {ex.name}
+                </button>
+              );
+            })}
+          </div>
+
+          <a
+            href={`/${current.slug}`}
+            className="group relative w-full max-w-md"
+            aria-label={`Öppna interaktivt exempel för ${current.name}`}
+          >
+            <div className="relative rounded-xl border border-line bg-ink-2 p-2 shadow-lift">
+              <div className="flex items-center gap-1.5 px-2 py-2">
+                <span className="size-2 rounded-full bg-fg/20" />
+                <span className="size-2 rounded-full bg-fg/20" />
+                <span className="size-2 rounded-full bg-fg/20" />
+                <span className="ml-2 truncate rounded-sm bg-canvas px-2 py-0.5 text-[10px] text-muted">
+                  interaktivt exempel · {current.name}
+                </span>
+                <span className="ml-auto text-[10px] text-gold group-hover:underline">
+                  Klicka för att testa →
+                </span>
+              </div>
+              <div className="relative overflow-hidden rounded-lg">
+                <Pic
+                  src={current.image}
+                  alt=""
+                  className="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                />
+                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink to-transparent p-4">
+                  <p className="text-[11px] uppercase tracking-[0.18em] text-mark">
+                    {current.brand}
+                  </p>
+                  <p className="font-display text-xl italic">{current.name}</p>
+                </div>
               </div>
             </div>
-          </div>
-        </a>
+          </a>
+        </div>
       </div>
     </section>
   );

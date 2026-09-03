@@ -55,14 +55,15 @@ function Examples() {
         <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
           <div>
             <p className="text-[11px] uppercase tracking-[0.24em] text-subtle">
-              Exempel
+              Interaktiva exempel
             </p>
             <h2 className="mt-3 max-w-[16ch] font-display text-[2.15rem] italic md:text-5xl">
               Så kan din sida se ut.
             </h2>
             <p className="mt-4 max-w-xl text-subtle">
-              Klicka in på en bransch. Det är enkla sidor – men de ska få en
-              kund att tänka: så här skulle vi kunna synas.
+              Klicka in och testa funktionerna. Det är fullt klickbara
+              exempelsidor som visar hur vi strukturerar kontakt, tjänster och
+              förtroende för olika branscher.
             </p>
           </div>
           <Button asChild variant="outline" className="w-full md:w-auto">
@@ -123,8 +124,8 @@ function Services() {
             Tydliga priser. Inga överraskningar.
           </h2>
           <p className="mt-4 max-w-xl text-muted">
-            Vi börjar alltid med ett samtal – helt kostnadsfritt. Du äger alltid
-            din hemsida och väljer själv om du vill ha fortsatt hjälp.
+            Tydliga förutsättningar från start. Du äger din verksamhets identitet
+            och projektleverans, och det finns inga inlåsande avtal.
           </p>
         </Reveal>
         <div className="mt-14 grid gap-5 lg:grid-cols-2">
@@ -191,6 +192,41 @@ function Services() {
                 </Button>
               </article>
             ))}
+          </div>
+        </div>
+        <div className="mt-10 rounded-xl border border-line bg-ink-2/40 p-6 md:p-8">
+          <div className="grid gap-6 md:grid-cols-3">
+            <div>
+              <p className="text-[11px] uppercase tracking-[0.2em] text-gold">
+                Ägarskap
+              </p>
+              <h4 className="mt-2 font-display text-lg">Du äger ditt projekt</h4>
+              <p className="mt-1 text-sm leading-relaxed text-muted">
+                Domän, identitet, bilder och innehåll tillhör dig. Om du vill flytta
+                i framtiden kan hemsidan exporteras till ditt eget valda upplägg
+                enligt överenskommelse.
+              </p>
+            </div>
+            <div>
+              <p className="text-[11px] uppercase tracking-[0.2em] text-gold">
+                Drift & teknik
+              </p>
+              <h4 className="mt-2 font-display text-lg">Vi sköter det praktiska</h4>
+              <p className="mt-1 text-sm leading-relaxed text-muted">
+                De flesta föredrar att slippa servrar, DNS och certifikat. Vi
+                hanterar drift och säkerhet så länge du vill ha vår hjälp.
+              </p>
+            </div>
+            <div>
+              <p className="text-[11px] uppercase tracking-[0.2em] text-gold">
+                Fast offert
+              </p>
+              <h4 className="mt-2 font-display text-lg">Inga överraskningar</h4>
+              <p className="mt-1 text-sm leading-relaxed text-muted">
+                Startpriset gäller standardhemsidor för småföretag. Eventuella
+                utökade önskemål stäms av och prissätts tydligt innan vi börjar.
+              </p>
+            </div>
           </div>
         </div>
       </div>

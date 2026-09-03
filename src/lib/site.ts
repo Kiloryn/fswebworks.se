@@ -66,11 +66,11 @@ export const SERVICES = [
     price: "9 900 kr",
     suffix: "från, exkl. moms",
     description:
-      "Vi skapar en enkel och professionell hemsida som presenterar ditt företag och gör det lätt för kunder att ta kontakt. Hemsidan anpassas efter din verksamhet och fungerar lika bra på mobil som på dator.",
+      "Vi skapar en professionell och lättskött hemsida anpassad efter din verksamhet. Startpriset täcker en komplett standardhemsida för småföretag. Större eller mer komplexa behov går vi igenom och offererar tydligt innan vi sätter igång.",
     fits: [
       "Saknar en hemsida idag",
-      "Har en gammal hemsida som behöver uppdateras",
-      "Vill ha en enkel och professionell närvaro på nätet",
+      "Har en gammal hemsida som behöver moderniseras",
+      "Vill ha en tydlig och representativ närvaro på nätet",
     ],
     cta: "Begär offert",
     subject: "offert",
@@ -78,15 +78,15 @@ export const SERVICES = [
   },
   {
     id: "service",
-    name: "Serviceavtal",
+    name: "Drift & webb-hjälp",
     price: "690 kr",
     suffix: "/ månad, exkl. moms · valfritt",
     description:
-      "För dig som vill ha löpande hjälp med din hemsida. Vi hjälper till med mindre uppdateringar och ser till att sidan fortsätter fungera bra över tid.",
+      "Ett tryggt skötselavtal för dig som vill slippa teknik. Vi hanterar webbdrift, säkerhet, SSL, grundläggande övervakning samt mindre ändringar av texter och bilder över tid.",
     fits: [
-      "Vill slippa tänka på tekniska uppdateringar",
-      "Ibland behöver ändra texter eller bilder",
-      "Vill ha en kontakt att höra av dig till när något behöver ändras",
+      "Vill slippa tänka på teknisk drift och uppdateringar",
+      "Behöver göra mindre ändringar av texter eller bilder löpande",
+      "Vill ha en fast kontaktväg när något behöver justeras",
     ],
     cta: "Fråga om serviceavtal",
     subject: "service",
@@ -98,10 +98,10 @@ export const SERVICES = [
     price: "950 kr",
     suffix: "/ timme, exkl. moms",
     description:
-      "Behöver du bara hjälp ibland? Vi hjälper till med ändringar, uppdateringar eller förbättringar när behov uppstår.",
+      "Har du inget månadsavtal eller behöver du större anpassningar? Vi hjälper till med ändringar, uppdateringar eller utbyggnad per timme precis när behovet uppstår.",
     fits: [
       "Bara behöver hjälp någon gång ibland",
-      "Vill betala per tillfälle istället för ett avtal",
+      "Vill betala per tillfälle utan fast månadskostnad",
     ],
     cta: "Hör av dig",
     subject: "ovrigt",
@@ -110,31 +110,39 @@ export const SERVICES = [
 ] as const;
 
 export const INCLUDED = [
-  "Uppstartssamtal",
-  "Design anpassad efter ditt företag",
-  "1–5 sidor (Startsida, Om oss, Tjänster, Kontakt)",
-  "Mobilanpassad design",
-  "Kontaktformulär",
-  "Grundläggande sökmotoroptimering",
-  "Genomgång när hemsidan är klar",
+  "Uppstartssamtal och genomgång av behov",
+  "Design och struktur anpassad efter ditt företag",
+  "Standardomfattning för småföretag (Startsida, Tjänster, Om oss, Kontakt)",
+  "Mobilanpassad, snabb och tillgänglig layout",
+  "Kontaktformulär och tydliga kontaktvägar",
+  "Grundläggande sökmotoroptimering (SEO) och delningskort",
+  "Gemensam genomgång innan lansering",
 ] as const;
 
 export const FAQ = [
   {
-    q: "Måste jag skriva texterna själv?",
-    a: "Ja, i grunden utgår vi från texter och information från dig, eftersom du känner din verksamhet bäst. Vi hjälper gärna till att strukturera, anpassa och lägga in texterna så att de fungerar bra på webben. Om du vill ha hjälp med formuleringar eller texter kan det erbjudas som tillägg.",
+    q: "Vad ingår i startpriset från 9 900 kr?",
+    a: "Startpriset täcker en komplett, professionell hemsida för ett typiskt småföretag med presentation av verksamhet, tjänster och kontaktvägar. Har du behov av fler sektioner, speciella funktioner eller flerspråkighet går vi igenom det och ger ett fast pris i offerten innan arbetet påbörjas.",
   },
   {
-    q: "Vad händer om jag inte har färdiga texter?",
-    a: "Det är väldigt vanligt. Vi börjar ofta med enkla utkast, stödfrågor eller befintligt material, och bygger vidare därifrån. Målet är att det ska kännas enkelt – inte stressande.",
+    q: "Hur fungerar ägarskap och drift?",
+    a: "Du äger din verksamhets identitet, domän, bilder och innehåll. Hemsidans projektleverans tillhör dig, och det finns ingen konstgjord inlåsning hos oss. Vi kan hantera drift och teknik så att du slipper det praktiska, men om du i framtiden vill flytta hemsidan kan den exporteras till ditt eget valda upplägg enligt överenskommelse.",
   },
   {
-    q: "Kan ni hjälpa till att ändra texter i efterhand?",
-    a: "Absolut. Mindre textändringar kan göras via vår löpande webb-hjälp eller som enstaka uppdrag vid behov.",
+    q: "Måste jag teckna serviceavtalet för 690 kr/månad?",
+    a: "Nej, serviceavtalet är helt valfritt. Med avtalet tar vi hand om webbdrift, SSL, löpande tekniskt underhåll och mindre innehållsändringar. Väljer du att inte ha avtalet driftas sidan enligt överenskommet upplägg, och du kan anlita oss per timme (950 kr/tim) om du vill ha hjälp senare.",
+  },
+  {
+    q: "Hjälper ni till med domän och e-post?",
+    a: "Ja, vi hjälper till att koppla ihop domänen med hemsidan och peka DNS-inställningar rätt så att din e-post fortsätter fungera hos din befintliga e-postleverantör. Däremot tillhandahåller vi inte generell IT-support för personliga datorer, mobiler eller e-postprogram.",
+  },
+  {
+    q: "Måste jag skriva alla texter själv?",
+    a: "Vi utgår från information och stödord från dig eftersom du känner ditt hantverk bäst. Vi hjälper till att strukturera, anpassa och finslipa texterna så att de fungerar bra på webben. Vill du ha mer omfattande copytexter kan vi erbjuda det som tillägg.",
   },
   {
     q: "Är jag bunden till er om ni bygger hemsidan?",
-    a: "Nej. Du äger alltid din hemsida och väljer själv om du vill ha fortsatt hjälp eller inte.",
+    a: "Nej. Vi tillämpar inga inlåsande avtal. Målet är att du ska stanna hos oss för att servicen fungerar smidigt – inte för att du sitter fast i ett kontrakt.",
   },
 ] as const;
 
