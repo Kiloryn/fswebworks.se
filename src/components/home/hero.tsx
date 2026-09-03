@@ -13,20 +13,8 @@ const HeroVideo = memo(function HeroVideo({
   sectionRef: SectionRef;
 }) {
   const ref = useRef<HTMLVideoElement>(null);
-  const [isDesktop, setIsDesktop] = useState(false);
 
   useEffect(() => {
-    const query = window.matchMedia("(min-width: 768px)");
-    const update = () => setIsDesktop(query.matches);
-
-    update();
-    query.addEventListener("change", update);
-    return () => query.removeEventListener("change", update);
-  }, []);
-
-  useEffect(() => {
-    if (!isDesktop) return;
-
     const video = ref.current;
     const section = sectionRef.current;
     if (!video || !section) return;
@@ -70,9 +58,7 @@ const HeroVideo = memo(function HeroVideo({
       document.removeEventListener("visibilitychange", onVis);
       pauseVideo();
     };
-  }, [isDesktop, sectionRef]);
-
-  if (!isDesktop) return null;
+  }, [sectionRef]);
 
   return (
     <video
@@ -86,6 +72,7 @@ const HeroVideo = memo(function HeroVideo({
       preload="auto"
       aria-hidden
     >
+      <source src="/videos/hero-720.mp4" type="video/mp4" media="(max-width: 768px)" />
       <source src="/videos/hero.mp4" type="video/mp4" />
     </video>
   );
