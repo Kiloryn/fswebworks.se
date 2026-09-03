@@ -41,20 +41,19 @@ const HeroVideo = memo(function HeroVideo({
   sectionRef: SectionRef;
 }) {
   const ref = useRef<HTMLVideoElement>(null);
-  const [reduceMotion, setReduceMotion] = useState(false);
 
   useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setReduceMotion(true);
-      return;
-    }
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (mq.matches) return;
 
     const video = ref.current;
     const section = sectionRef.current;
     if (!video || !section) return;
 
     const show = () => {
-      void video.play().catch(() => {});
+      if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        void video.play().catch(() => {});
+      }
     };
     const hide = () => {
       video.pause();
@@ -73,8 +72,6 @@ const HeroVideo = memo(function HeroVideo({
       video.pause();
     };
   }, [sectionRef]);
-
-  if (reduceMotion) return null;
 
   return (
     <video

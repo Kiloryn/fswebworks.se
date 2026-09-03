@@ -9,11 +9,15 @@ export function scrollToTop() {
 
 export function scrollToId(id: string) {
   if (typeof document === "undefined") return false;
-  const el = document.getElementById(id);
+  const targetId = id === "kontakt" ? "contact" : id;
+  const el = document.getElementById(targetId);
   if (!el) return false;
-  el.scrollIntoView({
+  const rect = el.getBoundingClientRect();
+  const offset = 72; // header height in px
+  const targetY = window.scrollY + rect.top - offset;
+  window.scrollTo({
+    top: Math.max(0, targetY),
     behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
-    block: "start",
   });
   return true;
 }
@@ -31,9 +35,7 @@ export function goToSection(
   },
 ) {
   if (opts.pathname === "/") {
-    if (opts.search?.amne) {
-      void opts.navigate({ to: "/", hash: id, search: opts.search });
-    }
+    void opts.navigate({ to: "/", hash: id, search: opts.search });
     scrollToId(id);
     return;
   }

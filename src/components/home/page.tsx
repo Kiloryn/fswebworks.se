@@ -50,7 +50,7 @@ function Marquee() {
 
 function Examples() {
   return (
-    <section id="exempel" className="scroll-mt-24 bg-paper py-24 text-ink md:py-32">
+    <section id="exempel" className="bg-paper py-24 text-ink md:py-32">
       <div className="mx-auto max-w-6xl px-5 md:px-8">
         <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
           <div>
@@ -113,7 +113,7 @@ function Services() {
   if (!main) return null;
 
   return (
-    <section id="priser" className="scroll-mt-24 bg-canvas py-24 md:py-32">
+    <section id="priser" className="bg-canvas py-24 md:py-32">
       <div className="mx-auto max-w-6xl px-5 md:px-8">
         <Reveal>
           <p className="text-[11px] uppercase tracking-[0.24em] text-gold">
@@ -200,7 +200,7 @@ function Services() {
 
 function Process() {
   return (
-    <section id="process" className="scroll-mt-24 bg-paper py-24 text-ink md:py-32">
+    <section id="process" className="bg-paper py-24 text-ink md:py-32">
       <div className="mx-auto grid max-w-6xl gap-12 px-5 md:grid-cols-[0.85fr_1.15fr] md:px-8">
         <div className="md:sticky md:top-28 md:self-start">
           <p className="text-[11px] uppercase tracking-[0.24em] text-subtle">
@@ -278,7 +278,7 @@ function Faq() {
 
 function Contact({ defaultSubject }: { defaultSubject: string }) {
   return (
-    <section id="contact" className="scroll-mt-24 bg-paper py-24 text-ink md:py-32">
+    <section id="contact" className="bg-paper py-24 text-ink md:py-32">
       <div className="mx-auto grid max-w-6xl gap-12 px-5 md:grid-cols-[1fr_1.05fr] md:px-8">
         <div>
           <p className="text-[11px] uppercase tracking-[0.24em] text-subtle">

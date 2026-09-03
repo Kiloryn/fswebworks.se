@@ -54,7 +54,7 @@
   }
 
   section[id] {
-    scroll-margin-top: 5rem;
+    scroll-margin-top: 4.5rem;
   }
 
   body {
@@ -111,6 +111,12 @@
     height: 100%;
     object-fit: cover;
     pointer-events: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-video {
+      display: none !important;
+    }
   }
 
   .hairline {

@@ -14,9 +14,9 @@ export function SectionScroll() {
     let timer = 0;
     const tick = () => {
       if (scrollToId(id)) return;
-      if (tries++ < 12) timer = window.setTimeout(tick, 50);
+      if (tries++ < 20) timer = window.setTimeout(tick, 50);
     };
-    timer = window.setTimeout(tick, 30);
+    timer = window.setTimeout(tick, 60);
     return () => window.clearTimeout(timer);
   }, [hash, pathname]);
 
