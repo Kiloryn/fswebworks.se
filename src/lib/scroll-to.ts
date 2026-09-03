@@ -7,10 +7,23 @@ export function scrollToTop() {
   });
 }
 
+export function sectionId(id: string) {
+  return id === "kontakt" ? "contact" : id;
+}
+
+let suppressHashScrollUntil = 0;
+
+export function suppressHashScroll(ms = 500) {
+  suppressHashScrollUntil = Date.now() + ms;
+}
+
+export function isHashScrollSuppressed() {
+  return Date.now() < suppressHashScrollUntil;
+}
+
 export function scrollToId(id: string) {
   if (typeof document === "undefined") return false;
-  const targetId = id === "kontakt" ? "contact" : id;
-  const el = document.getElementById(targetId);
+  const el = document.getElementById(sectionId(id));
   if (!el) return false;
   const rect = el.getBoundingClientRect();
   const offset = 72; // header height in px
@@ -30,14 +43,33 @@ export function goToSection(
       to: "/";
       hash?: string;
       search?: { amne?: string };
+      resetScroll?: boolean;
+      hashScrollIntoView?: boolean;
     }) => unknown;
     search?: { amne?: string };
   },
 ) {
+  const hash = sectionId(id);
   if (opts.pathname === "/") {
-    void opts.navigate({ to: "/", hash: id, search: opts.search });
-    scrollToId(id);
+    // One scroll only. Router hash navigation would also resetScroll +
+    // hashScrollIntoView, and SectionScroll would fire a third smooth
+    // scroll 60ms later — WebKit cancels the competing scrolls.
+    suppressHashScroll();
+    scrollToId(hash);
+    void opts.navigate({
+      to: "/",
+      hash,
+      search: opts.search,
+      resetScroll: false,
+      hashScrollIntoView: false,
+    });
     return;
   }
-  void opts.navigate({ to: "/", hash: id, search: opts.search });
+  void opts.navigate({
+    to: "/",
+    hash,
+    search: opts.search,
+    resetScroll: false,
+    hashScrollIntoView: false,
+  });
 }

@@ -1,6 +1,6 @@
 import { useRouterState } from "@tanstack/react-router";
 import { useEffect } from "react";
-import { scrollToId } from "@/lib/scroll-to";
+import { isHashScrollSuppressed, scrollToId } from "@/lib/scroll-to";
 
 export function SectionScroll() {
   const hash = useRouterState({ select: (s) => s.location.hash });
@@ -9,6 +9,9 @@ export function SectionScroll() {
   useEffect(() => {
     const id = hash.replace(/^#/, "");
     if (!id || pathname !== "/") return;
+    // In-page SectionLink already scrolled; a second smooth scroll
+    // cancels the first on iOS/WebKit.
+    if (isHashScrollSuppressed()) return;
 
     let tries = 0;
     let timer = 0;
