@@ -13,8 +13,20 @@ const HeroVideo = memo(function HeroVideo({
   sectionRef: SectionRef;
 }) {
   const ref = useRef<HTMLVideoElement>(null);
+  const [isDesktop, setIsDesktop] = useState(false);
 
   useEffect(() => {
+    const query = window.matchMedia("(min-width: 768px)");
+    const update = () => setIsDesktop(query.matches);
+
+    update();
+    query.addEventListener("change", update);
+    return () => query.removeEventListener("change", update);
+  }, []);
+
+  useEffect(() => {
+    if (!isDesktop) return;
+
     const video = ref.current;
     const section = sectionRef.current;
     if (!video || !section) return;
@@ -58,7 +70,9 @@ const HeroVideo = memo(function HeroVideo({
       document.removeEventListener("visibilitychange", onVis);
       pauseVideo();
     };
-  }, [sectionRef]);
+  }, [isDesktop, sectionRef]);
+
+  if (!isDesktop) return null;
 
   return (
     <video
@@ -72,7 +86,6 @@ const HeroVideo = memo(function HeroVideo({
       preload="auto"
       aria-hidden
     >
-      <source src="/videos/hero-720.mp4" type="video/mp4" media="(max-width: 768px)" />
       <source src="/videos/hero.mp4" type="video/mp4" />
     </video>
   );
@@ -87,7 +100,7 @@ export const Hero = memo(function Hero() {
   return (
     <section
       ref={rootRef}
-      className="relative min-h-svh overflow-hidden bg-canvas bg-cover bg-center"
+      className="relative min-h-dvh overflow-hidden bg-canvas bg-cover bg-center"
       style={{ backgroundImage: "url(/videos/hero-poster.jpg)" }}
     >
       <img
@@ -101,7 +114,7 @@ export const Hero = memo(function Hero() {
       <HeroVideo sectionRef={rootRef} />
       <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgb(11_10_8_/_0.38)_0%,rgb(11_10_8_/_0.62)_48%,rgb(11_10_8_/_0.82)_100%)] md:bg-[linear-gradient(90deg,rgb(11_10_8_/_0.86)_0%,rgb(11_10_8_/_0.58)_48%,rgb(11_10_8_/_0.22)_100%)]" />
 
-      <div className="relative mx-auto grid min-h-svh max-w-6xl items-center gap-12 px-5 pb-16 pt-28 md:grid-cols-[1.15fr_0.85fr] md:px-8 md:pt-24">
+      <div className="relative mx-auto grid min-h-dvh max-w-6xl items-center gap-12 px-5 pb-16 pt-28 md:grid-cols-[1.15fr_0.85fr] md:px-8 md:pt-24">
         <div>
           <p className="text-[11px] uppercase tracking-[0.28em] text-mark">
             Webbdesign för småföretag
