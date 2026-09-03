@@ -67,10 +67,10 @@ export function ContactForm({ defaultSubject = "", onPaper = false }: Props) {
   }
 
   const field = cn(
-    "h-12 w-full rounded-md border px-4 text-sm outline-none transition-[border-color,box-shadow] duration-150",
+    "h-12 w-full rounded-lg border px-4 text-sm outline-none transition-[border-color,box-shadow,background-color] duration-150",
     onPaper
       ? "border-ink/12 bg-paper text-ink placeholder:text-subtle focus:border-gold"
-      : "border-line bg-ink-2 text-fg placeholder:text-muted focus:border-gold",
+      : "border-line bg-canvas text-fg placeholder:text-muted/60 focus:border-gold focus:ring-1 focus:ring-gold/30",
   );
 
   if (sent) {
@@ -99,66 +99,66 @@ export function ContactForm({ defaultSubject = "", onPaper = false }: Props) {
 
   return (
     <form className="space-y-4 text-left" onSubmit={onSubmit} noValidate>
-      <p className={cn("text-xs leading-relaxed", onPaper ? "text-subtle" : "text-muted")}>
-        Berätta kort om ditt företag och vad du behöver hjälp med. Vi återkommer
-        vanligtvis inom en arbetsdag.
-      </p>
-      <div>
-        <label htmlFor="contact-name" className="mb-1.5 block text-sm font-medium">
-          Namn
-        </label>
-        <input
-          id="contact-name"
-          name="name"
-          autoComplete="name"
-          required
-          placeholder="Ditt namn"
-          className={field}
-        />
+      <div className="grid gap-4 sm:grid-cols-2">
+        <div>
+          <label htmlFor="contact-name" className="mb-1.5 block text-sm font-medium">
+            Namn
+          </label>
+          <input
+            id="contact-name"
+            name="name"
+            autoComplete="name"
+            required
+            placeholder="Ditt namn"
+            className={field}
+          />
+        </div>
+        <div>
+          <label htmlFor="contact-email" className="mb-1.5 block text-sm font-medium">
+            E-post
+          </label>
+          <input
+            id="contact-email"
+            name="email"
+            type="email"
+            autoComplete="email"
+            required
+            placeholder="din@epost.se"
+            className={field}
+          />
+        </div>
       </div>
-      <div>
-        <label htmlFor="contact-email" className="mb-1.5 block text-sm font-medium">
-          E-post
-        </label>
-        <input
-          id="contact-email"
-          name="email"
-          type="email"
-          autoComplete="email"
-          required
-          placeholder="din@epost.se"
-          className={field}
-        />
-      </div>
-      <div>
-        <label htmlFor="contact-phone" className="mb-1.5 block text-sm font-medium">
-          Telefon (valfritt)
-        </label>
-        <input
-          id="contact-phone"
-          name="phone"
-          type="tel"
-          autoComplete="tel"
-          placeholder="070-123 45 67"
-          className={field}
-        />
-      </div>
-      <div>
-        <label htmlFor="contact-subject" className="mb-1.5 block text-sm font-medium">
-          Ämne (valfritt)
-        </label>
-        <select
-          id="contact-subject"
-          name="subject"
-          defaultValue={defaultSubject}
-          className={field}
-        >
-          {SUBJECTS.map((s) => (
-            <option key={s.value} value={s.value}>
-              {s.label}
-            </option>
-          ))}
-        </select>
+      <div className="grid gap-4 sm:grid-cols-2">
+        <div>
+          <label htmlFor="contact-phone" className="mb-1.5 block text-sm font-medium">
+            Telefon <span className="text-xs text-muted font-normal">(valfritt)</span>
+          </label>
+          <input
+            id="contact-phone"
+            name="phone"
+            type="tel"
+            autoComplete="tel"
+            placeholder="070-123 45 67"
+            className={field}
+          />
+        </div>
+        <div>
+          <label htmlFor="contact-subject" className="mb-1.5 block text-sm font-medium">
+            Ämne <span className="text-xs text-muted font-normal">(valfritt)</span>
+          </label>
+          <select
+            id="contact-subject"
+            name="subject"
+            defaultValue={defaultSubject}
+            className={field}
+          >
+            {SUBJECTS.map((s) => (
+              <option key={s.value} value={s.value}>
+                {s.label}
+              </option>
+            ))}
+          </select>
+        </div>
       </div>
       <div>
         <label htmlFor="contact-message" className="mb-1.5 block text-sm font-medium">
@@ -168,8 +168,8 @@ export function ContactForm({ defaultSubject = "", onPaper = false }: Props) {
           id="contact-message"
           name="message"
           required
-          rows={5}
-          placeholder="Skriv ditt meddelande..."
+          rows={4}
+          placeholder="Berätta kort om ert företag och vad ni behöver..."
           className={cn(field, "h-auto py-3")}
         />
       </div>
@@ -185,7 +185,7 @@ export function ContactForm({ defaultSubject = "", onPaper = false }: Props) {
         </Link>
         .
       </p>
-      <Button type="submit" className="w-full" disabled={pending}>
+      <Button type="submit" size="xl" className="w-full" disabled={pending}>
         {pending ? "Skickar…" : "Skicka förfrågan"}
       </Button>
     </form>

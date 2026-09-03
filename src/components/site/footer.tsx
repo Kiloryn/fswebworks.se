@@ -2,7 +2,6 @@ import { Link } from "@tanstack/react-router";
 import { SITE } from "@/lib/site";
 import { Logo } from "@/components/site/logo";
 import { SectionLink } from "@/components/site/section-link";
-import { scrollToTop } from "@/lib/scroll-to";
 
 export function SiteFooter() {
   return (
@@ -70,13 +69,6 @@ export function SiteFooter() {
         <div className="mx-auto flex max-w-6xl flex-col gap-2 px-5 py-5 text-xs text-muted md:flex-row md:items-center md:justify-between md:px-8">
           <p>© {new Date().getFullYear()} {SITE.name}</p>
           <p>Webbdesign för småföretag · bas i Stockholm</p>
-          <button
-            type="button"
-            className="text-left text-gold hover:text-gold-2 md:text-right"
-            onClick={() => scrollToTop()}
-          >
-            Till toppen
-          </button>
         </div>
       </div>
     </footer>

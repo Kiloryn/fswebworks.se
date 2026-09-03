@@ -99,6 +99,15 @@
   .bg-paper-2 {
     color-scheme: only light;
   }
+
+  .bg-canvas {
+    color-scheme: only dark;
+  }
+
+  /* Contact section layout anchor: ensures smooth jump accounts for header */
+  #contact {
+    scroll-margin-top: 4.5rem;
+  }
 }
 
 @layer utilities {
