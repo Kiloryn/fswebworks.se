@@ -1,9 +1,10 @@
 import { Link } from "@tanstack/react-router";
-import { ArrowRight, Check, ChevronDown } from "lucide-react";
+import { ArrowRight, Check, ChevronDown, Sparkles } from "lucide-react";
 import {
   EXAMPLES,
   FAQ,
   INCLUDED,
+  PREP,
   SERVICES,
   STEPS,
 } from "@/lib/site";
@@ -237,45 +238,108 @@ function Services() {
 function Process() {
   return (
     <section id="process" className="bg-paper py-24 text-ink md:py-32">
-      <div className="mx-auto grid max-w-6xl gap-12 px-5 md:grid-cols-[0.85fr_1.15fr] md:px-8">
-        <div className="md:sticky md:top-28 md:self-start">
+      <div className="mx-auto max-w-6xl px-5 md:px-8">
+        {/* Section Header */}
+        <div className="max-w-2xl">
           <p className="text-[11px] uppercase tracking-[0.24em] text-subtle">
             Så här går det till
           </p>
           <h2 className="mt-3 font-display text-[2.15rem] italic md:text-5xl">
-            Fem steg. Inget krångel.
+            Fem enkla steg. Från idé till färdig sida.
           </h2>
-          <p className="mt-4 max-w-sm text-subtle">
-            Att komma igång med en ny hemsida behöver inte vara krångligt. Vi
-            håller processen enkel och tydlig.
+          <p className="mt-4 text-base leading-relaxed text-subtle md:text-lg">
+            Att komma igång behöver inte vara krångligt. Vi sköter design,
+            struktur och det tekniska bygget – du behöver varken kunna koda eller
+            ha allt material klart från början.
           </p>
-          <Button asChild variant="outline" className="mt-8 w-full md:w-auto">
-            <Link to="/process">
-              Öppna innehållsguiden
-              <ArrowRight className="size-4" />
-            </Link>
-          </Button>
         </div>
-        <ol className="space-y-3">
+
+        {/* 5 Process Steps */}
+        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
           {STEPS.map((step, i) => (
-            <li
+            <div
               key={step.title}
-              className="rounded-xl border border-ink/10 bg-paper-2 p-6 md:p-7"
+              className="flex flex-col justify-between rounded-xl border border-ink/10 bg-paper-2 p-6 transition-colors hover:border-ink/25"
             >
-              <div className="flex items-baseline gap-4">
+              <div>
                 <span className="font-display text-3xl italic text-brass">
                   {String(i + 1).padStart(2, "0")}
                 </span>
-                <div>
-                  <h3 className="font-display text-2xl">{step.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-subtle">
-                    {step.body}
-                  </p>
-                </div>
+                <h3 className="mt-3 font-display text-xl leading-snug">
+                  {step.title}
+                </h3>
+                <p className="mt-2 text-sm leading-relaxed text-subtle">
+                  {step.body}
+                </p>
               </div>
-            </li>
+            </div>
           ))}
-        </ol>
+        </div>
+
+        {/* Subtle divider */}
+        <div className="my-16 h-px w-full bg-ink/10" />
+
+        {/* Integrated Innehållsguide */}
+        <div>
+          <div className="flex flex-col justify-between gap-4 md:flex-row md:items-end">
+            <div>
+              <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-brass">
+                Innehållsguide
+              </p>
+              <h3 className="mt-2 font-display text-[2.15rem] italic md:text-4xl">
+                Vad behöver du ha redo?
+              </h3>
+              <p className="mt-3 max-w-2xl text-base leading-relaxed text-subtle">
+                Du behöver varken proffsbilder eller färdigskrivna texter. Det
+                här är allt som behövs för att vi ska kunna sätta igång:
+              </p>
+            </div>
+            <span className="inline-flex items-center gap-1.5 self-start rounded-full border border-brass/30 bg-paper-2 px-3.5 py-1.5 text-xs font-medium text-brass">
+              <Sparkles className="size-3.5" />
+              Ingen förkunskap krävs
+            </span>
+          </div>
+
+          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {PREP.map((block, idx) => (
+              <div
+                key={block.title}
+                className={`rounded-xl border border-ink/10 bg-paper-2 p-6 transition-colors hover:border-ink/25 ${
+                  idx === 4 ? "sm:col-span-2 lg:col-span-1" : ""
+                }`}
+              >
+                <div className="flex items-center gap-3">
+                  <span className="grid size-8 place-items-center rounded-full bg-paper text-sm font-semibold text-brass shadow-xs">
+                    {idx + 1}
+                  </span>
+                  <h4 className="font-display text-xl">{block.title}</h4>
+                </div>
+                <ul className="mt-4 space-y-2.5 text-sm text-subtle">
+                  {block.items.map((item) => (
+                    <li key={item} className="flex items-start gap-2.5">
+                      <span className="mt-2 size-1.5 shrink-0 rounded-full bg-brass/80" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-8 flex flex-col items-start justify-between gap-5 rounded-xl border border-ink/10 bg-paper-2 px-7 py-6 md:flex-row md:items-center">
+            <p className="max-w-xl text-sm leading-relaxed text-subtle">
+              <strong className="font-medium text-ink">Saknas något?</strong> Inga
+              problem. Vi börjar alltid med ett förutsättningslöst samtal och
+              hjälper dig att strukturera upplägget under arbetets gång.
+            </p>
+            <Button asChild size="lg" className="w-full shrink-0 sm:w-auto">
+              <SectionLink section="contact">
+                Ta första kontakten
+                <ArrowRight className="size-4" />
+              </SectionLink>
+            </Button>
+          </div>
+        </div>
       </div>
     </section>
   );

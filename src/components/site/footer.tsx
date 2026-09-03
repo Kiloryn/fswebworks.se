@@ -36,9 +36,9 @@ export function SiteFooter() {
               </SectionLink>
             </li>
             <li>
-              <Link to="/process" className="hover:text-fg">
-                Förbered innehåll
-              </Link>
+              <SectionLink section="process" className="hover:text-fg">
+                Innehållsguide
+              </SectionLink>
             </li>
             <li>
               <SectionLink section="contact" className="hover:text-fg">
