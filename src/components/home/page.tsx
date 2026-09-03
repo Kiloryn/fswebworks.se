@@ -1,11 +1,10 @@
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { ArrowRight, Check, ChevronDown, Sparkles } from "lucide-react";
+import { ArrowRight, Check, ChevronDown } from "lucide-react";
 import {
   EXAMPLES,
   FAQ,
   INCLUDED,
-  PREP,
   SERVICES,
   STEPS,
 } from "@/lib/site";
@@ -237,6 +236,25 @@ function Services() {
 }
 
 function Process() {
+  const essentialInputs = [
+    {
+      title: "Om företaget",
+      desc: "Kort om vad ni gör, er ort och hur länge ni har funnits.",
+    },
+    {
+      title: "Tjänster",
+      desc: "Vilka jobb ni tar, era specialområden och hur kunder anlitar er.",
+    },
+    {
+      title: "Kontaktuppgifter",
+      desc: "Telefonnummer, e-postadress, adress eller organisationsnummer.",
+    },
+    {
+      title: "Bilder om du har",
+      desc: "Logotyp och foton från vardagen (enkla mobilbilder fungerar utmärkt).",
+    },
+  ];
+
   return (
     <section id="process" className="bg-paper py-24 text-ink md:py-32">
       <div className="mx-auto max-w-6xl px-5 md:px-8">
@@ -255,90 +273,90 @@ function Process() {
           </p>
         </div>
 
-        {/* 5 Process Steps */}
-        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-          {STEPS.map((step, i) => (
-            <div
-              key={step.title}
-              className="flex flex-col justify-between rounded-xl border border-ink/10 bg-paper-2 p-6 transition-colors hover:border-ink/25"
-            >
-              <div>
-                <span className="font-display text-3xl italic text-brass">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <h3 className="mt-3 font-display text-xl leading-snug">
-                  {step.title}
-                </h3>
-                <p className="mt-2 text-sm leading-relaxed text-subtle">
-                  {step.body}
-                </p>
-              </div>
-            </div>
-          ))}
+        {/* 5 Process Steps as a Connected Journey */}
+        <div className="relative mt-14">
+          {/* Subtle connecting progress line behind steps on desktop */}
+          <div
+            className="pointer-events-none absolute left-0 right-0 top-7 hidden h-px bg-ink/12 lg:block"
+            aria-hidden="true"
+          />
+
+          <ol className="grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
+            {STEPS.map((step, i) => (
+              <li key={step.title} className="relative flex flex-col">
+                <div className="relative z-10 flex items-center gap-3">
+                  <span className="grid size-11 place-items-center rounded-full border border-ink/15 bg-paper font-display text-xl italic text-brass shadow-xs">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  {/* Step connector arrow for small screens */}
+                  <span className="text-xs uppercase tracking-widest text-subtle/60 lg:hidden">
+                    Steg {i + 1}
+                  </span>
+                </div>
+                <div className="mt-4 flex-1 rounded-xl border border-ink/8 bg-paper-2 p-5 transition-colors duration-200 hover:border-ink/20">
+                  <h3 className="font-display text-lg leading-snug">
+                    {step.title}
+                  </h3>
+                  <p className="mt-2 text-sm leading-relaxed text-subtle">
+                    {step.body}
+                  </p>
+                </div>
+              </li>
+            ))}
+          </ol>
         </div>
 
-        {/* Subtle divider */}
-        <div className="my-16 h-px w-full bg-ink/10" />
-
-        {/* Integrated Innehållsguide */}
-        <div>
-          <div className="flex flex-col justify-between gap-4 md:flex-row md:items-end">
+        {/* Compact, non-repetitive secondary block: Det enda vi behöver från dig */}
+        <div className="mt-14 rounded-2xl border border-ink/10 bg-paper-2 p-7 md:p-9 shadow-xs">
+          <div className="flex flex-col justify-between gap-3 border-b border-ink/10 pb-6 md:flex-row md:items-end">
             <div>
-              <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-brass">
-                Innehållsguide
+              <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-brass">
+                Förberedelser
               </p>
-              <h3 className="mt-2 font-display text-[2.15rem] italic md:text-4xl">
-                Vad behöver du ha redo?
+              <h3 className="mt-1.5 font-display text-2xl italic md:text-3xl">
+                Det enda vi behöver från dig
               </h3>
-              <p className="mt-3 max-w-2xl text-base leading-relaxed text-subtle">
-                Du behöver varken proffsbilder eller färdigskrivna texter. Det
-                här är allt som behövs för att vi ska kunna sätta igång:
-              </p>
             </div>
-            <span className="inline-flex items-center gap-1.5 self-start rounded-full border border-brass/30 bg-paper-2 px-3.5 py-1.5 text-xs font-medium text-brass">
-              <Sparkles className="size-3.5" />
-              Ingen förkunskap krävs
-            </span>
+            <p className="text-sm text-subtle">
+              Fokusera på det du kan bäst – vi sätter ihop helheten.
+            </p>
           </div>
 
-          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {PREP.map((block, idx) => (
-              <div
-                key={block.title}
-                className={`rounded-xl border border-ink/10 bg-paper-2 p-6 transition-colors hover:border-ink/25 ${
-                  idx === 4 ? "sm:col-span-2 lg:col-span-1" : ""
-                }`}
-              >
-                <div className="flex items-center gap-3">
-                  <span className="grid size-8 place-items-center rounded-full bg-paper text-sm font-semibold text-brass shadow-xs">
+          <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {essentialInputs.map((item, idx) => (
+              <div key={item.title} className="flex flex-col">
+                <div className="flex items-center gap-2">
+                  <span className="grid size-5 place-items-center rounded-full bg-paper text-[11px] font-semibold text-brass">
                     {idx + 1}
                   </span>
-                  <h4 className="font-display text-xl">{block.title}</h4>
+                  <h4 className="font-display text-base font-medium">{item.title}</h4>
                 </div>
-                <ul className="mt-4 space-y-2.5 text-sm text-subtle">
-                  {block.items.map((item) => (
-                    <li key={item} className="flex items-start gap-2.5">
-                      <span className="mt-2 size-1.5 shrink-0 rounded-full bg-brass/80" />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
+                <p className="mt-2 text-sm leading-relaxed text-subtle">
+                  {item.desc}
+                </p>
               </div>
             ))}
           </div>
 
-          <div className="mt-8 flex flex-col items-start justify-between gap-5 rounded-xl border border-ink/10 bg-paper-2 px-7 py-6 md:flex-row md:items-center">
-            <p className="max-w-xl text-sm leading-relaxed text-subtle">
-              <strong className="font-medium text-ink">Saknas något?</strong> Inga
-              problem. Vi börjar alltid med ett förutsättningslöst samtal och
-              hjälper dig att strukturera upplägget under arbetets gång.
+          <div className="mt-8 flex flex-col items-start justify-between gap-4 border-t border-ink/10 pt-6 sm:flex-row sm:items-center">
+            <p className="text-sm leading-relaxed text-subtle">
+              <strong className="font-medium text-ink">Har du inte allt?</strong> Ingen
+              fara. Vi hjälper dig att strukturera resten under samtalets gång.
             </p>
-            <Button asChild size="lg" className="w-full shrink-0 sm:w-auto">
-              <SectionLink section="contact">
-                Ta första kontakten
-                <ArrowRight className="size-4" />
-              </SectionLink>
-            </Button>
+            <div className="flex w-full shrink-0 items-center justify-between gap-4 sm:w-auto sm:justify-end">
+              <Link
+                to="/process"
+                className="inline-flex items-center gap-1.5 text-xs font-medium text-brass underline decoration-brass/40 underline-offset-4 transition-colors hover:text-ink hover:decoration-ink"
+              >
+                Läs hela innehållsguiden
+                <ArrowRight className="size-3.5" />
+              </Link>
+              <Button asChild size="md">
+                <SectionLink section="contact">
+                  Kontakta oss
+                </SectionLink>
+              </Button>
+            </div>
           </div>
         </div>
       </div>
