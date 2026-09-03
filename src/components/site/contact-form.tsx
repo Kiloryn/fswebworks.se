@@ -69,7 +69,7 @@ export function ContactForm({ defaultSubject = "", onPaper = false }: Props) {
   const field = cn(
     "h-12 w-full rounded-lg border px-4 text-sm outline-none transition-[border-color,box-shadow,background-color] duration-150",
     onPaper
-      ? "border-ink/12 bg-paper text-ink placeholder:text-subtle focus:border-gold"
+      ? "border-ink/15 bg-paper text-ink placeholder:text-subtle/70 focus:border-brass focus:ring-1 focus:ring-brass/30"
       : "border-line bg-canvas text-fg placeholder:text-muted/60 focus:border-gold focus:ring-1 focus:ring-gold/30",
   );
 
@@ -85,10 +85,16 @@ export function ContactForm({ defaultSubject = "", onPaper = false }: Props) {
           <Check className="size-5" strokeWidth={2.2} />
         </span>
         <h3 className="mt-5 font-display text-2xl">Tack – vi har fått din förfrågan.</h3>
-        <p className="mt-2 text-sm leading-relaxed text-muted">
+        <p className="mt-2 text-sm leading-relaxed text-subtle">
           Vi hör av oss så snart vi kan, vanligtvis inom en arbetsdag. Behöver du
           oss fortare går det bra att mejla{" "}
-          <a className="text-gold underline-offset-4 hover:underline" href={`mailto:${SITE.email}`}>
+          <a
+            className={cn(
+              "underline-offset-4 hover:underline",
+              onPaper ? "text-brass font-medium" : "text-gold",
+            )}
+            href={`mailto:${SITE.email}`}
+          >
             {SITE.email}
           </a>
           .
@@ -180,7 +186,13 @@ export function ContactForm({ defaultSubject = "", onPaper = false }: Props) {
       {error ? <p className="text-sm text-danger">{error}</p> : null}
       <p className={cn("text-xs leading-relaxed", onPaper ? "text-subtle" : "text-muted")}>
         Genom att skicka godkänner du att vi behandlar dina uppgifter enligt{" "}
-        <Link to="/integritet" className="text-gold underline-offset-4 hover:underline">
+        <Link
+          to="/integritet"
+          className={cn(
+            "underline-offset-4 hover:underline",
+            onPaper ? "text-brass font-medium" : "text-gold",
+          )}
+        >
           vår integritetspolicy
         </Link>
         .

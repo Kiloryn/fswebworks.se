@@ -419,52 +419,52 @@ function Faq() {
 
 function Contact({ defaultSubject }: { defaultSubject: string }) {
   return (
-    <section id="contact" className="bg-canvas py-24 text-fg md:py-32">
+    <section id="contact" className="bg-paper py-24 text-ink md:py-32">
       <div className="mx-auto grid max-w-6xl gap-12 px-5 md:grid-cols-[1fr_1.1fr] md:gap-16 md:px-8">
         <div>
-          <p className="text-[11px] uppercase tracking-[0.24em] text-gold">
+          <p className="text-[11px] uppercase tracking-[0.24em] text-subtle">
             Kontakt
           </p>
           <h2 className="mt-3 font-display text-[2.15rem] italic leading-[1.08] md:text-5xl">
             Osäker på vad du behöver? Hör av dig.
           </h2>
-          <p className="mt-5 text-base leading-relaxed text-muted">
+          <p className="mt-5 text-base leading-relaxed text-subtle">
             Vi går igenom dina önskemål och förutsättningar – helt utan
             förpliktelser. Du får alltid ett tydligt prisförslag innan något
             påbörjas.
           </p>
 
-          <div className="mt-8 space-y-4 border-y border-line py-6 text-sm">
+          <div className="mt-8 space-y-4 border-y border-ink/10 py-6 text-sm">
             <div className="flex items-start gap-3">
-              <span className="mt-1 size-1.5 shrink-0 rounded-full bg-gold" />
+              <span className="mt-1 size-1.5 shrink-0 rounded-full bg-brass" />
               <div>
-                <p className="font-medium text-fg">Snabb återkoppling</p>
-                <p className="text-muted">Vi svarar vanligtvis inom en arbetsdag.</p>
+                <p className="font-medium text-ink">Snabb återkoppling</p>
+                <p className="text-subtle">Vi svarar vanligtvis inom en arbetsdag.</p>
               </div>
             </div>
             <div className="flex items-start gap-3">
-              <span className="mt-1 size-1.5 shrink-0 rounded-full bg-gold" />
+              <span className="mt-1 size-1.5 shrink-0 rounded-full bg-brass" />
               <div>
-                <p className="font-medium text-fg">Direktkontakt via mejl</p>
-                <p className="text-muted">Föredrar du att skriva direkt till oss?</p>
+                <p className="font-medium text-ink">Direktkontakt via mejl</p>
+                <p className="text-subtle">Föredrar du att skriva direkt till oss?</p>
               </div>
             </div>
           </div>
 
           <a
             href={`mailto:${SITE.email}`}
-            className="mt-6 inline-block font-display text-xl italic text-fg underline decoration-gold decoration-2 underline-offset-8 transition-colors hover:text-gold md:text-2xl"
+            className="mt-6 inline-block font-display text-xl italic text-ink underline decoration-brass decoration-2 underline-offset-8 transition-colors hover:text-brass md:text-2xl"
           >
             {SITE.email}
           </a>
 
-          <p className="mt-4 text-xs text-muted">
+          <p className="mt-4 text-xs text-subtle">
             Bas i Stockholm · Vi skapar hemsidor för företag i hela Sverige.
           </p>
         </div>
 
-        <div className="rounded-2xl border border-line bg-ink-2 p-7 shadow-card md:p-9">
-          <ContactForm defaultSubject={defaultSubject} />
+        <div className="rounded-2xl border border-ink/10 bg-paper-2 p-7 shadow-sm md:p-9">
+          <ContactForm defaultSubject={defaultSubject} onPaper />
         </div>
       </div>
     </section>
