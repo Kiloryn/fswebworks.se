@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Pic } from "@/components/site/pic";
-import { DemoBanner, DemoExit } from "@/components/site/demo-banner";
+import { DemoBanner, DemoExit, DemoPhoneLink } from "@/components/site/demo-banner";
 
 export const Route = createFileRoute("/salong")({
   component: SalonDemo,
@@ -256,9 +256,9 @@ function SalonDemo() {
                   Ring
                 </dt>
                 <dd className="mt-2">
-                  <a href="tel:083214567" className="font-display text-2xl italic">
+                  <DemoPhoneLink tel="08-321 45 67" className="font-display text-2xl italic">
                     08-321 45 67
-                  </a>
+                  </DemoPhoneLink>
                 </dd>
               </div>
             </dl>

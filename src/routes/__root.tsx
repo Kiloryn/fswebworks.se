@@ -1,5 +1,4 @@
 import { createRootRoute, HeadContent, Outlet, Scripts } from "@tanstack/react-router";
-import { AuthProvider } from "@/lib/auth/provider";
 import { PreviewHostBridge } from "@/components/preview-host-bridge";
 import { SectionScroll } from "@/components/site/section-scroll";
 import { BackToTop } from "@/components/site/back-to-top";
@@ -45,11 +44,9 @@ function RootDocument() {
       </head>
       <body className="bg-canvas text-fg">
         <PreviewHostBridge />
-        <AuthProvider>
-          <SectionScroll />
-          <BackToTop />
-          <Outlet />
-        </AuthProvider>
+        <SectionScroll />
+        <BackToTop />
+        <Outlet />
         <Scripts />
       </body>
     </html>

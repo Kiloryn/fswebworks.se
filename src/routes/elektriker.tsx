@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Pic } from "@/components/site/pic";
-import { DemoBanner, DemoExit } from "@/components/site/demo-banner";
+import { DemoBanner, DemoExit, DemoPhoneLink } from "@/components/site/demo-banner";
 
 export const Route = createFileRoute("/elektriker")({
   component: ElDemo,
@@ -52,12 +52,12 @@ function ElDemo() {
             Nyinstallation, felavhjälpning och besiktning. Dokumentation som
             håller vid försäkring och försäljning.
           </p>
-          <a
-            href="tel:0845678901"
+          <DemoPhoneLink
+            tel="08-456 789 01"
             className="mt-10 inline-block font-display text-3xl italic md:text-4xl"
           >
             08-456 789 01
-          </a>
+          </DemoPhoneLink>
         </div>
         <div className="relative min-h-[42vh] md:min-h-[78vh]">
           <Pic
@@ -201,12 +201,12 @@ function ElDemo() {
               Mån–fre 07–16 · jour vid fel · Stockholm och krans
             </p>
           </div>
-          <a
-            href="tel:0845678901"
+          <DemoPhoneLink
+            tel="08-456 789 01"
             className="mt-8 block font-display text-4xl italic leading-none md:mt-0 md:text-5xl"
           >
             08-456 789 01
-          </a>
+          </DemoPhoneLink>
         </div>
       </section>
       <DemoExit />

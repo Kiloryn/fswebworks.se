@@ -15,8 +15,8 @@
   --color-brass: #8a6234;
   --color-gold-fg: #1a150c;
   --color-fg: #f5f1ea;
-  --color-muted: #c9c2b4;
-  --color-subtle: #534e46;
+  --color-muted: #dcd6cc;
+  --color-subtle: #3a352f;
   --color-line: rgb(200 164 110 / 0.22);
   --color-danger: #c45c3a;
 
@@ -44,6 +44,17 @@
     color-scheme: only light;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  section[id] {
+    scroll-margin-top: 5rem;
   }
 
   body {
@@ -135,6 +146,11 @@
 
   .marquee-track {
     animation: marquee 36s linear infinite;
+  }
+
+  .marquee-track:hover,
+  .marquee-track:focus-within {
+    animation-play-state: paused;
   }
 
   @keyframes marquee {

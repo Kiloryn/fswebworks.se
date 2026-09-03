@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Pic } from "@/components/site/pic";
-import { DemoBanner, DemoExit } from "@/components/site/demo-banner";
+import { DemoBanner, DemoExit, DemoPhoneLink } from "@/components/site/demo-banner";
 
 export const Route = createFileRoute("/restaurang")({
   component: RestaurantDemo,
@@ -183,12 +183,12 @@ function RestaurantDemo() {
               <br />
               Folkungagatan 48, Södermalm
             </p>
-            <a
-              href="tel:0856789012"
+            <DemoPhoneLink
+              tel="08-567 890 12"
               className="mt-6 inline-block font-display text-3xl italic md:text-4xl"
             >
               08-567 890 12
-            </a>
+            </DemoPhoneLink>
           </div>
           <form
             className="bg-[#1a0f0d] p-6 text-[#f3e6d8] md:p-8"

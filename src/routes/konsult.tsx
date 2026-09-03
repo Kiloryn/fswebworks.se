@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Pic } from "@/components/site/pic";
-import { DemoBanner, DemoExit } from "@/components/site/demo-banner";
+import { DemoBanner, DemoExit, DemoPhoneLink } from "@/components/site/demo-banner";
 
 export const Route = createFileRoute("/konsult")({
   component: ConsultDemo,
@@ -193,12 +193,12 @@ function ConsultDemo() {
               Distans eller i Stockholm. Ingen karta – jag kommer till er, eller
               så tar vi det i ett samtal.
             </p>
-            <a
-              href="tel:0701234567"
+            <DemoPhoneLink
+              tel="070-123 45 67"
               className="mt-10 block font-display text-4xl italic md:text-5xl"
             >
               070-123 45 67
-            </a>
+            </DemoPhoneLink>
             <p className="mt-3 text-sm text-[#c9c2b6]">anders@erikssonstrategi.se</p>
           </div>
           <form

@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Phone } from "lucide-react";
 import { Pic } from "@/components/site/pic";
-import { DemoBanner, DemoExit } from "@/components/site/demo-banner";
+import { DemoBanner, DemoExit, DemoPhoneLink } from "@/components/site/demo-banner";
 
 export const Route = createFileRoute("/vvs")({
   component: VvsDemo,
@@ -76,8 +76,8 @@ function VvsDemo() {
   return (
     <div className="min-h-dvh bg-[#eef3ef] text-[#1a2420]">
       <DemoBanner current="vvs" />
-      <a
-        href="tel:0812345678"
+      <DemoPhoneLink
+        tel="08-123 456 78"
         className="flex items-center justify-center gap-2 bg-[#c45c3a] px-4 py-3 text-center text-[13px] font-medium text-white"
       >
         <Phone className="size-4" />
@@ -85,7 +85,7 @@ function VvsDemo() {
         <span className="hidden sm:inline">
           Akut? Ring 08-123 456 78 — jour dygnet runt
         </span>
-      </a>
+      </DemoPhoneLink>
 
       <section className="relative isolate text-[#e8efe9]">
         <Pic
@@ -111,12 +111,12 @@ function VvsDemo() {
             Akut VVS, badrum och värme för villor, lägenheter och BRF.
             Offert innan vi sätter igång.
           </p>
-          <a
-            href="tel:0812345678"
+          <DemoPhoneLink
+            tel="08-123 456 78"
             className="mt-6 inline-flex h-12 items-center rounded-md bg-[#c45c3a] px-5 text-sm font-medium text-white hover:bg-[#b04f32]"
           >
             Ring 08-123 456 78
-          </a>
+          </DemoPhoneLink>
         </div>
       </section>
 
@@ -252,12 +252,12 @@ function VvsDemo() {
               ROT på arbetskostnaden.
             </p>
           </div>
-          <a
-            href="tel:0812345678"
+          <DemoPhoneLink
+            tel="08-123 456 78"
             className="mt-8 block font-display text-4xl italic leading-none md:mt-0 md:text-5xl"
           >
             08-123 456 78
-          </a>
+          </DemoPhoneLink>
         </div>
       </section>
       <DemoExit />

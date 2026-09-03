@@ -4,12 +4,6 @@ import { EXAMPLES, PROMISES } from "@/lib/site";
 import { Button } from "@/components/ui/button";
 import { Pic } from "@/components/site/pic";
 import { SectionLink } from "@/components/site/section-link";
-import { cn } from "@/lib/utils";
-
-type RVFCVideo = HTMLVideoElement & {
-  requestVideoFrameCallback?: (cb: () => void) => number;
-  cancelVideoFrameCallback?: (handle: number) => void;
-};
 
 type SectionRef = { current: HTMLElement | null };
 
@@ -41,28 +35,37 @@ function watchHeroOnScreen(el: HTMLElement, onShow: () => void, onHide: () => vo
   };
 }
 
-const NativeHeroVideo = memo(function NativeHeroVideo({
+const HeroVideo = memo(function HeroVideo({
   sectionRef,
 }: {
   sectionRef: SectionRef;
 }) {
   const ref = useRef<HTMLVideoElement>(null);
+  const [reduceMotion, setReduceMotion] = useState(false);
 
   useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setReduceMotion(true);
+      return;
+    }
+
     const video = ref.current;
     const section = sectionRef.current;
     if (!video || !section) return;
+
     const show = () => {
       void video.play().catch(() => {});
     };
     const hide = () => {
       video.pause();
     };
+
     const stopWatch = watchHeroOnScreen(section, show, hide);
     const onVis = () => {
       if (document.hidden) hide();
       else if (heroIsOnScreen(section)) show();
     };
+
     document.addEventListener("visibilitychange", onVis);
     return () => {
       stopWatch();
@@ -70,6 +73,8 @@ const NativeHeroVideo = memo(function NativeHeroVideo({
       video.pause();
     };
   }, [sectionRef]);
+
+  if (reduceMotion) return null;
 
   return (
     <video
@@ -83,138 +88,10 @@ const NativeHeroVideo = memo(function NativeHeroVideo({
       preload="auto"
       aria-hidden
     >
-      <source src="/videos/hero-720.mp4" type="video/mp4" />
+      <source src="/videos/hero-720.mp4" type="video/mp4" media="(max-width: 768px)" />
+      <source src="/videos/hero.mp4" type="video/mp4" />
     </video>
   );
-});
-
-const CanvasHeroVideo = memo(function CanvasHeroVideo({
-  sectionRef,
-}: {
-  sectionRef: SectionRef;
-}) {
-  const videoRef = useRef<RVFCVideo>(null);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [hasFrame, setHasFrame] = useState(false);
-
-  useEffect(() => {
-    const video = videoRef.current;
-    const canvas = canvasRef.current;
-    const section = sectionRef.current;
-    if (!video || !canvas || !section) return;
-
-    const ctx = canvas.getContext("2d", { alpha: false });
-    if (!ctx) return;
-
-    let drawing = false;
-    let shown = false;
-    let raf = 0;
-    let rvfc = 0;
-
-    const paint = () => {
-      const vw = video.videoWidth;
-      const vh = video.videoHeight;
-      if (!vw || !vh || video.readyState < 2) return false;
-      if (canvas.width !== vw || canvas.height !== vh) {
-        canvas.width = vw;
-        canvas.height = vh;
-      }
-      ctx.drawImage(video, 0, 0, vw, vh);
-      return true;
-    };
-
-    const tick = () => {
-      if (!drawing) return;
-      if (paint() && !shown) {
-        shown = true;
-        setHasFrame(true);
-      }
-      if (video.requestVideoFrameCallback) {
-        rvfc = video.requestVideoFrameCallback(tick);
-      } else {
-        raf = requestAnimationFrame(tick);
-      }
-    };
-
-    const start = () => {
-      if (drawing || document.hidden) return;
-      drawing = true;
-      void video.play().catch(() => {
-        drawing = false;
-      });
-      tick();
-    };
-
-    const stop = () => {
-      drawing = false;
-      if (video.cancelVideoFrameCallback && rvfc) {
-        video.cancelVideoFrameCallback(rvfc);
-      }
-      cancelAnimationFrame(raf);
-      rvfc = 0;
-      raf = 0;
-      video.pause();
-    };
-
-    const stopWatch = watchHeroOnScreen(section, start, stop);
-    const onVis = () => {
-      if (document.hidden) stop();
-      else if (heroIsOnScreen(section)) start();
-    };
-    video.addEventListener("playing", start);
-    document.addEventListener("visibilitychange", onVis);
-    start();
-
-    return () => {
-      stopWatch();
-      stop();
-      video.removeEventListener("playing", start);
-      document.removeEventListener("visibilitychange", onVis);
-    };
-  }, [sectionRef]);
-
-  return (
-    <>
-      <canvas
-        ref={canvasRef}
-        className={cn("hero-video", !hasFrame && "opacity-0")}
-        width={1280}
-        height={720}
-        aria-hidden
-      />
-      <video
-        ref={videoRef}
-        className="pointer-events-none fixed top-0 left-[-9999px] h-[90px] w-[160px] opacity-0"
-        muted
-        loop
-        playsInline
-        preload="auto"
-        width={1280}
-        height={720}
-        aria-hidden
-        tabIndex={-1}
-      >
-        <source src="/videos/hero.mp4" type="video/mp4" />
-      </video>
-    </>
-  );
-});
-
-const HeroVideo = memo(function HeroVideo({
-  sectionRef,
-}: {
-  sectionRef: SectionRef;
-}) {
-  const [mode, setMode] = useState<"none" | "native" | "canvas">("none");
-
-  useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    setMode(window.matchMedia("(max-width: 767px)").matches ? "native" : "canvas");
-  }, []);
-
-  if (mode === "native") return <NativeHeroVideo sectionRef={sectionRef} />;
-  if (mode === "canvas") return <CanvasHeroVideo sectionRef={sectionRef} />;
-  return null;
 });
 
 export const Hero = memo(function Hero() {

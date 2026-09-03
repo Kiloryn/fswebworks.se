@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Pic } from "@/components/site/pic";
-import { DemoBanner, DemoExit } from "@/components/site/demo-banner";
+import { DemoBanner, DemoExit, DemoPhoneLink } from "@/components/site/demo-banner";
 
 export const Route = createFileRoute("/malare")({
   component: PainterDemo,
@@ -135,12 +135,12 @@ function PainterDemo() {
             >
               Kostnadsfri offert
             </a>
-            <a
-              href="tel:0867890123"
+            <DemoPhoneLink
+              tel="08-678 901 23"
               className="inline-flex h-12 items-center justify-center rounded-md border border-white/40 px-5 text-sm"
             >
               08-678 901 23
-            </a>
+            </DemoPhoneLink>
           </div>
         </div>
       </section>
@@ -275,9 +275,9 @@ function PainterDemo() {
                   Ring
                 </dt>
                 <dd className="mt-2">
-                  <a href="tel:0867890123" className="font-display text-3xl italic">
+                  <DemoPhoneLink tel="08-678 901 23" className="font-display text-3xl italic">
                     08-678 901 23
-                  </a>
+                  </DemoPhoneLink>
                 </dd>
               </div>
               <div>

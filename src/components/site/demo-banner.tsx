@@ -1,5 +1,6 @@
+import { type MouseEvent, type ReactNode, useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, ArrowRight, Phone, X } from "lucide-react";
 import { EXAMPLES } from "@/lib/site";
 import { Logo } from "@/components/site/logo";
 import { SectionLink } from "@/components/site/section-link";
@@ -73,5 +74,91 @@ export function DemoExit() {
         </SectionLink>
       </div>
     </div>
+  );
+}
+
+export function DemoPhoneLink({
+  tel,
+  className,
+  children,
+}: {
+  tel: string;
+  className?: string;
+  children: ReactNode;
+}) {
+  const [open, setOpen] = useState(false);
+
+  const handleClick = (e: MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    setOpen(true);
+  };
+
+  return (
+    <>
+      <a
+        href={`tel:${tel}`}
+        onClick={handleClick}
+        className={className}
+      >
+        {children}
+      </a>
+
+      {open ? (
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="demo-phone-dialog-title"
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 p-4 backdrop-blur-xs"
+          onClick={() => setOpen(false)}
+        >
+          <div
+            className="relative w-full max-w-md rounded-xl border border-line bg-canvas p-6 text-fg shadow-lift"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              type="button"
+              onClick={() => setOpen(false)}
+              className="absolute right-4 top-4 text-muted hover:text-fg"
+              aria-label="Stäng dialog"
+            >
+              <X className="size-5" />
+            </button>
+            <div className="flex items-center gap-3">
+              <span className="grid size-10 place-items-center rounded-full bg-gold/15 text-gold">
+                <Phone className="size-5" />
+              </span>
+              <div>
+                <p className="text-[11px] font-semibold uppercase tracking-wider text-gold">
+                  Exempelsida
+                </p>
+                <h3 id="demo-phone-dialog-title" className="font-display text-xl">
+                  Klickbart telefonnummer
+                </h3>
+              </div>
+            </div>
+            <p className="mt-4 text-sm leading-relaxed text-muted">
+              Numret <strong className="text-fg">{tel}</strong> är ett exempel för den här demonstrationssidan. På din riktiga hemsida ringer dina kunder direkt till ert företags telefonnummer med ett enda tryck.
+            </p>
+            <div className="mt-6 flex flex-col gap-2.5 sm:flex-row">
+              <SectionLink
+                section="contact"
+                className="inline-flex h-11 flex-1 items-center justify-center gap-1.5 rounded-md bg-gold px-4 text-sm font-medium text-gold-fg hover:bg-gold-2"
+                onClick={() => setOpen(false)}
+              >
+                Begär offert för ditt företag
+                <ArrowRight className="size-4" />
+              </SectionLink>
+              <button
+                type="button"
+                className="inline-flex h-11 items-center justify-center rounded-md border border-line px-4 text-sm text-fg hover:bg-fg/5"
+                onClick={() => setOpen(false)}
+              >
+                Stäng
+              </button>
+            </div>
+          </div>
+        </div>
+      ) : null}
+    </>
   );
 }
