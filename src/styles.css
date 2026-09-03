@@ -32,6 +32,9 @@
   --shadow-card:
     0 0 0 1px rgb(200 164 110 / 0.14),
     0 18px 40px -24px rgb(0 0 0 / 0.55);
+  --shadow-card-hover:
+    0 0 0 1px rgb(200 164 110 / 0.28),
+    0 24px 48px -20px rgb(0 0 0 / 0.7);
   --shadow-lift:
     0 0 0 1px rgb(200 164 110 / 0.28),
     0 22px 50px -20px rgb(0 0 0 / 0.6);
@@ -177,6 +180,15 @@
 
     .marquee-track {
       animation: none;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
     }
   }
 }

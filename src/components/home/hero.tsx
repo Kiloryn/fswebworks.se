@@ -177,18 +177,31 @@ export const Hero = memo(function Hero() {
                   interaktivt exempel · {current.name}
                 </span>
               </div>
-              <div className="relative overflow-hidden rounded-lg">
-                <Pic
-                  src={current.image}
-                  alt=""
-                  className="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-                />
-                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink to-transparent p-4">
-                  <p className="text-[11px] uppercase tracking-[0.18em] text-mark">
-                    {current.brand}
-                  </p>
-                  <p className="font-display text-xl italic">{current.name}</p>
-                </div>
+              <div className="relative aspect-[4/3] w-full overflow-hidden rounded-lg bg-ink-3">
+                {EXAMPLES.map((ex) => {
+                  const isVisible = ex.slug === current.slug;
+                  return (
+                    <div
+                      key={ex.slug}
+                      aria-hidden={!isVisible}
+                      className={`absolute inset-0 size-full transition-opacity duration-300 ease-out ${
+                        isVisible ? "opacity-100 z-10" : "opacity-0 z-0 pointer-events-none"
+                      }`}
+                    >
+                      <Pic
+                        src={ex.image}
+                        alt=""
+                        className="size-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                      />
+                      <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink to-transparent p-4">
+                        <p className="text-[11px] uppercase tracking-[0.18em] text-mark">
+                          {ex.brand}
+                        </p>
+                        <p className="font-display text-xl italic">{ex.name}</p>
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </a>

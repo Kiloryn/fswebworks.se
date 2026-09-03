@@ -62,9 +62,9 @@ export function SiteHeader({ ink = true }: { ink?: boolean }) {
   return (
     <header
       className={cn(
-        "fixed inset-x-0 top-0 z-50 transition-[background-color,border-color,color] duration-200",
+        "fixed inset-x-0 top-0 z-50 transition-[background-color,border-color,color,backdrop-filter] duration-200",
         solid
-          ? "border-b border-line bg-canvas text-fg"
+          ? "border-b border-line/80 bg-canvas/92 backdrop-blur-md text-fg shadow-xs"
           : "border-b border-transparent bg-transparent text-fg",
       )}
     >

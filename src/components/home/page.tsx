@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { ArrowRight, Check, ChevronDown, Sparkles } from "lucide-react";
 import {
@@ -79,7 +80,7 @@ function Examples() {
             <a
               key={ex.slug}
               href={`/${ex.slug}`}
-              className="group overflow-hidden rounded-xl bg-paper-2"
+              className="group overflow-hidden rounded-xl border border-ink/8 bg-paper-2 transition-all duration-300 ease-out hover:-translate-y-1 hover:border-ink/20 hover:shadow-lg"
             >
               <div className="relative aspect-[4/3] overflow-hidden">
                 <Pic
@@ -130,7 +131,7 @@ function Services() {
           </p>
         </Reveal>
         <div className="mt-14 grid gap-5 lg:grid-cols-2">
-          <article className="flex flex-col rounded-xl bg-ink-2 p-7 shadow-card md:p-8">
+          <article className="flex flex-col rounded-xl bg-ink-2 p-7 shadow-card transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[var(--shadow-card-hover)] md:p-8">
             <p className="text-[11px] uppercase tracking-[0.2em] text-gold">
               Hemsida
             </p>
@@ -163,7 +164,7 @@ function Services() {
             {rest.map((s) => (
               <article
                 key={s.id}
-                className="flex flex-col rounded-xl border border-line bg-ink-2/60 p-7"
+                className="flex flex-col rounded-xl border border-line bg-ink-2/60 p-7 transition-all duration-300 ease-out hover:-translate-y-0.5 hover:border-line/60 hover:bg-ink-2"
               >
                 <p className="text-[11px] uppercase tracking-[0.2em] text-gold">
                   {s.id === "service" ? "Valfritt" : "Vid behov"}
@@ -346,6 +347,8 @@ function Process() {
 }
 
 function Faq() {
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
+
   return (
     <section className="cv-auto bg-canvas py-24 md:py-32">
       <div className="mx-auto max-w-3xl px-5 md:px-8">
@@ -353,23 +356,42 @@ function Faq() {
           Vanliga frågor
         </h2>
         <div className="mt-12 space-y-3">
-          {FAQ.map((item, i) => (
-            <details
-              key={item.q}
-              className="group rounded-xl border border-line bg-ink-2"
-              open={i === 0}
-            >
-              <summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-4 px-6 py-5 text-left marker:content-none [&::-webkit-details-marker]:hidden">
-                <span className="font-display text-base leading-snug md:text-xl">
-                  {item.q}
-                </span>
-                <ChevronDown className="size-5 shrink-0 text-gold transition-transform duration-200 group-open:rotate-180" />
-              </summary>
-              <p className="border-t border-line px-6 py-5 text-sm leading-relaxed text-muted">
-                {item.a}
-              </p>
-            </details>
-          ))}
+          {FAQ.map((item, i) => {
+            const isOpen = openIndex === i;
+            return (
+              <div
+                key={item.q}
+                className="overflow-hidden rounded-xl border border-line bg-ink-2 transition-colors duration-150 hover:border-line/70"
+              >
+                <button
+                  type="button"
+                  aria-expanded={isOpen}
+                  onClick={() => setOpenIndex(isOpen ? null : i)}
+                  className="flex min-h-14 w-full cursor-pointer items-center justify-between gap-4 px-6 py-5 text-left transition-colors"
+                >
+                  <span className="font-display text-base leading-snug md:text-xl">
+                    {item.q}
+                  </span>
+                  <ChevronDown
+                    className={`size-5 shrink-0 text-gold transition-transform duration-250 ease-out ${
+                      isOpen ? "rotate-180" : ""
+                    }`}
+                  />
+                </button>
+                <div
+                  className={`grid transition-[grid-template-rows] duration-250 ease-out ${
+                    isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+                  }`}
+                >
+                  <div className="overflow-hidden">
+                    <p className="border-t border-line/60 px-6 py-5 text-sm leading-relaxed text-muted">
+                      {item.a}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>
