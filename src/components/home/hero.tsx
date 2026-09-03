@@ -176,9 +176,6 @@ export const Hero = memo(function Hero() {
                 <span className="ml-2 truncate rounded-sm bg-canvas px-2 py-0.5 text-[10px] text-muted">
                   interaktivt exempel · {current.name}
                 </span>
-                <span className="ml-auto text-[10px] text-gold group-hover:underline">
-                  Klicka för att testa →
-                </span>
               </div>
               <div className="relative overflow-hidden rounded-lg">
                 <Pic
