@@ -30,21 +30,32 @@ export function HomePage({ defaultSubject = "" }: { defaultSubject?: string }) {
   );
 }
 
-function Marquee() {
-  const items = [...EXAMPLES, ...EXAMPLES];
+function MarqueeLink({ ex }: { ex: (typeof EXAMPLES)[number] }) {
   return (
-    <div className="overflow-hidden border-y border-line bg-ink-2 py-4">
-      <div className="marquee-track flex w-max gap-10 pr-10">
-        {items.map((ex, i) => (
-          <a
-            key={`${ex.slug}-${i}`}
-            href={`/${ex.slug}`}
-            className="flex items-center gap-3 text-[12px] uppercase tracking-[0.22em] text-muted hover:text-gold"
-          >
-            <span className="text-gold">/</span>
-            {ex.name}
-          </a>
+    <a
+      href={`/${ex.slug}`}
+      className="flex items-center gap-3 text-[12px] uppercase tracking-[0.22em] text-muted hover:text-gold"
+    >
+      <span className="text-gold">/</span>
+      {ex.name}
+    </a>
+  );
+}
+
+function Marquee() {
+  return (
+    <div className="border-y border-line bg-ink-2 py-4">
+      <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-x-6 gap-y-2 px-5 md:hidden">
+        {EXAMPLES.map((ex) => (
+          <MarqueeLink key={ex.slug} ex={ex} />
         ))}
+      </div>
+      <div className="hidden overflow-hidden md:block">
+        <div className="marquee-track flex w-max gap-10 pr-10">
+          {[...EXAMPLES, ...EXAMPLES].map((ex, i) => (
+            <MarqueeLink key={`${ex.slug}-${i}`} ex={ex} />
+          ))}
+        </div>
       </div>
     </div>
   );
@@ -347,7 +358,7 @@ function Process() {
             <div className="flex w-full shrink-0 items-center justify-between gap-4 sm:w-auto sm:justify-end">
               <Link
                 to="/process"
-                className="inline-flex items-center gap-1.5 text-xs font-medium text-brass underline decoration-brass/40 underline-offset-4 transition-colors hover:text-ink hover:decoration-ink"
+                className="inline-flex items-center gap-1.5 text-xs font-medium text-brass underline decoration-brass underline-offset-4 transition-colors hover:text-ink hover:decoration-ink"
               >
                 Läs hela innehållsguiden
                 <ArrowRight className="size-3.5" />

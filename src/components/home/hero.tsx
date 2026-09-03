@@ -166,7 +166,6 @@ export const Hero = memo(function Hero() {
           <a
             href={`/${current.slug}`}
             className="group relative w-full max-w-md"
-            aria-label={`Öppna interaktivt exempel för ${current.name}`}
           >
             <div className="relative rounded-xl border border-line bg-ink-2 p-2 shadow-lift">
               <div className="flex items-center gap-1.5 px-2 py-2">
