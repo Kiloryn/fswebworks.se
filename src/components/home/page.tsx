@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { ArrowRight, Check, ChevronDown } from "lucide-react";
 import {
@@ -62,17 +62,6 @@ function Marquee() {
 }
 
 function Examples() {
-  const [showImages, setShowImages] = useState(false);
-
-  useEffect(() => {
-    const query = window.matchMedia("(min-width: 768px)");
-    const update = () => setShowImages(query.matches);
-
-    update();
-    query.addEventListener("change", update);
-    return () => query.removeEventListener("change", update);
-  }, []);
-
   return (
     <section id="exempel" className="bg-paper py-24 text-ink md:py-32">
       <div className="mx-auto max-w-6xl px-5 md:px-8">
@@ -105,18 +94,14 @@ function Examples() {
               className="group overflow-hidden rounded-xl border border-ink/8 bg-paper-2 transition-all duration-300 ease-out hover:-translate-y-1 hover:border-ink/20 hover:shadow-lg"
             >
               <div className="relative aspect-[4/3] overflow-hidden">
-                {showImages ? (
-                  <Pic
-                    src={ex.image}
-                    alt={`${ex.name} exempelsida`}
-                    className="size-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    width={800}
-                    height={600}
-                    priority={ex.slug === "vvs" || ex.slug === "elektriker"}
-                  />
-                ) : (
-                  <div className="size-full bg-paper-2" aria-hidden />
-                )}
+                <Pic
+                  src={ex.image}
+                  alt={`${ex.name} exempelsida`}
+                  className="size-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  width={800}
+                  height={600}
+                  priority={ex.slug === "vvs" || ex.slug === "elektriker"}
+                />
                 <span className="absolute right-3 top-3 rounded-sm bg-gold px-3 py-1 text-[11px] font-medium text-gold-fg md:opacity-0 md:transition-opacity md:duration-200 md:group-hover:opacity-100">
                   Öppna
                 </span>
