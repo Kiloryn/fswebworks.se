@@ -106,8 +106,8 @@ export const Hero = memo(function Hero() {
           <p className="text-[11px] uppercase tracking-[0.28em] text-mark">
             Webbdesign för småföretag
           </p>
-          <h1 className="mt-5 max-w-[14ch] font-display text-[2.35rem] leading-[1.05] text-fg italic sm:text-5xl md:text-[4.1rem]">
-            En hemsida som ser ut som ditt hantverk.
+          <h1 className="mt-5 max-w-[15ch] font-display text-[2.35rem] leading-[1.05] text-fg italic sm:text-5xl md:text-[4.1rem]">
+            En hemsida byggd för ditt företag.
           </h1>
           <p className="mt-6 max-w-md text-lg leading-relaxed text-muted md:text-xl">
             Professionella hemsidor för hantverkare och småföretag i hela
