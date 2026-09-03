@@ -463,8 +463,8 @@ function Contact({ defaultSubject }: { defaultSubject: string }) {
           </p>
         </div>
 
-        <div className="rounded-2xl border border-ink/10 bg-paper-2 p-7 shadow-sm md:p-9">
-          <ContactForm defaultSubject={defaultSubject} onPaper />
+        <div className="rounded-2xl border border-line bg-ink-2 p-7 text-fg shadow-card md:p-9">
+          <ContactForm defaultSubject={defaultSubject} />
         </div>
       </div>
     </section>

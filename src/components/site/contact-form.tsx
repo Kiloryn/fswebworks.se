@@ -70,7 +70,7 @@ export function ContactForm({ defaultSubject = "", onPaper = false }: Props) {
     "h-12 w-full rounded-lg border px-4 text-sm outline-none transition-[border-color,box-shadow,background-color] duration-150",
     onPaper
       ? "border-ink/15 bg-paper text-ink placeholder:text-subtle/70 focus:border-brass focus:ring-1 focus:ring-brass/30"
-      : "border-line bg-canvas text-fg placeholder:text-muted/60 focus:border-gold focus:ring-1 focus:ring-gold/30",
+      : "border-line/70 bg-ink-3 text-fg placeholder:text-muted/60 focus:border-gold focus:ring-1 focus:ring-gold/30",
   );
 
   if (sent) {
@@ -85,7 +85,7 @@ export function ContactForm({ defaultSubject = "", onPaper = false }: Props) {
           <Check className="size-5" strokeWidth={2.2} />
         </span>
         <h3 className="mt-5 font-display text-2xl">Tack – vi har fått din förfrågan.</h3>
-        <p className="mt-2 text-sm leading-relaxed text-subtle">
+        <p className={cn("mt-2 text-sm leading-relaxed", onPaper ? "text-subtle" : "text-muted")}>
           Vi hör av oss så snart vi kan, vanligtvis inom en arbetsdag. Behöver du
           oss fortare går det bra att mejla{" "}
           <a
@@ -107,7 +107,10 @@ export function ContactForm({ defaultSubject = "", onPaper = false }: Props) {
     <form className="space-y-4 text-left" onSubmit={onSubmit} noValidate>
       <div className="grid gap-4 sm:grid-cols-2">
         <div>
-          <label htmlFor="contact-name" className="mb-1.5 block text-sm font-medium">
+          <label
+            htmlFor="contact-name"
+            className={cn("mb-1.5 block text-sm font-medium", onPaper ? "text-ink" : "text-fg")}
+          >
             Namn
           </label>
           <input
@@ -120,7 +123,10 @@ export function ContactForm({ defaultSubject = "", onPaper = false }: Props) {
           />
         </div>
         <div>
-          <label htmlFor="contact-email" className="mb-1.5 block text-sm font-medium">
+          <label
+            htmlFor="contact-email"
+            className={cn("mb-1.5 block text-sm font-medium", onPaper ? "text-ink" : "text-fg")}
+          >
             E-post
           </label>
           <input
@@ -136,8 +142,11 @@ export function ContactForm({ defaultSubject = "", onPaper = false }: Props) {
       </div>
       <div className="grid gap-4 sm:grid-cols-2">
         <div>
-          <label htmlFor="contact-phone" className="mb-1.5 block text-sm font-medium">
-            Telefon <span className="text-xs text-muted font-normal">(valfritt)</span>
+          <label
+            htmlFor="contact-phone"
+            className={cn("mb-1.5 block text-sm font-medium", onPaper ? "text-ink" : "text-fg")}
+          >
+            Telefon <span className={cn("text-xs font-normal", onPaper ? "text-subtle" : "text-muted")}>(valfritt)</span>
           </label>
           <input
             id="contact-phone"
@@ -149,8 +158,11 @@ export function ContactForm({ defaultSubject = "", onPaper = false }: Props) {
           />
         </div>
         <div>
-          <label htmlFor="contact-subject" className="mb-1.5 block text-sm font-medium">
-            Ämne <span className="text-xs text-muted font-normal">(valfritt)</span>
+          <label
+            htmlFor="contact-subject"
+            className={cn("mb-1.5 block text-sm font-medium", onPaper ? "text-ink" : "text-fg")}
+          >
+            Ämne <span className={cn("text-xs font-normal", onPaper ? "text-subtle" : "text-muted")}>(valfritt)</span>
           </label>
           <select
             id="contact-subject"
@@ -167,7 +179,10 @@ export function ContactForm({ defaultSubject = "", onPaper = false }: Props) {
         </div>
       </div>
       <div>
-        <label htmlFor="contact-message" className="mb-1.5 block text-sm font-medium">
+        <label
+          htmlFor="contact-message"
+          className={cn("mb-1.5 block text-sm font-medium", onPaper ? "text-ink" : "text-fg")}
+        >
           Meddelande
         </label>
         <textarea

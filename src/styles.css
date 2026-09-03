@@ -107,7 +107,6 @@
   /* Contact section layout anchor: ensures smooth jump accounts for header */
   #contact {
     scroll-margin-top: 4.5rem;
-    color-scheme: only light;
   }
 }
 
