@@ -7,34 +7,6 @@ import { SectionLink } from "@/components/site/section-link";
 
 type SectionRef = { current: HTMLElement | null };
 
-function heroIsOnScreen(el: HTMLElement) {
-  const r = el.getBoundingClientRect();
-  const vh = window.visualViewport?.height ?? window.innerHeight;
-  return r.bottom > 8 && r.top < vh - 8;
-}
-
-function watchHeroOnScreen(el: HTMLElement, onShow: () => void, onHide: () => void) {
-  let timer = 0;
-  const apply = () => {
-    if (heroIsOnScreen(el)) {
-      window.clearTimeout(timer);
-      onShow();
-      return;
-    }
-    window.clearTimeout(timer);
-    timer = window.setTimeout(() => {
-      if (!heroIsOnScreen(el)) onHide();
-    }, 320);
-  };
-  const io = new IntersectionObserver(apply, { threshold: 0 });
-  io.observe(el);
-  apply();
-  return () => {
-    io.disconnect();
-    window.clearTimeout(timer);
-  };
-}
-
 const HeroVideo = memo(function HeroVideo({
   sectionRef,
 }: {
@@ -43,33 +15,48 @@ const HeroVideo = memo(function HeroVideo({
   const ref = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
-    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    if (mq.matches) return;
-
     const video = ref.current;
     const section = sectionRef.current;
     if (!video || !section) return;
 
-    const show = () => {
-      if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-        void video.play().catch(() => {});
+    let isSectionIntersecting = true;
+
+    const playVideo = () => {
+      if (document.hidden) return;
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      void video.play().catch(() => {});
+    };
+
+    const pauseVideo = () => {
+      video.pause();
+    };
+
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        isSectionIntersecting = entry.isIntersecting;
+        if (entry.isIntersecting) {
+          playVideo();
+        } else {
+          pauseVideo();
+        }
+      },
+      { threshold: 0.05 },
+    );
+    io.observe(section);
+
+    const onVis = () => {
+      if (document.hidden) {
+        pauseVideo();
+      } else if (isSectionIntersecting) {
+        playVideo();
       }
     };
-    const hide = () => {
-      video.pause();
-    };
-
-    const stopWatch = watchHeroOnScreen(section, show, hide);
-    const onVis = () => {
-      if (document.hidden) hide();
-      else if (heroIsOnScreen(section)) show();
-    };
-
     document.addEventListener("visibilitychange", onVis);
+
     return () => {
-      stopWatch();
+      io.disconnect();
       document.removeEventListener("visibilitychange", onVis);
-      video.pause();
+      pauseVideo();
     };
   }, [sectionRef]);
 
