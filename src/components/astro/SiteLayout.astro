@@ -17,10 +17,10 @@ import Icon from "./Icon.astro";
   const topSentinel = document.querySelector("#top-sentinel");
   if (topButton && topSentinel) {
     new IntersectionObserver(([entry]) => {
-      topButton.classList.toggle("hidden", Boolean(entry?.isIntersecting));
-      topButton.classList.toggle("flex", !entry?.isIntersecting);
+      const show = matchMedia("(min-width: 768px)").matches && !entry?.isIntersecting;
+      topButton.classList.toggle("hidden", !show);
+      topButton.classList.toggle("flex", show);
     }, { rootMargin: "480px 0px 0px" }).observe(topSentinel);
     topButton.addEventListener("click", () => window.scrollTo({ top: 0, behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" }));
   }
 </script>
-
