@@ -47,13 +47,7 @@
     color-scheme: only light;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    scroll-behavior: auto;
-  }
-
-  @media (min-width: 768px) {
-    html {
-      scroll-behavior: smooth;
-    }
+    scroll-behavior: smooth;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -70,7 +64,8 @@
     background: var(--color-canvas);
     color: var(--color-fg);
     font-family: var(--font-sans);
-    min-height: 100dvh;
+    min-height: 100vh;
+    min-height: 100svh;
   }
 
   h1,
