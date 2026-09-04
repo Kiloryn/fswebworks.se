@@ -1,0 +1,324 @@
+---
+export const prerender = true;
+import DemoLayout from "../layouts/DemoLayout.astro";
+import Pic from "../components/astro/Pic.astro";
+import DemoBanner from "../components/astro/DemoBanner.astro";
+import DemoExit from "../components/astro/DemoExit.astro";
+import DemoPhoneLink from "../components/astro/DemoPhoneLink.astro";
+
+const colors = [
+  { name: "Salvia", hex: "#8a9a7b", ink: true },
+  { name: "Kalk", hex: "#e8e0d0", ink: true },
+  { name: "Terrakotta", hex: "#c36b4a", ink: false },
+  { name: "Djupgrön", hex: "#2f5d3d", ink: false },
+];
+
+const services = [
+  {
+    title: "Inomhus",
+    body: "Tak, väggar, lister och kök. Spackling och slipning ingår när ytan kräver det.",
+  },
+  {
+    title: "Utomhus",
+    body: "Fasader, fönster och staket. Färg som håller svenska vintrar.",
+  },
+  {
+    title: "Tapet",
+    body: "Tapetsering, fondvägg och förarbete. Vi hjälper till att välja material.",
+  },
+  {
+    title: "Hembesök",
+    body: "Kostnadsfri genomgång på plats. Offert utan förpliktelser, ofta samma dag.",
+  },
+];
+
+const team = [
+  { name: "Per Holm", role: "Målarmästare" },
+  { name: "Nina Berg", role: "Målare, tapet" },
+  { name: "Johan Ek", role: "Fasader" },
+];
+
+const reviews = [
+  {
+    quote:
+      "Målade om tre rum i lägenheten. Höll tiden, täckte allt och lämnade rent. ROT på fakturan utan krångel.",
+    name: "Anna, Kungsholmen",
+  },
+  {
+    quote:
+      "Färgförslag på plats som faktiskt passade ljuset. Inte den där standardvita alla andra kör.",
+    name: "David, Bromma",
+  },
+  {
+    quote:
+      "Tapet i hallen plus tak. Tydlig offert, inga extra rader efteråt.",
+    name: "Lisa, Enskede",
+  },
+];
+
+const faq = [
+  {
+    q: "Gör ni ROT-avdrag?",
+    a: "Ja, på arbetskostnaden för privatpersoner i befintlig bostad. Ni får avdraget direkt på fakturan.",
+  },
+  {
+    q: "Vad kostar ett hembesök?",
+    a: "Inget. Vi tittar på ytorna, pratar färg och skickar offert. Ingen förpliktelse.",
+  },
+  {
+    q: "Hur lång tid tar ett rum?",
+    a: "Ett rum är ofta en till två dagar beroende på underarbete. Vi säger hur lång tid det tar redan i offerten.",
+  },
+  {
+    q: "Var kör ni?",
+    a: "Storstockholm – innerstan, krans och en bit utanför. Säg adressen så säger vi om vi tar det.",
+  },
+];
+---
+<DemoLayout title="Stockholms Måleri – exempelsida">
+<div class="min-h-dvh bg-[#f3f1ea] text-[#1f2a22]">
+      <DemoBanner current="malare" />
+      <header class="border-b border-[#1f2a22]/10">
+        <div class="mx-auto flex max-w-6xl items-center justify-between gap-3 px-5 py-4 md:px-8">
+          <p class="min-w-0 text-[11px] font-semibold tracking-[0.16em]">
+            STOCKHOLMS MÅLERI
+          </p>
+          <nav class="hidden items-center gap-7 text-sm md:flex">
+            <a href="#tjanster" class="hover:underline">
+              Tjänster
+            </a>
+            <a href="#folk" class="hover:underline">
+              Folket
+            </a>
+            <a href="#offert" class="hover:underline">
+              Offert
+            </a>
+          </nav>
+          <a
+            href="#offert"
+            class="inline-flex h-11 shrink-0 items-center rounded-md bg-[#2f5d3d] px-4 text-sm text-white"
+          >
+            Kostnadsfri offert
+          </a>
+        </div>
+      </header>
+
+      <section class="relative isolate">
+        <Pic
+          src="/images/malare.jpg?v=5"
+          alt="Nymålat rum i salviagrönt"
+          class="h-[62dvh] w-full object-cover md:h-[82vh]"
+          width={1400}
+          height={1050}
+          priority
+        />
+        <div class="absolute inset-0 bg-gradient-to-t from-[#1f2a22] via-[#1f2a22]/25 to-transparent" />
+        <div class="absolute inset-x-0 bottom-0 mx-auto max-w-6xl px-5 pb-10 text-white md:px-8 md:pb-14">
+          <p class="text-[11px] uppercase tracking-[0.22em] text-white/70">
+            Stockholm · ROT · kostnadsfri offert
+          </p>
+          <h1 class="mt-3 max-w-[13ch] font-display text-[2.5rem] leading-[0.98] md:text-7xl">
+            Ett rum som känns färdigt.
+          </h1>
+          <p class="mt-4 max-w-md text-sm text-white/80 md:text-base">
+            Inomhus, utomhus och tapet. Vi kommer hem, tittar på ytorna och
+            skickar offert – utan förpliktelse.
+          </p>
+          <div class="mt-7 flex flex-col gap-3 sm:flex-row">
+            <a
+              href="#offert"
+              class="inline-flex h-12 items-center justify-center rounded-md bg-white px-5 text-sm text-[#1f2a22]"
+            >
+              Kostnadsfri offert
+            </a>
+            <DemoPhoneLink
+              tel="08-678 901 23"
+              class="inline-flex h-12 items-center justify-center rounded-md border border-white/40 px-5 text-sm"
+            >
+              08-678 901 23
+            </DemoPhoneLink>
+          </div>
+        </div>
+      </section>
+
+      <section class="border-b border-[#1f2a22]/10 bg-white">
+        <div class="mx-auto grid max-w-6xl gap-8 px-5 py-8 sm:grid-cols-2 lg:grid-cols-4 md:px-8">
+          {[
+            ["ROT", "på arbetskostnaden"],
+            ["Fri offert", "hembesök utan kostnad"],
+            ["Alcro / Nordsjö", "färg vi litar på"],
+            ["Storstockholm", "innerstan och krans"],
+          ].map(([k, v]) => (
+            <div>
+              <p class="font-display text-2xl italic text-[#2f5d3d]">{k}</p>
+              <p class="mt-1 text-sm text-[#4d5b52]">{v}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section class="grid grid-cols-2 md:grid-cols-4">
+        {colors.map((c) => (
+          <div
+            class="flex h-36 flex-col justify-end p-4 md:h-52"
+            style={`background-color:${c.hex}`}
+          >
+            <p
+              class={`text-sm font-medium tracking-wide ${c.ink ? "text-[#1f2a22]" : "text-white"}`}
+            >
+              {c.name}
+            </p>
+          </div>
+        ))}
+      </section>
+
+      <section id="tjanster" class="bg-[#e4ebe3] px-5 py-16 md:px-8">
+        <div class="mx-auto max-w-6xl">
+          <h2 class="font-display text-3xl italic md:text-4xl">Vad vi gör</h2>
+          <div class="mt-10 grid gap-4 sm:grid-cols-2">
+            {services.map((s) => (
+              <article class="bg-[#f3f1ea] p-6 md:p-8">
+                <h3 class="font-display text-2xl italic">{s.title}</h3>
+                <p class="mt-3 text-sm leading-relaxed text-[#4d5b52]">{s.body}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="folk" class="bg-white px-5 py-16 md:px-8">
+        <div class="mx-auto max-w-6xl">
+          <div class="flex flex-col justify-between gap-4 md:flex-row md:items-end">
+            <div>
+              <p class="text-[11px] uppercase tracking-[0.22em] text-[#2f5d3d]">
+                Folket
+              </p>
+              <h2 class="mt-2 font-display text-3xl italic md:text-4xl">
+                Samma målare från offert till sista listen.
+              </h2>
+            </div>
+            <p class="max-w-sm text-sm text-[#4d5b52]">
+              Här lägger vi in era foton. Namn, roll, en bild från ett jobb.
+            </p>
+          </div>
+          <div class="mt-10 grid gap-4 sm:grid-cols-3">
+            {team.map((p) => (
+              <article class="bg-[#f3f1ea]">
+                <div class="flex aspect-[3/4] flex-col items-center justify-center">
+                  <span class="text-[11px] uppercase tracking-[0.22em] text-[#2f5d3d]">
+                    Bild på personal
+                  </span>
+                  <span class="mt-2 text-sm text-[#4d5b52]">Ert foto här</span>
+                </div>
+                <div class="p-5">
+                  <h3 class="font-display text-xl italic">{p.name}</h3>
+                  <p class="text-sm text-[#4d5b52]">{p.role}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section class="bg-[#e4ebe3] px-5 py-16 md:px-8">
+        <div class="mx-auto max-w-6xl">
+          <h2 class="font-display text-3xl italic md:text-4xl">De ringer tillbaka.</h2>
+          <div class="mt-10 grid gap-4 md:grid-cols-3">
+            {reviews.map((r) => (
+              <figure class="bg-white p-6 md:p-8">
+                <blockquote class="font-display text-xl italic leading-snug">
+                  “{r.quote}”
+                </blockquote>
+                <figcaption class="mt-6 text-sm text-[#2f5d3d]">{r.name}</figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section class="border-t border-[#1f2a22]/10 bg-white px-5 py-16 md:px-8">
+        <div class="mx-auto max-w-6xl">
+          <h2 class="font-display text-3xl italic">Vanliga frågor</h2>
+          <div class="mt-8 divide-y divide-[#1f2a22]/10 border-y border-[#1f2a22]/10">
+            {faq.map((item) => (
+              <details class="py-5">
+                <summary class="cursor-pointer list-none font-medium">{item.q}</summary>
+                <p class="mt-3 max-w-2xl text-sm leading-relaxed text-[#4d5b52]">
+                  {item.a}
+                </p>
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="offert" class="bg-[#2f5d3d] px-5 py-16 text-white md:px-8">
+        <div class="mx-auto grid max-w-6xl gap-10 lg:grid-cols-2">
+          <div>
+            <p class="text-[11px] uppercase tracking-[0.2em] text-white/70">
+              Kostnadsfritt hembesök
+            </p>
+            <h2 class="mt-3 font-display text-3xl md:text-4xl">
+              Vi tittar på rummen. Sen får du en offert.
+            </h2>
+            <p class="mt-4 max-w-md text-white/80">
+              Skicka gärna bilder. ROT på arbetskostnaden. Svar samma vardag.
+            </p>
+            <dl class="mt-10 grid gap-6 sm:grid-cols-2">
+              <div>
+                <dt class="text-[11px] uppercase tracking-[0.18em] text-white/55">
+                  Ring
+                </dt>
+                <dd class="mt-2">
+                  <DemoPhoneLink tel="08-678 901 23" class="font-display text-3xl italic">
+                    08-678 901 23
+                  </DemoPhoneLink>
+                </dd>
+              </div>
+              <div>
+                <dt class="text-[11px] uppercase tracking-[0.18em] text-white/55">
+                  Område
+                </dt>
+                <dd class="mt-2 text-sm text-white/80">
+                  Storstockholm
+                  <br />
+                  Mån–fre 07–16
+                </dd>
+              </div>
+            </dl>
+          </div>
+          <form data-demo-form
+            class="rounded-md bg-[#f3f1ea] p-6 text-[#1f2a22] md:p-8"
+          >
+            <p class="font-display text-2xl italic">Begär offert</p>
+            <label class="mt-6 block text-[11px] uppercase tracking-[0.16em] text-[#4d5b52]">
+              Vad ska målas?
+              <select class="mt-2 h-12 w-full rounded-md border border-[#1f2a22]/15 bg-white px-3 text-sm">
+                <option>Inomhus, ett eller flera rum</option>
+                <option>Hela lägenheten / villan</option>
+                <option>Fasad eller fönster</option>
+                <option>Tapet</option>
+              </select>
+            </label>
+            <label class="mt-4 block text-[11px] uppercase tracking-[0.16em] text-[#4d5b52]">
+              Telefon eller e-post
+              <input
+                class="mt-2 h-12 w-full rounded-md border border-[#1f2a22]/15 bg-white px-3 text-sm"
+                placeholder="Så vi når dig"
+              />
+            </label>
+            <button
+              type="submit"
+              class="mt-6 inline-flex h-12 w-full items-center justify-center rounded-md bg-[#2f5d3d] text-sm text-white"
+            >
+              Skicka förfrågan
+            </button>
+            <p class="mt-3 text-center text-xs text-[#4d5b52]">
+              Exempel – inget skickas här.
+            </p>
+          </form>
+        </div>
+      </section>
+      <DemoExit />
+    </div>
+</DemoLayout>

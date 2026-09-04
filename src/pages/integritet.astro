@@ -1,0 +1,21 @@
+---
+export const prerender = true;
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SiteLayout from "../components/astro/SiteLayout.astro";
+import PageBack from "../components/astro/PageBack.astro";
+import { SITE } from "../lib/site";
+const sections = [
+  ["Vilka uppgifter samlar vi in?", "När du skickar en förfrågan via kontaktformuläret tar vi emot namn, e-postadress, telefonnummer (om du anger det), valfritt ämne och ditt meddelande."],
+  ["Varför behandlar vi uppgifterna?", "Vi använder uppgifterna för att läsa, besvara och följa upp din förfrågan om våra tjänster. Behandlingen sker med stöd av vårt berättigade intresse att kunna kommunicera med potentiella och befintliga kunder."],
+  ["Hur länge sparas uppgifterna?", "Förfrågningar sparas så länge det behövs för att hantera ditt ärende och enligt bokförings- eller affärsregler som gäller för oss. Vi sparar inte uppgifterna längre än nödvändigt."],
+  ["Dina rättigheter", "Du kan begära tillgång till, rättelse eller radering av dina uppgifter, samt invända mot eller begränsa viss behandling. Kontakta oss så hjälper vi dig."],
+];
+---
+<BaseLayout title="Integritetspolicy – FSwebworks" description="Hur FSwebworks behandlar personuppgifter från kontaktformuläret.">
+  <SiteLayout>
+    <article class="bg-paper pt-28 text-ink"><div class="mx-auto max-w-2xl px-5 pb-24 md:px-8"><PageBack onPaper /><p class="text-[11px] uppercase tracking-[0.24em] text-subtle">Juridik</p><h1 class="mt-4 font-display text-4xl italic md:text-5xl">Integritetspolicy</h1><p class="mt-5 text-subtle">Den här policyn beskriver hur FSwebworks behandlar personuppgifter när du använder kontaktformuläret på fswebworks.se. Senast uppdaterad: maj 2026.</p>
+      <section class="mt-10 space-y-8 text-[15px] leading-relaxed">{sections.slice(0,3).map(([title,body]) => <div><h2 class="font-display text-2xl">{title}</h2><p class="mt-3 text-subtle">{body}</p></div>)}<div><h2 class="font-display text-2xl">Vem delar vi uppgifter med?</h2><p class="mt-3 text-subtle">Meddelandet skickas till {SITE.email} via e-posttjänsten Resend, som behandlar uppgifterna som personuppgiftsbiträde för att kunna leverera mejlet. Vi säljer inte dina uppgifter och delar dem inte med tredje part i marknadsföringssyfte.</p></div>{sections.slice(3).map(([title,body]) => <div><h2 class="font-display text-2xl">{title}</h2><p class="mt-3 text-subtle">{body}</p></div>)}<div><h2 class="font-display text-2xl">Kontakt</h2><p class="mt-3 text-subtle">FSwebworks · <a class="text-ink underline decoration-gold underline-offset-4" href={`mailto:${SITE.email}`}>{SITE.email}</a></p></div></section>
+      <p class="mt-12"><a href="/" class="text-sm text-subtle hover:text-ink">← Tillbaka till startsidan</a></p></div></article>
+  </SiteLayout>
+</BaseLayout>
+

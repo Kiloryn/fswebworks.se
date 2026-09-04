@@ -1,0 +1,23 @@
+---
+export const prerender = true;
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SiteLayout from "../components/astro/SiteLayout.astro";
+import PageBack from "../components/astro/PageBack.astro";
+import Pic from "../components/astro/Pic.astro";
+import Icon from "../components/astro/Icon.astro";
+import { PREP } from "../lib/site";
+---
+<BaseLayout title="Så förbereder du innehållet – FSwebworks" description="Konkreta tips på vad du kan förbereda inför din nya hemsida – från företagsbeskrivning till bilder.">
+  <SiteLayout>
+    <article class="bg-paper pt-28 text-ink">
+      <div class="mx-auto max-w-3xl px-5 pb-8 md:px-8"><PageBack onPaper /><p class="text-[11px] uppercase tracking-[0.24em] text-subtle">Inför projektet</p><h1 class="mt-4 font-display text-[2.4rem] italic md:text-6xl">Så förbereder du innehållet till din hemsida.</h1><p class="mt-6 text-lg leading-relaxed text-subtle">Du behöver inte ha allt klart från början – men följande hjälper oss att komma igång smidigt. Vi börjar alltid med ett samtal.</p></div>
+      <div class="mx-auto max-w-3xl px-5 pb-8 md:px-8"><Pic src="/images/studio-desk.jpg?v=5" alt="Arbetsbord med laptop och anteckningsbok" class="aspect-[16/9] w-full rounded-xl object-cover" width={1400} height={788} /></div>
+      <ol class="mx-auto max-w-3xl space-y-4 px-5 pb-20 md:px-8">
+        {PREP.map((block,index) => <li class="rounded-xl bg-paper-2 p-6 md:p-8"><div class="flex items-baseline gap-4"><span class="font-display text-3xl italic text-brass">{String(index + 1).padStart(2,"0")}</span><h2 class="font-display text-2xl md:text-3xl">{block.title}</h2></div><ul class="mt-5 space-y-2 text-subtle">{block.items.map((item) => <li class="flex gap-2"><span class="mt-2 size-1.5 shrink-0 rounded-full bg-gold"></span>{item}</li>)}</ul></li>)}
+        <p class="pt-4 text-subtle">Saknas något? Inga problem. Vi hjälper gärna till att strukturera och anpassa innehållet under arbetets gång.</p>
+        <a href="/#contact" class="mt-4 inline-flex h-14 items-center justify-center gap-2 rounded-lg bg-gold px-7 text-base font-medium text-gold-fg">Kontakta oss <Icon name="arrow-right" class="size-4" /></a>
+      </ol>
+    </article>
+  </SiteLayout>
+</BaseLayout>
+

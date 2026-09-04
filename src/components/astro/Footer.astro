@@ -1,0 +1,28 @@
+---
+import { SITE } from "../../lib/site";
+import Logo from "./Logo.astro";
+---
+
+<footer class="border-t border-line bg-canvas">
+  <div class="mx-auto grid max-w-6xl gap-10 px-5 py-14 md:grid-cols-[1.4fr_1fr_1fr] md:px-8">
+    <div><Logo /><p class="mt-5 max-w-sm text-sm leading-relaxed text-muted">Enkla hemsidor för hantverkare och småföretag i hela Sverige. Tydliga priser, ingen bindning – du äger sidan själv.</p></div>
+    <div>
+      <p class="text-[11px] uppercase tracking-[0.2em] text-gold">Navigering</p>
+      <ul class="mt-4 space-y-2.5 text-sm text-muted">
+        <li><a href="/#exempel" class="hover:text-fg">Exempel</a></li>
+        <li><a href="/#priser" class="hover:text-fg">Priser</a></li>
+        <li><a href="/#process" class="hover:text-fg">Så går det till</a></li>
+        <li><a href="/process" class="hover:text-fg">Innehållsguide</a></li>
+        <li><a href="/#contact" class="hover:text-fg">Kontakt</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="text-[11px] uppercase tracking-[0.2em] text-gold">Företaget</p>
+      <ul class="mt-4 space-y-2.5 text-sm text-muted">
+        <li>{SITE.city}</li><li><a href={`mailto:${SITE.email}`} class="hover:text-fg">{SITE.email}</a></li><li><a href="/integritet" class="hover:text-fg">Integritetspolicy</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="border-t border-line"><div class="mx-auto flex max-w-6xl flex-col gap-2 px-5 py-5 text-xs text-muted md:flex-row md:items-center md:justify-between md:px-8"><p>© {new Date().getFullYear()} {SITE.name}</p><p>Webbdesign för småföretag · bas i Stockholm</p></div></div>
+</footer>
+

@@ -1,0 +1,69 @@
+---
+import { SITE, SUBJECTS } from "../../lib/site";
+import Icon from "./Icon.astro";
+
+interface Props { defaultSubject?: string; onPaper?: boolean }
+const { defaultSubject = "", onPaper = false } = Astro.props;
+const field = `h-12 w-full rounded-lg border px-4 text-sm outline-none transition-[border-color,box-shadow,background-color] duration-150 ${onPaper ? "border-ink/15 bg-paper text-ink placeholder:text-subtle/70 focus:border-brass focus:ring-1 focus:ring-brass/30" : "border-line/70 bg-ink-3 text-fg placeholder:text-muted/60 focus:border-gold focus:ring-1 focus:ring-gold/30"}`;
+const label = `mb-1.5 block text-sm font-medium ${onPaper ? "text-ink" : "text-fg"}`;
+---
+
+<div data-contact-shell>
+  <form data-contact-form class="space-y-4 text-left" novalidate>
+    <div class="grid gap-4 sm:grid-cols-2">
+      <div><label for="contact-name" class={label}>Namn</label><input id="contact-name" name="name" autocomplete="name" required placeholder="Ditt namn" class={field} /></div>
+      <div><label for="contact-email" class={label}>E-post</label><input id="contact-email" name="email" type="email" autocomplete="email" required placeholder="din@epost.se" class={field} /></div>
+    </div>
+    <div class="grid gap-4 sm:grid-cols-2">
+      <div><label for="contact-phone" class={label}>Telefon <span class:list={["text-xs font-normal", onPaper ? "text-subtle" : "text-muted"]}>(valfritt)</span></label><input id="contact-phone" name="phone" type="tel" autocomplete="tel" placeholder="070-123 45 67" class={field} /></div>
+      <div>
+        <label for="contact-subject" class={label}>Ämne <span class:list={["text-xs font-normal", onPaper ? "text-subtle" : "text-muted"]}>(valfritt)</span></label>
+        <select id="contact-subject" name="subject" class={field}>{SUBJECTS.map((subject) => <option value={subject.value} selected={subject.value === defaultSubject}>{subject.label}</option>)}</select>
+      </div>
+    </div>
+    <div><label for="contact-message" class={label}>Meddelande</label><textarea id="contact-message" name="message" required rows="4" placeholder="Berätta kort om ert företag och vad ni behöver..." class={`${field} h-auto py-3`}></textarea></div>
+    <div class="sr-only" aria-hidden="true"><label for="contact-website">Webbplats</label><input id="contact-website" name="website" tabindex="-1" autocomplete="off" /></div>
+    <p data-contact-error class="hidden text-sm text-danger" role="alert"></p>
+    <p class:list={["text-xs leading-relaxed", onPaper ? "text-subtle" : "text-muted"]}>Genom att skicka godkänner du att vi behandlar dina uppgifter enligt <a href="/integritet" class:list={["underline-offset-4 hover:underline", onPaper ? "font-medium text-brass" : "text-gold"]}>vår integritetspolicy</a>.</p>
+    <button data-contact-submit type="submit" class="inline-flex h-14 w-full items-center justify-center gap-2 rounded-lg bg-gold px-7 text-base font-medium text-gold-fg shadow-[0_10px_24px_-16px_rgb(200_164_110_/_0.9)] transition-colors hover:bg-gold-2 disabled:pointer-events-none disabled:opacity-50">Skicka förfrågan</button>
+  </form>
+  <div data-contact-success class:list={["hidden rounded-xl border p-8", onPaper ? "border-ink/10 bg-paper-2 text-ink" : "border-line bg-ink-2 text-fg"]}>
+    <span class="grid size-11 place-items-center rounded-full bg-gold text-gold-fg"><Icon name="check" class="size-5" strokeWidth={2.2} /></span>
+    <h3 class="mt-5 font-display text-2xl">Tack – vi har fått din förfrågan.</h3>
+    <p class:list={["mt-2 text-sm leading-relaxed", onPaper ? "text-subtle" : "text-muted"]}>Vi hör av oss så snart vi kan, vanligtvis inom en arbetsdag. Behöver du oss fortare går det bra att mejla <a class:list={["underline-offset-4 hover:underline", onPaper ? "font-medium text-brass" : "text-gold"]} href={`mailto:${SITE.email}`}>{SITE.email}</a>.</p>
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>("[data-contact-shell]").forEach((shell) => {
+    const form = shell.querySelector<HTMLFormElement>("[data-contact-form]");
+    const error = shell.querySelector<HTMLElement>("[data-contact-error]");
+    const submit = shell.querySelector<HTMLButtonElement>("[data-contact-submit]");
+    const success = shell.querySelector<HTMLElement>("[data-contact-success]");
+    const requestedSubject = new URLSearchParams(location.search).get("amne");
+    const subject = form?.querySelector<HTMLSelectElement>("[name=subject]");
+    if (requestedSubject && subject && [...subject.options].some((option) => option.value === requestedSubject)) subject.value = requestedSubject;
+    form?.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      if (!form || !error || !submit || !success) return;
+      error.classList.add("hidden");
+      const data = new FormData(form);
+      const name = String(data.get("name") ?? "").trim();
+      const email = String(data.get("email") ?? "").trim();
+      const message = String(data.get("message") ?? "").trim();
+      const fail = (text: string) => { error.textContent = text; error.classList.remove("hidden"); };
+      if (!name || !email || !message) return fail("Fyll i namn, e-post och meddelande.");
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return fail("Ange en giltig e-postadress.");
+      submit.disabled = true;
+      submit.textContent = "Skickar…";
+      try {
+        const response = await fetch("/api/contact", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(Object.fromEntries(data)) });
+        const result = await response.json().catch(() => null);
+        if (!response.ok || !result?.ok) return fail(result?.error || "Kunde inte skicka just nu. Skriv till oss på fredrik@fswebworks.se.");
+        form.classList.add("hidden");
+        success.classList.remove("hidden");
+      } catch { fail("Kunde inte skicka just nu. Skriv till oss på fredrik@fswebworks.se."); }
+      finally { submit.disabled = false; submit.textContent = "Skicka förfrågan"; }
+    });
+  });
+</script>

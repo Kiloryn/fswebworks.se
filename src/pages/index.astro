@@ -1,0 +1,122 @@
+---
+export const prerender = true;
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SiteLayout from "../components/astro/SiteLayout.astro";
+import Pic from "../components/astro/Pic.astro";
+import ContactForm from "../components/astro/ContactForm.astro";
+import Icon from "../components/astro/Icon.astro";
+import { EXAMPLES, FAQ, INCLUDED, PROMISES, SERVICES, SITE, STEPS } from "../lib/site";
+
+const main = SERVICES.find((service) => service.featured)!;
+const rest = SERVICES.filter((service) => !service.featured);
+const essentialInputs = [
+  { title: "Om företaget", desc: "Kort om vad ni gör, er ort och hur länge ni har funnits." },
+  { title: "Tjänster", desc: "Vilka jobb ni tar, era specialområden och hur kunder anlitar er." },
+  { title: "Kontaktuppgifter", desc: "Telefonnummer, e-postadress, adress eller organisationsnummer." },
+  { title: "Bilder om du har", desc: "Logotyp och foton från vardagen (enkla mobilbilder fungerar utmärkt)." },
+];
+---
+
+<BaseLayout preloadHero>
+  <SiteLayout>
+    <section id="hero" class="relative min-h-dvh overflow-hidden bg-canvas bg-cover bg-center" style="background-image:url(/videos/hero-poster.jpg)">
+      <img src="/videos/hero-poster.jpg" alt="" class="absolute inset-0 size-full object-cover outline-none" width="1920" height="1080" fetchpriority="high" decoding="async" aria-hidden="true" />
+      <video id="hero-video" class="hero-video" poster="/videos/hero-poster.jpg" muted loop playsinline preload="none" aria-hidden="true"></video>
+      <div class="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgb(11_10_8_/_0.38)_0%,rgb(11_10_8_/_0.62)_48%,rgb(11_10_8_/_0.82)_100%)] md:bg-[linear-gradient(90deg,rgb(11_10_8_/_0.86)_0%,rgb(11_10_8_/_0.58)_48%,rgb(11_10_8_/_0.22)_100%)]"></div>
+      <div class="relative mx-auto grid min-h-dvh max-w-6xl items-center gap-12 px-5 pb-16 pt-28 md:grid-cols-[1.15fr_0.85fr] md:px-8 md:pt-24">
+        <div>
+          <p class="text-[11px] uppercase tracking-[0.28em] text-mark">Webbdesign för småföretag</p>
+          <h1 class="mt-5 max-w-[15ch] font-display text-[2.35rem] italic leading-[1.05] text-fg sm:text-5xl md:text-[4.1rem]">En hemsida byggd för ditt företag.</h1>
+          <p class="mt-6 max-w-md text-lg leading-relaxed text-muted md:text-xl">Professionella hemsidor för hantverkare och småföretag i hela Sverige. Från 9 900 kr, ingen bindning – du äger sidan själv.</p>
+          <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+            <a href="#contact" class="inline-flex h-14 w-full items-center justify-center gap-2 rounded-lg bg-gold px-7 text-base font-medium text-gold-fg shadow-[0_10px_24px_-16px_rgb(200_164_110_/_0.9)] transition-colors hover:bg-gold-2 sm:w-auto">Begär offert <Icon name="arrow-right" class="size-4" /></a>
+            <a href="#exempel" class="inline-flex h-14 w-full items-center justify-center gap-2 rounded-lg border border-line bg-transparent px-7 text-base font-medium text-fg sm:w-auto">Se exempel</a>
+          </div>
+          <ul class="mt-10 flex flex-wrap gap-x-5 gap-y-2 text-sm text-muted">{PROMISES.map((promise) => <li class="flex items-center gap-2"><span class="size-1.5 rounded-full bg-mark"></span>{promise}</li>)}</ul>
+        </div>
+        <div class="hidden flex-col items-center gap-3 md:flex">
+          <div class="flex flex-wrap items-center justify-center gap-1.5 rounded-lg border border-line bg-ink-2/80 p-1.5" role="tablist" aria-label="Välj branschexempel">
+            {EXAMPLES.map((example, index) => <button type="button" role="tab" aria-selected={index === 0 ? "true" : "false"} data-hero-tab data-slug={example.slug} data-image={example.image} data-brand={example.brand} data-name={example.name} class:list={["rounded-md px-2.5 py-1 text-xs font-medium transition-colors", index === 0 ? "bg-gold text-gold-fg" : "text-muted hover:bg-fg/5 hover:text-fg"]}>{example.name}</button>)}
+          </div>
+          <a id="hero-example-link" href={`/${EXAMPLES[0].slug}`} class="group relative w-full max-w-md">
+            <div class="relative rounded-xl border border-line bg-ink-2 p-2 shadow-lift">
+              <div class="flex items-center gap-1.5 px-2 py-2"><span class="size-2 rounded-full bg-fg/20"></span><span class="size-2 rounded-full bg-fg/20"></span><span class="size-2 rounded-full bg-fg/20"></span><span id="hero-example-address" class="ml-2 truncate rounded-sm bg-canvas px-2 py-0.5 text-[10px] text-muted">interaktivt exempel · {EXAMPLES[0].name}</span></div>
+              <div class="relative aspect-[4/3] w-full overflow-hidden rounded-lg bg-ink-3">
+                <Pic src={EXAMPLES[0].image} alt="" class="size-full object-cover transition-transform duration-500 group-hover:scale-[1.03]" width={800} height={600} priority />
+                <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink to-transparent p-4"><p id="hero-example-brand" class="text-[11px] uppercase tracking-[0.18em] text-mark">{EXAMPLES[0].brand}</p><p id="hero-example-name" class="font-display text-xl italic">{EXAMPLES[0].name}</p></div>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <div class="border-y border-line bg-ink-2 py-4">
+      <div class="mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-x-6 gap-y-2 px-5 md:hidden">{EXAMPLES.map((example) => <a href={`/${example.slug}`} class="flex items-center gap-3 text-[12px] uppercase tracking-[0.22em] text-muted"><span class="text-gold">/</span>{example.name}</a>)}</div>
+      <div class="hidden overflow-hidden md:block"><div class="marquee-track flex w-max gap-10 pr-10">{[...EXAMPLES, ...EXAMPLES].map((example) => <a href={`/${example.slug}`} class="flex items-center gap-3 text-[12px] uppercase tracking-[0.22em] text-muted hover:text-gold"><span class="text-gold">/</span>{example.name}</a>)}</div></div>
+    </div>
+
+    <section id="exempel" class="bg-paper py-24 text-ink md:py-32">
+      <div class="mx-auto max-w-6xl px-5 md:px-8">
+        <div class="flex flex-col justify-between gap-6 md:flex-row md:items-end"><div><p class="text-[11px] uppercase tracking-[0.24em] text-subtle">Interaktiva exempel</p><h2 class="mt-3 max-w-[16ch] font-display text-[2.15rem] italic md:text-5xl">Så kan din sida se ut.</h2><p class="mt-4 max-w-xl text-subtle">Klicka in och testa funktionerna. Det är fullt klickbara exempelsidor som visar hur vi strukturerar kontakt, tjänster och förtroende för olika branscher.</p></div><a href="/examples" class="inline-flex h-12 w-full items-center justify-center gap-2 rounded-lg border border-ink/15 bg-transparent px-6 text-sm font-medium text-ink md:w-auto">Se alla exempel <Icon name="arrow-right" class="size-4" /></a></div>
+        <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {EXAMPLES.map((example, index) => <a href={`/${example.slug}`} class="group overflow-hidden rounded-xl border border-ink/8 bg-paper-2 md:transition-all md:duration-300 md:hover:-translate-y-1 md:hover:border-ink/20 md:hover:shadow-lg"><div class="relative aspect-[4/3] overflow-hidden"><Pic src={example.image} alt={`${example.name} exempelsida`} class="size-full object-cover md:transition-transform md:duration-500 md:group-hover:scale-105" width={800} height={600} priority={index < 2} /><span class="absolute right-3 top-3 rounded-sm bg-gold px-3 py-1 text-[11px] font-medium text-gold-fg md:opacity-0 md:transition-opacity md:duration-200 md:group-hover:opacity-100">Öppna</span></div><div class="px-5 py-4"><p class="text-[11px] uppercase tracking-[0.18em] text-subtle">{example.brand}</p><h3 class="mt-1 font-display text-2xl">{example.name}</h3><p class="mt-2 line-clamp-2 text-sm text-subtle">{example.blurb}</p></div></a>)}
+        </div>
+      </div>
+    </section>
+
+    <section id="priser" class="bg-canvas py-24 md:py-32">
+      <div class="mx-auto max-w-6xl px-5 md:px-8">
+        <div><p class="text-[11px] uppercase tracking-[0.24em] text-gold">Priser</p><h2 class="mt-3 font-display text-[2.15rem] italic md:text-5xl">Tydliga priser. Inga överraskningar.</h2><p class="mt-4 max-w-xl text-muted">Tydliga förutsättningar från start. Du äger din verksamhets identitet och projektleverans, och det finns inga inlåsande avtal.</p></div>
+        <div class="mt-14 grid gap-5 lg:grid-cols-2">
+          <article class="flex flex-col rounded-xl bg-ink-2 p-7 shadow-card md:p-8"><p class="text-[11px] uppercase tracking-[0.2em] text-gold">Hemsida</p><h3 class="mt-3 font-display text-3xl">{main.name}</h3><p class="mt-4 font-display text-5xl italic tabular-nums">{main.price}</p><p class="mt-1 text-sm text-muted">{main.suffix}</p><p class="mt-5 text-sm leading-relaxed text-muted">{main.description}</p><p class="mt-8 font-display text-xl italic">En komplett start – inte en halvfärdig mall.</p><ul class="mt-5 space-y-2.5 text-sm">{INCLUDED.map((item) => <li class="flex gap-2"><Icon name="check" class="mt-0.5 size-4 shrink-0 text-gold" /><span>{item}</span></li>)}</ul><a href={`/?amne=${main.subject}#contact`} class="mt-8 inline-flex h-12 w-full items-center justify-center rounded-lg bg-gold px-6 text-sm font-medium text-gold-fg">{main.cta}</a></article>
+          <div class="grid gap-5">{rest.map((service) => <article class="flex flex-col rounded-xl border border-line bg-ink-2/60 p-7"><p class="text-[11px] uppercase tracking-[0.2em] text-gold">{service.id === "service" ? "Valfritt" : "Vid behov"}</p><div class="mt-3 flex flex-wrap items-baseline justify-between gap-3"><h3 class="font-display text-2xl">{service.name}</h3><p class="font-display text-3xl italic tabular-nums">{service.price}</p></div><p class="mt-1 text-sm text-muted">{service.suffix}</p><p class="mt-4 text-sm leading-relaxed text-muted">{service.description}</p><ul class="mt-5 space-y-2 text-sm">{service.fits.map((fit) => <li class="flex gap-2"><Icon name="check" class="mt-0.5 size-4 shrink-0 text-gold" /><span>{fit}</span></li>)}</ul><a href={`/?amne=${service.subject}#contact`} class="mt-6 inline-flex h-12 w-full items-center justify-center rounded-lg border border-line bg-transparent px-6 text-sm font-medium text-fg">{service.cta}</a></article>)}</div>
+        </div>
+        <div class="mt-10 rounded-xl border border-line bg-ink-2/40 p-6 md:p-8"><div class="grid gap-6 md:grid-cols-3">{[["Ägarskap","Du äger ditt projekt","Domän, identitet, bilder och innehåll tillhör dig. Om du vill flytta i framtiden kan hemsidan exporteras till ditt eget valda upplägg enligt överenskommelse."],["Drift & teknik","Vi sköter det praktiska","De flesta föredrar att slippa servrar, DNS och certifikat. Vi hanterar drift och säkerhet så länge du vill ha vår hjälp."],["Fast offert","Inga överraskningar","Startpriset gäller standardhemsidor för småföretag. Eventuella utökade önskemål stäms av och prissätts tydligt innan vi börjar."]].map(([label,title,body]) => <div><p class="text-[11px] uppercase tracking-[0.2em] text-gold">{label}</p><h4 class="mt-2 font-display text-lg">{title}</h4><p class="mt-1 text-sm leading-relaxed text-muted">{body}</p></div>)}</div></div>
+      </div>
+    </section>
+
+    <section id="process" class="bg-paper py-24 text-ink md:py-32">
+      <div class="mx-auto max-w-6xl px-5 md:px-8">
+        <div class="max-w-2xl"><p class="text-[11px] uppercase tracking-[0.24em] text-subtle">Så här går det till</p><h2 class="mt-3 font-display text-[2.15rem] italic md:text-5xl">Fem enkla steg. Från idé till färdig sida.</h2><p class="mt-4 text-base leading-relaxed text-subtle md:text-lg">Att komma igång behöver inte vara krångligt. Vi sköter design, struktur och det tekniska bygget – du behöver varken kunna koda eller ha allt material klart från början.</p></div>
+        <div class="relative mt-14"><div class="pointer-events-none absolute left-0 right-0 top-7 hidden h-px bg-ink/12 lg:block" aria-hidden="true"></div><ol class="grid gap-6 sm:grid-cols-2 lg:grid-cols-5">{STEPS.map((step, index) => <li class="relative flex flex-col"><div class="relative z-10 flex items-center gap-3"><span class="grid size-11 place-items-center rounded-full border border-ink/15 bg-paper font-display text-xl italic text-brass shadow-xs">{String(index + 1).padStart(2,"0")}</span><span class="text-xs uppercase tracking-widest text-subtle/60 lg:hidden">Steg {index + 1}</span></div><div class="mt-4 flex-1 rounded-xl border border-ink/8 bg-paper-2 p-5"><h3 class="font-display text-lg leading-snug">{step.title}</h3><p class="mt-2 text-sm leading-relaxed text-subtle">{step.body}</p></div></li>)}</ol></div>
+        <div class="mt-14 rounded-2xl border border-ink/10 bg-paper-2 p-7 shadow-xs md:p-9"><div class="flex flex-col justify-between gap-3 border-b border-ink/10 pb-6 md:flex-row md:items-end"><div><p class="text-[11px] font-semibold uppercase tracking-[0.22em] text-brass">Förberedelser</p><h3 class="mt-1.5 font-display text-2xl italic md:text-3xl">Det enda vi behöver från dig</h3></div><p class="text-sm text-subtle">Fokusera på det du kan bäst – vi sätter ihop helheten.</p></div><div class="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">{essentialInputs.map((item,index) => <div class="flex flex-col"><div class="flex items-center gap-2"><span class="grid size-5 place-items-center rounded-full bg-paper text-[11px] font-semibold text-brass">{index + 1}</span><h4 class="font-display text-base font-medium">{item.title}</h4></div><p class="mt-2 text-sm leading-relaxed text-subtle">{item.desc}</p></div>)}</div><div class="mt-8 flex flex-col items-start justify-between gap-4 border-t border-ink/10 pt-6 sm:flex-row sm:items-center"><p class="text-sm leading-relaxed text-subtle"><strong class="font-medium text-ink">Har du inte allt?</strong> Ingen fara. Vi hjälper dig att strukturera resten under samtalets gång.</p><div class="flex w-full shrink-0 items-center justify-between gap-4 sm:w-auto sm:justify-end"><a href="/process" class="inline-flex items-center gap-1.5 text-xs font-medium text-brass underline decoration-brass underline-offset-4">Läs hela innehållsguiden <Icon name="arrow-right" class="size-3.5" /></a><a href="#contact" class="inline-flex h-11 items-center justify-center rounded-md bg-gold px-5 text-sm font-medium text-gold-fg">Kontakta oss</a></div></div></div>
+      </div>
+    </section>
+
+    <section class="bg-canvas py-24 md:py-32">
+      <div class="mx-auto max-w-3xl px-5 md:px-8"><h2 class="text-center font-display text-[2.15rem] italic md:text-5xl">Vanliga frågor</h2><div class="mt-12 space-y-3">{FAQ.map((item,index) => <details class="group overflow-hidden rounded-xl border border-line bg-ink-2" open={index === 0}><summary class="flex min-h-14 w-full cursor-pointer list-none items-center justify-between gap-4 px-6 py-5 text-left marker:content-none [&::-webkit-details-marker]:hidden"><span class="font-display text-base leading-snug md:text-xl">{item.q}</span><Icon name="chevron" class="size-5 shrink-0 text-gold transition-transform duration-200 group-open:rotate-180" /></summary><p class="border-t border-line/60 px-6 py-5 text-sm leading-relaxed text-muted">{item.a}</p></details>)}</div></div>
+    </section>
+
+    <section id="contact" class="bg-paper py-24 text-ink md:py-32">
+      <div class="mx-auto grid max-w-6xl gap-12 px-5 md:grid-cols-[1fr_1.1fr] md:gap-16 md:px-8"><div><p class="text-[11px] uppercase tracking-[0.24em] text-subtle">Kontakt</p><h2 class="mt-3 font-display text-[2.15rem] italic leading-[1.08] md:text-5xl">Osäker på vad du behöver? Hör av dig.</h2><p class="mt-5 text-base leading-relaxed text-subtle">Vi går igenom dina önskemål och förutsättningar – helt utan förpliktelser. Du får alltid ett tydligt prisförslag innan något påbörjas.</p><div class="mt-8 space-y-4 border-y border-ink/10 py-6 text-sm"><div class="flex items-start gap-3"><span class="mt-1 size-1.5 shrink-0 rounded-full bg-brass"></span><div><p class="font-medium text-ink">Snabb återkoppling</p><p class="text-subtle">Vi svarar vanligtvis inom en arbetsdag.</p></div></div><div class="flex items-start gap-3"><span class="mt-1 size-1.5 shrink-0 rounded-full bg-brass"></span><div><p class="font-medium text-ink">Direktkontakt via mejl</p><p class="text-subtle">Föredrar du att skriva direkt till oss?</p></div></div></div><a href={`mailto:${SITE.email}`} class="mt-6 inline-block font-display text-xl italic text-ink underline decoration-brass decoration-2 underline-offset-8 md:text-2xl">{SITE.email}</a><p class="mt-4 text-xs text-subtle">Bas i Stockholm · Vi skapar hemsidor för företag i hela Sverige.</p></div><div class="rounded-2xl border border-line bg-ink-2 p-7 text-fg shadow-card md:p-9"><ContactForm /></div></div>
+    </section>
+  </SiteLayout>
+</BaseLayout>
+
+<script>
+  const video = document.querySelector<HTMLVideoElement>("#hero-video");
+  const hero = document.querySelector<HTMLElement>("#hero");
+  if (video && hero && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    video.src = matchMedia("(max-width: 767px)").matches ? "/videos/hero-720.mp4" : "/videos/hero.mp4";
+    video.play().catch(() => {});
+    new IntersectionObserver(([entry]) => entry?.isIntersecting ? video.play().catch(() => {}) : video.pause(), { threshold: .05 }).observe(hero);
+  }
+
+  const previewLink = document.querySelector<HTMLAnchorElement>("#hero-example-link");
+  const previewImage = previewLink?.querySelector<HTMLImageElement>("img");
+  const previewSource = previewLink?.querySelector<HTMLSourceElement>("source");
+  const address = document.querySelector("#hero-example-address");
+  const brand = document.querySelector("#hero-example-brand");
+  const name = document.querySelector("#hero-example-name");
+  document.querySelectorAll<HTMLButtonElement>("[data-hero-tab]").forEach((tab) => tab.addEventListener("click", () => {
+    document.querySelectorAll<HTMLButtonElement>("[data-hero-tab]").forEach((button) => { const active = button === tab; button.setAttribute("aria-selected", String(active)); button.classList.toggle("bg-gold", active); button.classList.toggle("text-gold-fg", active); button.classList.toggle("text-muted", !active); });
+    const image = tab.dataset.image || "";
+    if (previewLink) previewLink.href = `/${tab.dataset.slug}`;
+    if (previewImage) previewImage.src = image;
+    if (previewSource) previewSource.srcset = image.replace(/\.jpg(\?.*)?$/, ".webp$1");
+    if (address) address.textContent = `interaktivt exempel · ${tab.dataset.name}`;
+    if (brand) brand.textContent = tab.dataset.brand || "";
+    if (name) name.textContent = tab.dataset.name || "";
+  }));
+</script>

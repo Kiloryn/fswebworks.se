@@ -1,0 +1,72 @@
+---
+import { NAV } from "../../lib/site";
+import Icon from "./Icon.astro";
+import Logo from "./Logo.astro";
+---
+
+<div id="top-sentinel" class="absolute left-0 top-3 size-px" aria-hidden="true"></div>
+<header id="site-header" class="fixed inset-x-0 top-0 z-50 border-b border-transparent bg-transparent text-fg transition-[background-color,border-color] duration-200">
+  <div class="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 md:h-[4.25rem] md:px-8">
+    <Logo />
+    <nav class="hidden items-center gap-7 md:flex" aria-label="Huvudmeny">
+      {NAV.map((item) => (
+        <a href={`/#${item.section}`} data-section-link={item.section} class="text-[15px] font-medium tracking-wide text-fg/90 transition-colors duration-150 hover:text-gold">
+          {item.label}
+        </a>
+      ))}
+    </nav>
+    <div class="flex items-center gap-2">
+      <a href="/#contact" class="inline-flex h-10 items-center justify-center gap-2 rounded-md bg-gold px-3 text-sm font-medium text-gold-fg shadow-[0_10px_24px_-16px_rgb(200_164_110_/_0.9)] transition-colors hover:bg-gold-2 md:h-11 md:px-5">
+        <span class="md:hidden">Offert</span><span class="hidden md:inline">Begär offert</span>
+      </a>
+      <button id="menu-toggle" type="button" class="inline-flex size-11 items-center justify-center rounded-md text-fg md:hidden" aria-label="Öppna meny" aria-expanded="false">
+        <Icon name="menu" class="menu-open-icon size-5" />
+        <Icon name="close" class="menu-close-icon hidden size-5" />
+      </button>
+    </div>
+  </div>
+  <div id="mobile-menu" class="hidden border-t border-line bg-canvas px-5 py-5 text-fg md:hidden">
+    <nav class="flex flex-col gap-1" aria-label="Mobilmeny">
+      <a href="/" class="flex min-h-11 items-center text-base text-fg">Startsidan</a>
+      {NAV.map((item) => <a href={`/#${item.section}`} class="flex min-h-11 items-center text-base text-fg">{item.label}</a>)}
+    </nav>
+  </div>
+</header>
+
+<script>
+  const header = document.querySelector<HTMLElement>("#site-header");
+  const sentinel = document.querySelector("#top-sentinel");
+  if (header && sentinel) {
+    new IntersectionObserver(([entry]) => {
+      header.classList.toggle("header-solid", !entry?.isIntersecting);
+    }).observe(sentinel);
+  }
+
+  const toggle = document.querySelector<HTMLButtonElement>("#menu-toggle");
+  const menu = document.querySelector<HTMLElement>("#mobile-menu");
+  toggle?.addEventListener("click", () => {
+    const open = toggle.getAttribute("aria-expanded") !== "true";
+    toggle.setAttribute("aria-expanded", String(open));
+    toggle.setAttribute("aria-label", open ? "Stäng meny" : "Öppna meny");
+    menu?.classList.toggle("hidden", !open);
+    toggle.querySelector(".menu-open-icon")?.classList.toggle("hidden", open);
+    toggle.querySelector(".menu-close-icon")?.classList.toggle("hidden", !open);
+    header?.classList.toggle("header-solid", open || window.scrollY > 12);
+  });
+  menu?.querySelectorAll("a").forEach((link) => link.addEventListener("click", () => {
+    toggle?.setAttribute("aria-expanded", "false");
+    menu.classList.add("hidden");
+  }));
+
+  const tracked = [...document.querySelectorAll<HTMLElement>("section[id]")];
+  if (location.pathname === "/" && tracked.length) {
+    const sectionObserver = new IntersectionObserver((entries) => {
+      const current = entries.filter((entry) => entry.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0]?.target.id;
+      if (!current) return;
+      document.querySelectorAll<HTMLElement>("[data-section-link]").forEach((link) => {
+        link.classList.toggle("text-gold", link.dataset.sectionLink === current);
+      });
+    }, { rootMargin: "-20% 0px -65% 0px", threshold: [0, .2, .5, 1] });
+    tracked.forEach((section) => sectionObserver.observe(section));
+  }
+</script>

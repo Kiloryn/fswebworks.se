@@ -1,0 +1,6 @@
+---
+interface Props { tel: string; class?: string }
+const { tel, class: className = "" } = Astro.props;
+---
+<a href={`tel:${tel}`} data-demo-phone={tel} class={className}><slot /></a>
+

@@ -1,0 +1,26 @@
+---
+import Header from "./Header.astro";
+import Footer from "./Footer.astro";
+import Icon from "./Icon.astro";
+---
+
+<div class="min-h-dvh bg-canvas text-fg">
+  <Header />
+  <main><slot /></main>
+  <Footer />
+</div>
+<button id="back-to-top" type="button" class="fixed bottom-[max(1.25rem,env(safe-area-inset-bottom))] right-4 z-40 hidden size-12 items-center justify-center rounded-full bg-gold text-gold-fg shadow-lift md:bottom-8 md:right-8" aria-label="Tillbaka till toppen">
+  <Icon name="arrow-up" class="size-5" />
+</button>
+<script>
+  const topButton = document.querySelector<HTMLElement>("#back-to-top");
+  const topSentinel = document.querySelector("#top-sentinel");
+  if (topButton && topSentinel) {
+    new IntersectionObserver(([entry]) => {
+      topButton.classList.toggle("hidden", Boolean(entry?.isIntersecting));
+      topButton.classList.toggle("flex", !entry?.isIntersecting);
+    }, { rootMargin: "480px 0px 0px" }).observe(topSentinel);
+    topButton.addEventListener("click", () => window.scrollTo({ top: 0, behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" }));
+  }
+</script>
+

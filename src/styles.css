@@ -162,6 +162,13 @@
     contain-intrinsic-size: auto 720px;
   }
 
+  .header-solid {
+    border-bottom-color: rgb(200 164 110 / 0.18);
+    background: var(--color-canvas);
+    color: var(--color-fg);
+    box-shadow: 0 1px 2px rgb(0 0 0 / 0.12);
+  }
+
   .marquee-track {
     animation: marquee 36s linear infinite;
   }

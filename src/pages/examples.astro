@@ -1,0 +1,16 @@
+---
+export const prerender = true;
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SiteLayout from "../components/astro/SiteLayout.astro";
+import PageBack from "../components/astro/PageBack.astro";
+import Pic from "../components/astro/Pic.astro";
+import Icon from "../components/astro/Icon.astro";
+import { EXAMPLES } from "../lib/site";
+---
+<BaseLayout title="Exempel på hemsidor – FSwebworks" description="Klicka på en kategori för att se en exempelsida. Alla exempel kan anpassas efter ditt företags uttryck.">
+  <SiteLayout><div class="bg-canvas pt-28"><div class="mx-auto max-w-6xl px-5 pb-16 md:px-8"><PageBack /><p class="text-[11px] uppercase tracking-[0.24em] text-gold">Urval</p><h1 class="mt-4 max-w-[14ch] font-display text-[2.4rem] italic md:text-6xl">Exempel på sidor vi bygger.</h1><p class="mt-5 max-w-xl text-muted">Klicka på en kategori för att se hur sidan kan se ut. Alla exempel kan anpassas efter ditt företags uttryck och behov.</p>
+    <div class="mt-14 grid gap-6 md:grid-cols-2">{EXAMPLES.map((example,index) => <a href={`/${example.slug}`} class:list={["group overflow-hidden rounded-xl bg-ink-2", index === 0 && "md:col-span-2"]}><div class:list={["relative overflow-hidden", index === 0 ? "aspect-[16/8]" : "aspect-[16/10]"]}><Pic src={example.image} alt={`${example.name} exempelsida`} class="size-full object-cover transition-transform duration-500 group-hover:scale-105" width={1200} height={750} priority={index === 0} /><div class="absolute inset-0 bg-gradient-to-t from-ink via-ink/20 to-transparent"></div><div class="absolute inset-x-0 bottom-0 p-6 md:p-8"><p class="text-[11px] uppercase tracking-[0.18em] text-gold">{example.brand}</p><h2 class="mt-1 font-display text-3xl italic md:text-4xl">{example.name}</h2><p class="mt-2 max-w-lg text-sm text-muted">{example.blurb}</p><span class="mt-4 inline-flex items-center gap-2 text-sm text-gold">Öppna exempel <Icon name="arrow-right" class="size-4" /></span></div></div></a>)}</div>
+    <div class="mt-14 rounded-xl bg-ink-2 p-8 text-center md:p-12"><h2 class="font-display text-3xl italic">Vill du ha en egen?</h2><p class="mx-auto mt-3 max-w-md text-muted">Vi anpassar layout, färg och ton efter din verksamhet – inte efter en generisk mall.</p><a href="/#contact" class="mt-6 inline-flex h-12 items-center justify-center rounded-lg bg-gold px-6 text-sm font-medium text-gold-fg">Kontakta oss</a></div>
+  </div></div></SiteLayout>
+</BaseLayout>
+

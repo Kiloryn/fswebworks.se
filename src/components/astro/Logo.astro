@@ -1,0 +1,9 @@
+---
+interface Props { class?: string }
+const { class: className = "" } = Astro.props;
+---
+
+<a href="/" aria-label="FSwebworks, till startsidan" class:list={["inline-flex items-center", className]}>
+  <img src="/logo.svg" alt="FSwebworks" class="h-5 w-auto outline-none md:h-7" width="264" height="28" />
+</a>
+

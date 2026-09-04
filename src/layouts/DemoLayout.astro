@@ -1,0 +1,27 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+import Icon from "../components/astro/Icon.astro";
+interface Props { title: string }
+const { title } = Astro.props;
+---
+<BaseLayout title={title}>
+  <slot />
+  <div id="demo-phone-dialog" class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/60 p-4 backdrop-blur-xs" role="dialog" aria-modal="true" aria-labelledby="demo-phone-dialog-title">
+    <div data-dialog-panel class="relative w-full max-w-md rounded-xl border border-line bg-canvas p-6 text-fg shadow-lift">
+      <button data-dialog-close type="button" class="absolute right-4 top-4 text-muted hover:text-fg" aria-label="Stäng dialog"><Icon name="close" class="size-5" /></button>
+      <div class="flex items-center gap-3"><span class="grid size-10 place-items-center rounded-full bg-gold/15 text-gold"><Icon name="phone" class="size-5" /></span><div><p class="text-[11px] font-semibold uppercase tracking-wider text-gold">Exempelsida</p><h3 id="demo-phone-dialog-title" class="font-display text-xl">Klickbart telefonnummer</h3></div></div>
+      <p class="mt-4 text-sm leading-relaxed text-muted">Numret <strong data-dialog-number class="text-fg"></strong> är ett exempel för den här demonstrationssidan. På din riktiga hemsida ringer dina kunder direkt till ert företags telefonnummer med ett enda tryck.</p>
+      <div class="mt-6 flex flex-col gap-2.5 sm:flex-row"><a href="/#contact" class="inline-flex h-11 flex-1 items-center justify-center gap-1.5 rounded-md bg-gold px-4 text-sm font-medium text-gold-fg hover:bg-gold-2">Begär offert för ditt företag <Icon name="arrow-right" class="size-4" /></a><button data-dialog-close type="button" class="inline-flex h-11 items-center justify-center rounded-md border border-line px-4 text-sm text-fg hover:bg-fg/5">Stäng</button></div>
+    </div>
+  </div>
+</BaseLayout>
+<script>
+  const dialog = document.querySelector<HTMLElement>("#demo-phone-dialog");
+  const number = dialog?.querySelector<HTMLElement>("[data-dialog-number]");
+  const close = () => { dialog?.classList.add("hidden"); dialog?.classList.remove("flex"); };
+  document.querySelectorAll<HTMLElement>("[data-demo-phone]").forEach((link) => link.addEventListener("click", (event) => { event.preventDefault(); if (number) number.textContent = link.dataset.demoPhone || ""; dialog?.classList.remove("hidden"); dialog?.classList.add("flex"); dialog?.querySelector<HTMLButtonElement>("[data-dialog-close]")?.focus(); }));
+  dialog?.querySelectorAll("[data-dialog-close]").forEach((button) => button.addEventListener("click", close));
+  dialog?.addEventListener("click", (event) => { if (event.target === dialog) close(); });
+  addEventListener("keydown", (event) => { if (event.key === "Escape") close(); });
+  document.querySelectorAll<HTMLFormElement>("[data-demo-form]").forEach((form) => form.addEventListener("submit", (event) => event.preventDefault()));
+</script>

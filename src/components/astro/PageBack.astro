@@ -1,0 +1,7 @@
+---
+import Icon from "./Icon.astro";
+interface Props { onPaper?: boolean; class?: string }
+const { onPaper = false, class: className = "" } = Astro.props;
+---
+<a href="/" class:list={["mb-6 inline-flex items-center gap-2 text-sm font-medium", onPaper ? "text-brass hover:text-ink" : "text-gold hover:text-gold-2", className]}><Icon name="arrow-left" class="size-4" />Tillbaka till startsidan</a>
+

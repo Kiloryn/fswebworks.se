@@ -1,0 +1,261 @@
+---
+export const prerender = true;
+import DemoLayout from "../layouts/DemoLayout.astro";
+import Pic from "../components/astro/Pic.astro";
+import DemoBanner from "../components/astro/DemoBanner.astro";
+import DemoExit from "../components/astro/DemoExit.astro";
+import DemoPhoneLink from "../components/astro/DemoPhoneLink.astro";
+import Icon from "../components/astro/Icon.astro";
+
+const services = [
+  {
+    title: "Akut läckage",
+    body: "Kran, rör eller beredare som ger upp mitt i natten. Vi åker ut, stänger vattnet och lagar.",
+  },
+  {
+    title: "Stopp i avlopp",
+    body: "Kök, badrum och stam. Vi rensar och säger till om det är ett större fel.",
+  },
+  {
+    title: "Badrum och kök",
+    body: "Nyinstallation vid renovering. Rör, golvbrunn, blandare – offert på plats.",
+  },
+  {
+    title: "Värme",
+    body: "Radiatorer, golvvärme och varmvattenberedare. Service och byte.",
+  },
+];
+
+const reviews = [
+  {
+    quote:
+      "Stopp i köket en lördag. De svarade direkt, var här samma dag och lämnade rent efter sig.",
+    name: "Linda, Södermalm",
+  },
+  {
+    quote:
+      "Tydlig offert innan de började, inga överraskningar på fakturan. Så ska en rörmokare vara.",
+    name: "Marcus, Solna",
+  },
+  {
+    quote:
+      "Bytte beredare i radhuset. Förklarade vad som var fel och vad ROT täckte. Tryggt hela vägen.",
+    name: "Eva, Täby",
+  },
+];
+
+const team = [
+  { name: "Erik Holm", role: "Ägare, rörmokare" },
+  { name: "Amir Hassan", role: "Rörmontör" },
+  { name: "Sofia Lind", role: "Kund och planering" },
+];
+
+const faq = [
+  {
+    q: "Det läcker – vad gör jag?",
+    a: "Stäng ventilen vid vattenmätaren om du hittar den. Ring oss. Vi tar jour dygnet runt i Storstockholm.",
+  },
+  {
+    q: "Jobbar ni med ROT-avdrag?",
+    a: "Ja, på arbetskostnaden för privatpersoner i befintlig bostad. Vi sköter underlaget, du får avdraget på fakturan.",
+  },
+  {
+    q: "Vad kostar ett hembesök?",
+    a: "Akut utryckning från 1 290 kr. Mindre jobb kan vi ofta prissätta från bilder du skickar. Du får alltid pris innan vi sätter igång.",
+  },
+  {
+    q: "Var kör ni?",
+    a: "Hela Storstockholm – innerstan, krans och en bit utanför. Säg var du bor så säger vi om vi tar det.",
+  },
+];
+---
+<DemoLayout title="Din Rörmokare i Stockholm – exempelsida">
+<div class="min-h-dvh bg-[#eef3ef] text-[#1a2420]">
+      <DemoBanner current="vvs" />
+      <DemoPhoneLink
+        tel="08-123 456 78"
+        class="flex items-center justify-center gap-2 bg-[#c45c3a] px-4 py-3 text-center text-[13px] font-medium text-white"
+      >
+        <Icon name="phone" class="size-4" />
+        <span class="sm:hidden">Akut? 08-123 456 78</span>
+        <span class="hidden sm:inline">
+          Akut? Ring 08-123 456 78 — jour dygnet runt
+        </span>
+      </DemoPhoneLink>
+
+      <section class="relative isolate text-[#e8efe9]">
+        <Pic
+          src="/images/vvs.jpg?v=6"
+          alt="Rörmokare drar åt kopparrör"
+          class="h-[62dvh] w-full object-cover md:h-[78vh]"
+          width={1400}
+          height={788}
+          priority
+        />
+        <div class="absolute inset-0 bg-gradient-to-t from-[#0e1418] via-[#0e1418]/55 to-black/15" />
+        <p class="absolute left-5 top-5 font-display text-xl italic md:left-8 md:text-2xl">
+          Din Rörmokare
+        </p>
+        <div class="absolute inset-x-0 bottom-0 mx-auto max-w-5xl px-5 pb-10 md:px-8">
+          <p class="text-[11px] uppercase tracking-[0.22em] text-[#e8b89a]">
+            Stockholm · sedan 2009 · jour dygnet runt
+          </p>
+          <h1 class="mt-3 max-w-[13ch] font-display text-[2.45rem] italic leading-[0.98] md:text-6xl lg:text-7xl">
+            Kranen gick sönder. Vi är på väg.
+          </h1>
+          <p class="mt-4 max-w-md text-sm text-[#c5d0c8] md:text-base">
+            Akut VVS, badrum och värme för villor, lägenheter och BRF.
+            Offert innan vi sätter igång.
+          </p>
+          <DemoPhoneLink
+            tel="08-123 456 78"
+            class="mt-6 inline-flex h-12 items-center rounded-md bg-[#c45c3a] px-5 text-sm font-medium text-white hover:bg-[#b04f32]"
+          >
+            Ring 08-123 456 78
+          </DemoPhoneLink>
+        </div>
+      </section>
+
+      <section class="border-b border-[#1a2420]/10 bg-[#dce6e0]">
+        <div class="mx-auto grid max-w-5xl gap-8 px-5 py-10 sm:grid-cols-4 md:px-8">
+          {[
+            ["4,9", "på Google"],
+            ["Sedan 2009", "i Stockholm"],
+            ["ROT", "på arbetskostnaden"],
+            ["15 min", "till återkoppling"],
+          ].map(([k, v]) => (
+            <div>
+              <p class="font-display text-3xl italic text-[#c45c3a]">{k}</p>
+              <p class="mt-1 text-sm text-[#3d4a44]">{v}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section class="bg-white">
+        <div class="mx-auto max-w-5xl px-5 py-16 md:px-8">
+          <p class="text-[11px] uppercase tracking-[0.22em] text-[#c45c3a]">
+            Recensioner
+          </p>
+          <h2 class="mt-2 font-display text-3xl italic">Folk ringer tillbaka.</h2>
+          <div class="mt-10 grid gap-8 md:grid-cols-3">
+            {reviews.map((r) => (
+              <figure class="border-t border-[#1a2420]/15 pt-5">
+                <blockquote class="text-[15px] leading-relaxed text-[#3d4a44]">
+                  “{r.quote}”
+                </blockquote>
+                <figcaption class="mt-4 text-sm text-[#c45c3a]">{r.name}</figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section class="bg-[#1a2420] text-[#e8efe9]">
+        <div class="mx-auto max-w-5xl px-5 py-16 md:px-8">
+          <p class="text-[11px] uppercase tracking-[0.22em] text-[#e8b89a]">
+            Folket
+          </p>
+          <h2 class="mt-2 font-display text-3xl italic">Ni pratar med dem som gör jobbet.</h2>
+          <p class="mt-3 max-w-xl text-sm text-[#c5d0c8]">
+            Här lägger vi in era foton. Tre rutor räcker – namn, roll, en bild från vardagen.
+          </p>
+          <div class="mt-10 grid gap-6 sm:grid-cols-3">
+            {team.map((p) => (
+              <article>
+                <div class="relative flex aspect-[3/4] flex-col items-center justify-center overflow-hidden bg-[#24302c]">
+                  <span class="text-[11px] uppercase tracking-[0.22em] text-[#e8b89a]/90">
+                    Bild på personal
+                  </span>
+                  <span class="mt-2 text-xs text-[#c5d0c8]/70">Ert foto här</span>
+                </div>
+                <h3 class="mt-4 font-display text-xl italic">{p.name}</h3>
+                <p class="text-sm text-[#c5d0c8]">{p.role}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section class="bg-[#eef3ef]">
+        <div class="mx-auto max-w-5xl px-5 py-16 md:px-8">
+          <h2 class="font-display text-3xl italic">Vad vi gör</h2>
+          <p class="mt-3 max-w-xl text-sm text-[#3d4a44]">
+            Service, reparation och nyinstallation. Privat, villa och förening.
+          </p>
+          <div class="mt-10 grid gap-4 sm:grid-cols-2">
+            {services.map((s) => (
+              <article class="bg-white p-6 md:p-8">
+                <h3 class="font-display text-2xl italic">{s.title}</h3>
+                <p class="mt-3 text-sm leading-relaxed text-[#3d4a44]">{s.body}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section class="bg-white py-16">
+        <div class="mx-auto max-w-5xl px-5 md:px-8">
+          <h2 class="font-display text-3xl italic">Riktpriser</h2>
+          <p class="mt-2 text-sm text-[#3d4a44]">
+            Exkl. moms. Fast pris innan vi börjar – inga överraskningar.
+          </p>
+          <dl class="mt-8 divide-y divide-[#1a2420]/10 border-y border-[#1a2420]/10">
+            {[
+              ["Utryckning, akuttid", "från 1 290 kr"],
+              ["Enklare reparation", "från 690 kr/tim"],
+              ["Stopp i avlopp", "från 1 490 kr"],
+              ["Badrum / beredare", "enligt offert"],
+            ].map(([k, v]) => (
+              <div class="flex items-baseline justify-between gap-4 py-4">
+                <dt class="min-w-0">{k}</dt>
+                <dd class="shrink-0 tabular-nums text-[#c45c3a]">{v}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </section>
+
+      <section class="bg-[#dce6e0]">
+        <div class="mx-auto max-w-5xl px-5 py-16 md:px-8">
+          <h2 class="font-display text-3xl italic">Vanliga frågor</h2>
+          <div class="mt-8 divide-y divide-[#1a2420]/10 border-y border-[#1a2420]/10">
+            {faq.map((item) => (
+              <details class="group py-5">
+                <summary class="cursor-pointer list-none font-medium marker:content-none">
+                  {item.q}
+                </summary>
+                <p class="mt-3 max-w-2xl text-sm leading-relaxed text-[#3d4a44]">
+                  {item.a}
+                </p>
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="offert" class="bg-[#c45c3a] px-5 py-16 text-white md:px-8">
+        <div class="mx-auto max-w-5xl md:flex md:items-end md:justify-between md:gap-10">
+          <div>
+            <p class="text-[11px] uppercase tracking-[0.22em] text-white/80">
+              Jour dygnet runt · Storstockholm
+            </p>
+            <h2 class="mt-3 font-display text-3xl italic md:text-4xl">
+              Hör av dig. Vi tar det därifrån.
+            </h2>
+            <p class="mt-3 max-w-md text-white/85">
+              Ring, eller skicka en bild på felet så återkommer vi med pris.
+              ROT på arbetskostnaden.
+            </p>
+          </div>
+          <DemoPhoneLink
+            tel="08-123 456 78"
+            class="mt-8 block font-display text-4xl italic leading-none md:mt-0 md:text-5xl"
+          >
+            08-123 456 78
+          </DemoPhoneLink>
+        </div>
+      </section>
+      <DemoExit />
+    </div>
+</DemoLayout>
