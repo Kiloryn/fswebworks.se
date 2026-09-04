@@ -62,6 +62,7 @@
   }
 
   body {
+    color-scheme: only light;
     background: var(--color-canvas);
     color: var(--color-fg);
     font-family: var(--font-sans);
@@ -104,13 +105,12 @@
     outline-offset: -1px;
   }
 
+  /* Light scheme everywhere. Dark bands are paint, not prefers-color-scheme.
+     Samsung Internet otherwise auto-darkens .bg-paper (cream → brown, H1 vanishes). */
   .bg-paper,
-  .bg-paper-2 {
-    color-scheme: only light;
-  }
-
+  .bg-paper-2,
   .bg-canvas {
-    color-scheme: only dark;
+    color-scheme: only light;
   }
 
   /* Contact section layout anchor: ensures smooth jump accounts for header */
