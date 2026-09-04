@@ -39,7 +39,7 @@ function VvsDemo() {
   return (
     <div className="demo-vvs min-h-svh bg-[#eef3ef] text-[#1a2420]">
       <DemoBanner current="vvs" />
-      <header className="border-b border-[#1a2420]/10 bg-white">
+      <header className="border-b border-[#1a2420]/10 bg-[#eef3ef]">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-5 py-4 md:px-8">
           <p className="min-w-0 font-display text-lg font-medium">Din Rörmokare</p>
           <nav className="hidden gap-6 text-sm md:flex">
@@ -77,18 +77,12 @@ function VvsDemo() {
         </div>
       </section>
 
-      <section className="bg-white">
-        <div className="mx-auto grid max-w-6xl gap-8 px-5 py-10 sm:grid-cols-3 md:px-8">
-          {[
-            ["Jour", "Dygnet runt, Storstockholm"],
-            ["ROT", "På arbetskostnaden, på fakturan"],
-            ["Fast pris", "Innan vi börjar – inga överraskningar"],
-          ].map(([k, v]) => (
-            <div key={k} className="border-l-2 border-[#c45c3a] pl-4">
-              <p className="font-display text-xl font-medium">{k}</p>
-              <p className="mt-1 text-sm text-[#3d4a44]">{v}</p>
-            </div>
-          ))}
+      <section className="border-y border-[#1a2420]/10 bg-[#dce6e0]">
+        <div className="mx-auto max-w-6xl px-5 py-8 md:px-8">
+          <p className="max-w-3xl text-lg leading-relaxed text-[#3d4a44]">
+            Jour dygnet runt i Storstockholm. ROT på arbetskostnaden, på fakturan.
+            Fast pris innan vi börjar.
+          </p>
         </div>
       </section>
 
@@ -107,7 +101,7 @@ function VvsDemo() {
         </div>
       </section>
 
-      <section id="priser" className="bg-white py-20">
+      <section id="priser" className="bg-[#dce6e0] py-20">
         <div className="mx-auto max-w-6xl px-5 md:px-8">
           <h2 className="font-display text-4xl font-medium">Riktpriser</h2>
           <p className="mt-2 text-[#3d4a44]">Exkl. moms. Fast pris innan vi börjar.</p>
@@ -152,7 +146,7 @@ function VvsDemo() {
         <div className="mt-10 divide-y divide-[#1a2420]/10 border-y border-[#1a2420]/10">
           {faq.map((item) => (
             <details key={item.q} className="py-5">
-              <summary className="cursor-pointer list-none text-lg font-medium">{item.q}</summary>
+              <summary className="flex min-h-11 cursor-pointer list-none items-center text-lg font-medium">{item.q}</summary>
               <p className="mt-3 max-w-2xl leading-relaxed text-[#3d4a44]">{item.a}</p>
             </details>
           ))}

@@ -87,7 +87,7 @@ export function DemoPhoneLink({
           role="dialog"
           aria-modal="true"
           aria-labelledby="demo-phone-dialog-title"
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 p-4"
+          className="fixed inset-0 z-[100] flex items-center justify-center overflow-y-auto overscroll-contain bg-black/60 p-4"
           onClick={() => setOpen(false)}
         >
           <div

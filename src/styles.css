@@ -19,6 +19,7 @@
   --color-subtle: #3a352f;
   --color-line: rgb(200 164 110 / 0.22);
   --color-danger: #c45c3a;
+  --color-focus: #c8a46e;
 
   --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif;
   --font-display: "Fraunces", "Iowan Old Style", Georgia, serif;
@@ -82,8 +83,17 @@
   h3,
   h4 {
     font-family: var(--font-display);
+    font-style: normal;
     text-wrap: balance;
     letter-spacing: -0.03em;
+    line-height: 1.06;
+    overflow-wrap: anywhere;
+    min-width: 0;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 2px;
   }
 
   p {
@@ -122,6 +132,16 @@
 @layer utilities {
   .font-display {
     font-family: var(--font-display);
+    font-style: normal;
+  }
+
+  .demo-vvs,
+  .demo-el,
+  .demo-salong,
+  .demo-krog,
+  .demo-malare,
+  .demo-konsult {
+    color-scheme: only light;
   }
 
   .demo-vvs {

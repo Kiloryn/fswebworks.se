@@ -10,13 +10,13 @@ export function SiteFooter() {
         <Logo onInk />
         <p className="flex flex-wrap items-center gap-x-3 gap-y-1">
           <span>{SITE.city}</span>
-          <a href={`mailto:${SITE.email}`} className="hover:text-fg">
+          <a href={`mailto:${SITE.email}`} className="whitespace-nowrap hover:text-fg">
             {SITE.email}
           </a>
-          <SectionLink section="contact" className="hover:text-fg">
+          <SectionLink section="contact" className="whitespace-nowrap hover:text-fg">
             Offert
           </SectionLink>
-          <Link to="/integritet" className="hover:text-fg">
+          <Link to="/integritet" className="whitespace-nowrap hover:text-fg">
             Integritet
           </Link>
           <span>© {new Date().getFullYear()} {SITE.name}</span>

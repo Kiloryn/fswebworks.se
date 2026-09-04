@@ -51,7 +51,7 @@ function PainterDemo() {
           <p className="mt-5 max-w-md text-white/80">
             Inomhus, utomhus och tapet. ROT på arbetskostnaden.
           </p>
-          <DemoPhoneLink tel="08-678 901 23" className="mt-8 inline-flex h-14 items-center bg-white px-6 text-lg text-[#1f2a22]">
+          <DemoPhoneLink tel="08-678 901 23" className="mt-8 inline-flex h-14 items-center bg-[#e8e0d0] px-6 text-lg text-[#1f2a22]">
             08-678 901 23
           </DemoPhoneLink>
         </div>
@@ -93,7 +93,7 @@ function PainterDemo() {
             <p className="font-display text-2xl font-medium">Begär offert</p>
             <label className="mt-6 block text-sm">
               Vad ska målas?
-              <select className="mt-1 h-12 w-full border border-[#1f2a22]/15 bg-white px-3">
+              <select className="mt-1 h-12 w-full border border-[#1f2a22]/15 bg-[#f3f1ea] px-3">
                 <option>Inomhus</option>
                 <option>Fasad</option>
                 <option>Tapet</option>
@@ -101,7 +101,7 @@ function PainterDemo() {
             </label>
             <label className="mt-4 block text-sm">
               Telefon eller e-post
-              <input className="mt-1 h-12 w-full border border-[#1f2a22]/15 bg-white px-3" />
+              <input className="mt-1 h-12 w-full border border-[#1f2a22]/15 bg-[#f3f1ea] px-3" />
             </label>
             <button type="submit" className="mt-6 inline-flex h-12 w-full items-center justify-center bg-[#2f5d3d] text-sm text-white">
               Skicka förfrågan

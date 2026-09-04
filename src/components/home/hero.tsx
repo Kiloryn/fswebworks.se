@@ -1,7 +1,5 @@
-import { memo, useEffect, useRef, useState } from "react";
-import { EXAMPLES } from "@/lib/site";
+import { memo, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
-import { Pic } from "@/components/site/pic";
 import { SectionLink } from "@/components/site/section-link";
 
 type SectionRef = { current: HTMLElement | null };
@@ -68,7 +66,7 @@ const HeroVideo = memo(function HeroVideo({
       loop
       playsInline
       autoPlay
-      preload="none"
+      preload="metadata"
       aria-hidden
     >
       <source src="/videos/hero-720.mp4" type="video/mp4" media="(max-width: 768px)" />
@@ -78,21 +76,18 @@ const HeroVideo = memo(function HeroVideo({
 });
 
 export const Hero = memo(function Hero() {
-  const [selectedSlug, setSelectedSlug] = useState<string>(EXAMPLES[0].slug);
   const rootRef = useRef<HTMLElement>(null);
-
-  const current = EXAMPLES.find((ex) => ex.slug === selectedSlug) ?? EXAMPLES[0];
 
   return (
     <section
       ref={rootRef}
-      className="relative min-h-svh overflow-x-clip bg-canvas bg-cover bg-center md:min-h-dvh"
+      className="relative min-h-[28rem] overflow-x-clip bg-canvas bg-cover bg-center md:min-h-[34rem]"
       style={{ backgroundImage: "url(/videos/hero-poster.jpg)" }}
     >
       <HeroVideo sectionRef={rootRef} />
-      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgb(11_10_8_/_0.38)_0%,rgb(11_10_8_/_0.62)_48%,rgb(11_10_8_/_0.82)_100%)] md:bg-[linear-gradient(90deg,rgb(11_10_8_/_0.86)_0%,rgb(11_10_8_/_0.58)_48%,rgb(11_10_8_/_0.22)_100%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgb(11_10_8_/_0.28)_0%,rgb(11_10_8_/_0.55)_42%,rgb(11_10_8_/_0.88)_100%)]" />
 
-      <div className="relative mx-auto grid min-h-svh max-w-6xl items-center gap-12 px-5 pb-16 pt-32 md:min-h-dvh md:grid-cols-[1.15fr_0.85fr] md:px-8 md:pb-20 md:pt-36">
+      <div className="relative mx-auto flex min-h-[28rem] max-w-6xl items-end px-5 pb-12 pt-32 md:min-h-[34rem] md:px-8 md:pb-16 md:pt-36">
         <div>
           <h1 className="max-w-[14ch] font-display text-[2.35rem] font-medium leading-[1.05] text-fg sm:text-5xl md:text-[4.1rem]">
             En hemsida som ser ut som jobbet ni gör.
@@ -114,50 +109,6 @@ export const Hero = memo(function Hero() {
               Se exempel
             </SectionLink>
           </div>
-        </div>
-
-        <div className="hidden md:block">
-          <div
-            className="flex flex-wrap gap-x-4 gap-y-1 text-sm"
-            role="tablist"
-            aria-label="Välj branschexempel"
-          >
-            {EXAMPLES.map((ex) => {
-              const active = ex.slug === current.slug;
-              return (
-                <button
-                  key={ex.slug}
-                  type="button"
-                  role="tab"
-                  aria-selected={active}
-                  onClick={() => setSelectedSlug(ex.slug)}
-                  className={`text-left transition-colors ${
-                    active ? "text-gold" : "text-muted hover:text-fg"
-                  }`}
-                >
-                  {ex.short}
-                </button>
-              );
-            })}
-          </div>
-
-          <a href={`/${current.slug}`} className="mt-4 block">
-            <div className="relative aspect-[4/3] w-full overflow-hidden bg-ink-3">
-              <Pic
-                src={current.image}
-                alt=""
-                className="size-full object-cover"
-                width={640}
-                height={480}
-              />
-            </div>
-            <p className="mt-3 flex flex-wrap items-baseline gap-x-2 text-sm text-muted">
-              <span>{current.brand}</span>
-              <span className="text-fg/30">·</span>
-              <span>{current.name}</span>
-              <span className="text-gold">Öppna</span>
-            </p>
-          </a>
         </div>
       </div>
     </section>

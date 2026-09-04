@@ -123,7 +123,7 @@ export function SiteHeader({ ink = true }: { ink?: boolean }) {
                 section={item.section}
                 aria-current={active ? "page" : undefined}
                 className={cn(
-                  "transition-colors hover:text-gold",
+                  "whitespace-nowrap transition-colors hover:text-gold",
                   active ? "text-gold" : "text-fg/80",
                 )}
               >

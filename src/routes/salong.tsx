@@ -132,7 +132,7 @@ function SalonDemo() {
             <p className="font-display text-2xl">Ta en tid</p>
             <label className="mt-6 block text-sm">
               Behandling
-              <select className="mt-1 h-12 w-full border border-[#3a2f28]/20 bg-white px-3">
+              <select className="mt-1 h-12 w-full border border-[#3a2f28]/20 bg-[#f6efe6] px-3">
                 {treatments.map((t) => (
                   <option key={t.name}>{t.name}</option>
                 ))}
@@ -140,7 +140,7 @@ function SalonDemo() {
             </label>
             <label className="mt-4 block text-sm">
               Frisör
-              <select className="mt-1 h-12 w-full border border-[#3a2f28]/20 bg-white px-3">
+              <select className="mt-1 h-12 w-full border border-[#3a2f28]/20 bg-[#f6efe6] px-3">
                 {stylists.map((p) => (
                   <option key={p.name}>{p.name}</option>
                 ))}

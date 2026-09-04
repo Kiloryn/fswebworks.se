@@ -66,10 +66,10 @@ export function ContactForm({ defaultSubject = "", onPaper = false }: Props) {
   }
 
   const field = cn(
-    "h-12 w-full rounded-sm border px-4 text-sm outline-none transition-[border-color,box-shadow,background-color] duration-150",
+    "h-12 w-full rounded-sm border px-4 text-sm outline-2 outline-transparent transition-[border-color,background-color] duration-150",
     onPaper
-      ? "border-ink/15 bg-paper text-ink placeholder:text-subtle/70 focus:border-brass focus:ring-1 focus:ring-brass/30"
-      : "border-line/70 bg-ink-3 text-fg placeholder:text-muted/60 focus:border-gold focus:ring-1 focus:ring-gold/30",
+      ? "border-ink/15 bg-paper text-ink placeholder:text-subtle/70 focus-visible:border-brass focus-visible:outline-brass"
+      : "border-line/70 bg-ink-3 text-fg placeholder:text-muted/60 focus-visible:border-gold focus-visible:outline-gold",
   );
 
   if (sent) {
@@ -125,6 +125,7 @@ export function ContactForm({ defaultSubject = "", onPaper = false }: Props) {
             type="email"
             autoComplete="email"
             required
+            spellCheck={false}
             placeholder="din@epost.se"
             className={field}
           />
@@ -180,7 +181,7 @@ export function ContactForm({ defaultSubject = "", onPaper = false }: Props) {
           name="message"
           required
           rows={4}
-          placeholder="Berätta kort om ert företag och vad ni behöver..."
+          placeholder="Berätta kort om ert företag och vad ni behöver…"
           className={cn(field, "h-auto py-3")}
         />
       </div>
@@ -188,7 +189,9 @@ export function ContactForm({ defaultSubject = "", onPaper = false }: Props) {
         <label htmlFor="contact-website">Webbplats</label>
         <input id="contact-website" name="website" tabIndex={-1} autoComplete="off" />
       </div>
-      {error ? <p className="text-sm text-danger">{error}</p> : null}
+      <p className="min-h-[1lh] text-sm text-danger" aria-live="polite">
+        {error}
+      </p>
       <p className={cn("text-xs leading-relaxed", onPaper ? "text-subtle" : "text-muted")}>
         Genom att skicka godkänner du att vi behandlar dina uppgifter enligt{" "}
         <Link
