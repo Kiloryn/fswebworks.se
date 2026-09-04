@@ -5,7 +5,7 @@ import Logo from "./Logo.astro";
 ---
 
 <div id="top-sentinel" class="absolute left-0 top-3 size-px" aria-hidden="true"></div>
-<header id="site-header" class="fixed inset-x-0 top-0 z-50 border-b border-transparent bg-transparent text-fg transition-[background-color,border-color] duration-200">
+<header id="site-header" class="absolute inset-x-0 top-0 z-50 border-b border-transparent bg-transparent text-fg transition-[background-color,border-color] duration-200 md:fixed">
   <div class="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 md:h-[4.25rem] md:px-8">
     <Logo />
     <nav class="hidden items-center gap-7 md:flex" aria-label="Huvudmeny">
