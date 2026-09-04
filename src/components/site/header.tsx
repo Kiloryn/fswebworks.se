@@ -5,7 +5,6 @@ import { NAV, SITE } from "@/lib/site";
 import { cn } from "@/lib/utils";
 import { Logo } from "@/components/site/logo";
 import { SectionLink } from "@/components/site/section-link";
-import { scrollToTop } from "@/lib/scroll-to";
 
 const SECTION_IDS = NAV.map((item) => item.section);
 
@@ -68,11 +67,6 @@ export function SiteHeader({ ink = true }: { ink?: boolean }) {
   const onHome = pathname === "/";
   const solid = !ink || scrolled || open || !onHome;
 
-  const goHomeTop = () => {
-    setOpen(false);
-    if (pathname === "/") scrollToTop();
-  };
-
   return (
     <>
     <header
@@ -134,15 +128,17 @@ export function SiteHeader({ ink = true }: { ink?: boolean }) {
         </nav>
       </div>
       {open ? (
-        <div className="border-t border-line bg-canvas px-5 py-5 text-fg md:hidden">
+        <div className="border-t border-line bg-canvas px-5 pb-6 pt-3 text-fg md:hidden">
           <nav className="flex flex-col" aria-label="Mobilmeny">
-            <Link
-              to="/"
-              className="flex min-h-11 items-center text-base text-fg"
-              onClick={goHomeTop}
-            >
-              Startsidan
-            </Link>
+            {onHome ? null : (
+              <Link
+                to="/"
+                className="flex min-h-11 items-center font-display text-2xl font-medium leading-none text-fg"
+                onClick={() => setOpen(false)}
+              >
+                Startsidan
+              </Link>
+            )}
             {NAV.map((item) => {
               const active = pathname === "/" && section === item.section;
               return (
@@ -151,7 +147,7 @@ export function SiteHeader({ ink = true }: { ink?: boolean }) {
                   section={item.section}
                   aria-current={active ? "page" : undefined}
                   className={cn(
-                    "flex min-h-11 items-center text-base",
+                    "flex min-h-11 items-center font-display text-2xl font-medium leading-none",
                     active ? "text-gold" : "text-fg",
                   )}
                   onClick={() => setOpen(false)}
@@ -160,13 +156,16 @@ export function SiteHeader({ ink = true }: { ink?: boolean }) {
                 </SectionLink>
               );
             })}
+          </nav>
+          <address className="mt-5 border-t border-line pt-4 not-italic">
+            <p className="text-sm text-muted">Skriv till oss</p>
             <a
               href={`mailto:${SITE.email}`}
-              className="flex min-h-11 items-center text-base text-gold"
+              className="mt-1 inline-flex min-h-11 items-center font-display text-xl text-gold"
             >
               {SITE.email}
             </a>
-          </nav>
+          </address>
         </div>
       ) : null}
     </header>
