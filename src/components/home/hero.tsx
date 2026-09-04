@@ -85,20 +85,20 @@ export const Hero = memo(function Hero() {
       style={{ backgroundImage: "url(/videos/hero-poster.jpg)" }}
     >
       <HeroVideo sectionRef={rootRef} />
-      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgb(11_10_8_/_0.28)_0%,rgb(11_10_8_/_0.55)_42%,rgb(11_10_8_/_0.88)_100%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgb(11_10_8_/_0.4)_0%,rgb(11_10_8_/_0.58)_48%,rgb(11_10_8_/_0.72)_100%)]" />
 
-      <div className="relative mx-auto flex min-h-svh max-w-6xl items-end px-5 pb-12 pt-32 md:min-h-dvh md:px-8 md:pb-16 md:pt-36">
-        <div>
-          <h1 className="max-w-[14ch] font-display text-[2.35rem] font-medium leading-[1.05] text-fg sm:text-5xl md:text-[4.1rem]">
+      <div className="relative flex min-h-svh items-center justify-center px-5 pt-28 pb-16 md:min-h-dvh md:px-8 md:pt-36 md:pb-20">
+        <div className="w-full max-w-xl text-center">
+          <h1 className="mx-auto max-w-[14ch] text-balance font-display text-[2.35rem] font-medium leading-[1.05] text-fg sm:text-5xl md:text-[4.1rem]">
             En hemsida som ser ut som jobbet ni gör.
           </h1>
-          <p className="mt-6 max-w-md text-lg leading-relaxed text-muted md:text-xl">
+          <p className="mx-auto mt-6 max-w-md text-pretty text-lg leading-relaxed text-muted md:text-xl">
             Professionella hemsidor för hantverkare och småföretag i hela
             Sverige. Från{" "}
             <span className="whitespace-nowrap">9 900 kr</span>, ingen bindning
             – du äger sidan själv.
           </p>
-          <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
             <Button asChild size="xl">
               <SectionLink section="contact">Begär offert</SectionLink>
             </Button>
