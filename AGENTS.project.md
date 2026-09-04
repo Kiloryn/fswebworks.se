@@ -37,14 +37,20 @@ Do not infer its full rules from the one-line summaries below.
    for “consistency”. Swedish sentence case wins over Title Case.
 
 4. **visual-qa** — Last look before “done”.
-   Screenshot the page. No Pic as a direct grid child. No empty
-   column. If the user sent a screenshot, read that first.
+   If the user sent a screenshot, read that first.
+   No Pic as a direct grid child. No empty column.
+   Do not open Chrome unless Verification allows it.
 
 ## Locked (not up for skill debate)
 
 - FSwebworks itself: cream paper, Fraunces, 9 900 kr, Swedish copy.
 - Example pages: each is a different room (not skins of one template).
 - User direction always wins the pipeline.
+
+## Verification
+
+- Do not open Chrome or run browser walkthroughs unless the user
+  explicitly says to check results in Chrome.
 
 ## Forbidden
 
