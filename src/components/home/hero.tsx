@@ -81,13 +81,13 @@ export const Hero = memo(function Hero() {
   return (
     <section
       ref={rootRef}
-      className="relative min-h-[28rem] overflow-x-clip bg-canvas bg-cover bg-center md:min-h-[34rem]"
+      className="relative min-h-svh overflow-x-clip bg-canvas bg-cover bg-center md:min-h-dvh"
       style={{ backgroundImage: "url(/videos/hero-poster.jpg)" }}
     >
       <HeroVideo sectionRef={rootRef} />
       <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgb(11_10_8_/_0.28)_0%,rgb(11_10_8_/_0.55)_42%,rgb(11_10_8_/_0.88)_100%)]" />
 
-      <div className="relative mx-auto flex min-h-[28rem] max-w-6xl items-end px-5 pb-12 pt-32 md:min-h-[34rem] md:px-8 md:pb-16 md:pt-36">
+      <div className="relative mx-auto flex min-h-svh max-w-6xl items-end px-5 pb-12 pt-32 md:min-h-dvh md:px-8 md:pb-16 md:pt-36">
         <div>
           <h1 className="max-w-[14ch] font-display text-[2.35rem] font-medium leading-[1.05] text-fg sm:text-5xl md:text-[4.1rem]">
             En hemsida som ser ut som jobbet ni gör.
