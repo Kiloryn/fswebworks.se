@@ -1,5 +1,6 @@
 import { memo, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
+import { Reveal } from "@/components/site/reveal";
 import { SectionLink } from "@/components/site/section-link";
 
 type SectionRef = { current: HTMLElement | null };
@@ -88,7 +89,7 @@ export const Hero = memo(function Hero() {
       <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgb(11_10_8_/_0.4)_0%,rgb(11_10_8_/_0.58)_48%,rgb(11_10_8_/_0.72)_100%)]" />
 
       <div className="relative flex min-h-svh items-center justify-center px-5 pt-28 pb-16 md:min-h-dvh md:px-8 md:pt-36 md:pb-20">
-        <div className="w-full max-w-xl text-center">
+        <Reveal className="w-full max-w-xl text-center">
           <h1 className="mx-auto max-w-[14ch] text-balance font-display text-[2.35rem] font-medium leading-[1.05] text-fg sm:text-5xl md:text-[4.1rem]">
             En hemsida som ser ut som jobbet ni gör.
           </h1>
@@ -109,7 +110,7 @@ export const Hero = memo(function Hero() {
               Se exempel
             </SectionLink>
           </div>
-        </div>
+        </Reveal>
       </div>
     </section>
   );

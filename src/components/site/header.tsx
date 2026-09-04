@@ -127,56 +127,67 @@ export function SiteHeader({ ink = true }: { ink?: boolean }) {
           })}
         </nav>
       </div>
-      {open ? (
-        <div className="border-t border-line bg-canvas px-5 pb-6 pt-3 text-fg md:hidden">
-          <nav className="flex flex-col" aria-label="Mobilmeny">
-            {onHome ? null : (
-              <Link
-                to="/"
-                className="flex min-h-11 items-center font-display text-2xl font-medium leading-none text-fg"
-                onClick={() => setOpen(false)}
-              >
-                Startsidan
-              </Link>
-            )}
-            {NAV.map((item) => {
-              const active = pathname === "/" && section === item.section;
-              return (
-                <SectionLink
-                  key={item.label}
-                  section={item.section}
-                  aria-current={active ? "page" : undefined}
-                  className={cn(
-                    "flex min-h-11 items-center font-display text-2xl font-medium leading-none",
-                    active ? "text-gold" : "text-fg",
-                  )}
+      <div
+        className="menu-panel grid md:hidden"
+        data-open={open}
+        style={{ gridTemplateRows: open ? "1fr" : "0fr" }}
+        inert={!open || undefined}
+      >
+        <div className="min-h-0 overflow-hidden">
+          <div className="border-t border-line bg-canvas px-5 pb-6 pt-3 text-fg">
+            <nav className="flex flex-col" aria-label="Mobilmeny">
+              {onHome ? null : (
+                <Link
+                  to="/"
+                  className="flex min-h-11 items-center font-display text-2xl font-medium leading-none text-fg"
                   onClick={() => setOpen(false)}
                 >
-                  {item.label}
-                </SectionLink>
-              );
-            })}
-          </nav>
-          <address className="mt-5 border-t border-line pt-4 not-italic">
-            <p className="text-sm text-muted">Skriv till oss</p>
-            <a
-              href={`mailto:${SITE.email}`}
-              className="mt-1 inline-flex min-h-11 items-center font-display text-xl text-gold"
-            >
-              {SITE.email}
-            </a>
-          </address>
+                  Startsidan
+                </Link>
+              )}
+              {NAV.map((item) => {
+                const active = pathname === "/" && section === item.section;
+                return (
+                  <SectionLink
+                    key={item.label}
+                    section={item.section}
+                    aria-current={active ? "page" : undefined}
+                    className={cn(
+                      "flex min-h-11 items-center font-display text-2xl font-medium leading-none",
+                      active ? "text-gold" : "text-fg",
+                    )}
+                    onClick={() => setOpen(false)}
+                  >
+                    {item.label}
+                  </SectionLink>
+                );
+              })}
+            </nav>
+            <address className="mt-5 border-t border-line pt-4 not-italic">
+              <p className="text-sm text-muted">Skriv till oss</p>
+              <a
+                href={`mailto:${SITE.email}`}
+                className="mt-1 inline-flex min-h-11 items-center font-display text-xl text-gold"
+              >
+                {SITE.email}
+              </a>
+            </address>
+          </div>
         </div>
-      ) : null}
+      </div>
     </header>
-    {open ? (
-      <button
-        type="button"
-        className="fixed inset-0 z-40 bg-black/50 md:hidden"
-        aria-label="Stäng meny"
-        onClick={() => setOpen(false)}
-      />
-    ) : null}
+    <button
+      type="button"
+      className={cn(
+        "menu-backdrop fixed inset-0 z-40 bg-black/50 md:hidden",
+        open ? "opacity-100" : "pointer-events-none opacity-0",
+      )}
+      data-open={open}
+      tabIndex={open ? 0 : -1}
+      aria-hidden={!open}
+      aria-label="Stäng meny"
+      onClick={() => setOpen(false)}
+    />
     </>
   );
 }

@@ -41,6 +41,11 @@
     0 22px 50px -20px rgb(0 0 0 / 0.6);
 
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in: cubic-bezier(0.7, 0, 0.84, 0);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-micro: 120ms;
+  --dur-short: 220ms;
+  --dur-long: 420ms;
 }
 
 @layer base {
@@ -202,8 +207,26 @@
     opacity: 0;
     transform: translateY(12px);
     transition:
-      opacity 500ms var(--ease-out),
-      transform 500ms var(--ease-out);
+      opacity var(--dur-long) var(--ease-out),
+      transform var(--dur-long) var(--ease-out);
+  }
+
+  .menu-panel {
+    transition: grid-template-rows var(--dur-short) var(--ease-out);
+  }
+
+  .menu-panel[data-open="false"] {
+    transition-duration: calc(var(--dur-short) * 0.75);
+    transition-timing-function: var(--ease-in);
+  }
+
+  .menu-backdrop {
+    transition: opacity var(--dur-short) var(--ease-out);
+  }
+
+  .menu-backdrop[data-open="false"] {
+    transition-duration: calc(var(--dur-short) * 0.75);
+    transition-timing-function: var(--ease-in);
   }
 
   .reveal-in {
