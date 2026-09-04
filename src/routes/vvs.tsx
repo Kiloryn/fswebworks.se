@@ -74,7 +74,7 @@ const faq = [
 
 function VvsDemo() {
   return (
-    <div className="min-h-dvh bg-[#eef3ef] text-[#1a2420]">
+    <div className="min-h-svh bg-[#eef3ef] text-[#1a2420] md:min-h-dvh">
       <DemoBanner current="vvs" />
       <DemoPhoneLink
         tel="08-123 456 78"
@@ -91,7 +91,7 @@ function VvsDemo() {
         <Pic
           src="/images/vvs.jpg?v=6"
           alt="Rörmokare drar åt kopparrör"
-          className="h-[62dvh] w-full object-cover md:h-[78vh]"
+          className="h-[62svh] w-full object-cover md:h-[78vh]"
           width={1400}
           height={788}
           priority

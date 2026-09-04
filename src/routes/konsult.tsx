@@ -48,7 +48,7 @@ const reviews = [
 
 function ConsultDemo() {
   return (
-    <div className="min-h-dvh bg-[#f7f4ee] text-[#1c1a16]">
+    <div className="min-h-svh bg-[#f7f4ee] text-[#1c1a16] md:min-h-dvh">
       <DemoBanner current="konsult" />
       <header className="border-b border-black/10">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-5 py-5 md:px-8">

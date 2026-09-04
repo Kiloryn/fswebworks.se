@@ -34,7 +34,7 @@ const services = [
 
 function ElDemo() {
   return (
-    <div className="min-h-dvh bg-[#eef1f6] text-[#12161e]">
+    <div className="min-h-svh bg-[#eef1f6] text-[#12161e] md:min-h-dvh">
       <DemoBanner current="elektriker" />
       <div className="bg-[#d4a017] px-3 py-2 text-center text-[11px] font-semibold tracking-[0.12em] text-[#111] uppercase">
         Auktoriserad elinstallatör · A-behörig

@@ -80,7 +80,7 @@ const faq = [
 
 function PainterDemo() {
   return (
-    <div className="min-h-dvh bg-[#f3f1ea] text-[#1f2a22]">
+    <div className="min-h-svh bg-[#f3f1ea] text-[#1f2a22] md:min-h-dvh">
       <DemoBanner current="malare" />
       <header className="border-b border-[#1f2a22]/10">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-5 py-4 md:px-8">
@@ -111,7 +111,7 @@ function PainterDemo() {
         <Pic
           src="/images/malare.jpg?v=5"
           alt="Nymålat rum i salviagrönt"
-          className="h-[62dvh] w-full object-cover md:h-[82vh]"
+          className="h-[62svh] w-full object-cover md:h-[82vh]"
           width={1400}
           height={1050}
           priority

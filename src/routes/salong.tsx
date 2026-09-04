@@ -44,7 +44,7 @@ const reviews = [
 
 function SalonDemo() {
   return (
-    <div className="min-h-dvh bg-[#f6efe6] text-[#3a2f28]">
+    <div className="min-h-svh bg-[#f6efe6] text-[#3a2f28] md:min-h-dvh">
       <DemoBanner current="salong" />
       <header className="border-b border-[#3a2f28]/10">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-5 py-4 md:px-8">

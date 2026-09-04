@@ -39,7 +39,7 @@ const reviews = [
 
 function RestaurantDemo() {
   return (
-    <div className="min-h-dvh bg-[#f6eee4] text-[#1a0f0d]">
+    <div className="min-h-svh bg-[#f6eee4] text-[#1a0f0d] md:min-h-dvh">
       <DemoBanner current="restaurang" />
       <header className="border-b border-[#1a0f0d]/10 bg-[#1a0f0d] text-[#f3e6d8]">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-5 py-4 md:px-8">
@@ -70,7 +70,7 @@ function RestaurantDemo() {
         <Pic
           src="/images/restaurang.jpg?v=5"
           alt="Tagliatelle och ett glas vin"
-          className="h-[62dvh] w-full object-cover md:h-[82vh]"
+          className="h-[62svh] w-full object-cover md:h-[82vh]"
           width={1400}
           height={1050}
           priority
