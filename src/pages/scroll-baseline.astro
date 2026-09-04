@@ -1,0 +1,60 @@
+---
+export const prerender = true;
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const cards = Array.from({ length: 22 }, (_, index) => index + 1);
+---
+
+<BaseLayout
+  title="Scroll baseline – FSwebworks"
+  description="Isolerat scrolltest utan JavaScript, media eller fasta element."
+>
+  <main class="baseline">
+    <section class="intro">
+      <p>Isolerat test</p>
+      <h1>Scroll baseline</h1>
+      <p>Dra sidan upp och ned i samma tempo som på startsidan. Här finns inga scripts, bilder, videor eller fasta element.</p>
+    </section>
+
+    <section class="dark" aria-label="Mörka testkort">
+      {cards.slice(0, 11).map((number) => (
+        <article>
+          <span>{String(number).padStart(2, "0")}</span>
+          <h2>Statisk testyta</h2>
+          <p>Samma enkla innehåll upprepas för att göra förändringar i scrollhastigheten lätta att se.</p>
+        </article>
+      ))}
+    </section>
+
+    <section class="light" aria-label="Ljusa testkort">
+      {cards.slice(11).map((number) => (
+        <article>
+          <span>{String(number).padStart(2, "0")}</span>
+          <h2>Statisk testyta</h2>
+          <p>Samma enkla innehåll upprepas för att göra förändringar i scrollhastigheten lätta att se.</p>
+        </article>
+      ))}
+    </section>
+  </main>
+</BaseLayout>
+
+<style is:global>
+  html { scroll-behavior: auto; }
+  body { min-height: 0; background: #0b0a08; font-family: system-ui, sans-serif; }
+</style>
+
+<style>
+  .baseline { overflow: clip; }
+  section { padding: 48px 20px; }
+  .intro { background: #f4efe6; color: #0b0a08; padding-block: 72px; }
+  .intro > * { max-width: 640px; margin-inline: auto; }
+  .intro > p:first-child, article span { font-size: 12px; letter-spacing: .2em; text-transform: uppercase; }
+  h1 { margin-top: 12px; font-family: system-ui, sans-serif; font-size: clamp(38px, 10vw, 64px); line-height: 1; }
+  .intro > p:last-child { margin-top: 20px; font-size: 18px; line-height: 1.6; }
+  .dark { background: #0b0a08; color: #f5f1ea; }
+  .light { background: #f4efe6; color: #0b0a08; }
+  article { max-width: 640px; margin: 0 auto 18px; border: 1px solid currentColor; border-radius: 20px; padding: 28px; }
+  article span { opacity: .65; }
+  article h2 { margin-top: 10px; font-family: system-ui, sans-serif; font-size: 25px; }
+  article p { margin-top: 8px; max-width: 52ch; line-height: 1.55; opacity: .75; }
+</style>
