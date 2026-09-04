@@ -22,10 +22,7 @@ function PrivacyPage() {
       <article className="bg-paper pt-28 text-ink">
         <div className="mx-auto max-w-2xl px-5 pb-24 md:px-8">
           <PageBack onPaper />
-          <p className="text-[11px] uppercase tracking-[0.24em] text-subtle">
-            Juridik
-          </p>
-          <h1 className="mt-4 font-display text-4xl italic md:text-5xl">
+          <h1 className="font-display text-4xl md:text-5xl">
             Integritetspolicy
           </h1>
           <p className="mt-5 text-subtle">

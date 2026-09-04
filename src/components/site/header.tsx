@@ -1,9 +1,8 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
-import { NAV } from "@/lib/site";
+import { NAV, SITE } from "@/lib/site";
 import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/site/logo";
 import { SectionLink } from "@/components/site/section-link";
 import { scrollToTop } from "@/lib/scroll-to";
@@ -26,6 +25,20 @@ export function SiteHeader({ ink = true }: { ink?: boolean }) {
   useEffect(() => {
     setOpen(false);
   }, [pathname]);
+
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.body.style.overflow = prev;
+    };
+  }, [open]);
 
   useEffect(() => {
     if (pathname !== "/") {
@@ -52,7 +65,8 @@ export function SiteHeader({ ink = true }: { ink?: boolean }) {
     return () => io.disconnect();
   }, [pathname]);
 
-  const solid = !ink || scrolled || open;
+  const onHome = pathname === "/";
+  const solid = !ink || scrolled || open || !onHome;
 
   const goHomeTop = () => {
     setOpen(false);
@@ -60,29 +74,57 @@ export function SiteHeader({ ink = true }: { ink?: boolean }) {
   };
 
   return (
+    <>
     <header
       className={cn(
-        "fixed inset-x-0 top-0 z-50 transition-[background-color,border-color,color] duration-200",
+        "fixed inset-x-0 top-0 z-50 pt-[env(safe-area-inset-top)] transition-[background-color,border-color,color] duration-200",
         solid
-          ? "border-b border-line/80 bg-canvas text-fg shadow-xs"
+          ? "border-b border-line/80 bg-canvas text-fg"
           : "border-b border-transparent bg-transparent text-fg",
       )}
     >
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 md:h-[4.25rem] md:px-8">
-        <Logo onInk />
-        <nav className="hidden items-center gap-7 md:flex" aria-label="Huvudmeny">
+      <div className="mx-auto max-w-6xl px-5 md:px-8">
+        <div className="flex h-14 items-center justify-between md:h-16">
+          <Logo onInk />
+          <a
+            href={`mailto:${SITE.email}`}
+            className="hidden text-sm text-fg/80 hover:text-gold md:inline"
+          >
+            {SITE.email}
+          </a>
+          <div className="flex items-center gap-1 md:hidden">
+            <SectionLink
+              section="contact"
+              className="px-3 text-sm font-medium text-gold"
+              onClick={() => setOpen(false)}
+            >
+              Offert
+            </SectionLink>
+            <button
+              type="button"
+              className="inline-flex size-11 items-center justify-center text-fg"
+              aria-label={open ? "Stäng meny" : "Öppna meny"}
+              aria-expanded={open}
+              onClick={() => setOpen((v) => !v)}
+            >
+              {open ? <X className="size-5" /> : <Menu className="size-5" />}
+            </button>
+          </div>
+        </div>
+        <nav
+          className="hidden items-center gap-6 border-t border-fg/15 py-2.5 text-[13px] md:flex"
+          aria-label="Huvudmeny"
+        >
           {NAV.map((item) => {
-            const active =
-              (pathname === "/" && section === item.section) ||
-              (item.section === "exempel" && pathname === "/examples");
+            const active = pathname === "/" && section === item.section;
             return (
               <SectionLink
                 key={item.label}
                 section={item.section}
                 aria-current={active ? "page" : undefined}
                 className={cn(
-                  "text-[15px] font-medium tracking-wide transition-colors duration-150 hover:text-gold",
-                  active ? "text-gold" : "text-fg/90",
+                  "transition-colors hover:text-gold",
+                  active ? "text-gold" : "text-fg/80",
                 )}
               >
                 {item.label}
@@ -90,27 +132,10 @@ export function SiteHeader({ ink = true }: { ink?: boolean }) {
             );
           })}
         </nav>
-        <div className="flex items-center gap-2">
-          <Button asChild size="md" className="h-10 px-3 text-sm md:h-11 md:px-5">
-            <SectionLink section="contact">
-              <span className="md:hidden">Offert</span>
-              <span className="hidden md:inline">Begär offert</span>
-            </SectionLink>
-          </Button>
-          <button
-            type="button"
-            className="inline-flex size-11 items-center justify-center rounded-md text-fg md:hidden"
-            aria-label={open ? "Stäng meny" : "Öppna meny"}
-            aria-expanded={open}
-            onClick={() => setOpen((v) => !v)}
-          >
-            {open ? <X className="size-5" /> : <Menu className="size-5" />}
-          </button>
-        </div>
       </div>
       {open ? (
         <div className="border-t border-line bg-canvas px-5 py-5 text-fg md:hidden">
-          <nav className="flex flex-col gap-1" aria-label="Mobilmeny">
+          <nav className="flex flex-col" aria-label="Mobilmeny">
             <Link
               to="/"
               className="flex min-h-11 items-center text-base text-fg"
@@ -119,9 +144,7 @@ export function SiteHeader({ ink = true }: { ink?: boolean }) {
               Startsidan
             </Link>
             {NAV.map((item) => {
-              const active =
-                (pathname === "/" && section === item.section) ||
-                (item.section === "exempel" && pathname === "/examples");
+              const active = pathname === "/" && section === item.section;
               return (
                 <SectionLink
                   key={item.label}
@@ -137,9 +160,24 @@ export function SiteHeader({ ink = true }: { ink?: boolean }) {
                 </SectionLink>
               );
             })}
+            <a
+              href={`mailto:${SITE.email}`}
+              className="flex min-h-11 items-center text-base text-gold"
+            >
+              {SITE.email}
+            </a>
           </nav>
         </div>
       ) : null}
     </header>
+    {open ? (
+      <button
+        type="button"
+        className="fixed inset-0 z-40 bg-black/50 md:hidden"
+        aria-label="Stäng meny"
+        onClick={() => setOpen(false)}
+      />
+    ) : null}
+    </>
   );
 }

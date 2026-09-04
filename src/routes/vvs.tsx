@@ -1,5 +1,4 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Phone } from "lucide-react";
 import { Pic } from "@/components/site/pic";
 import { DemoBanner, DemoExit, DemoPhoneLink } from "@/components/site/demo-banner";
 
@@ -7,44 +6,20 @@ export const Route = createFileRoute("/vvs")({
   component: VvsDemo,
   head: () => ({
     meta: [{ title: "Din Rörmokare i Stockholm – exempelsida" }],
+    links: [
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&display=swap",
+      },
+    ],
   }),
 });
 
 const services = [
-  {
-    title: "Akut läckage",
-    body: "Kran, rör eller beredare som ger upp mitt i natten. Vi åker ut, stänger vattnet och lagar.",
-  },
-  {
-    title: "Stopp i avlopp",
-    body: "Kök, badrum och stam. Vi rensar och säger till om det är ett större fel.",
-  },
-  {
-    title: "Badrum och kök",
-    body: "Nyinstallation vid renovering. Rör, golvbrunn, blandare – offert på plats.",
-  },
-  {
-    title: "Värme",
-    body: "Radiatorer, golvvärme och varmvattenberedare. Service och byte.",
-  },
-];
-
-const reviews = [
-  {
-    quote:
-      "Stopp i köket en lördag. De svarade direkt, var här samma dag och lämnade rent efter sig.",
-    name: "Linda, Södermalm",
-  },
-  {
-    quote:
-      "Tydlig offert innan de började, inga överraskningar på fakturan. Så ska en rörmokare vara.",
-    name: "Marcus, Solna",
-  },
-  {
-    quote:
-      "Bytte beredare i radhuset. Förklarade vad som var fel och vad ROT täckte. Tryggt hela vägen.",
-    name: "Eva, Täby",
-  },
+  { title: "Akut läckage", body: "Kran, rör eller beredare som ger upp mitt i natten. Vi åker ut, stänger vattnet och lagar. Jour dygnet runt i Storstockholm." },
+  { title: "Stopp i avlopp", body: "Kök, badrum och stam. Vi rensar, filmar om det behövs och säger till om det är ett större fel." },
+  { title: "Badrum och kök", body: "Nyinstallation vid renovering. Rör, golvbrunn, blandare. Offert på plats innan vi börjar." },
+  { title: "Värme", body: "Radiatorer, golvvärme och varmvattenberedare. Service, byte och injustering." },
 ];
 
 const team = [
@@ -54,126 +29,117 @@ const team = [
 ];
 
 const faq = [
-  {
-    q: "Det läcker – vad gör jag?",
-    a: "Stäng ventilen vid vattenmätaren om du hittar den. Ring oss. Vi tar jour dygnet runt i Storstockholm.",
-  },
-  {
-    q: "Jobbar ni med ROT-avdrag?",
-    a: "Ja, på arbetskostnaden för privatpersoner i befintlig bostad. Vi sköter underlaget, du får avdraget på fakturan.",
-  },
-  {
-    q: "Vad kostar ett hembesök?",
-    a: "Akut utryckning från 1 290 kr. Mindre jobb kan vi ofta prissätta från bilder du skickar. Du får alltid pris innan vi sätter igång.",
-  },
-  {
-    q: "Var kör ni?",
-    a: "Hela Storstockholm – innerstan, krans och en bit utanför. Säg var du bor så säger vi om vi tar det.",
-  },
+  { q: "Det läcker – vad gör jag?", a: "Stäng ventilen vid vattenmätaren om du hittar den. Ring oss. Jour dygnet runt i Storstockholm." },
+  { q: "Jobbar ni med ROT-avdrag?", a: "Ja, på arbetskostnaden för privatpersoner i befintlig bostad. Avdraget sitter på fakturan." },
+  { q: "Vad kostar ett hembesök?", a: "Akut utryckning från 1\u00a0290 kr. Du får alltid pris innan vi sätter igång." },
+  { q: "Var kör ni?", a: "Hela Storstockholm. Säg var du bor så säger vi om vi tar det." },
 ];
 
 function VvsDemo() {
   return (
-    <div className="min-h-svh bg-[#eef3ef] text-[#1a2420] md:min-h-dvh">
+    <div className="demo-vvs min-h-svh bg-[#eef3ef] text-[#1a2420]">
       <DemoBanner current="vvs" />
+      <header className="border-b border-[#1a2420]/10 bg-white">
+        <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-5 py-4 md:px-8">
+          <p className="min-w-0 font-display text-lg font-medium">Din Rörmokare</p>
+          <nav className="hidden gap-6 text-sm md:flex">
+            <a href="#tjanster">Tjänster</a>
+            <a href="#priser">Priser</a>
+            <a href="#folk">Vi som kommer</a>
+          </nav>
+          <DemoPhoneLink tel="08-123 456 78" className="text-sm font-medium text-[#c45c3a]">
+            08-123 456 78
+          </DemoPhoneLink>
+        </div>
+      </header>
       <DemoPhoneLink
         tel="08-123 456 78"
-        className="flex items-center justify-center gap-2 bg-[#c45c3a] px-4 py-3 text-center text-[13px] font-medium text-white"
+        className="flex items-center justify-center bg-[#c45c3a] px-4 py-3 text-sm font-medium text-white"
       >
-        <Phone className="size-4" />
-        <span className="sm:hidden">Akut? 08-123 456 78</span>
-        <span className="hidden sm:inline">
-          Akut? Ring 08-123 456 78 — jour dygnet runt
-        </span>
+        Akut? Ring 08-123 456 78 — jour dygnet runt
       </DemoPhoneLink>
 
-      <section className="relative isolate text-[#e8efe9]">
-        <Pic
-          src="/images/vvs.jpg?v=6"
-          alt="Rörmokare drar åt kopparrör"
-          className="h-[62svh] w-full object-cover md:h-[78vh]"
-          width={1400}
-          height={788}
-          priority
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0e1418] via-[#0e1418]/55 to-black/15" />
-        <p className="absolute left-5 top-5 font-display text-xl italic md:left-8 md:text-2xl">
-          Din Rörmokare
-        </p>
-        <div className="absolute inset-x-0 bottom-0 mx-auto max-w-5xl px-5 pb-10 md:px-8">
-          <p className="text-[11px] uppercase tracking-[0.22em] text-[#e8b89a]">
-            Stockholm · sedan 2009 · jour dygnet runt
-          </p>
-          <h1 className="mt-3 max-w-[13ch] font-display text-[2.45rem] italic leading-[0.98] md:text-6xl lg:text-7xl">
+      <section className="relative min-h-[78svh] text-white md:min-h-[85vh]">
+        <div className="absolute inset-0">
+          <Pic src="/images/vvs.jpg?v=6" alt="Rörmokare drar åt kopparrör" className="size-full object-cover" width={1400} height={788} priority />
+        </div>
+        <div className="absolute inset-0 bg-[#0e1418]/60" />
+        <div className="relative mx-auto flex min-h-[78svh] max-w-6xl flex-col justify-end px-5 pb-14 md:min-h-[85vh] md:px-8 md:pb-20">
+          <h1 className="max-w-[14ch] font-display text-5xl font-medium leading-[1.02] md:text-7xl">
             Kranen gick sönder. Vi är på väg.
           </h1>
-          <p className="mt-4 max-w-md text-sm text-[#c5d0c8] md:text-base">
-            Akut VVS, badrum och värme för villor, lägenheter och BRF.
-            Offert innan vi sätter igång.
+          <p className="mt-5 max-w-lg text-lg text-white/85">
+            Akut VVS, badrum och värme. Offert innan vi sätter igång. ROT på arbetskostnaden.
           </p>
-          <DemoPhoneLink
-            tel="08-123 456 78"
-            className="mt-6 inline-flex h-12 items-center rounded-md bg-[#c45c3a] px-5 text-sm font-medium text-white hover:bg-[#b04f32]"
-          >
+          <DemoPhoneLink tel="08-123 456 78" className="mt-8 inline-flex h-14 items-center bg-[#c45c3a] px-6 text-lg font-medium">
             Ring 08-123 456 78
           </DemoPhoneLink>
         </div>
       </section>
 
-      <section className="border-b border-[#1a2420]/10 bg-[#dce6e0]">
-        <div className="mx-auto grid max-w-5xl gap-8 px-5 py-10 sm:grid-cols-4 md:px-8">
+      <section className="bg-white">
+        <div className="mx-auto grid max-w-6xl gap-8 px-5 py-10 sm:grid-cols-3 md:px-8">
           {[
-            ["4,9", "på Google"],
-            ["Sedan 2009", "i Stockholm"],
-            ["ROT", "på arbetskostnaden"],
-            ["15 min", "till återkoppling"],
+            ["Jour", "Dygnet runt, Storstockholm"],
+            ["ROT", "På arbetskostnaden, på fakturan"],
+            ["Fast pris", "Innan vi börjar – inga överraskningar"],
           ].map(([k, v]) => (
-            <div key={k}>
-              <p className="font-display text-3xl italic text-[#c45c3a]">{k}</p>
+            <div key={k} className="border-l-2 border-[#c45c3a] pl-4">
+              <p className="font-display text-xl font-medium">{k}</p>
               <p className="mt-1 text-sm text-[#3d4a44]">{v}</p>
             </div>
           ))}
         </div>
       </section>
 
-      <section className="bg-white">
-        <div className="mx-auto max-w-5xl px-5 py-16 md:px-8">
-          <p className="text-[11px] uppercase tracking-[0.22em] text-[#c45c3a]">
-            Recensioner
-          </p>
-          <h2 className="mt-2 font-display text-3xl italic">Folk ringer tillbaka.</h2>
-          <div className="mt-10 grid gap-8 md:grid-cols-3">
-            {reviews.map((r) => (
-              <figure key={r.name} className="border-t border-[#1a2420]/15 pt-5">
-                <blockquote className="text-[15px] leading-relaxed text-[#3d4a44]">
-                  “{r.quote}”
-                </blockquote>
-                <figcaption className="mt-4 text-sm text-[#c45c3a]">{r.name}</figcaption>
-              </figure>
-            ))}
-          </div>
+      <section id="tjanster" className="mx-auto max-w-6xl px-5 py-20 md:px-8">
+        <h2 className="font-display text-4xl font-medium md:text-5xl">Vad vi gör</h2>
+        <p className="mt-3 max-w-xl text-[#3d4a44]">
+          Service, reparation och nyinstallation. Privat, villa och förening.
+        </p>
+        <div className="mt-12 grid gap-x-12 gap-y-10 md:grid-cols-2">
+          {services.map((s) => (
+            <article key={s.title} className="border-t border-[#1a2420]/15 pt-6">
+              <h3 className="font-display text-2xl font-medium">{s.title}</h3>
+              <p className="mt-3 leading-relaxed text-[#3d4a44]">{s.body}</p>
+            </article>
+          ))}
         </div>
       </section>
 
-      <section className="bg-[#1a2420] text-[#e8efe9]">
-        <div className="mx-auto max-w-5xl px-5 py-16 md:px-8">
-          <p className="text-[11px] uppercase tracking-[0.22em] text-[#e8b89a]">
-            Folket
-          </p>
-          <h2 className="mt-2 font-display text-3xl italic">Ni pratar med dem som gör jobbet.</h2>
+      <section id="priser" className="bg-white py-20">
+        <div className="mx-auto max-w-6xl px-5 md:px-8">
+          <h2 className="font-display text-4xl font-medium">Riktpriser</h2>
+          <p className="mt-2 text-[#3d4a44]">Exkl. moms. Fast pris innan vi börjar.</p>
+          <dl className="mt-10 divide-y divide-[#1a2420]/10 border-y border-[#1a2420]/10">
+            {[
+              ["Utryckning, akuttid", "från 1\u00a0290 kr"],
+              ["Enklare reparation", "från 690 kr/tim"],
+              ["Stopp i avlopp", "från 1\u00a0490 kr"],
+              ["Badrum / beredare", "enligt offert"],
+            ].map(([k, v]) => (
+              <div key={k} className="flex min-w-0 items-baseline justify-between gap-4 py-5">
+                <dt className="min-w-0">{k}</dt>
+                <dd className="shrink-0 font-display text-xl font-medium tabular-nums">{v}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </section>
+
+      <section id="folk" className="bg-[#1a2420] py-20 text-[#e8efe9]">
+        <div className="mx-auto max-w-6xl px-5 md:px-8">
+          <h2 className="font-display text-4xl font-medium">Ni pratar med dem som gör jobbet.</h2>
           <p className="mt-3 max-w-xl text-sm text-[#c5d0c8]">
-            Här lägger vi in era foton. Tre rutor räcker – namn, roll, en bild från vardagen.
+            Här lägger vi in era foton. Namn, roll, en bild från vardagen.
           </p>
-          <div className="mt-10 grid gap-6 sm:grid-cols-3">
+          <div className="mt-12 grid gap-6 sm:grid-cols-3">
             {team.map((p) => (
               <article key={p.name}>
-                <div className="relative flex aspect-[3/4] flex-col items-center justify-center overflow-hidden bg-[#24302c]">
-                  <span className="text-[11px] uppercase tracking-[0.22em] text-[#e8b89a]/90">
-                    Bild på personal
-                  </span>
-                  <span className="mt-2 text-xs text-[#c5d0c8]/70">Ert foto här</span>
+                <div className="flex aspect-[3/4] flex-col items-center justify-center bg-[#24302c]">
+                  <span className="text-sm text-[#e8b89a]">Bild på personal</span>
                 </div>
-                <h3 className="mt-4 font-display text-xl italic">{p.name}</h3>
+                <h3 className="mt-4 font-display text-xl font-medium">{p.name}</h3>
                 <p className="text-sm text-[#c5d0c8]">{p.role}</p>
               </article>
             ))}
@@ -181,85 +147,40 @@ function VvsDemo() {
         </div>
       </section>
 
-      <section className="bg-[#eef3ef]">
-        <div className="mx-auto max-w-5xl px-5 py-16 md:px-8">
-          <h2 className="font-display text-3xl italic">Vad vi gör</h2>
-          <p className="mt-3 max-w-xl text-sm text-[#3d4a44]">
-            Service, reparation och nyinstallation. Privat, villa och förening.
-          </p>
-          <div className="mt-10 grid gap-4 sm:grid-cols-2">
-            {services.map((s) => (
-              <article key={s.title} className="bg-white p-6 md:p-8">
-                <h3 className="font-display text-2xl italic">{s.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-[#3d4a44]">{s.body}</p>
-              </article>
-            ))}
-          </div>
+      <section className="mx-auto max-w-6xl px-5 py-20 md:px-8">
+        <h2 className="font-display text-4xl font-medium">Vanliga frågor</h2>
+        <div className="mt-10 divide-y divide-[#1a2420]/10 border-y border-[#1a2420]/10">
+          {faq.map((item) => (
+            <details key={item.q} className="py-5">
+              <summary className="cursor-pointer list-none text-lg font-medium">{item.q}</summary>
+              <p className="mt-3 max-w-2xl leading-relaxed text-[#3d4a44]">{item.a}</p>
+            </details>
+          ))}
         </div>
-      </section>
-
-      <section className="bg-white py-16">
-        <div className="mx-auto max-w-5xl px-5 md:px-8">
-          <h2 className="font-display text-3xl italic">Riktpriser</h2>
-          <p className="mt-2 text-sm text-[#3d4a44]">
-            Exkl. moms. Fast pris innan vi börjar – inga överraskningar.
-          </p>
-          <dl className="mt-8 divide-y divide-[#1a2420]/10 border-y border-[#1a2420]/10">
-            {[
-              ["Utryckning, akuttid", "från 1 290 kr"],
-              ["Enklare reparation", "från 690 kr/tim"],
-              ["Stopp i avlopp", "från 1 490 kr"],
-              ["Badrum / beredare", "enligt offert"],
-            ].map(([k, v]) => (
-              <div key={k} className="flex items-baseline justify-between gap-4 py-4">
-                <dt className="min-w-0">{k}</dt>
-                <dd className="shrink-0 tabular-nums text-[#c45c3a]">{v}</dd>
-              </div>
-            ))}
-          </dl>
-        </div>
-      </section>
-
-      <section className="bg-[#dce6e0]">
-        <div className="mx-auto max-w-5xl px-5 py-16 md:px-8">
-          <h2 className="font-display text-3xl italic">Vanliga frågor</h2>
-          <div className="mt-8 divide-y divide-[#1a2420]/10 border-y border-[#1a2420]/10">
-            {faq.map((item) => (
-              <details key={item.q} className="group py-5">
-                <summary className="cursor-pointer list-none font-medium marker:content-none">
-                  {item.q}
-                </summary>
-                <p className="mt-3 max-w-2xl text-sm leading-relaxed text-[#3d4a44]">
-                  {item.a}
-                </p>
-              </details>
-            ))}
-          </div>
-        </div>
+        <p className="mt-12 text-sm text-[#3d4a44]">Så kan omdömen se ut</p>
+        <blockquote className="mt-3 max-w-2xl font-display text-3xl font-medium leading-snug">
+          Stopp i köket en lördag. De svarade direkt, var här samma dag och lämnade rent efter sig.
+        </blockquote>
+        <p className="mt-4 text-sm text-[#3d4a44]">Linda, Södermalm</p>
       </section>
 
       <section id="offert" className="bg-[#c45c3a] px-5 py-16 text-white md:px-8">
-        <div className="mx-auto max-w-5xl md:flex md:items-end md:justify-between md:gap-10">
+        <div className="mx-auto flex max-w-6xl flex-col justify-between gap-8 md:flex-row md:items-end">
           <div>
-            <p className="text-[11px] uppercase tracking-[0.22em] text-white/80">
-              Jour dygnet runt · Storstockholm
-            </p>
-            <h2 className="mt-3 font-display text-3xl italic md:text-4xl">
-              Hör av dig. Vi tar det därifrån.
-            </h2>
-            <p className="mt-3 max-w-md text-white/85">
-              Ring, eller skicka en bild på felet så återkommer vi med pris.
-              ROT på arbetskostnaden.
-            </p>
+            <h2 className="font-display text-4xl font-medium">Hör av dig. Vi tar det därifrån.</h2>
+            <p className="mt-3 max-w-md text-white/85">Skicka en bild på felet så återkommer vi med pris.</p>
           </div>
-          <DemoPhoneLink
-            tel="08-123 456 78"
-            className="mt-8 block font-display text-4xl italic leading-none md:mt-0 md:text-5xl"
-          >
+          <DemoPhoneLink tel="08-123 456 78" className="font-display text-5xl font-medium leading-none">
             08-123 456 78
           </DemoPhoneLink>
         </div>
       </section>
+      <footer className="bg-[#1a2420] px-5 py-8 text-sm text-[#c5d0c8] md:px-8">
+        <div className="mx-auto flex max-w-6xl flex-wrap justify-between gap-4">
+          <p>Din Rörmokare · Stockholm</p>
+          <p>08-123 456 78 · jour@dinrormokare.se</p>
+        </div>
+      </footer>
       <DemoExit />
     </div>
   );

@@ -4,12 +4,12 @@ export const SITE = {
   city: "Stockholm",
   tagline: "Webbdesign för småföretag i Sverige",
   description:
-    "Enkla och professionella hemsidor för hantverkare och småföretag i hela Sverige. Med bas i Stockholm. Från 9 900 kr, ingen bindning.",
+    "Enkla och professionella hemsidor för hantverkare och småföretag i hela Sverige. Med bas i Stockholm. Från 9\u00a0900 kr, ingen bindning.",
 } as const;
 
 export const NAV = [
-  { label: "Exempel", section: "exempel" },
   { label: "Priser", section: "priser" },
+  { label: "Exempel", section: "exempel" },
   { label: "Så går det till", section: "process" },
   { label: "Kontakt", section: "contact" },
 ] as const;
@@ -63,7 +63,7 @@ export const SERVICES = [
   {
     id: "hemsida",
     name: "Skapa hemsida",
-    price: "9 900 kr",
+    price: "9\u00a0900 kr",
     suffix: "från, exkl. moms",
     description:
       "Vi skapar en hemsida som visar vad ni gör och gör det lätt att höra av sig. Startpriset täcker en komplett sida för ett vanligt småföretag. Behöver ni mer går vi igenom det och sätter pris innan vi börjar.",
@@ -121,7 +121,7 @@ export const INCLUDED = [
 
 export const FAQ = [
   {
-    q: "Vad ingår i startpriset från 9 900 kr?",
+    q: "Vad ingår i startpriset från 9\u00a0900 kr?",
     a: "Startpriset täcker en komplett, professionell hemsida för ett typiskt småföretag med presentation av verksamhet, tjänster och kontaktvägar. Har du behov av fler sektioner, speciella funktioner eller flerspråkighet går vi igenom det och ger ett fast pris i offerten innan arbetet påbörjas.",
   },
   {

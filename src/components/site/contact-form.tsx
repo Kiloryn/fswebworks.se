@@ -1,5 +1,4 @@
 import { Link } from "@tanstack/react-router";
-import { Check } from "lucide-react";
 import { useState, type FormEvent } from "react";
 import { SITE, SUBJECTS } from "@/lib/site";
 import { Button } from "@/components/ui/button";
@@ -67,7 +66,7 @@ export function ContactForm({ defaultSubject = "", onPaper = false }: Props) {
   }
 
   const field = cn(
-    "h-12 w-full rounded-lg border px-4 text-sm outline-none transition-[border-color,box-shadow,background-color] duration-150",
+    "h-12 w-full rounded-sm border px-4 text-sm outline-none transition-[border-color,box-shadow,background-color] duration-150",
     onPaper
       ? "border-ink/15 bg-paper text-ink placeholder:text-subtle/70 focus:border-brass focus:ring-1 focus:ring-brass/30"
       : "border-line/70 bg-ink-3 text-fg placeholder:text-muted/60 focus:border-gold focus:ring-1 focus:ring-gold/30",
@@ -75,19 +74,10 @@ export function ContactForm({ defaultSubject = "", onPaper = false }: Props) {
 
   if (sent) {
     return (
-      <div
-        className={cn(
-          "rounded-xl border p-8",
-          onPaper ? "border-ink/10 bg-paper-2 text-ink" : "border-line bg-ink-2 text-fg",
-        )}
-      >
-        <span className="grid size-11 place-items-center rounded-full bg-gold text-gold-fg">
-          <Check className="size-5" strokeWidth={2.2} />
-        </span>
-        <h3 className="mt-5 font-display text-2xl">Tack – vi har fått din förfrågan.</h3>
+      <div className={onPaper ? "text-ink" : "text-fg"}>
+        <h3 className="font-display text-2xl">Tack. Vi har fått er förfrågan.</h3>
         <p className={cn("mt-2 text-sm leading-relaxed", onPaper ? "text-subtle" : "text-muted")}>
-          Vi hör av oss så snart vi kan, vanligtvis inom en arbetsdag. Behöver du
-          oss fortare går det bra att mejla{" "}
+          Vi hör av oss inom en arbetsdag. Behöver ni oss fortare, mejla{" "}
           <a
             className={cn(
               "underline-offset-4 hover:underline",

@@ -48,6 +48,7 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     scroll-behavior: smooth;
+    overflow-x: clip;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -57,7 +58,7 @@
   }
 
   section[id] {
-    scroll-margin-top: 4.5rem;
+    scroll-margin-top: 6.5rem;
   }
 
   body {
@@ -66,6 +67,7 @@
     font-family: var(--font-sans);
     min-height: 100vh;
     min-height: 100svh;
+    overflow-x: clip;
   }
 
   @media (min-width: 768px) {
@@ -113,13 +115,38 @@
 
   /* Contact section layout anchor: ensures smooth jump accounts for header */
   #contact {
-    scroll-margin-top: 4.5rem;
+    scroll-margin-top: 6.5rem;
   }
 }
 
 @layer utilities {
   .font-display {
     font-family: var(--font-display);
+  }
+
+  .demo-vvs {
+    --font-display: "IBM Plex Sans", ui-sans-serif, sans-serif;
+    font-family: "IBM Plex Sans", ui-sans-serif, sans-serif;
+  }
+  .demo-el {
+    --font-display: "Oswald", ui-sans-serif, sans-serif;
+    font-family: "IBM Plex Sans", ui-sans-serif, sans-serif;
+  }
+  .demo-salong {
+    --font-display: "Cormorant Garamond", "Iowan Old Style", serif;
+    font-family: "Cormorant Garamond", "Iowan Old Style", serif;
+  }
+  .demo-krog {
+    --font-display: "Newsreader", Georgia, serif;
+    font-family: "Newsreader", Georgia, serif;
+  }
+  .demo-malare {
+    --font-display: "DM Sans", ui-sans-serif, sans-serif;
+    font-family: "DM Sans", ui-sans-serif, sans-serif;
+  }
+  .demo-konsult {
+    --font-display: "Fraunces", "Iowan Old Style", Georgia, serif;
+    font-family: "Outfit", ui-sans-serif, sans-serif;
   }
 
   .hero-video {

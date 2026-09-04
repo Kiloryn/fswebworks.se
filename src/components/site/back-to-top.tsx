@@ -1,4 +1,3 @@
-import { ArrowUp } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useRouterState } from "@tanstack/react-router";
 import { scrollToTop } from "@/lib/scroll-to";
@@ -22,11 +21,11 @@ export function BackToTop() {
   return (
     <button
       type="button"
-      className="fixed bottom-[max(1.25rem,env(safe-area-inset-bottom))] right-4 z-40 flex size-12 items-center justify-center rounded-full bg-gold text-gold-fg shadow-lift md:bottom-8 md:right-8"
+      className="fixed bottom-[max(1.25rem,env(safe-area-inset-bottom))] right-4 z-40 bg-gold px-3 py-2 text-sm text-gold-fg md:bottom-8 md:right-8"
       aria-label="Tillbaka till toppen"
       onClick={() => scrollToTop()}
     >
-      <ArrowUp className="size-5" aria-hidden />
+      Upp
     </button>
   );
 }

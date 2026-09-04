@@ -4,11 +4,11 @@ import type { ButtonHTMLAttributes } from "react";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 font-medium transition-[background-color,color,box-shadow,transform,opacity] duration-150 ease-out active:not-disabled:scale-[0.96] disabled:pointer-events-none disabled:opacity-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold",
+  "inline-flex items-center justify-center gap-2 font-medium transition-[background-color,color] duration-150 ease-out disabled:pointer-events-none disabled:opacity-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold",
   {
     variants: {
       variant: {
-        gold: "bg-gold text-gold-fg hover:bg-gold-2 shadow-[0_10px_24px_-16px_rgb(200_164_110_/_0.9)]",
+        gold: "bg-gold text-gold-fg hover:bg-gold-2",
         ink: "bg-canvas text-fg hover:bg-canvas-2",
         ghost:
           "bg-transparent text-fg hover:bg-fg/6 border border-line",
@@ -17,9 +17,9 @@ const buttonVariants = cva(
         paper: "bg-paper text-ink hover:bg-paper-2",
       },
       size: {
-        md: "h-11 px-5 rounded-md text-sm",
-        lg: "h-12 px-6 rounded-lg text-sm",
-        xl: "h-14 px-7 rounded-lg text-base",
+        md: "h-11 px-5 rounded-sm text-sm",
+        lg: "h-12 px-6 rounded-sm text-sm",
+        xl: "h-14 px-7 rounded-sm text-base",
       },
     },
     defaultVariants: {
