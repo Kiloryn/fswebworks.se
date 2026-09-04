@@ -78,7 +78,7 @@ export const SERVICES = [
   },
   {
     id: "service",
-    name: "Drift & webb-hjälp",
+    name: "Drift och webbhjälp",
     price: "690 kr",
     suffix: "/ månad, exkl. moms · valfritt",
     description:
@@ -126,7 +126,7 @@ export const FAQ = [
   },
   {
     q: "Hur fungerar ägarskap och drift?",
-    a: "Du äger din verksamhets identitet, domän, bilder och innehåll. Hemsidans projektleverans tillhör dig, och det finns ingen konstgjord inlåsning hos oss. Vi kan hantera drift och teknik så att du slipper det praktiska, men om du i framtiden vill flytta hemsidan kan den exporteras till ditt eget valda upplägg enligt överenskommelse.",
+    a: "Du äger din domän, bilder och innehåll. Det finns ingen inlåsning hos oss. Vi kan sköta drift och teknik så du slipper det – och om du senare vill flytta sidan går det.",
   },
   {
     q: "Måste jag teckna serviceavtalet för 690 kr/månad?",

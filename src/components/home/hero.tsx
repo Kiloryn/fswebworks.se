@@ -40,7 +40,7 @@ const HeroVideo = memo(function HeroVideo({
           pauseVideo();
         }
       },
-      { threshold: 0.05 },
+      { threshold: 0 },
     );
     io.observe(section);
 
@@ -69,7 +69,7 @@ const HeroVideo = memo(function HeroVideo({
       loop
       playsInline
       autoPlay
-      preload="auto"
+      preload="metadata"
       aria-hidden
     >
       <source src="/videos/hero-720.mp4" type="video/mp4" media="(max-width: 768px)" />
@@ -90,14 +90,6 @@ export const Hero = memo(function Hero() {
       className="relative min-h-svh overflow-hidden bg-canvas bg-cover bg-center md:min-h-dvh"
       style={{ backgroundImage: "url(/videos/hero-poster.jpg)" }}
     >
-      <img
-        src="/videos/hero-poster.jpg"
-        alt=""
-        className="absolute inset-0 size-full object-cover outline-none"
-        fetchPriority="high"
-        decoding="async"
-        aria-hidden
-      />
       <HeroVideo sectionRef={rootRef} />
       <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgb(11_10_8_/_0.38)_0%,rgb(11_10_8_/_0.62)_48%,rgb(11_10_8_/_0.82)_100%)] md:bg-[linear-gradient(90deg,rgb(11_10_8_/_0.86)_0%,rgb(11_10_8_/_0.58)_48%,rgb(11_10_8_/_0.22)_100%)]" />
 
