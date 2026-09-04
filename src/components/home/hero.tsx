@@ -88,26 +88,33 @@ export const Hero = memo(function Hero() {
       style={{ backgroundImage: "url(/videos/hero-poster.jpg)" }}
     >
       <HeroVideo sectionRef={rootRef} />
-      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgb(11_10_8_/_0.4)_0%,rgb(11_10_8_/_0.58)_48%,rgb(11_10_8_/_0.72)_100%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgb(11_10_8_/_0.28)_0%,rgb(11_10_8_/_0.58)_36%,rgb(11_10_8_/_0.78)_68%,rgb(11_10_8_/_0.86)_100%)]" />
 
-      <div className="relative flex min-h-svh items-center justify-center px-5 pt-28 pb-16 md:min-h-dvh md:px-8 md:pt-36 md:pb-20">
-        <div className="hero-reveal w-full max-w-xl text-center">
-          <h1 className="mx-auto max-w-[14ch] text-balance font-display text-[2.35rem] font-medium leading-[1.05] text-fg sm:text-5xl md:text-[4.1rem]">
-            En hemsida som ser ut som jobbet ni gör.
-          </h1>
-          <p className="mx-auto mt-6 max-w-md text-pretty text-lg leading-relaxed text-muted md:text-xl">
-            Professionella hemsidor för hantverkare och småföretag i hela
-            Sverige. Från{" "}
-            <span className="whitespace-nowrap">9 900 kr</span>, ingen bindning
-            – du äger sidan själv.
+      <div className="relative mx-auto flex min-h-svh max-w-6xl flex-col justify-end px-5 pt-28 pb-10 md:min-h-dvh md:px-8 md:pt-36 md:pb-[22vh]">
+        <div className="w-full">
+          <p className="text-base text-muted md:text-lg">
+            Hemsidor för småföretag
           </p>
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
-            <Button asChild size="xl">
+          <h1 className="hero-wipe mt-4 font-display text-[clamp(2.7rem,6.2vw,5.75rem)] font-medium leading-[1.02] text-fg [overflow-wrap:normal]">
+            En hemsida som ser ut
+            <br className="hidden md:inline" />{" "}
+            som jobbet ni gör.
+          </h1>
+          <p className="mt-6 font-display text-3xl tabular-nums text-fg md:mt-8 md:text-5xl">
+            Från{" "}
+            <span className="whitespace-nowrap">9 900 kr</span>.
+          </p>
+          <p className="mt-4 max-w-2xl text-pretty text-lg leading-relaxed text-muted md:text-xl">
+            Professionella hemsidor för hantverkare och småföretag i hela
+            Sverige. Tydliga priser och ingen inlåsning.
+          </p>
+          <div className="mt-9 flex flex-wrap items-center justify-start gap-x-8 gap-y-3 md:mt-10">
+            <Button asChild size="xl" className="h-16 px-8 text-lg">
               <SectionLink section="contact">Begär offert</SectionLink>
             </Button>
             <SectionLink
               section="exempel"
-              className="text-sm text-muted underline decoration-fg/30 underline-offset-4 hover:text-fg hover:decoration-fg"
+              className="inline-flex min-h-11 items-center text-base text-fg underline decoration-fg/35 underline-offset-4 hover:decoration-fg md:text-lg"
             >
               Se exempel
             </SectionLink>

@@ -11,6 +11,7 @@ import {
   parseAppEnv,
   projectRoot,
   readAppEnv,
+  resolveSpawnTarget,
 } from "./with-app-env.mjs";
 
 const execFileAsync = promisify(execFile);
@@ -111,6 +112,19 @@ test("a signal-killed command is never reported as success", async () => {
     ]),
     (err) => err.signal === "SIGTERM" || err.code !== 0,
   );
+});
+
+test("resolves a local vite bin to this node + vite.js", () => {
+  const { file, argv } = resolveSpawnTarget("vite", ["dev", "--host"], projectRoot());
+  assert.equal(file, process.execPath);
+  assert.match(argv[0].replaceAll("\\", "/"), /node_modules\/vite\/bin\/vite\.js$/);
+  assert.deepEqual(argv.slice(1), ["dev", "--host"]);
+});
+
+test("leaves a non-local command unchanged", () => {
+  const { file, argv } = resolveSpawnTarget(process.execPath, ["-e", "1"], projectRoot());
+  assert.equal(file, process.execPath);
+  assert.deepEqual(argv, ["-e", "1"]);
 });
 
 test("the CLI still runs when invoked through a symlinked path", async () => {

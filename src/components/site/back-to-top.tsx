@@ -21,7 +21,7 @@ export function BackToTop() {
   return (
     <button
       type="button"
-      className="fixed bottom-[max(1.25rem,env(safe-area-inset-bottom))] right-4 z-40 bg-gold px-3 py-2 text-sm text-gold-fg md:bottom-8 md:right-8"
+      className="fixed bottom-[max(1.25rem,env(safe-area-inset-bottom))] right-4 z-40 inline-flex min-h-11 min-w-11 items-center justify-center bg-gold px-3 text-sm text-gold-fg md:bottom-8 md:right-8"
       aria-label="Upp till toppen"
       onClick={() => scrollToTop()}
     >

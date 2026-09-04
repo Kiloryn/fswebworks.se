@@ -4,7 +4,7 @@ export const SITE = {
   city: "Stockholm",
   tagline: "Webbdesign för småföretag i Sverige",
   description:
-    "Enkla och professionella hemsidor för hantverkare och småföretag i hela Sverige. Med bas i Stockholm. Från 9\u00a0900 kr, ingen bindning.",
+    "Professionella hemsidor för hantverkare och småföretag i hela Sverige. Från 9\u00a0900 kr – tydliga priser och ingen inlåsning.",
 } as const;
 
 export const NAV = [
@@ -12,13 +12,6 @@ export const NAV = [
   { label: "Exempel", section: "exempel" },
   { label: "Så går det till", section: "process" },
   { label: "Kontakt", section: "contact" },
-] as const;
-
-export const PROMISES = [
-  "Inget krångel",
-  "Tydliga priser",
-  "Ingen bindningstid",
-  "Du äger hemsidan själv",
 ] as const;
 
 export const FEATURES = [
@@ -66,7 +59,7 @@ export const SERVICES = [
     price: "9\u00a0900 kr",
     suffix: "från, exkl. moms",
     description:
-      "Vi skapar en hemsida som visar vad ni gör och gör det lätt att höra av sig. Startpriset täcker en komplett sida för ett vanligt småföretag. Behöver ni mer går vi igenom det och sätter pris innan vi börjar.",
+      "Startpriset gäller en komplett standardhemsida för småföretag. Har du andra eller större behov går vi igenom dem och lämnar pris innan vi börjar.",
     fits: [
       "Saknar en hemsida idag",
       "Har en gammal hemsida som behöver moderniseras",
@@ -78,31 +71,26 @@ export const SERVICES = [
   },
   {
     id: "service",
-    name: "Drift och webbhjälp",
-    price: "690 kr",
-    suffix: "/ månad, exkl. moms · valfritt",
+    name: "Webbdrift",
+    kicker: "Vi sköter det praktiska",
+    price: "1\u00a0990 kr",
+    suffix: "/ år, exkl. moms",
     description:
-      "Vi tar hand om drift, certifikat och mindre text- och bildändringar. För dig som vill slippa teknik.",
-    fits: [
-      "Vill slippa tänka på teknisk drift och uppdateringar",
-      "Behöver göra mindre ändringar av texter eller bilder löpande",
-      "Vill ha en fast kontaktväg när något behöver justeras",
-    ],
-    cta: "Fråga om serviceavtal",
+      "Vi tar hand om den tekniska driften av din hemsida så att den är säker, snabb och tillgänglig. Du slipper tänka på tekniken och har en kontakt att vända dig till om något händer.",
+    note: "Webbdriften faktureras årsvis.",
     subject: "service",
     featured: false,
   },
   {
     id: "timme",
     name: "Hjälp vid behov",
-    price: "950 kr",
-    suffix: "/ timme, exkl. moms",
-    description:
-      "Har du inget månadsavtal eller behöver du större anpassningar? Vi hjälper till med ändringar, uppdateringar eller utbyggnad per timme precis när behovet uppstår.",
-    fits: [
-      "Bara behöver hjälp någon gång ibland",
-      "Vill betala per tillfälle utan fast månadskostnad",
+    rates: [
+      "Mindre ändringar från 495 kr",
+      "Större ändringar och utveckling 995 kr/timme",
     ],
+    suffix: "exkl. moms",
+    description:
+      "Behöver du uppdatera en text, byta en bild eller göra andra ändringar på hemsidan? Vi hjälper dig när behovet uppstår – du betalar bara för den hjälp du behöver.",
     cta: "Hör av dig",
     subject: "ovrigt",
     featured: false,
@@ -129,20 +117,20 @@ export const FAQ = [
     a: "Du äger din domän, bilder och innehåll. Det finns ingen inlåsning hos oss. Vi kan sköta drift och teknik så du slipper det – och om du senare vill flytta sidan går det.",
   },
   {
-    q: "Måste jag teckna serviceavtalet för 690 kr/månad?",
-    a: "Nej, serviceavtalet är helt valfritt. Med avtalet tar vi hand om webbdrift, SSL, löpande tekniskt underhåll och mindre innehållsändringar. Väljer du att inte ha avtalet driftas sidan enligt överenskommet upplägg, och du kan anlita oss per timme (950 kr/tim) om du vill ha hjälp senare.",
+    q: "Vad kostar webbdriften?",
+    a: "Webbdriften kostar 1\u00a0990 kr per år exkl. moms och faktureras årsvis. Vi tar hand om den tekniska driften så att hemsidan är säker, snabb och tillgänglig.",
   },
   {
     q: "Hjälper ni till med domän och e-post?",
-    a: "Ja, vi hjälper till att koppla ihop domänen med hemsidan och peka DNS-inställningar rätt så att din e-post fortsätter fungera hos din befintliga e-postleverantör. Däremot tillhandahåller vi inte generell IT-support för personliga datorer, mobiler eller e-postprogram.",
+    a: "Ja. Vi hjälper till att koppla domänen till hemsidan och ser till att din befintliga e-post fortsätter fungera. Vi erbjuder däremot inte generell IT-support för datorer, mobiler eller e-postprogram.",
   },
   {
     q: "Måste jag skriva alla texter själv?",
-    a: "Vi utgår från information och stödord från dig eftersom du känner ditt hantverk bäst. Vi hjälper till att strukturera, anpassa och finslipa texterna så att de fungerar bra på webben. Vill du ha mer omfattande copytexter kan vi erbjuda det som tillägg.",
+    a: "Vi utgår från information och stödord från dig eftersom du känner din verksamhet bäst. Vi hjälper till att strukturera, anpassa och finslipa texterna så att de fungerar bra på webben. Vill du ha mer omfattande copytexter kan vi erbjuda det som tillägg.",
   },
   {
     q: "Är jag bunden till er om ni bygger hemsidan?",
-    a: "Nej. Vi tillämpar inga inlåsande avtal. Målet är att du ska stanna hos oss för att servicen fungerar smidigt – inte för att du sitter fast i ett kontrakt.",
+    a: "Nej. Så länge hemsidan ligger hos oss sköter vi webbdriften, men du är inte inlåst. Om du senare vill flytta hemsidan till en annan leverantör går det.",
   },
 ] as const;
 

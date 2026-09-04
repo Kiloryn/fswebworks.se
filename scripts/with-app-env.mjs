@@ -20,7 +20,7 @@
  * `process.env`, which is why the merge has to happen before Vite starts.
  */
 import { spawn } from "node:child_process";
-import { readFileSync, realpathSync } from "node:fs";
+import { existsSync, readFileSync, realpathSync } from "node:fs";
 import { constants as osConstants } from "node:os";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -88,6 +88,19 @@ export function projectRoot() {
 }
 
 /**
+ * Prefer `node_modules/<cmd>/bin/<cmd>.js` so Windows does not have to spawn
+ * a `.cmd` shim. Node's `spawn` without `shell: true` cannot run `.cmd` and
+ * fails with ENOENT — which is what `npm run dev` hits in PowerShell.
+ */
+export function resolveSpawnTarget(command, args, root) {
+  const localJs = join(root, "node_modules", command, "bin", `${command}.js`);
+  if (existsSync(localJs)) {
+    return { file: process.execPath, argv: [localJs, ...args] };
+  }
+  return { file: command, argv: args };
+}
+
+/**
  * Whether `moduleUrl` is the script node was asked to run.
  *
  * Both sides are resolved through symlinks: node realpaths `import.meta.url`
@@ -111,7 +124,8 @@ function main(argv) {
     process.exit(2);
   }
   const env = mergeAppEnv(readAppEnv(projectRoot()), process.env);
-  const child = spawn(command, args, { stdio: "inherit", env });
+  const { file, argv: spawnArgv } = resolveSpawnTarget(command, args, projectRoot());
+  const child = spawn(file, spawnArgv, { stdio: "inherit", env });
   // The dev server is long-running and is stopped by signalling this wrapper.
   for (const signal of ["SIGINT", "SIGTERM", "SIGHUP"]) {
     process.on(signal, () => child.kill(signal));

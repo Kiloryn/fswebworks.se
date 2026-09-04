@@ -89,7 +89,7 @@ export function SiteHeader({ ink = true }: { ink?: boolean }) {
           <div className="flex items-center gap-1 md:hidden">
             <SectionLink
               section="contact"
-              className="px-3 text-sm font-medium text-gold"
+              className="inline-flex min-h-11 items-center px-3 text-sm font-medium text-gold"
               onClick={() => setOpen(false)}
             >
               Offert

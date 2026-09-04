@@ -181,7 +181,7 @@ export function ContactForm({ defaultSubject = "", onPaper = false }: Props) {
           name="message"
           required
           rows={4}
-          placeholder="Berätta kort om ert företag och vad ni behöver…"
+          placeholder="Skriv gärna några rader om vad du behöver hjälp med..."
           className={cn(field, "h-auto py-3")}
         />
       </div>
@@ -206,7 +206,7 @@ export function ContactForm({ defaultSubject = "", onPaper = false }: Props) {
         .
       </p>
       <Button type="submit" size="xl" className="w-full" disabled={pending}>
-        {pending ? "Skickar…" : "Skicka förfrågan"}
+        {pending ? "Skickar…" : "Skicka meddelande"}
       </Button>
     </form>
   );
