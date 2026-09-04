@@ -98,8 +98,8 @@ export const Hero = memo(function Hero() {
           <p className="text-[11px] uppercase tracking-[0.28em] text-mark">
             Webbdesign för småföretag
           </p>
-          <h1 className="mt-5 max-w-[15ch] font-display text-[2.35rem] leading-[1.05] text-fg italic sm:text-5xl md:text-[4.1rem]">
-            En hemsida byggd för ditt företag.
+          <h1 className="mt-5 max-w-[14ch] font-display text-[2.35rem] leading-[1.05] text-fg italic sm:text-5xl md:text-[4.1rem]">
+            En hemsida som ser ut som jobbet ni gör.
           </h1>
           <p className="mt-6 max-w-md text-lg leading-relaxed text-muted md:text-xl">
             Professionella hemsidor för hantverkare och småföretag i hela
@@ -128,9 +128,9 @@ export const Hero = memo(function Hero() {
           </ul>
         </div>
 
-        <div className="hidden flex-col items-center gap-3 md:flex">
+        <div className="hidden flex-col justify-center md:flex">
           <div
-            className="flex flex-wrap items-center justify-center gap-1.5 rounded-lg border border-line bg-ink-2/80 p-1.5"
+            className="flex flex-wrap gap-x-4 gap-y-1"
             role="tablist"
             aria-label="Välj branschexempel"
           >
@@ -143,10 +143,8 @@ export const Hero = memo(function Hero() {
                   role="tab"
                   aria-selected={active}
                   onClick={() => setSelectedSlug(ex.slug)}
-                  className={`rounded-md px-2.5 py-1 text-xs font-medium transition-colors ${
-                    active
-                      ? "bg-gold text-gold-fg"
-                      : "text-muted hover:bg-fg/5 hover:text-fg"
+                  className={`text-[12px] uppercase tracking-[0.16em] transition-colors ${
+                    active ? "text-gold" : "text-muted hover:text-fg"
                   }`}
                 >
                   {ex.name}
@@ -155,45 +153,40 @@ export const Hero = memo(function Hero() {
             })}
           </div>
 
-          <a
-            href={`/${current.slug}`}
-            className="group relative w-full max-w-md"
-          >
-            <div className="relative rounded-xl border border-line bg-ink-2 p-2 shadow-lift">
-              <div className="flex items-center gap-1.5 px-2 py-2">
-                <span className="size-2 rounded-full bg-fg/20" />
-                <span className="size-2 rounded-full bg-fg/20" />
-                <span className="size-2 rounded-full bg-fg/20" />
-                <span className="ml-2 truncate rounded-sm bg-canvas px-2 py-0.5 text-[10px] text-muted">
-                  interaktivt exempel · {current.name}
-                </span>
+          <a href={`/${current.slug}`} className="mt-5 block">
+            <div className="relative aspect-[4/3] w-full overflow-hidden bg-ink-3">
+              {EXAMPLES.map((ex) => {
+                const isVisible = ex.slug === current.slug;
+                return (
+                  <div
+                    key={ex.slug}
+                    aria-hidden={!isVisible}
+                    className={`absolute inset-0 size-full transition-opacity duration-300 ease-out ${
+                      isVisible
+                        ? "z-10 opacity-100"
+                        : "pointer-events-none z-0 opacity-0"
+                    }`}
+                  >
+                    <Pic
+                      src={ex.image}
+                      alt=""
+                      className="size-full object-cover"
+                    />
+                  </div>
+                );
+              })}
+            </div>
+            <div className="mt-4 flex items-baseline justify-between gap-4">
+              <div>
+                <p className="text-[11px] uppercase tracking-[0.18em] text-mark">
+                  {current.brand}
+                </p>
+                <p className="mt-1 font-display text-2xl italic">{current.name}</p>
               </div>
-              <div className="relative aspect-[4/3] w-full overflow-hidden rounded-lg bg-ink-3">
-                {EXAMPLES.map((ex) => {
-                  const isVisible = ex.slug === current.slug;
-                  return (
-                    <div
-                      key={ex.slug}
-                      aria-hidden={!isVisible}
-                      className={`absolute inset-0 size-full transition-opacity duration-300 ease-out ${
-                        isVisible ? "opacity-100 z-10" : "opacity-0 z-0 pointer-events-none"
-                      }`}
-                    >
-                      <Pic
-                        src={ex.image}
-                        alt=""
-                        className="size-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-                      />
-                      <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink to-transparent p-4">
-                        <p className="text-[11px] uppercase tracking-[0.18em] text-mark">
-                          {ex.brand}
-                        </p>
-                        <p className="font-display text-xl italic">{ex.name}</p>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
+              <span className="text-sm text-gold">
+                Öppna exempel
+                <ArrowRight className="ml-1 inline size-3.5" />
+              </span>
             </div>
           </a>
         </div>

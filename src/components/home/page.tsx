@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { ArrowRight, Check, ChevronDown } from "lucide-react";
+import { ArrowRight, ChevronDown } from "lucide-react";
 import {
   EXAMPLES,
   FAQ,
@@ -10,7 +10,6 @@ import {
 } from "@/lib/site";
 import { Button } from "@/components/ui/button";
 import { ContactForm } from "@/components/site/contact-form";
-import { Reveal } from "@/components/site/reveal";
 import { Pic } from "@/components/site/pic";
 import { Hero } from "@/components/home/hero";
 import { SectionLink } from "@/components/site/section-link";
@@ -43,18 +42,11 @@ function MarqueeLink({ ex }: { ex: (typeof EXAMPLES)[number] }) {
 
 function Marquee() {
   return (
-    <div className="border-y border-line bg-ink-2 py-4">
-      <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-x-6 gap-y-2 px-5 md:hidden">
+    <div className="border-y border-line bg-ink-2">
+      <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-x-7 gap-y-2 px-5 py-4">
         {EXAMPLES.map((ex) => (
           <MarqueeLink key={ex.slug} ex={ex} />
         ))}
-      </div>
-      <div className="hidden overflow-hidden md:block">
-        <div className="marquee-track flex w-max gap-10 pr-10">
-          {[...EXAMPLES, ...EXAMPLES].map((ex, i) => (
-            <MarqueeLink key={`${ex.slug}-${i}`} ex={ex} />
-          ))}
-        </div>
       </div>
     </div>
   );
@@ -67,51 +59,41 @@ function Examples() {
         <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
           <div>
             <p className="text-[11px] uppercase tracking-[0.24em] text-subtle">
-              Interaktiva exempel
+              Exempel
             </p>
             <h2 className="mt-3 max-w-[16ch] font-display text-[2.15rem] italic md:text-5xl">
               Så kan din sida se ut.
             </h2>
             <p className="mt-4 max-w-xl text-subtle">
-              Klicka in och testa funktionerna. Det är fullt klickbara
-              exempelsidor som visar hur vi strukturerar kontakt, tjänster och
-              förtroende för olika branscher.
+              Klickbara sidor, inte skisser. En rörmokare, en salong, en krog –
+              samma tydlighet, olika uttryck.
             </p>
           </div>
           <Button asChild variant="outline" className="w-full md:w-auto">
             <Link to="/examples">
-              Se alla exempel
+              Alla exempel
               <ArrowRight className="size-4" />
             </Link>
           </Button>
         </div>
-        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-14 grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
           {EXAMPLES.map((ex) => (
-            <a
-              key={ex.slug}
-              href={`/${ex.slug}`}
-              className="group overflow-hidden rounded-xl border border-ink/8 bg-paper-2 hover:border-ink/20"
-            >
-              <div className="relative aspect-[4/3] overflow-hidden">
+            <a key={ex.slug} href={`/${ex.slug}`}>
+              <div className="relative aspect-[4/3] overflow-hidden bg-paper-2">
                 <Pic
                   src={ex.image}
                   alt={`${ex.name} exempelsida`}
-                  className="size-full object-cover md:transition-transform md:duration-500 md:group-hover:scale-105"
+                  className="size-full object-cover"
                   width={800}
                   height={600}
                   priority={ex.slug === "vvs" || ex.slug === "elektriker"}
                 />
-                <span className="absolute right-3 top-3 rounded-sm bg-gold px-3 py-1 text-[11px] font-medium text-gold-fg md:opacity-0 md:transition-opacity md:duration-200 md:group-hover:opacity-100">
-                  Öppna
-                </span>
               </div>
-              <div className="px-5 py-4">
-                <p className="text-[11px] uppercase tracking-[0.18em] text-subtle">
-                  {ex.brand}
-                </p>
-                <h3 className="mt-1 font-display text-2xl">{ex.name}</h3>
-                <p className="mt-2 line-clamp-2 text-sm text-subtle">{ex.blurb}</p>
-              </div>
+              <p className="mt-4 text-[11px] uppercase tracking-[0.18em] text-subtle">
+                {ex.brand}
+              </p>
+              <h3 className="mt-1 font-display text-2xl italic">{ex.name}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-subtle">{ex.blurb}</p>
             </a>
           ))}
         </div>
@@ -128,20 +110,18 @@ function Services() {
   return (
     <section id="priser" className="bg-canvas py-24 md:py-32">
       <div className="mx-auto max-w-6xl px-5 md:px-8">
-        <Reveal>
-          <p className="text-[11px] uppercase tracking-[0.24em] text-gold">
-            Priser
-          </p>
-          <h2 className="mt-3 font-display text-[2.15rem] italic md:text-5xl">
-            Tydliga priser. Inga överraskningar.
-          </h2>
-          <p className="mt-4 max-w-xl text-muted">
-            Tydliga förutsättningar från start. Du äger din verksamhets identitet
-            och projektleverans, och det finns inga inlåsande avtal.
-          </p>
-        </Reveal>
+        <p className="text-[11px] uppercase tracking-[0.24em] text-gold">
+          Priser
+        </p>
+        <h2 className="mt-3 font-display text-[2.15rem] md:text-5xl">
+          9 900 kr. Sen är sidan din.
+        </h2>
+        <p className="mt-4 max-w-xl text-muted">
+          Fast startpris för en komplett småföretagshemsida. Inget abonnemang
+          som krävs. Inget som låser in dig.
+        </p>
         <div className="mt-14 grid gap-5 lg:grid-cols-2">
-          <article className="flex flex-col rounded-xl bg-ink-2 p-7 shadow-card md:p-8">
+          <article className="flex flex-col border border-line bg-ink-2 p-7 md:p-10">
             <p className="text-[11px] uppercase tracking-[0.2em] text-gold">
               Hemsida
             </p>
@@ -158,8 +138,8 @@ function Services() {
             </p>
             <ul className="mt-5 space-y-2.5 text-sm">
               {INCLUDED.map((item) => (
-                <li key={item} className="flex gap-2">
-                  <Check className="mt-0.5 size-4 shrink-0 text-gold" />
+                <li key={item} className="flex gap-3">
+                  <span className="mt-2 size-1 shrink-0 rounded-full bg-gold" />
                   <span>{item}</span>
                 </li>
               ))}
@@ -174,7 +154,7 @@ function Services() {
             {rest.map((s) => (
               <article
                 key={s.id}
-                className="flex flex-col rounded-xl border border-line bg-ink-2/60 p-7 hover:border-line/60 hover:bg-ink-2"
+                className="flex flex-col border border-line bg-ink-2/60 p-7"
               >
                 <p className="text-[11px] uppercase tracking-[0.2em] text-gold">
                   {s.id === "service" ? "Valfritt" : "Vid behov"}
@@ -191,8 +171,8 @@ function Services() {
                 </p>
                 <ul className="mt-5 space-y-2 text-sm">
                   {s.fits.map((f) => (
-                    <li key={f} className="flex gap-2">
-                      <Check className="mt-0.5 size-4 shrink-0 text-gold" />
+                    <li key={f} className="flex gap-3">
+                      <span className="mt-2 size-1 shrink-0 rounded-full bg-gold" />
                       <span>{f}</span>
                     </li>
                   ))}
@@ -206,8 +186,7 @@ function Services() {
             ))}
           </div>
         </div>
-        <div className="mt-10 rounded-xl border border-line bg-ink-2/40 p-6 md:p-8">
-          <div className="grid gap-6 md:grid-cols-3">
+        <div className="mt-10 grid gap-8 border border-line px-6 py-8 md:grid-cols-3 md:px-8">
             <div>
               <p className="text-[11px] uppercase tracking-[0.2em] text-gold">
                 Ägarskap
@@ -220,12 +199,12 @@ function Services() {
             </div>
             <div>
               <p className="text-[11px] uppercase tracking-[0.2em] text-gold">
-                Drift & teknik
+                Drift och teknik
               </p>
               <h4 className="mt-2 font-display text-lg">Vi sköter det praktiska</h4>
               <p className="mt-1 text-sm leading-relaxed text-muted">
-                De flesta föredrar att slippa servrar, DNS och certifikat. Vi
-                hanterar drift och säkerhet så länge du vill ha vår hjälp.
+                Servrar, certifikat och uppdateringar. Så länge du vill ha vår
+                hjälp.
               </p>
             </div>
             <div>
@@ -234,11 +213,10 @@ function Services() {
               </p>
               <h4 className="mt-2 font-display text-lg">Inga överraskningar</h4>
               <p className="mt-1 text-sm leading-relaxed text-muted">
-                Startpriset gäller standardhemsidor för småföretag. Eventuella
-                utökade önskemål stäms av och prissätts tydligt innan vi börjar.
+                Startpriset gäller en vanlig småföretagshemsida. Större önskemål
+                får eget pris innan vi börjar.
               </p>
             </div>
-          </div>
         </div>
       </div>
     </section>
@@ -257,70 +235,51 @@ function Process() {
     },
     {
       title: "Kontaktuppgifter",
-      desc: "Telefonnummer, e-postadress, adress eller organisationsnummer.",
+      desc: "Telefon, e-post, adress eller organisationsnummer.",
     },
     {
       title: "Bilder om du har",
-      desc: "Logotyp och foton från vardagen (enkla mobilbilder fungerar utmärkt).",
+      desc: "Logotyp och foton från vardagen. Mobilbilder går bra.",
     },
   ];
 
   return (
     <section id="process" className="bg-paper py-24 text-ink md:py-32">
       <div className="mx-auto max-w-6xl px-5 md:px-8">
-        {/* Section Header */}
         <div className="max-w-2xl">
           <p className="text-[11px] uppercase tracking-[0.24em] text-subtle">
             Så här går det till
           </p>
           <h2 className="mt-3 font-display text-[2.15rem] italic md:text-5xl">
-            Fem enkla steg. Från idé till färdig sida.
+            Fem steg. Sen är sidan uppe.
           </h2>
           <p className="mt-4 text-base leading-relaxed text-subtle md:text-lg">
-            Att komma igång behöver inte vara krångligt. Vi sköter design,
-            struktur och det tekniska bygget – du behöver varken kunna koda eller
-            ha allt material klart från början.
+            Du behöver varken kunna koda eller ha allt material klart. Vi sköter
+            design, struktur och det tekniska.
           </p>
         </div>
 
-        {/* 5 Process Steps as a Connected Journey */}
-        <div className="relative mt-14">
-          {/* Subtle connecting progress line behind steps on desktop */}
-          <div
-            className="pointer-events-none absolute left-0 right-0 top-7 hidden h-px bg-ink/12 lg:block"
-            aria-hidden="true"
-          />
+        <ol className="mt-14 divide-y divide-ink/10 border-y border-ink/10">
+          {STEPS.map((step, i) => (
+            <li
+              key={step.title}
+              className="grid gap-2 py-7 md:grid-cols-[4.5rem_minmax(0,14rem)_1fr] md:items-baseline md:gap-8"
+            >
+              <span className="font-display text-2xl italic text-brass">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <h3 className="font-display text-2xl">{step.title}</h3>
+              <p className="text-sm leading-relaxed text-subtle md:text-base">
+                {step.body}
+              </p>
+            </li>
+          ))}
+        </ol>
 
-          <ol className="grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
-            {STEPS.map((step, i) => (
-              <li key={step.title} className="relative flex flex-col">
-                <div className="relative z-10 flex items-center gap-3">
-                  <span className="grid size-11 place-items-center rounded-full border border-ink/15 bg-paper font-display text-xl italic text-brass shadow-xs">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  {/* Step connector arrow for small screens */}
-                  <span className="text-xs uppercase tracking-widest text-subtle/60 lg:hidden">
-                    Steg {i + 1}
-                  </span>
-                </div>
-                <div className="mt-4 flex-1 rounded-xl border border-ink/8 bg-paper-2 p-5 transition-colors duration-200 hover:border-ink/20">
-                  <h3 className="font-display text-lg leading-snug">
-                    {step.title}
-                  </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-subtle">
-                    {step.body}
-                  </p>
-                </div>
-              </li>
-            ))}
-          </ol>
-        </div>
-
-        {/* Compact, non-repetitive secondary block: Det enda vi behöver från dig */}
-        <div className="mt-14 rounded-2xl border border-ink/10 bg-paper-2 p-7 md:p-9 shadow-xs">
-          <div className="flex flex-col justify-between gap-3 border-b border-ink/10 pb-6 md:flex-row md:items-end">
+        <div className="mt-16 border-t border-ink/10 pt-12">
+          <div className="flex flex-col justify-between gap-3 md:flex-row md:items-end">
             <div>
-              <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-brass">
+              <p className="text-[11px] uppercase tracking-[0.22em] text-brass">
                 Förberedelser
               </p>
               <h3 className="mt-1.5 font-display text-2xl italic md:text-3xl">
@@ -328,19 +287,14 @@ function Process() {
               </h3>
             </div>
             <p className="text-sm text-subtle">
-              Fokusera på det du kan bäst – vi sätter ihop helheten.
+              Har du inte allt? Vi tar det i samtalet.
             </p>
           </div>
 
-          <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {essentialInputs.map((item, idx) => (
-              <div key={item.title} className="flex flex-col">
-                <div className="flex items-center gap-2">
-                  <span className="grid size-5 place-items-center rounded-full bg-paper text-[11px] font-semibold text-brass">
-                    {idx + 1}
-                  </span>
-                  <h4 className="font-display text-base font-medium">{item.title}</h4>
-                </div>
+          <div className="mt-8 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+            {essentialInputs.map((item) => (
+              <div key={item.title}>
+                <h4 className="font-display text-lg">{item.title}</h4>
                 <p className="mt-2 text-sm leading-relaxed text-subtle">
                   {item.desc}
                 </p>
@@ -348,25 +302,17 @@ function Process() {
             ))}
           </div>
 
-          <div className="mt-8 flex flex-col items-start justify-between gap-4 border-t border-ink/10 pt-6 sm:flex-row sm:items-center">
-            <p className="text-sm leading-relaxed text-subtle">
-              <strong className="font-medium text-ink">Har du inte allt?</strong> Ingen
-              fara. Vi hjälper dig att strukturera resten under samtalets gång.
-            </p>
-            <div className="flex w-full shrink-0 items-center justify-between gap-4 sm:w-auto sm:justify-end">
-              <Link
-                to="/process"
-                className="inline-flex items-center gap-1.5 text-xs font-medium text-brass underline decoration-brass underline-offset-4 transition-colors hover:text-ink hover:decoration-ink"
-              >
-                Läs hela innehållsguiden
-                <ArrowRight className="size-3.5" />
-              </Link>
-              <Button asChild size="md">
-                <SectionLink section="contact">
-                  Kontakta oss
-                </SectionLink>
-              </Button>
-            </div>
+          <div className="mt-10 flex flex-col items-start justify-between gap-4 border-t border-ink/10 pt-6 sm:flex-row sm:items-center">
+            <Link
+              to="/process"
+              className="inline-flex items-center gap-1.5 text-sm text-brass underline decoration-brass/40 underline-offset-4 hover:decoration-brass"
+            >
+              Hela innehållsguiden
+              <ArrowRight className="size-3.5" />
+            </Link>
+            <Button asChild size="md">
+              <SectionLink section="contact">Kontakta oss</SectionLink>
+            </Button>
           </div>
         </div>
       </div>
@@ -377,23 +323,20 @@ function Process() {
 function Faq() {
   return (
     <section className="bg-canvas py-24 md:py-32">
-      <div className="mx-auto max-w-3xl px-5 md:px-8">
-        <h2 className="text-center font-display text-[2.15rem] italic md:text-5xl">
+      <div className="mx-auto grid max-w-6xl gap-10 px-5 md:grid-cols-[minmax(0,18rem)_1fr] md:gap-16 md:px-8">
+        <h2 className="font-display text-[2.15rem] italic md:text-5xl">
           Vanliga frågor
         </h2>
-        <div className="mt-12 space-y-3">
+        <div className="divide-y divide-line border-y border-line">
           {FAQ.map((item) => (
-            <details
-              key={item.q}
-              className="group rounded-xl border border-line bg-ink-2 open:border-line/70"
-            >
-              <summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-4 px-6 py-5 text-left marker:content-none [&::-webkit-details-marker]:hidden">
-                <span className="font-display text-base leading-snug md:text-xl">
+            <details key={item.q} className="group">
+              <summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-4 py-5 text-left marker:content-none [&::-webkit-details-marker]:hidden">
+                <span className="font-display text-lg leading-snug md:text-xl">
                   {item.q}
                 </span>
                 <ChevronDown className="size-5 shrink-0 text-gold transition-transform duration-200 group-open:rotate-180" />
               </summary>
-              <p className="border-t border-line/60 px-6 py-5 text-sm leading-relaxed text-muted">
+              <p className="max-w-2xl pb-6 text-sm leading-relaxed text-muted">
                 {item.a}
               </p>
             </details>
@@ -413,30 +356,16 @@ function Contact({ defaultSubject }: { defaultSubject: string }) {
             Kontakt
           </p>
           <h2 className="mt-3 font-display text-[2.15rem] italic leading-[1.08] md:text-5xl">
-            Osäker på vad du behöver? Hör av dig.
+            Säg vad ni gör. Vi återkommer med pris.
           </h2>
           <p className="mt-5 text-base leading-relaxed text-subtle">
-            Vi går igenom dina önskemål och förutsättningar – helt utan
-            förpliktelser. Du får alltid ett tydligt prisförslag innan något
-            påbörjas.
+            Ett kort samtal, ingen förpliktelse. Du får alltid ett tydligt
+            prisförslag innan något påbörjas.
           </p>
 
-          <div className="mt-8 space-y-4 border-y border-ink/10 py-6 text-sm">
-            <div className="flex items-start gap-3">
-              <span className="mt-1 size-1.5 shrink-0 rounded-full bg-brass" />
-              <div>
-                <p className="font-medium text-ink">Snabb återkoppling</p>
-                <p className="text-subtle">Vi svarar vanligtvis inom en arbetsdag.</p>
-              </div>
-            </div>
-            <div className="flex items-start gap-3">
-              <span className="mt-1 size-1.5 shrink-0 rounded-full bg-brass" />
-              <div>
-                <p className="font-medium text-ink">Direktkontakt via mejl</p>
-                <p className="text-subtle">Föredrar du att skriva direkt till oss?</p>
-              </div>
-            </div>
-          </div>
+          <p className="mt-8 text-sm text-subtle">
+            Svar inom en arbetsdag.
+          </p>
 
           <a
             href={`mailto:${SITE.email}`}
@@ -446,12 +375,18 @@ function Contact({ defaultSubject }: { defaultSubject: string }) {
           </a>
 
           <p className="mt-4 text-xs text-subtle">
-            Bas i Stockholm · Vi skapar hemsidor för företag i hela Sverige.
+            Bas i Stockholm. Vi bygger för hela Sverige.
           </p>
         </div>
 
-        <div className="rounded-2xl border border-line bg-ink-2 p-7 text-fg shadow-card md:p-9">
-          <ContactForm defaultSubject={defaultSubject} />
+        <div className="border border-line bg-ink-2 p-7 text-fg md:p-9">
+          <p className="font-display text-2xl italic">Berätta vad ni gör</p>
+          <p className="mt-2 text-sm text-muted">
+            Bransch, ort och vad sidan ska hjälpa till med räcker långt.
+          </p>
+          <div className="mt-8">
+            <ContactForm defaultSubject={defaultSubject} />
+          </div>
         </div>
       </div>
     </section>

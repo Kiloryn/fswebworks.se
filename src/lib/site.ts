@@ -66,7 +66,7 @@ export const SERVICES = [
     price: "9 900 kr",
     suffix: "från, exkl. moms",
     description:
-      "Vi skapar en professionell och lättskött hemsida anpassad efter din verksamhet. Startpriset täcker en komplett standardhemsida för småföretag. Större eller mer komplexa behov går vi igenom och offererar tydligt innan vi sätter igång.",
+      "Vi skapar en hemsida som visar vad ni gör och gör det lätt att höra av sig. Startpriset täcker en komplett sida för ett vanligt småföretag. Behöver ni mer går vi igenom det och sätter pris innan vi börjar.",
     fits: [
       "Saknar en hemsida idag",
       "Har en gammal hemsida som behöver moderniseras",
@@ -82,7 +82,7 @@ export const SERVICES = [
     price: "690 kr",
     suffix: "/ månad, exkl. moms · valfritt",
     description:
-      "Ett tryggt skötselavtal för dig som vill slippa teknik. Vi hanterar webbdrift, säkerhet, SSL, grundläggande övervakning samt mindre ändringar av texter och bilder över tid.",
+      "Vi tar hand om drift, certifikat och mindre text- och bildändringar. För dig som vill slippa teknik.",
     fits: [
       "Vill slippa tänka på teknisk drift och uppdateringar",
       "Behöver göra mindre ändringar av texter eller bilder löpande",
@@ -111,12 +111,12 @@ export const SERVICES = [
 
 export const INCLUDED = [
   "Uppstartssamtal och genomgång av behov",
-  "Design och struktur anpassad efter ditt företag",
-  "Standardomfattning för småföretag (Startsida, Tjänster, Om oss, Kontakt)",
-  "Mobilanpassad, snabb och tillgänglig layout",
-  "Kontaktformulär och tydliga kontaktvägar",
-  "Grundläggande sökmotoroptimering (SEO) och delningskort",
-  "Gemensam genomgång innan lansering",
+  "Design efter er verksamhet – inte en mall",
+  "Startsida, tjänster, om oss och kontakt",
+  "Fungerar på telefon",
+  "Formulär så kunder når er",
+  "Grund så ni syns på Google",
+  "Genomgång innan sidan går live",
 ] as const;
 
 export const FAQ = [
