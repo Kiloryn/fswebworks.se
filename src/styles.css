@@ -21,8 +21,8 @@
   --color-danger: #c45c3a;
   --color-focus: #c8a46e;
 
-  --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Fraunces", "Iowan Old Style", Georgia, serif;
+  --font-sans: "Outfit", "Outfit Fallback", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Fraunces", "Fraunces Fallback", Georgia, serif;
 
   --radius-xs: 4px;
   --radius-sm: 8px;
@@ -49,11 +49,32 @@
 }
 
 @layer base {
+  /* Metric-matched locals. font-display: optional never late-swaps, so a miss
+     keeps these for the session. Values from the shipped woff2 files
+     (Fraunces at opsz 65 / Outfit at wght 400) vs Times / Arial. */
+  @font-face {
+    font-family: "Fraunces Fallback";
+    src: local("Times New Roman"), local("Georgia");
+    size-adjust: 116.65%;
+    ascent-override: 83.84%;
+    descent-override: 21.86%;
+    line-gap-override: 0%;
+  }
+
+  @font-face {
+    font-family: "Outfit Fallback";
+    src: local("Arial"), local("Helvetica Neue"), local("Roboto");
+    size-adjust: 107.23%;
+    ascent-override: 93.26%;
+    descent-override: 24.25%;
+    line-gap-override: 0%;
+  }
+
   @font-face {
     font-family: Fraunces;
     font-style: normal;
     font-weight: 500;
-    font-display: swap;
+    font-display: optional;
     src: url("/fonts/fraunces-latin.woff2") format("woff2");
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
       U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
@@ -64,7 +85,7 @@
     font-family: Outfit;
     font-style: normal;
     font-weight: 400 600;
-    font-display: swap;
+    font-display: optional;
     src: url("/fonts/outfit-latin.woff2") format("woff2");
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
       U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
@@ -192,8 +213,8 @@
     font-family: "DM Sans", ui-sans-serif, sans-serif;
   }
   .demo-konsult {
-    --font-display: "Fraunces", "Iowan Old Style", Georgia, serif;
-    font-family: "Outfit", ui-sans-serif, sans-serif;
+    --font-display: "Fraunces", "Fraunces Fallback", Georgia, serif;
+    font-family: "Outfit", "Outfit Fallback", ui-sans-serif, sans-serif;
   }
 
   .hero-video {
