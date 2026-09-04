@@ -130,7 +130,7 @@ export const Hero = memo(function Hero() {
 
         <div className="hidden flex-col justify-center md:flex">
           <div
-            className="flex flex-wrap gap-x-4 gap-y-1"
+            className="grid grid-cols-3 gap-x-3 gap-y-1"
             role="tablist"
             aria-label="Välj branschexempel"
           >
@@ -143,17 +143,17 @@ export const Hero = memo(function Hero() {
                   role="tab"
                   aria-selected={active}
                   onClick={() => setSelectedSlug(ex.slug)}
-                  className={`text-[12px] uppercase tracking-[0.16em] transition-colors ${
+                  className={`h-8 truncate text-left text-[12px] uppercase tracking-[0.14em] transition-colors ${
                     active ? "text-gold" : "text-muted hover:text-fg"
                   }`}
                 >
-                  {ex.name}
+                  {ex.short}
                 </button>
               );
             })}
           </div>
 
-          <a href={`/${current.slug}`} className="mt-5 block">
+          <a href={`/${current.slug}`} className="mt-4 block">
             <div className="relative aspect-[4/3] w-full overflow-hidden bg-ink-3">
               {EXAMPLES.map((ex) => {
                 const isVisible = ex.slug === current.slug;
@@ -175,18 +175,20 @@ export const Hero = memo(function Hero() {
                   </div>
                 );
               })}
-            </div>
-            <div className="mt-4 flex items-baseline justify-between gap-4">
-              <div>
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 z-20 bg-gradient-to-t from-ink via-ink/55 to-transparent px-4 pb-4 pt-16">
                 <p className="text-[11px] uppercase tracking-[0.18em] text-mark">
                   {current.brand}
                 </p>
-                <p className="mt-1 font-display text-2xl italic">{current.name}</p>
+                <div className="mt-1 flex items-end justify-between gap-3">
+                  <p className="min-h-[2.5rem] font-display text-2xl leading-tight italic">
+                    {current.name}
+                  </p>
+                  <span className="mb-0.5 shrink-0 text-sm text-gold">
+                    Öppna
+                    <ArrowRight className="ml-1 inline size-3.5" />
+                  </span>
+                </div>
               </div>
-              <span className="text-sm text-gold">
-                Öppna exempel
-                <ArrowRight className="ml-1 inline size-3.5" />
-              </span>
             </div>
           </a>
         </div>

@@ -158,6 +158,7 @@ export const EXAMPLES = [
   {
     slug: "vvs",
     name: "VVS och rörmokare",
+    short: "VVS",
     brand: "Din Rörmokare",
     blurb:
       "Akut jour, recensioner och ROT. Så syns en rörmokare när någon googlar VVS Stockholm.",
@@ -166,6 +167,7 @@ export const EXAMPLES = [
   {
     slug: "elektriker",
     name: "Elektriker",
+    short: "El",
     brand: "Stockholms Elkraft",
     blurb:
       "A-behörig installation och felavhjälpning. Bygg förtroende med dokumenterad kompetens.",
@@ -174,6 +176,7 @@ export const EXAMPLES = [
   {
     slug: "salong",
     name: "Salong och skönhet",
+    short: "Salong",
     brand: "Ateljé Linné",
     blurb:
       "Boka tid, frisör med namn och prislista. Det en salong behöver för att fylla stolen.",
@@ -182,6 +185,7 @@ export const EXAMPLES = [
   {
     slug: "restaurang",
     name: "Restaurang",
+    short: "Restaurang",
     brand: "Trattoria Nove",
     blurb:
       "Meny, bordsbokning och karta. Visa maten så gästen blir hungrig – och hittar dit.",
@@ -190,6 +194,7 @@ export const EXAMPLES = [
   {
     slug: "malare",
     name: "Målare",
+    short: "Målare",
     brand: "Stockholms Måleri",
     blurb:
       "Färg, ROT och kostnadsfri offert. Ett rum som säljer hantverket – och en sida som tar in jobb.",
@@ -198,6 +203,7 @@ export const EXAMPLES = [
   {
     slug: "konsult",
     name: "Konsult",
+    short: "Konsult",
     brand: "Anders Eriksson",
     blurb:
       "Ett samtal, tre uppdragstyper, tydlig kontakt. En sida som får fler att boka trettio minuter.",
