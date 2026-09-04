@@ -23,7 +23,11 @@ function ProcessPage() {
     <SiteLayout>
       <article className="bg-paper pt-28 text-ink">
         <div className="mx-auto max-w-2xl px-5 pb-24 md:px-8">
-          <PageBack onPaper />
+          <PageBack
+            onPaper
+            section="process"
+            label="Tillbaka till så går det till"
+          />
           <h1 className="font-display text-[2.15rem] md:text-5xl">
             Det vi behöver från er.
           </h1>

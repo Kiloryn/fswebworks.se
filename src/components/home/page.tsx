@@ -160,12 +160,17 @@ function Process() {
         </ol>
 
         <p className="border-t border-ink/10 pt-6 text-sm text-subtle">
-          Logotyp, foton och tre rader om vad ni gör räcker för att börja.{" "}
+          Logotyp, foton och tre rader om vad ni gör räcker för att börja.
+        </p>
+        <p className="mt-3">
           <Link
             to="/process"
-            className="text-brass underline decoration-brass/40 underline-offset-4 hover:decoration-brass"
+            className="inline-flex min-h-11 items-center text-sm font-medium text-ink underline decoration-brass underline-offset-4 hover:decoration-ink"
           >
-            Innehållsguide
+            Öppna innehållsguiden
+            <span aria-hidden className="ms-2">
+              →
+            </span>
           </Link>
         </p>
       </div>
