@@ -18,7 +18,6 @@ export function HomePage({ defaultSubject = "" }: { defaultSubject?: string }) {
   return (
     <>
       <Hero />
-      <Marquee />
       <Examples />
       <Services />
       <Process />
@@ -28,74 +27,62 @@ export function HomePage({ defaultSubject = "" }: { defaultSubject?: string }) {
   );
 }
 
-function MarqueeLink({ ex }: { ex: (typeof EXAMPLES)[number] }) {
-  return (
-    <a
-      href={`/${ex.slug}`}
-      className="flex items-center gap-3 text-[12px] uppercase tracking-[0.22em] text-muted hover:text-gold"
-    >
-      <span className="text-gold">/</span>
-      {ex.name}
-    </a>
-  );
-}
-
-function Marquee() {
-  return (
-    <div className="border-y border-line bg-ink-2">
-      <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-x-7 gap-y-2 px-5 py-4">
-        {EXAMPLES.map((ex) => (
-          <MarqueeLink key={ex.slug} ex={ex} />
-        ))}
-      </div>
-    </div>
-  );
-}
-
 function Examples() {
   return (
     <section id="exempel" className="bg-paper py-24 text-ink md:py-32">
       <div className="mx-auto max-w-6xl px-5 md:px-8">
-        <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
-          <div>
-            <p className="text-[11px] uppercase tracking-[0.24em] text-subtle">
-              Exempel
-            </p>
-            <h2 className="mt-3 max-w-[16ch] font-display text-[2.15rem] italic md:text-5xl">
-              Så kan din sida se ut.
-            </h2>
-            <p className="mt-4 max-w-xl text-subtle">
-              Klickbara sidor, inte skisser. En rörmokare, en salong, en krog –
-              samma tydlighet, olika uttryck.
-            </p>
-          </div>
-          <Button asChild variant="outline" className="w-full md:w-auto">
-            <Link to="/examples">
-              Alla exempel
-              <ArrowRight className="size-4" />
-            </Link>
-          </Button>
+        <div>
+          <p className="text-[11px] uppercase tracking-[0.24em] text-subtle">
+            Exempel
+          </p>
+          <h2 className="mt-3 max-w-[16ch] font-display text-[2.15rem] italic md:text-5xl">
+            Så kan din sida se ut.
+          </h2>
+          <p className="mt-4 max-w-xl text-subtle">
+            Klickbara sidor, inte skisser. En rörmokare, en salong, en krog –
+            samma tydlighet, olika uttryck.
+          </p>
         </div>
-        <div className="mt-14 grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
-          {EXAMPLES.map((ex) => (
-            <a key={ex.slug} href={`/${ex.slug}`}>
-              <div className="relative aspect-[4/3] overflow-hidden bg-paper-2">
-                <Pic
-                  src={ex.image}
-                  alt={`${ex.name} exempelsida`}
-                  className="size-full object-cover"
-                  width={800}
-                  height={600}
-                  priority={ex.slug === "vvs" || ex.slug === "elektriker"}
-                />
-              </div>
-              <p className="mt-4 text-[11px] uppercase tracking-[0.18em] text-subtle">
-                {ex.brand}
-              </p>
-              <h3 className="mt-1 font-display text-2xl italic">{ex.name}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-subtle">{ex.blurb}</p>
-            </a>
-          ))}
+        <div className="mt-14 grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
+          {EXAMPLES.map((ex, i) => {
+            const featured = i < 2;
+            return (
+              <a
+                key={ex.slug}
+                href={`/${ex.slug}`}
+                className={`group ${featured ? "lg:col-span-2" : ""}`}
+              >
+                <div
+                  className={`relative overflow-hidden bg-paper-2 ${
+                    featured ? "aspect-[4/3] lg:aspect-[16/10]" : "aspect-[4/3]"
+                  }`}
+                >
+                  <Pic
+                    src={ex.image}
+                    alt={`${ex.name} exempelsida`}
+                    className="size-full object-cover"
+                    width={featured ? 1200 : 800}
+                    height={featured ? 750 : 600}
+                    priority={featured}
+                  />
+                </div>
+                <div className="mt-4 flex items-start justify-between gap-3">
+                  <div>
+                    <p className="text-[11px] uppercase tracking-[0.18em] text-subtle">
+                      {ex.short}
+                    </p>
+                    <h3 className="mt-1 min-h-[2.5rem] font-display text-2xl leading-tight group-hover:text-brass">
+                      {ex.name}
+                    </h3>
+                  </div>
+                  <span className="mt-6 shrink-0 text-sm text-brass md:opacity-0 md:group-hover:opacity-100">
+                    Öppna
+                    <ArrowRight className="ml-1 inline size-3.5" />
+                  </span>
+                </div>
+              </a>
+            );
+          })}
         </div>
       </div>
     </section>
