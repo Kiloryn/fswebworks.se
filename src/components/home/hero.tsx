@@ -21,6 +21,10 @@ const HeroVideo = memo(function HeroVideo({
     const playVideo = () => {
       if (document.hidden) return;
       if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      const connection = (
+        navigator as Navigator & { connection?: { saveData?: boolean } }
+      ).connection;
+      if (connection?.saveData) return;
       void video.play().catch(() => {});
     };
 
@@ -65,8 +69,7 @@ const HeroVideo = memo(function HeroVideo({
       muted
       loop
       playsInline
-      autoPlay
-      preload="metadata"
+      preload="none"
       aria-hidden
     >
       <source src="/videos/hero-720.mp4" type="video/mp4" media="(max-width: 768px)" />

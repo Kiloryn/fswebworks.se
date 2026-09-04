@@ -1,4 +1,5 @@
 import { Link } from "@tanstack/react-router";
+import { useState } from "react";
 import {
   EXAMPLES,
   FAQ,
@@ -38,42 +39,56 @@ function Examples() {
         </p>
         <ul className="mt-14">
           {EXAMPLES.map((ex) => (
-            <li key={ex.slug} className="border-t border-line last:border-b">
-              <details name="exempel-register" className="group">
-                <summary className="flex min-h-16 min-w-0 cursor-pointer list-none items-baseline justify-between gap-4 py-5 marker:content-none [&::-webkit-details-marker]:hidden">
-                  <span className="min-w-0 font-display text-[1.65rem] leading-tight group-open:text-gold md:text-5xl">
-                    {ex.brand}
-                  </span>
-                  <span className="shrink-0 text-sm text-muted">{ex.short}</span>
-                </summary>
-                <div className="grid gap-6 pb-8 md:grid-cols-[minmax(0,18rem)_1fr] md:items-end">
-                  <div className="relative aspect-[4/3] min-w-0 overflow-hidden bg-ink-3">
-                    <Pic
-                      src={ex.image}
-                      alt={`${ex.brand}, exempelsida för ${ex.short}`}
-                      className="size-full object-cover"
-                      width={640}
-                      height={480}
-                    />
-                  </div>
-                  <div className="min-w-0">
-                    <p className="max-w-md text-sm leading-relaxed text-muted md:text-base">
-                      {ex.blurb}
-                    </p>
-                    <a
-                      href={`/${ex.slug}`}
-                      className="mt-5 inline-flex h-11 items-center whitespace-nowrap text-sm text-gold underline decoration-gold/40 underline-offset-4 hover:decoration-gold"
-                    >
-                      Öppna {ex.brand}
-                    </a>
-                  </div>
-                </div>
-              </details>
-            </li>
+            <ExampleRow key={ex.slug} ex={ex} />
           ))}
         </ul>
       </div>
     </section>
+  );
+}
+
+function ExampleRow({ ex }: { ex: (typeof EXAMPLES)[number] }) {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <li className="border-t border-line last:border-b">
+      <details
+        name="exempel-register"
+        className="group"
+        onToggle={(e) => setOpen(e.currentTarget.open)}
+      >
+        <summary className="flex min-h-16 min-w-0 cursor-pointer list-none items-baseline justify-between gap-4 py-5 marker:content-none [&::-webkit-details-marker]:hidden">
+          <span className="min-w-0 font-display text-[1.65rem] leading-tight group-open:text-gold md:text-5xl">
+            {ex.brand}
+          </span>
+          <span className="shrink-0 text-sm text-muted">{ex.short}</span>
+        </summary>
+        <div className="grid gap-6 pb-8 md:grid-cols-[minmax(0,18rem)_1fr] md:items-end">
+          <div className="relative aspect-[4/3] min-w-0 overflow-hidden bg-ink-3">
+            {open ? (
+              <Pic
+                src={ex.image}
+                alt={`${ex.brand}, exempelsida för ${ex.short}`}
+                className="size-full object-cover"
+                width={640}
+                height={480}
+              />
+            ) : null}
+          </div>
+          <div className="min-w-0">
+            <p className="max-w-md text-sm leading-relaxed text-muted md:text-base">
+              {ex.blurb}
+            </p>
+            <a
+              href={`/${ex.slug}`}
+              className="mt-5 inline-flex h-11 items-center whitespace-nowrap text-sm text-gold underline decoration-gold/40 underline-offset-4 hover:decoration-gold"
+            >
+              Öppna {ex.brand}
+            </a>
+          </div>
+        </div>
+      </details>
+    </li>
   );
 }
 
