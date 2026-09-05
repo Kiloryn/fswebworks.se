@@ -9,6 +9,8 @@ This file is the **pipeline**, not a substitute for the skill files.
 If a skill is missing from `.agents/skills/`, install or write it.
 Do not infer its full rules from the one-line summaries below.
 
+**Token-efficiency routing**: see `EFFICIENCY.md` for skill routing, default no-screenshot policy, and visual-audit gate.
+
 ## Skills (load the step you are on)
 
 | Step | Skill | File |
@@ -16,7 +18,6 @@ Do not infer its full rules from the one-line summaries below.
 | 1 | frontend-design | `.agents/skills/frontend-design/SKILL.md` |
 | 2 | hallmark | `.agents/skills/hallmark/SKILL.md` |
 | 3 | web-design-guidelines | `.agents/skills/web-design-guidelines/SKILL.md` |
-| 4 | visual-qa | `.agents/skills/visual-qa/SKILL.md` |
 
 ## Pipeline (mandatory)
 
@@ -36,11 +37,6 @@ Do not infer its full rules from the one-line summaries below.
    images, forms. Fix function. Do not flatten a colour-field hero
    for “consistency”. Swedish sentence case wins over Title Case.
 
-4. **visual-qa** — Last look before “done”.
-   If the user sent a screenshot, read that first.
-   No Pic as a direct grid child. No empty column.
-   Do not open Chrome unless Verification allows it.
-
 ## Locked (not up for skill debate)
 
 - FSwebworks itself: cream paper, Fraunces, 9 900 kr, Swedish copy.
@@ -49,8 +45,11 @@ Do not infer its full rules from the one-line summaries below.
 
 ## Verification
 
-- Do not open Chrome or run browser walkthroughs unless the user
-  explicitly says to check results in Chrome.
+- Default: never open Chrome / never capture screenshots. Infer layout from CSS.
+- Only when the user explicitly says **visual audit** (or clearly synonymous: visual pass / screenshot QA / check mobile visually):
+  - Capture desktop + ~375px for the touched routes
+  - Report defects (overflow, empty columns, overlap, broken images, obvious responsive breaks)
+  - Stop — do not redesign, restyle, or run Hallmark unless the user also asks
 
 ## Forbidden
 
