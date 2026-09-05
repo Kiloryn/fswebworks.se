@@ -9,6 +9,8 @@ This file is the **pipeline**, not a substitute for the skill files.
 If a skill is missing from `.agents/skills/`, install or write it.
 Do not infer its full rules from the one-line summaries below.
 
+**Token-efficiency routing**: see `EFFICIENCY.md` for skill routing, default no-screenshot policy, and visual-audit gate.
+
 ## Skills (load the step you are on)
 
 | Step | Skill | File |
@@ -43,8 +45,11 @@ Do not infer its full rules from the one-line summaries below.
 
 ## Verification
 
-- Do not open Chrome or run browser walkthroughs unless the user
-  explicitly says to check results in Chrome.
+- Default: never open Chrome / never capture screenshots. Infer layout from CSS.
+- Only when the user explicitly says **visual audit** (or clearly synonymous: visual pass / screenshot QA / check mobile visually):
+  - Capture desktop + ~375px for the touched routes
+  - Report defects (overflow, empty columns, overlap, broken images, obvious responsive breaks)
+  - Stop — do not redesign, restyle, or run Hallmark unless the user also asks
 
 ## Forbidden
 
