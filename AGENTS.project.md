@@ -16,7 +16,6 @@ Do not infer its full rules from the one-line summaries below.
 | 1 | frontend-design | `.agents/skills/frontend-design/SKILL.md` |
 | 2 | hallmark | `.agents/skills/hallmark/SKILL.md` |
 | 3 | web-design-guidelines | `.agents/skills/web-design-guidelines/SKILL.md` |
-| 4 | visual-qa | `.agents/skills/visual-qa/SKILL.md` |
 
 ## Pipeline (mandatory)
 
@@ -35,11 +34,6 @@ Do not infer its full rules from the one-line summaries below.
    Tap targets, contrast, focus, empty grid cells, alt on linked
    images, forms. Fix function. Do not flatten a colour-field hero
    for “consistency”. Swedish sentence case wins over Title Case.
-
-4. **visual-qa** — Last look before “done”.
-   If the user sent a screenshot, read that first.
-   No Pic as a direct grid child. No empty column.
-   Do not open Chrome unless Verification allows it.
 
 ## Locked (not up for skill debate)
 
