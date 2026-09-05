@@ -1,0 +1,16 @@
+/* FSwebworks homepage only. Existing example-page palettes remain independent. */
+.home-refresh {
+  --home-body: 1.125rem;
+  --home-small: 1rem;
+  --home-heading: clamp(2rem, 3.6vw, 3rem);
+  --home-title: clamp(2.5rem, 4.6vw, 3.75rem);
+  --home-subheading: 1.75rem;
+  --home-space-xs: 0.5rem;
+  --home-space-sm: 1rem;
+  --home-space-md: 1.5rem;
+  --home-space-lg: 2rem;
+  --home-space-xl: 3rem;
+  --home-space-section: 4rem;
+  --home-rule: color-mix(in oklch, var(--color-ink) 22%, var(--color-paper));
+  --home-field-border: oklch(60% 0.025 80);
+}

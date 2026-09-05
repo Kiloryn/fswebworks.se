@@ -46,9 +46,7 @@ export function ContactForm({ defaultSubject = "", onPaper = false }: Props) {
         }),
       });
       const result = (await res.json().catch(() => null)) as
-        | { ok: true }
-        | { ok: false; error?: string }
-        | null;
+        { ok: true } | { ok: false; error?: string } | null;
       if (!res.ok || !result || !result.ok) {
         setError(
           result && "error" in result && result.error
@@ -74,10 +72,10 @@ export function ContactForm({ defaultSubject = "", onPaper = false }: Props) {
 
   if (sent) {
     return (
-      <div className={onPaper ? "text-ink" : "text-fg"}>
+      <div role="status" className={onPaper ? "text-ink" : "text-fg"}>
         <h3 className="font-display text-2xl">Tack. Vi har fått er förfrågan.</h3>
         <p className={cn("mt-2 text-sm leading-relaxed", onPaper ? "text-subtle" : "text-muted")}>
-          Vi hör av oss inom en arbetsdag. Behöver ni oss fortare, mejla{" "}
+          Vi återkommer via e-post. Har du något att lägga till, mejla{" "}
           <a
             className={cn(
               "underline-offset-4 hover:underline",
@@ -137,7 +135,10 @@ export function ContactForm({ defaultSubject = "", onPaper = false }: Props) {
             htmlFor="contact-phone"
             className={cn("mb-1.5 block text-sm font-medium", onPaper ? "text-ink" : "text-fg")}
           >
-            Telefon <span className={cn("text-xs font-normal", onPaper ? "text-subtle" : "text-muted")}>(valfritt)</span>
+            Telefon{" "}
+            <span className={cn("text-xs font-normal", onPaper ? "text-subtle" : "text-muted")}>
+              (valfritt)
+            </span>
           </label>
           <input
             id="contact-phone"
@@ -153,7 +154,10 @@ export function ContactForm({ defaultSubject = "", onPaper = false }: Props) {
             htmlFor="contact-subject"
             className={cn("mb-1.5 block text-sm font-medium", onPaper ? "text-ink" : "text-fg")}
           >
-            Ämne <span className={cn("text-xs font-normal", onPaper ? "text-subtle" : "text-muted")}>(valfritt)</span>
+            Ämne{" "}
+            <span className={cn("text-xs font-normal", onPaper ? "text-subtle" : "text-muted")}>
+              (valfritt)
+            </span>
           </label>
           <select
             id="contact-subject"
@@ -181,7 +185,7 @@ export function ContactForm({ defaultSubject = "", onPaper = false }: Props) {
           name="message"
           required
           rows={4}
-          placeholder="Skriv gärna några rader om vad du behöver hjälp med..."
+          placeholder="Skriv gärna några rader om vad du behöver hjälp med…"
           className={cn(field, "h-auto py-3")}
         />
       </div>

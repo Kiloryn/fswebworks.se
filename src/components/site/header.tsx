@@ -69,125 +69,125 @@ export function SiteHeader({ ink = true }: { ink?: boolean }) {
 
   return (
     <>
-    <header
-      className={cn(
-        "fixed inset-x-0 top-0 z-50 pt-[env(safe-area-inset-top)] transition-[background-color,border-color,color] duration-200",
-        solid
-          ? "border-b border-line/80 bg-canvas text-fg"
-          : "border-b border-transparent bg-transparent text-fg",
-      )}
-    >
-      <div className="mx-auto max-w-6xl px-5 md:px-8">
-        <div className="flex h-14 items-center justify-between md:h-16">
-          <Logo onInk />
-          <a
-            href={`mailto:${SITE.email}`}
-            className="hidden text-sm text-fg/80 hover:text-gold md:inline"
-          >
-            {SITE.email}
-          </a>
-          <div className="flex items-center gap-1 md:hidden">
-            <SectionLink
-              section="contact"
-              className="inline-flex min-h-11 items-center px-3 text-sm font-medium text-gold"
-              onClick={() => setOpen(false)}
-            >
-              Offert
-            </SectionLink>
-            <button
-              type="button"
-              className="inline-flex size-11 items-center justify-center text-fg"
-              aria-label={open ? "Stäng meny" : "Öppna meny"}
-              aria-expanded={open}
-              onClick={() => setOpen((v) => !v)}
-            >
-              {open ? <X className="size-5" /> : <Menu className="size-5" />}
-            </button>
-          </div>
-        </div>
-        <nav
-          className="hidden items-center gap-6 border-t border-fg/15 py-2.5 text-[13px] md:flex"
-          aria-label="Huvudmeny"
-        >
-          {NAV.map((item) => {
-            const active = pathname === "/" && section === item.section;
-            return (
-              <SectionLink
-                key={item.label}
-                section={item.section}
-                aria-current={active ? "page" : undefined}
-                className={cn(
-                  "whitespace-nowrap transition-colors hover:text-gold",
-                  active ? "text-gold" : "text-fg/80",
-                )}
-              >
-                {item.label}
-              </SectionLink>
-            );
-          })}
-        </nav>
-      </div>
-      <div
-        className="menu-panel grid md:hidden"
-        data-open={open}
-        style={{ gridTemplateRows: open ? "1fr" : "0fr" }}
-        inert={!open || undefined}
+      <header
+        className={cn(
+          "fixed inset-x-0 top-0 z-50 pt-[env(safe-area-inset-top)] transition-[background-color,border-color,color] duration-200",
+          solid
+            ? "border-b border-line/80 bg-canvas text-fg"
+            : "border-b border-transparent bg-transparent text-fg",
+        )}
       >
-        <div className="min-h-0 overflow-hidden">
-          <div className="border-t border-line bg-canvas px-5 pb-6 pt-3 text-fg">
-            <nav className="flex flex-col" aria-label="Mobilmeny">
-              {onHome ? null : (
-                <Link
-                  to="/"
-                  className="flex min-h-11 items-center font-display text-2xl font-medium leading-none text-fg"
-                  onClick={() => setOpen(false)}
+        <div className="mx-auto max-w-6xl px-5 md:px-8">
+          <div className="flex h-14 items-center justify-between md:h-16">
+            <Logo onInk />
+            <a
+              href={`mailto:${SITE.email}`}
+              className="hidden min-h-11 items-center text-base text-fg hover:text-gold md:inline-flex"
+            >
+              {SITE.email}
+            </a>
+            <div className="flex items-center gap-1 md:hidden">
+              <SectionLink
+                section="contact"
+                className="inline-flex min-h-11 items-center px-3 text-sm font-medium text-gold"
+                onClick={() => setOpen(false)}
+              >
+                Offert
+              </SectionLink>
+              <button
+                type="button"
+                className="inline-flex size-11 items-center justify-center text-fg"
+                aria-label={open ? "Stäng meny" : "Öppna meny"}
+                aria-expanded={open}
+                onClick={() => setOpen((v) => !v)}
+              >
+                {open ? <X className="size-5" /> : <Menu className="size-5" />}
+              </button>
+            </div>
+          </div>
+          <nav
+            className="hidden items-center gap-6 border-t border-fg/15 text-base md:flex"
+            aria-label="Huvudmeny"
+          >
+            {NAV.map((item) => {
+              const active = pathname === "/" && section === item.section;
+              return (
+                <SectionLink
+                  key={item.label}
+                  section={item.section}
+                  aria-current={active ? "page" : undefined}
+                  className={cn(
+                    "inline-flex min-h-11 items-center whitespace-nowrap transition-colors hover:text-gold",
+                    active ? "text-gold" : "text-fg/80",
+                  )}
                 >
-                  Startsidan
-                </Link>
-              )}
-              {NAV.map((item) => {
-                const active = pathname === "/" && section === item.section;
-                return (
-                  <SectionLink
-                    key={item.label}
-                    section={item.section}
-                    aria-current={active ? "page" : undefined}
-                    className={cn(
-                      "flex min-h-11 items-center font-display text-2xl font-medium leading-none",
-                      active ? "text-gold" : "text-fg",
-                    )}
+                  {item.label}
+                </SectionLink>
+              );
+            })}
+          </nav>
+        </div>
+        <div
+          className="menu-panel grid md:hidden"
+          data-open={open}
+          style={{ gridTemplateRows: open ? "1fr" : "0fr" }}
+          inert={!open || undefined}
+        >
+          <div className="min-h-0 overflow-hidden">
+            <div className="border-t border-line bg-canvas px-5 pb-6 pt-3 text-fg">
+              <nav className="flex flex-col" aria-label="Mobilmeny">
+                {onHome ? null : (
+                  <Link
+                    to="/"
+                    className="flex min-h-11 items-center font-display text-2xl font-medium leading-none text-fg"
                     onClick={() => setOpen(false)}
                   >
-                    {item.label}
-                  </SectionLink>
-                );
-              })}
-            </nav>
-            <address className="mt-5 border-t border-line pt-4 not-italic">
-              <p className="text-sm text-muted">Skriv till oss</p>
-              <a
-                href={`mailto:${SITE.email}`}
-                className="mt-1 inline-flex min-h-11 items-center font-display text-xl text-gold"
-              >
-                {SITE.email}
-              </a>
-            </address>
+                    Startsidan
+                  </Link>
+                )}
+                {NAV.map((item) => {
+                  const active = pathname === "/" && section === item.section;
+                  return (
+                    <SectionLink
+                      key={item.label}
+                      section={item.section}
+                      aria-current={active ? "page" : undefined}
+                      className={cn(
+                        "flex min-h-11 items-center font-display text-2xl font-medium leading-none",
+                        active ? "text-gold" : "text-fg",
+                      )}
+                      onClick={() => setOpen(false)}
+                    >
+                      {item.label}
+                    </SectionLink>
+                  );
+                })}
+              </nav>
+              <address className="mt-5 border-t border-line pt-4 not-italic">
+                <p className="text-sm text-muted">Skriv till oss</p>
+                <a
+                  href={`mailto:${SITE.email}`}
+                  className="mt-1 inline-flex min-h-11 items-center font-display text-xl text-gold"
+                >
+                  {SITE.email}
+                </a>
+              </address>
+            </div>
           </div>
         </div>
-      </div>
-    </header>
-    <button
-      type="button"
-      className={cn(
-        "menu-backdrop fixed inset-0 z-40 bg-black/50 md:hidden",
-        open ? "opacity-100" : "pointer-events-none opacity-0",
-      )}
-      data-open={open}
-      tabIndex={open ? 0 : -1}
-      aria-hidden={!open}
-      aria-label="Stäng meny"
-      onClick={() => setOpen(false)}
-    />
+      </header>
+      <button
+        type="button"
+        className={cn(
+          "menu-backdrop fixed inset-0 z-40 bg-black/50 md:hidden",
+          open ? "opacity-100" : "pointer-events-none opacity-0",
+        )}
+        data-open={open}
+        tabIndex={open ? 0 : -1}
+        aria-hidden={!open}
+        aria-label="Stäng meny"
+        onClick={() => setOpen(false)}
+      />
     </>
   );
 }
