@@ -35,8 +35,8 @@ function Services() {
             Inga överraskningar.
           </h2>
           <p>
-            Hemsida från 9 900 kr och webbdrift 1 990 kr/år. Övrig hjälp köper du bara när du
-            behöver den.
+            Hemsida från 9 900 kr, webbdrift 1 990 kr/år och hjälp vid behov från 495 kr. Du
+            betalar bara för det du använder.
           </p>
         </div>
         <div className="home-pricing-grid">

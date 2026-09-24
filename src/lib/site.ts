@@ -126,7 +126,7 @@ export const FAQ = [
   },
   {
     q: "Måste jag skriva alla texter själv?",
-    a: "Vi utgår från information och stödord från dig eftersom du känner din verksamhet bäst. Vi hjälper till att strukturera, anpassa och finslipa texterna så att de fungerar bra på webben. Vill du ha mer omfattande copytexter kan vi erbjuda det som tillägg.",
+    a: "Vi utgår från information och stödord från dig eftersom du känner din verksamhet bäst. Vi hjälper till att strukturera, anpassa och finslipa texterna så att de fungerar bra på webben.",
   },
   {
     q: "Är jag bunden till er om ni bygger hemsidan?",

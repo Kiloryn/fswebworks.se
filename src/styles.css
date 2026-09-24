@@ -295,12 +295,6 @@
   border-top: 1px solid var(--color-line);
   padding-top: var(--home-space-md);
 }
-.home-refresh .home-ownership h3 {
-  font-size: var(--home-body);
-  font-family: var(--font-sans);
-  font-weight: 600;
-  letter-spacing: 0;
-}
 .home-refresh .home-examples {
   padding-block: var(--home-space-section);
   background: var(--color-paper);
