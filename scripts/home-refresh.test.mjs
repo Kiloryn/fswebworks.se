@@ -35,20 +35,23 @@ test("homepage shows an example before interaction and labels demo work honestly
   assert.ok(text.includes("demonstrationer, inte kunduppdrag"));
   assert.equal((html.match(/<details\b/g) ?? []).length, 6, "only FAQ answers are collapsed");
   assert.ok(html.includes('href="/vvs"'));
-  assert.ok(html.includes('href="/salong"'));
+  assert.ok(html.includes('value="salong"'));
 });
 
-test("hero is eager, media exists, and no video or scroll reveal is rendered", async () => {
-  assert.doesNotMatch(html, /<video\b|class="[^"]*\b(?:hero-wipe|reveal-wipe|reveal-in)\b/);
+test("hero video is lazy with lightweight sources and all media exists", async () => {
+  const videoTag = html.match(/<video\b[^>]*>/)?.[0];
+  assert.ok(videoTag, "hero video background is rendered");
+  assert.match(videoTag, /preload="none"/);
+  assert.match(videoTag, /muted/);
+  assert.match(videoTag, /playsInline/);
+  assert.match(videoTag, /poster="\/videos\/hero-poster\.jpg"/);
+  assert.match(html, /<source src="\/videos\/hero\.webm" type="video\/webm"/);
+  assert.match(html, /<source src="\/videos\/hero\.mp4" type="video\/mp4"/);
+  assert.doesNotMatch(html, /class="[^"]*\b(?:hero-wipe|reveal-wipe|reveal-in)\b/);
   const images = [...html.matchAll(/<img\b[^>]*>/g)].map((match) => match[0]);
-  assert.ok(
-    images.some(
-      (img) =>
-        img.includes("salong.jpg") &&
-        img.includes('loading="eager"') &&
-        img.includes('fetchPriority="high"'),
-    ),
-  );
+  for (const file of ["hero.webm", "hero.mp4", "hero-poster.jpg"]) {
+    await access(new URL("../public/videos/" + file, import.meta.url));
+  }
   for (const image of images) {
     assert.match(image, /alt="/);
     const src = image.match(/src="([^"]+)"/)?.[1];
@@ -57,8 +60,13 @@ test("hero is eager, media exists, and no video or scroll reveal is rendered", a
       assert.match(image, /width="/);
       assert.match(image, /height="/);
     }
-    if (src?.startsWith("/"))
-      await access(new URL("../public" + src.split("?")[0], import.meta.url));
+    if (src?.startsWith("/")) {
+      const path = src.split("?")[0];
+      await access(new URL("../public" + path, import.meta.url));
+      // Pic serves a WebP <source> first; a missing file breaks the image.
+      if (/\.jpe?g$/i.test(path))
+        await access(new URL("../public" + path.replace(/\.jpe?g$/i, ".webp"), import.meta.url));
+    }
   }
 });
 
@@ -76,6 +84,6 @@ test("readability tokens and single-column default are present", async () => {
   assert.match(tokens, /--home-body: 1\.125rem/);
   assert.match(tokens, /--home-small: 1rem/);
   assert.ok(css.includes('import "../tokens.css"'));
-  assert.ok(css.includes("minmax(0, 1.15fr)"));
-  assert.match(css, /\.home-refresh \.home-hero\s*\{[^}]*padding-top: 6rem/s);
+  assert.ok(css.includes("minmax(0, 1.2fr)"));
+  assert.match(css, /\.home-refresh \.home-hero\s*\{[^}]*min-height: 100svh/s);
 });
