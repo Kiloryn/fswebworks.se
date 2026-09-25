@@ -45,7 +45,8 @@ function ElDemo() {
           El som sitter. Första gången.
         </h1>
         <p className="mt-6 max-w-lg text-lg text-[#b7c2d4]">
-          Nyinstallation, fel och besiktning. Protokoll efter varje jobb. Registrerad hos Elsäkerhetsverket.
+          Vi installerar ny el, letar fel och besiktigar. Efter varje jobb får du protokollet,
+          och vi är registrerade hos Elsäkerhetsverket.
         </p>
         <DemoPhoneLink tel="08-456 789 01" className="mt-10 inline-flex h-14 items-center bg-[#d4a017] px-6 text-lg font-medium text-[#111]">
           08-456 789 01
@@ -59,7 +60,7 @@ function ElDemo() {
       <section className="mx-auto max-w-6xl px-5 py-20 md:px-8">
         <h2 className="font-display text-4xl">Efter jobbet: protokoll.</h2>
         <p className="mt-3 max-w-xl text-[#b7c2d4]">
-          Det som försäkringen och besiktningen vill ha. Inte en lapp i fönstret.
+          Det som försäkringen och besiktningen vill ha, utan lappar i fönstret.
         </p>
         <div className="mt-12 divide-y divide-white/10 border-y border-white/10">
           {services.map((s) => (

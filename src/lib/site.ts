@@ -150,7 +150,7 @@ export const EXAMPLES = [
     brand: "Din Rörmokare",
     blurb:
       "Akut jour, recensioner och ROT. Så syns en rörmokare när någon googlar VVS Stockholm.",
-    image: "/images/vvs.jpg?v=6",
+    image: "/images/examples/vvs.jpg",
   },
   {
     slug: "elektriker",
@@ -158,8 +158,8 @@ export const EXAMPLES = [
     short: "El",
     brand: "Stockholms Elkraft",
     blurb:
-      "A-behörig installation och felavhjälpning. Bygg förtroende med dokumenterad kompetens.",
-    image: "/images/elektriker.jpg?v=5",
+      "A-behörig installation och snabb felsökning. Besiktning med protokoll som försäkringen godkänner.",
+    image: "/images/examples/elektriker.jpg",
   },
   {
     slug: "salong",
@@ -168,7 +168,7 @@ export const EXAMPLES = [
     brand: "Ateljé Linné",
     blurb:
       "Boka tid, frisör med namn och prislista. Det en salong behöver för att fylla stolen.",
-    image: "/images/salong.jpg?v=5",
+    image: "/images/examples/salong.jpg",
   },
   {
     slug: "restaurang",
@@ -176,8 +176,8 @@ export const EXAMPLES = [
     short: "Restaurang",
     brand: "Trattoria Nove",
     blurb:
-      "Meny, bordsbokning och karta. Visa maten så gästen blir hungrig – och hittar dit.",
-    image: "/images/restaurang.jpg?v=5",
+      "Meny, bordsbokning och karta. När gästen ser maten ska hon bli hungrig, och kartan ser till att hon hittar hit.",
+    image: "/images/examples/restaurang.jpg",
   },
   {
     slug: "malare",
@@ -185,8 +185,8 @@ export const EXAMPLES = [
     short: "Målare",
     brand: "Stockholms Måleri",
     blurb:
-      "Färg, ROT och kostnadsfri offert. Ett rum som säljer hantverket – och en sida som tar in jobb.",
-    image: "/images/malare.jpg?v=5",
+      "Färg, ROT och kostnadsfri offert. Ett rum som säljer hantverket, och en sida som tar in jobb.",
+    image: "/images/examples/malare.jpg",
   },
   {
     slug: "konsult",
@@ -195,7 +195,7 @@ export const EXAMPLES = [
     brand: "Anders Eriksson",
     blurb:
       "Ett samtal, tre uppdragstyper, tydlig kontakt. En sida som får fler att boka trettio minuter.",
-    image: "/images/konsult.jpg?v=5",
+    image: "/images/examples/konsult.jpg",
   },
 ] as const;
 

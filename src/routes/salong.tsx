@@ -60,7 +60,7 @@ function SalonDemo() {
             Hårvård i ett lugnare tempo.
           </h1>
           <p className="mt-6 max-w-md text-lg leading-relaxed text-[#6b574c]">
-            Klippning, färg, slingor och balayage. Du bokar frisören, inte en lucka i ett schema.
+            Klippning, färg och slingor. När du bokar väljer du vilken frisör du vill sitta hos.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <a href="#boka" className="inline-flex h-12 items-center bg-[#3a2f28] px-6 text-sm text-[#f6efe6]">
@@ -81,7 +81,8 @@ function SalonDemo() {
         <div className="bg-[#efe6da] px-5 py-16 md:px-12">
           <h2 className="font-display text-4xl">Prislista</h2>
           <p className="mt-3 max-w-md text-sm text-[#6b574c]">
-            Riktpriser. Längd och utgångsläge sätter det exakta priset när du bokar. Konsultation ingår.
+            Riktpriser. Det exakta priset får du när du bokar, längd och utgångsläge styr.
+            Konsultationen ingår alltid.
           </p>
           <dl className="mt-10">
             {treatments.map((t) => (
@@ -99,7 +100,7 @@ function SalonDemo() {
 
       <section id="frisorer" className="mx-auto max-w-6xl px-5 py-20 md:px-8">
         <h2 className="font-display text-4xl">Boka den du vill sitta hos.</h2>
-        <p className="mt-3 max-w-xl text-[#6b574c]">Här lägger vi in era foton. Gästen bokar en person, inte “första lediga”.</p>
+        <p className="mt-3 max-w-xl text-[#6b574c]">Här lägger vi in era foton. Gästen väljer frisör, inte bara en tid.</p>
         <div className="mt-12 grid gap-6 sm:grid-cols-3">
           {stylists.map((p) => (
             <article key={p.name} className="bg-[#efe6da]">

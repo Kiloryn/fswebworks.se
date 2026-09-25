@@ -22,7 +22,7 @@ export const Route = createFileRoute("/vvs")({
 });
 
 const services = [
-  { title: "Akut läckage", body: "Kran, rör eller beredare som ger upp mitt i natten. Vi åker ut, stänger vattnet och lagar. Jour dygnet runt i Storstockholm." },
+  { title: "Akut läckage", body: "Kran, rör eller beredare som ger upp mitt i natten. Vi åker ut, stänger vattnet och lagar. Du når oss dygnet runt." },
   { title: "Stopp i avlopp", body: "Kök, badrum och stam. Vi rensar, filmar om det behövs och säger till om det är ett större fel." },
   { title: "Badrum och kök", body: "Nyinstallation vid renovering. Rör, golvbrunn, blandare. Offert på plats innan vi börjar." },
   { title: "Värme", body: "Radiatorer, golvvärme och varmvattenberedare. Service, byte och injustering." },
@@ -62,7 +62,7 @@ function VvsDemo() {
         tel="08-123 456 78"
         className="flex items-center justify-center bg-[#c45c3a] px-4 py-3 text-sm font-medium text-white"
       >
-        Akut? Ring 08-123 456 78 — jour dygnet runt
+        Akut? Ring 08-123 456 78, vi har jour dygnet runt
       </DemoPhoneLink>
 
       <section className="relative min-h-[78svh] text-white md:min-h-[85vh]">
@@ -75,7 +75,8 @@ function VvsDemo() {
             Kranen gick sönder. Vi är på väg.
           </h1>
           <p className="mt-5 max-w-lg text-lg text-white/85">
-            Akut VVS, badrum och värme. Offert innan vi sätter igång. ROT på arbetskostnaden.
+            Vi åker på läckor dygnet runt i Storstockholm. Du får priset innan vi börjar, och ROT
+            dras direkt på fakturan.
           </p>
           <DemoPhoneLink tel="08-123 456 78" className="mt-8 inline-flex h-14 items-center bg-[#c45c3a] px-6 text-lg font-medium">
             Ring 08-123 456 78
@@ -86,8 +87,7 @@ function VvsDemo() {
       <section className="border-y border-[#1a2420]/10 bg-[#dce6e0]">
         <div className="mx-auto max-w-6xl px-5 py-8 md:px-8">
           <p className="max-w-3xl text-lg leading-relaxed text-[#3d4a44]">
-            Jour dygnet runt i Storstockholm. ROT på arbetskostnaden, på fakturan.
-            Fast pris innan vi börjar.
+            De flesta jobben gör vi samma dag, och du pratar direkt med den som åker ut.
           </p>
         </div>
       </section>
@@ -159,7 +159,8 @@ function VvsDemo() {
         </div>
         <p className="mt-12 text-sm text-[#3d4a44]">Så kan omdömen se ut</p>
         <blockquote className="mt-3 max-w-2xl font-display text-3xl font-medium leading-snug">
-          Stopp i köket en lördag. De svarade direkt, var här samma dag och lämnade rent efter sig.
+          Stopp i köket en lördag. De svarade direkt och var här inom ett par timmar. Diskhon var
+          renare än innan de kom.
         </blockquote>
         <p className="mt-4 text-sm text-[#3d4a44]">Linda, Södermalm</p>
       </section>

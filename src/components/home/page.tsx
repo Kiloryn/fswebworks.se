@@ -164,7 +164,7 @@ function Examples() {
               <Pic
                 key={example.slug}
                 src={example.image}
-                alt={`Bild från exempelsidan ${example.brand} för ${example.name.toLowerCase()}`}
+                alt={`Skärmdump av förstasidan på exempelsidan ${example.brand} för ${example.name.toLowerCase()}`}
                 width={960}
                 height={640}
                 className="home-example-photo"

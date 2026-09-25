@@ -30,7 +30,7 @@ const colors = [
 
 const services = [
   { title: "Inomhus", body: "Tak, väggar, lister och kök. Spackling och slipning när ytan kräver det." },
-  { title: "Utomhus", body: "Fasader, fönster och staket. Färg som håller svenska vintrar." },
+  { title: "Utomhus", body: "Fasader, fönster och staket. Vi använder färg som tål att stå ute året om i svenskt klimat." },
   { title: "Tapet", body: "Tapetsering, fondvägg och förarbete." },
   { title: "Hembesök", body: "Kostnadsfri genomgång. Offert ofta samma dag." },
 ];
@@ -55,7 +55,7 @@ function PainterDemo() {
             Ett rum som känns färdigt.
           </h1>
           <p className="mt-5 max-w-md text-white/80">
-            Inomhus, utomhus och tapet. ROT på arbetskostnaden.
+            Vi målar inomhus och utomhus och sätter tapet. ROT dras på arbetskostnaden.
           </p>
           <DemoPhoneLink tel="08-678 901 23" className="mt-8 inline-flex h-14 items-center bg-[#e8e0d0] px-6 text-lg text-[#1f2a22]">
             08-678 901 23

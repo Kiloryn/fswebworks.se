@@ -32,8 +32,8 @@ function ConsultDemo() {
             i Stockholm.
           </p>
           <p className="mt-5 max-w-[36em] leading-relaxed text-[#5c564c]">
-            Tjugo år i både näringsliv och offentlig sektor. Ni går därifrån med
-            nästa steg, inte med en ny lista.
+            Jag har tjugo år i näringsliv och offentlig sektor. Efter samtalet vet ni vilket steg
+            som kommer först.
           </p>
           <p className="mt-10 font-display text-xl">Anders Eriksson</p>
           <a href="#kontakt" className="mt-8 inline-flex h-12 w-fit items-center bg-[#1c1a16] px-5 text-sm text-[#f7f4ee]">
@@ -62,7 +62,7 @@ function ConsultDemo() {
         <h2 className="font-display text-4xl">Tre typer av uppdrag</h2>
         <div className="mt-12 space-y-10">
           {[
-            ["Strategi", "Riktning för ledningsgrupper som behöver fatta beslut – inte skriva fler presentationer."],
+            ["Strategi", "Ledningsgrupper som fastnat i diskussionerna får hjälp att fatta beslut."],
             ["Ledarskap", "Samtal med chefer som tar nästa steg. Tydliga mål, konkret handledning."],
             ["Team", "Ledda arbetsmöten för grupper som kört fast. Ni går därifrån med nästa steg."],
           ].map(([t, b]) => (
@@ -87,7 +87,7 @@ function ConsultDemo() {
       <section id="kontakt" className="mx-auto grid max-w-3xl gap-0 px-5 py-16 md:px-8 lg:grid-cols-2">
         <div className="bg-[#2c2924] px-6 py-12 text-[#f7f4ee] md:px-10">
           <h2 className="font-display text-4xl">Ett första samtal, 30 minuter.</h2>
-          <p className="mt-4 text-sm text-[#c9c2b6]">Distans eller i Stockholm. Jag kommer till er, eller så tar vi det i ett samtal.</p>
+          <p className="mt-4 text-sm text-[#c9c2b6]">På distans eller hemma hos er i Stockholm.</p>
           <DemoPhoneLink tel="070-123 45 67" className="mt-8 block font-display text-4xl">
             070-123 45 67
           </DemoPhoneLink>

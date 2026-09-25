@@ -49,7 +49,7 @@ function RestaurantDemo() {
       <section id="meny" className="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-24">
         <p className="text-sm text-[#5c4338]">Folkungagatan 48 · Södermalm</p>
         <h1 className="mt-3 font-display text-5xl leading-[1.02] md:text-7xl">
-          Pasta. Vin. Inget krångel.
+          Vi kokar pasta och häller upp vin. Det är ungefär hela konceptet.
         </h1>
         <div className="mt-16 grid gap-16 md:grid-cols-2">
           <div>
