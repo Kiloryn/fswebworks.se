@@ -18,6 +18,8 @@ export function Logo({
       onClick={(e) => {
         if (pathname !== "/") return;
         e.preventDefault();
+        // Ren URL utan hash så en refresh landar på hero, inte på senaste sektionen.
+        window.history.replaceState(null, "", "/");
         scrollToTop();
       }}
     >

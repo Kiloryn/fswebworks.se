@@ -45,6 +45,7 @@ export function goToSection(
       search?: { amne?: string };
       resetScroll?: boolean;
       hashScrollIntoView?: boolean;
+      replace?: boolean;
     }) => unknown;
     search?: { amne?: string };
   },
@@ -62,6 +63,7 @@ export function goToSection(
       search: opts.search,
       resetScroll: false,
       hashScrollIntoView: false,
+      replace: true,
     });
     return;
   }
@@ -71,5 +73,6 @@ export function goToSection(
     search: opts.search,
     resetScroll: false,
     hashScrollIntoView: false,
+    replace: true,
   });
 }
