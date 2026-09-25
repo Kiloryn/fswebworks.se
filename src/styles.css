@@ -370,6 +370,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  color: transparent;
 }
 .home-refresh .home-example-preview figcaption {
   padding-top: var(--home-space-md);
