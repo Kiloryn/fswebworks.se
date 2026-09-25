@@ -1,11 +1,12 @@
 import { Check } from "lucide-react";
+import { useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
-import { Pic } from "@/components/site/pic";
 import { SectionLink } from "@/components/site/section-link";
 
 export function Hero() {
   return (
     <section className="home-hero" aria-labelledby="home-title">
+      <HeroMedia />
       <div className="home-container">
         <div className="home-hero-grid">
           <div className="home-hero-copy">
@@ -30,31 +31,6 @@ export function Hero() {
               </SectionLink>
             </div>
           </div>
-          <figure className="home-featured">
-            <a
-              href="/salong"
-              className="home-featured-image"
-              aria-label="Öppna exempelsidan Ateljé Linné"
-            >
-              <Pic
-                src="/images/salong.jpg?v=5"
-                alt="Salongsstol och spegel i varm fönsterbelysning, från exempelsidan Ateljé Linné"
-                width={1200}
-                height={1600}
-                priority
-                className="size-full object-cover"
-              />
-            </a>
-            <figcaption>
-              <div>
-                <p>Exempelsida för en salong</p>
-                <p className="home-featured-name">Ateljé Linné</p>
-              </div>
-              <a href="/salong" className="home-text-link">
-                Öppna sidan
-              </a>
-            </figcaption>
-          </figure>
         </div>
         <ul className="home-assurances" aria-label="Så arbetar vi">
           {["Inget krångel", "Tydliga priser", "Personlig hjälp", "Ingen inlåsning"].map((text) => (
@@ -66,5 +42,44 @@ export function Hero() {
         </ul>
       </div>
     </section>
+  );
+}
+
+function HeroMedia() {
+  const ref = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const video = ref.current;
+    if (!video) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (window.matchMedia("(max-width: 767px)").matches) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (!entries.some((entry) => entry.isIntersecting)) return;
+        observer.disconnect();
+        video.load();
+        video.play().catch(() => {});
+      },
+      { rootMargin: "300px" },
+    );
+    observer.observe(video);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div className="home-hero-media" aria-hidden="true">
+      <video
+        ref={ref}
+        muted
+        loop
+        playsInline
+        preload="none"
+        poster="/videos/hero-poster.jpg"
+        tabIndex={-1}
+      >
+        <source src="/videos/hero.webm" type="video/webm" />
+        <source src="/videos/hero.mp4" type="video/mp4" />
+      </video>
+    </div>
   );
 }
