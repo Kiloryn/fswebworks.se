@@ -78,8 +78,8 @@ function PainterDemo() {
         </div>
         <div className="relative min-h-[56vh] md:min-h-[82vh]">
           <Pic
-            src="/images/malare.jpg?v=6"
-            alt="Nymålat vardagsrum i salviagrönt"
+            src="/images/malare.jpg?v=7"
+            alt="Roller som målar en vägg i salviagrönt"
             className="absolute inset-0 size-full object-cover"
             width={1600}
             height={1200}
@@ -91,7 +91,7 @@ function PainterDemo() {
       <section className="mx-auto max-w-6xl px-5 py-20 md:px-8">
         <h2 className="font-display text-4xl">Färger vi ofta återkommer till</h2>
         <p className="mt-3 max-w-xl text-[#4d5b52]">
-          Rummet på bilden är målat i Salvia. Vi hjälper dig provmåla innan du bestämmer dig.
+          Väggen i bilden målas i Salvia. Vi hjälper dig provmåla innan du bestämmer dig.
         </p>
         <div className="mt-12 grid grid-cols-2 gap-3 md:grid-cols-4">
           {colors.map((c) => (
