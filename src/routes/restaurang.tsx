@@ -4,21 +4,7 @@ import { DemoBanner, DemoExit, DemoPhoneLink } from "@/components/site/demo-bann
 
 export const Route = createFileRoute("/restaurang")({
   component: RestaurantDemo,
-  head: () => ({
-    meta: [{ title: "Trattoria Nove – exempelsida" }],
-    links: [
-      { rel: "preconnect", href: "https://fonts.googleapis.com" },
-      {
-        rel: "preconnect",
-        href: "https://fonts.gstatic.com",
-        crossOrigin: "anonymous",
-      },
-      {
-        rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap",
-      },
-    ],
-  }),
+  head: () => ({ meta: [{ title: "Trattoria Nove – exempelsida" }] }),
 });
 
 const lunch = [
@@ -37,23 +23,67 @@ function RestaurantDemo() {
   return (
     <div className="demo-krog min-h-svh bg-[#f6eee4] text-[#1a0f0d]">
       <DemoBanner current="restaurang" />
-      <header className="bg-[#1a0f0d] text-[#f3e6d8]">
+      <header className="border-b border-[#1a0f0d]/10">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-5 md:px-8">
           <p className="font-display text-2xl">Trattoria Nove</p>
-          <a href="#boka" className="inline-flex h-11 items-center bg-[#f3e6d8] px-4 text-sm text-[#1a0f0d]">
+          <a href="#boka" className="inline-flex h-11 items-center bg-[#1a0f0d] px-5 text-sm text-[#f3e6d8]">
             Boka bord
           </a>
         </div>
       </header>
 
-      <section id="meny" className="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-24">
-        <p className="text-sm text-[#5c4338]">Folkungagatan 48 · Södermalm</p>
-        <h1 className="mt-3 font-display text-5xl leading-[1.02] md:text-7xl">
-          Vi kokar pasta och häller upp vin. Det är ungefär hela konceptet.
-        </h1>
-        <div className="mt-16 grid gap-16 md:grid-cols-2">
+      <section className="grid md:grid-cols-2 md:items-stretch">
+        <div className="flex flex-col justify-center px-5 py-16 md:px-12 lg:px-16">
+          <p className="text-sm text-[#5c4338]">Trattoria · Folkungagatan 48 · Södermalm</p>
+          <h1 className="mt-4 max-w-[16ch] font-display text-5xl leading-[1.02] md:text-6xl lg:text-7xl">
+            Vi kokar pasta och häller upp vin. Det är ungefär hela konceptet.
+          </h1>
+          <dl className="mt-10 grid max-w-md grid-cols-2 gap-6 text-sm">
+            <div>
+              <dt className="text-[#5c4338]">Lunch</dt>
+              <dd className="mt-1 font-display text-xl">Mån–fre 11–14</dd>
+            </div>
+            <div>
+              <dt className="text-[#5c4338]">Kväll</dt>
+              <dd className="mt-1 font-display text-xl">Tis–sön 17–23</dd>
+            </div>
+          </dl>
+          <div className="mt-10 flex flex-wrap gap-3">
+            <a
+              href="#boka"
+              className="inline-flex h-12 items-center bg-[#1a0f0d] px-6 text-sm text-[#f3e6d8]"
+            >
+              Boka bord
+            </a>
+            <a
+              href="#meny"
+              className="inline-flex h-12 items-center border border-[#1a0f0d] px-6 text-sm"
+            >
+              Se menyn
+            </a>
+          </div>
+          <p className="mt-8 text-sm text-[#5c4338]">Lunch utan bokning går oftast bra.</p>
+        </div>
+        <div className="relative min-h-[56vh] md:min-h-[82vh]">
+          <Pic
+            src="/images/restaurang.jpg?v=6"
+            alt="Tagliatelle och ett glas rött vin på dukat bord"
+            className="absolute inset-0 size-full object-cover"
+            width={1600}
+            height={1200}
+            priority
+          />
+        </div>
+      </section>
+
+      <section id="meny" className="mx-auto max-w-6xl px-5 py-20 md:px-8">
+        <h2 className="font-display text-4xl">Menyn</h2>
+        <p className="mt-3 max-w-xl text-[#5c4338]">
+          Kort, italiensk, inget krångel. Vinlistan får du från personalen.
+        </p>
+        <div className="mt-12 grid gap-16 md:grid-cols-2">
           <div>
-            <h2 className="font-display text-3xl">Lunch</h2>
+            <h3 className="font-display text-3xl">Lunch</h3>
             <p className="mt-1 text-sm text-[#5c4338]">Mån–fre 11–14</p>
             <ul className="mt-8 divide-y divide-[#1a0f0d]/10 border-y border-[#1a0f0d]/10">
               {lunch.map(([n, p]) => (
@@ -65,7 +95,7 @@ function RestaurantDemo() {
             </ul>
           </div>
           <div>
-            <h2 className="font-display text-3xl">Kväll</h2>
+            <h3 className="font-display text-3xl">Kväll</h3>
             <p className="mt-1 text-sm text-[#5c4338]">Tis–sön 17–23</p>
             <ul className="mt-8 divide-y divide-[#1a0f0d]/10 border-y border-[#1a0f0d]/10">
               {dinner.map(([n, p]) => (
@@ -79,9 +109,15 @@ function RestaurantDemo() {
         </div>
       </section>
 
-      <div className="relative min-h-[60vh] md:min-h-[75vh]">
-        <Pic src="/images/restaurang.jpg?v=5" alt="Tagliatelle och ett glas vin" className="absolute inset-0 size-full object-cover" width={1400} height={1050} priority />
-      </div>
+      <section className="border-y border-[#1a0f0d]/10 px-5 py-16 md:px-8">
+        <div className="mx-auto max-w-3xl">
+          <p className="text-sm text-[#5c4338]">Så kan omdömen se ut</p>
+          <blockquote className="mt-4 max-w-2xl font-display text-3xl leading-snug">
+            Pastan är gjord på plats varje morgon. Beställ tagliatellen och lita på mig.
+          </blockquote>
+          <p className="mt-4 text-sm text-[#5c4338]">Stammis sedan 2019</p>
+        </div>
+      </section>
 
       <section id="boka" className="bg-[#1a0f0d] px-5 py-16 text-[#f3e6d8] md:px-8">
         <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-2">

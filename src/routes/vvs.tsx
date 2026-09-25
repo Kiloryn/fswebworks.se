@@ -34,10 +34,16 @@ const team = [
   { name: "Sofia Lind", role: "Kund och planering" },
 ];
 
+const steps = [
+  { title: "Skicka en bild på felet", body: "På sms eller mejl. Du får svar inom en timme på vardagar." },
+  { title: "Du får fast pris", body: "Innan vi åker vet du vad det kostar. Inga tillägg i efterhand." },
+  { title: "Vi lagar och städar efter oss", body: "De flesta jobb klara på plats. ROT dras direkt på fakturan." },
+];
+
 const faq = [
   { q: "Det läcker – vad gör jag?", a: "Stäng ventilen vid vattenmätaren om du hittar den. Ring oss. Jour dygnet runt i Storstockholm." },
   { q: "Jobbar ni med ROT-avdrag?", a: "Ja, på arbetskostnaden för privatpersoner i befintlig bostad. Avdraget sitter på fakturan." },
-  { q: "Vad kostar ett hembesök?", a: "Akut utryckning från 1\u00a0290 kr. Du får alltid pris innan vi sätter igång." },
+  { q: "Vad kostar ett hembesök?", a: "Akut utryckning från 1 290 kr. Du får alltid pris innan vi sätter igång." },
   { q: "Var kör ni?", a: "Hela Storstockholm. Säg var du bor så säger vi om vi tar det." },
 ];
 
@@ -47,7 +53,7 @@ function VvsDemo() {
       <DemoBanner current="vvs" />
       <header className="border-b border-[#1a2420]/10 bg-[#eef3ef]">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-5 py-4 md:px-8">
-          <p className="min-w-0 font-display text-lg font-medium">Din Rörmokare</p>
+          <p className="min-w-0 font-display text-2xl">Din Rörmokare</p>
           <nav className="hidden gap-6 text-sm md:flex">
             <a href="#tjanster">Tjänster</a>
             <a href="#priser">Priser</a>
@@ -58,73 +64,90 @@ function VvsDemo() {
           </DemoPhoneLink>
         </div>
       </header>
-      <DemoPhoneLink
-        tel="08-123 456 78"
-        className="flex items-center justify-center bg-[#c45c3a] px-4 py-3 text-sm font-medium text-white"
-      >
-        Akut? Ring 08-123 456 78, vi har jour dygnet runt
-      </DemoPhoneLink>
 
-      <section className="relative min-h-[78svh] text-white md:min-h-[85vh]">
-        <div className="absolute inset-0">
-          <Pic src="/images/vvs.jpg?v=6" alt="Rörmokare drar åt kopparrör" className="size-full object-cover" width={1400} height={788} priority />
-        </div>
-        <div className="absolute inset-0 bg-[#0e1418]/60" />
-        <div className="relative mx-auto flex min-h-[78svh] max-w-6xl flex-col justify-end px-5 pb-14 md:min-h-[85vh] md:px-8 md:pb-20">
-          <h1 className="max-w-[14ch] font-display text-5xl font-medium leading-[1.02] md:text-7xl">
+      <section className="grid md:grid-cols-2 md:items-stretch">
+        <div className="flex flex-col justify-center px-5 py-16 md:px-12 lg:px-16">
+          <p className="text-sm text-[#3d4a44]">Jour i Storstockholm · dygnet runt</p>
+          <h1 className="mt-4 max-w-[13ch] font-display text-5xl leading-[1.02] md:text-7xl">
             Kranen gick sönder. Vi är på väg.
           </h1>
-          <p className="mt-5 max-w-lg text-lg text-white/85">
+          <p className="mt-6 max-w-md text-lg leading-relaxed text-[#3d4a44]">
             Vi åker på läckor dygnet runt i Storstockholm. Du får priset innan vi börjar, och ROT
             dras direkt på fakturan.
           </p>
-          <DemoPhoneLink tel="08-123 456 78" className="mt-8 inline-flex h-14 items-center bg-[#c45c3a] px-6 text-lg font-medium">
-            Ring 08-123 456 78
-          </DemoPhoneLink>
+          <div className="mt-8 flex flex-wrap items-center gap-3">
+            <DemoPhoneLink
+              tel="08-123 456 78"
+              className="inline-flex h-12 items-center bg-[#c45c3a] px-6 text-sm font-medium text-white"
+            >
+              Ring 08-123 456 78
+            </DemoPhoneLink>
+            <a href="#priser" className="inline-flex h-12 items-center border border-[#1a2420] px-6 text-sm">
+              Se riktpriser
+            </a>
+          </div>
+          <p className="mt-8 text-sm text-[#3d4a44]">Fast pris innan vi börjar · ROT på fakturan · Jour alla dagar</p>
+        </div>
+        <div className="relative min-h-[56vh] md:min-h-[82vh]">
+          <Pic
+            src="/images/vvs.jpg?v=7"
+            alt="Rörmokare drar åt kopparrör under en köksbänk"
+            className="absolute inset-0 size-full object-cover"
+            width={1600}
+            height={900}
+            priority
+          />
         </div>
       </section>
 
-      <section className="border-y border-[#1a2420]/10 bg-[#dce6e0]">
-        <div className="mx-auto max-w-6xl px-5 py-8 md:px-8">
-          <p className="max-w-3xl text-lg leading-relaxed text-[#3d4a44]">
-            De flesta jobben gör vi samma dag, och du pratar direkt med den som åker ut.
-          </p>
-        </div>
-      </section>
-
-      <section id="tjanster" className="mx-auto max-w-6xl px-5 py-20 md:px-8">
-        <h2 className="font-display text-4xl font-medium md:text-5xl">Vad vi gör</h2>
-        <p className="mt-3 max-w-xl text-[#3d4a44]">
-          Service, reparation och nyinstallation. Privat, villa och förening.
-        </p>
-        <div className="mt-12 grid gap-x-12 gap-y-10 md:grid-cols-2">
-          {services.map((s) => (
-            <article key={s.title} className="border-t border-[#1a2420]/15 pt-6">
-              <h3 className="font-display text-2xl font-medium">{s.title}</h3>
-              <p className="mt-3 leading-relaxed text-[#3d4a44]">{s.body}</p>
-            </article>
+      <section className="mx-auto max-w-6xl px-5 py-20 md:px-8">
+        <h2 className="font-display text-4xl">Så går det till</h2>
+        <ol className="mt-12 grid gap-10 md:grid-cols-3">
+          {steps.map((s, i) => (
+            <li key={s.title} className="border-t border-[#1a2420]/15 pt-6">
+              <span className="font-display text-5xl text-[#1a2420]/25" aria-hidden="true">
+                {i + 1}
+              </span>
+              <h3 className="mt-4 font-display text-2xl">{s.title}</h3>
+              <p className="mt-2 leading-relaxed text-[#3d4a44]">{s.body}</p>
+            </li>
           ))}
+        </ol>
+      </section>
+
+      <section id="tjanster" className="bg-[#dce6e0] py-20">
+        <div className="mx-auto max-w-6xl px-5 md:px-8">
+          <h2 className="font-display text-4xl font-medium">Vad vi gör</h2>
+          <p className="mt-3 max-w-xl text-[#3d4a44]">
+            Service, reparation och nyinstallation. Privat, villa och förening.
+          </p>
+          <div className="mt-12 grid gap-x-12 gap-y-10 md:grid-cols-2">
+            {services.map((s) => (
+              <article key={s.title} className="border-t border-[#1a2420]/15 pt-6">
+                <h3 className="font-display text-2xl font-medium">{s.title}</h3>
+                <p className="mt-3 leading-relaxed text-[#3d4a44]">{s.body}</p>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
 
-      <section id="priser" className="bg-[#dce6e0] py-20">
-        <div className="mx-auto max-w-6xl px-5 md:px-8">
-          <h2 className="font-display text-4xl font-medium">Riktpriser</h2>
-          <p className="mt-2 text-[#3d4a44]">Exkl. moms. Fast pris innan vi börjar.</p>
-          <dl className="mt-10 divide-y divide-[#1a2420]/10 border-y border-[#1a2420]/10">
-            {[
-              ["Utryckning, akuttid", "från 1\u00a0290 kr"],
-              ["Enklare reparation", "från 690 kr/tim"],
-              ["Stopp i avlopp", "från 1\u00a0490 kr"],
-              ["Badrum / beredare", "enligt offert"],
-            ].map(([k, v]) => (
-              <div key={k} className="flex min-w-0 items-baseline justify-between gap-4 py-5">
-                <dt className="min-w-0">{k}</dt>
-                <dd className="shrink-0 font-display text-xl font-medium tabular-nums">{v}</dd>
-              </div>
-            ))}
-          </dl>
-        </div>
+      <section id="priser" className="mx-auto max-w-6xl px-5 py-20 md:px-8">
+        <h2 className="font-display text-4xl">Riktpriser</h2>
+        <p className="mt-2 text-[#3d4a44]">Exkl. moms. Fast pris innan vi börjar.</p>
+        <dl className="mt-10 divide-y divide-[#1a2420]/10 border-y border-[#1a2420]/10">
+          {[
+            ["Utryckning, akuttid", "från 1 290 kr"],
+            ["Enklare reparation", "från 690 kr/tim"],
+            ["Stopp i avlopp", "från 1 490 kr"],
+            ["Badrum / beredare", "enligt offert"],
+          ].map(([k, v]) => (
+            <div key={k} className="flex min-w-0 items-baseline justify-between gap-4 py-5">
+              <dt className="min-w-0">{k}</dt>
+              <dd className="shrink-0 font-display text-xl font-medium tabular-nums">{v}</dd>
+            </div>
+          ))}
+        </dl>
       </section>
 
       <section id="folk" className="bg-[#1a2420] py-20 text-[#e8efe9]">
@@ -152,7 +175,9 @@ function VvsDemo() {
         <div className="mt-10 divide-y divide-[#1a2420]/10 border-y border-[#1a2420]/10">
           {faq.map((item) => (
             <details key={item.q} className="py-5">
-              <summary className="flex min-h-11 cursor-pointer list-none items-center text-lg font-medium">{item.q}</summary>
+              <summary className="flex min-h-11 cursor-pointer list-none items-center text-lg font-medium">
+                {item.q}
+              </summary>
               <p className="mt-3 max-w-2xl leading-relaxed text-[#3d4a44]">{item.a}</p>
             </details>
           ))}
