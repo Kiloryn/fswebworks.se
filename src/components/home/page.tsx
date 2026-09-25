@@ -168,6 +168,7 @@ function Examples() {
                 width={960}
                 height={640}
                 className="home-example-photo"
+                priority
               />
             </a>
             <figcaption>
