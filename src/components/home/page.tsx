@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { Check, Plus } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { EXAMPLES, FAQ, INCLUDED, SERVICES, SITE, STEPS } from "@/lib/site";
 import { Button } from "@/components/ui/button";
 import { ContactForm } from "@/components/site/contact-form";
@@ -108,9 +108,47 @@ function Services() {
 
 function Examples() {
   const [selected, setSelected] = useState<string>(EXAMPLES[0].slug);
+  const [preloadExamples, setPreloadExamples] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
   const example = EXAMPLES.find((item) => item.slug === selected) ?? EXAMPLES[0];
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+    if (!("IntersectionObserver" in window)) {
+      setPreloadExamples(true);
+      return;
+    }
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry?.isIntersecting) {
+          setPreloadExamples(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "800px" },
+    );
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section id="exempel" className="home-examples" aria-labelledby="examples-title">
+    <section
+      ref={sectionRef}
+      id="exempel"
+      className="home-examples"
+      aria-labelledby="examples-title"
+    >
+      {preloadExamples && (
+        <div hidden aria-hidden="true">
+          {EXAMPLES.slice(1).map((item) => (
+            <picture key={item.slug}>
+              <source srcSet={item.image.replace(/\.jpg$/i, ".webp")} type="image/webp" />
+              <img src={item.image} alt="" loading="eager" fetchPriority="low" />
+            </picture>
+          ))}
+        </div>
+      )}
       <div className="home-container">
         <div className="home-section-head">
           <h2 id="examples-title">
