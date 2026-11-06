@@ -149,7 +149,7 @@ function VvsDemo() {
             {team.map((p) => (
               <article key={p.name}>
                 <div className="flex aspect-[3/4] flex-col items-center justify-center bg-[#24302c]">
-                  <span className="text-sm text-[#e8b89a]">Bild på personal</span>
+                  <span className="text-sm text-[#e8b89a]">Er bild läggs här</span>
                 </div>
                 <h3 className="mt-4 font-display text-xl font-medium">{p.name}</h3>
                 <p className="text-sm text-[#c5d0c8]">{p.role}</p>
