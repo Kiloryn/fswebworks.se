@@ -227,18 +227,37 @@ test("salong self-hosts Cormorant and does not load Google Fonts", () => {
 
 test("example heroes are local files with recorded stock attribution", () => {
   const credits = read("public/images/ATTRIBUTION.md");
-  assert.match(credits, /Maria Orlova/);
-  assert.match(credits, /Rachel Claire/);
-  assert.match(credits, /stevepb/);
-  assert.match(credits, /ranjeet \./);
-  assert.match(credits, /Pexels License/);
-  assert.match(credits, /Pixabay License/);
-  assert.match(credits, /Pixabay Content License/);
-  assert.match(credits, /https:\/\/www\.pexels\.com\/photo\/kitchen-restaurant-4947388\//);
-  assert.match(credits, /https:\/\/www\.pexels\.com\/photo\/wooden-desk-and-shelves-in-room-5490294\//);
-  assert.match(credits, /https:\/\/pixabay\.com\/photos\/plumbing-pipe-wrenches-plumber-840835\//);
-  assert.match(credits, /https:\/\/www\.pexels\.com\/photo\/electrical-circuit-breaker-panel-with-color-coded-wiring-28950842\//);
+  for (const [creator, source, license] of [
+    [
+      "Maria Orlova",
+      "https://www.pexels.com/photo/kitchen-restaurant-4947388/",
+      "Pexels License",
+    ],
+    [
+      "Rachel Claire",
+      "https://www.pexels.com/photo/wooden-desk-and-shelves-in-room-5490294/",
+      "Pexels License",
+    ],
+    [
+      "stevepb",
+      "https://pixabay.com/photos/plumbing-pipe-wrenches-plumber-840835/",
+      "Pixabay Content License",
+    ],
+    [
+      "ranjeet .",
+      "https://www.pexels.com/photo/electrical-circuit-breaker-panel-with-color-coded-wiring-28950842/",
+      "Pexels License",
+    ],
+  ]) {
+    assert.match(credits, new RegExp(`creator: ${creator.replace(".", "\\.")}`));
+    assert.match(credits, new RegExp(`source_page: ${source.replaceAll("/", "\\/")}`));
+    assert.match(credits, new RegExp(`license: ${license}`));
+  }
+  assert.match(credits, /editorial_only: no/);
+  assert.match(credits, /cc_nc: no/);
+  assert.match(credits, /paid_plus_premium: no/);
   assert.doesNotMatch(credits, /unsplash\.com\/plus/);
+  assert.doesNotMatch(credits, /CC BY-NC/);
   const kib = (rel) => statSync(join(ROOT, rel)).size / 1024;
   const caps = {
     restaurang: { jpeg: 300, webp: 131.6 },

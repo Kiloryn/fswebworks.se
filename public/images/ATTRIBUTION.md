@@ -1,24 +1,57 @@
 # Example-page photos
 
 Downloaded into this repo and served locally (not hotlinked).
-`salong.jpg` and `malare.jpg` are unchanged here.
+`salong.jpg` and `malare.jpg` were not replaced.
 
-Each source page was opened before commit. All four are free
-commercial licenses (Pexels License or Pixabay Content License).
-None are Plus, premium, editorial-only, CC NC, Unsplash+,
-or a paid subscription. Pexels pages are labelled Free. Pexels does
-not allow generative-AI uploads. The Pixabay file is labelled
-“Free for use under the Pixabay Content License” (Pixabay’s no-cost
-license; Media type JPG, published 2015, not AI generated).
+Each source page was opened before this note was written. Allowed
+licenses only: Pexels License, Pixabay Content License, Unsplash
+License. Rejected if the source page had been Plus, premium, paid,
+editorial-only, or Creative Commons NC.
 
-| File | Source page | Creator | License (as on source page) |
-| --- | --- | --- | --- |
-| `restaurang.jpg` | https://www.pexels.com/photo/kitchen-restaurant-4947388/ | Maria Orlova | Pexels License — Free, commercial use |
-| `konsult.jpg` | https://www.pexels.com/photo/wooden-desk-and-shelves-in-room-5490294/ | Rachel Claire | Pexels License — Free, commercial use |
-| `vvs.jpg` | https://pixabay.com/photos/plumbing-pipe-wrenches-plumber-840835/ | stevepb | Pixabay Content License (the no-cost Pixabay License) |
-| `elektriker.jpg` | https://www.pexels.com/photo/electrical-circuit-breaker-panel-with-color-coded-wiring-28950842/ | ranjeet . | Pexels License — Free, commercial use |
+## restaurang.jpg
+
+- source_page: https://www.pexels.com/photo/kitchen-restaurant-4947388/
+- creator: Maria Orlova
+- license: Pexels License
+- source_page_label: Free / Free Stock Photo
+- paid_plus_premium: no
+- editorial_only: no
+- cc_nc: no
+
+## konsult.jpg
+
+- source_page: https://www.pexels.com/photo/wooden-desk-and-shelves-in-room-5490294/
+- creator: Rachel Claire
+- license: Pexels License
+- source_page_label: Free / Free Stock Photo
+- paid_plus_premium: no
+- editorial_only: no
+- cc_nc: no
+
+## vvs.jpg
+
+- source_page: https://pixabay.com/photos/plumbing-pipe-wrenches-plumber-840835/
+- creator: stevepb
+- license: Pixabay Content License
+- source_page_label: Free for use under the Pixabay Content License
+- paid_plus_premium: no
+- editorial_only: no
+- cc_nc: no
+
+Pixabay’s “Editor's Choice” on that page is a quality badge, not an
+editorial-only license. Media type JPG, published 13 July 2015.
+
+## elektriker.jpg
+
+- source_page: https://www.pexels.com/photo/electrical-circuit-breaker-panel-with-color-coded-wiring-28950842/
+- creator: ranjeet .
+- license: Pexels License
+- source_page_label: Free / Free Stock Photo
+- paid_plus_premium: no
+- editorial_only: no
+- cc_nc: no
 
 License texts:
 
-- Pexels License: https://www.pexels.com/license/
-- Pixabay Content License / Pixabay License: https://pixabay.com/service/license-summary/
+- Pexels License: https://www.pexels.com/license/ (free, including commercial use on a website)
+- Pixabay Content License: https://pixabay.com/service/license-summary/ (free to use; attribution not required)
