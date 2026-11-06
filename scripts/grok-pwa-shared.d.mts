@@ -3,6 +3,21 @@ export declare const OG_SERVICE_URL_DEFAULT: string;
 export declare const OG_SITE_REL_PATH: string;
 export declare function escapeHtml(value: unknown): string;
 export declare function appNameFromHost(hostHeader: string | null | undefined): string;
+export declare function normalizeRequestHost(hostHeader: string | null | undefined): string;
+export declare function isProductionPublicHost(hostHeader: string | null | undefined): boolean;
+export declare function isGrokPlatformHost(hostHeader: string | null | undefined): boolean;
+export declare function shouldServeGrokPwa(
+  hostHeader: string | null | undefined,
+  env?: { VERCEL_ENV?: string },
+): boolean;
+export declare function shouldDenyFraming(hostHeader: string | null | undefined): boolean;
+export declare const ALWAYS_SECURITY_HEADERS: {
+  "X-Content-Type-Options": string;
+  "Referrer-Policy": string;
+};
+export declare function framingSecurityHeaders(
+  hostHeader: string | null | undefined,
+): Record<string, string>;
 export declare function publicAppHost(hostHeader: string | null | undefined): string;
 export declare function resolvePublicHost(hostHeader: string | null | undefined): string;
 export declare function isInstallQuery(url: string | null | undefined): boolean;

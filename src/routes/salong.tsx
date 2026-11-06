@@ -1,11 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Pic } from "@/components/site/pic";
 import { DemoBanner, DemoExit, DemoPhoneLink } from "@/components/site/demo-banner";
+import { NOINDEX_ROBOTS_META } from "@/lib/site";
 
 export const Route = createFileRoute("/salong")({
   component: SalonDemo,
   head: () => ({
-    meta: [{ title: "Ateljé Linné – exempelsida" }],
+    meta: [{ title: "Ateljé Linné – exempelsida" }, NOINDEX_ROBOTS_META],
     links: [
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       {

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://fswebworks.se/</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://fswebworks.se/process</loc>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://fswebworks.se/integritet</loc>
+    <changefreq>yearly</changefreq>
+  </url>
+</urlset>
