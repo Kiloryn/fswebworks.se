@@ -225,6 +225,26 @@ test("salong self-hosts Cormorant and does not load Google Fonts", () => {
   assert.equal(existsSync(join(ROOT, "public/fonts/cormorant-garamond-latin-600.woff2")), true);
 });
 
+test("example heroes are local files with recorded stock attribution", () => {
+  const credits = read("public/images/ATTRIBUTION.md");
+  assert.match(credits, /Sarah Films/);
+  assert.match(credits, /Rachel Claire/);
+  assert.match(credits, /stevepb/);
+  assert.match(credits, /ranjeet \./);
+  assert.match(credits, /Pexels License/);
+  assert.match(credits, /Pixabay License/);
+  assert.doesNotMatch(credits, /unsplash\.com\/plus/);
+  for (const stem of ["restaurang", "konsult", "vvs", "elektriker"]) {
+    assert.equal(existsSync(join(ROOT, `public/images/${stem}.jpg`)), true);
+    assert.equal(existsSync(join(ROOT, `public/images/${stem}.webp`)), true);
+  }
+  const restaurang = read("src/routes/restaurang.tsx");
+  assert.match(restaurang, /restaurang\.jpg\?v=8/);
+  assert.doesNotMatch(restaurang, /pexels\.com\/photos/);
+  assert.doesNotMatch(read("src/routes/salong.tsx"), /salong\.jpg\?v=8/);
+  assert.doesNotMatch(read("src/routes/malare.tsx"), /malare\.jpg\?v=8/);
+});
+
 test("salong and restaurang maps are a static image plus a Google Maps link", () => {
   for (const rel of ["src/routes/salong.tsx", "src/routes/restaurang.tsx"]) {
     const source = read(rel);

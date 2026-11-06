@@ -81,8 +81,8 @@ function ElDemo() {
         </div>
         <div className="relative min-h-[56vh] md:min-h-[82vh]">
           <Pic
-            src="/images/elektriker.jpg?v=6"
-            alt="Elektriker som installerar en elcentral"
+            src="/images/elektriker.jpg?v=8"
+            alt="Elcentral med säkringar och färgkodade kablar"
             className="absolute inset-0 size-full object-cover"
             width={1600}
             height={1200}

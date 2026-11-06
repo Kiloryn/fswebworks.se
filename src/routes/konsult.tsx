@@ -82,8 +82,8 @@ function ConsultDemo() {
         </div>
         <div className="relative min-h-[56vh] md:min-h-[82vh]">
           <Pic
-            src="/images/konsult.jpg?v=6"
-            alt="Porträtt av Anders Eriksson i sitt kontor"
+            src="/images/konsult.jpg?v=8"
+            alt="Skrivbord i ett arbetsrum"
             className="absolute inset-0 size-full object-cover"
             width={1200}
             height={1600}

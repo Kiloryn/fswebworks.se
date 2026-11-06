@@ -79,8 +79,8 @@ function VvsDemo() {
         </div>
         <div className="relative min-h-[56vh] md:min-h-[82vh]">
           <Pic
-            src="/images/vvs.jpg?v=7"
-            alt="Rörmokare drar åt kopparrör under en köksbänk"
+            src="/images/vvs.jpg?v=8"
+            alt="Rörtänger och rör vid en reparation"
             className="absolute inset-0 size-full object-cover"
             width={1600}
             height={900}
