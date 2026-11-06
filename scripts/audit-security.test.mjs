@@ -200,3 +200,41 @@ test("example pages use an opaque sticky bar and hide BackToTop", () => {
   const footer = read("src/components/site/footer.tsx");
   assert.match(footer, /md:pe-28/);
 });
+
+test("malare and konsult header CTAs do not wrap", () => {
+  const malare = read("src/routes/malare.tsx");
+  assert.match(malare, /whitespace-nowrap[\s\S]*Kostnadsfri offert/);
+  const konsult = read("src/routes/konsult.tsx");
+  assert.match(konsult, /whitespace-nowrap[\s\S]*Boka 30 minuter/);
+});
+
+test("vvs team placeholders use the locked Voice string", () => {
+  const vvs = read("src/routes/vvs.tsx");
+  assert.match(vvs, /Här lägger vi in era foton\. Namn, roll, en bild från vardagen\./);
+  assert.match(vvs, /Er bild läggs här/);
+  assert.doesNotMatch(vvs, /Bild på personal/);
+});
+
+test("salong self-hosts Cormorant and does not load Google Fonts", () => {
+  const salong = read("src/routes/salong.tsx");
+  assert.doesNotMatch(salong, /fonts\.googleapis\.com/);
+  assert.doesNotMatch(salong, /fonts\.gstatic\.com/);
+  assert.match(read("src/styles.css"), /cormorant-garamond-latin-400\.woff2/);
+  assert.match(read("src/styles.css"), /cormorant-garamond-latin-600\.woff2/);
+  assert.equal(existsSync(join(ROOT, "public/fonts/cormorant-garamond-latin-400.woff2")), true);
+  assert.equal(existsSync(join(ROOT, "public/fonts/cormorant-garamond-latin-600.woff2")), true);
+});
+
+test("salong and restaurang maps are a static image plus a Google Maps link", () => {
+  for (const rel of ["src/routes/salong.tsx", "src/routes/restaurang.tsx"]) {
+    const source = read(rel);
+    assert.doesNotMatch(source, /<iframe/);
+    assert.doesNotMatch(source, /output=embed/);
+    assert.match(source, /Öppna i Google Maps/);
+    assert.match(source, /google\.com\/maps\/search/);
+  }
+  assert.equal(existsSync(join(ROOT, "public/images/salong-karta.jpg")), true);
+  assert.equal(existsSync(join(ROOT, "public/images/salong-karta.webp")), true);
+  assert.equal(existsSync(join(ROOT, "public/images/restaurang-karta.jpg")), true);
+  assert.equal(existsSync(join(ROOT, "public/images/restaurang-karta.webp")), true);
+});

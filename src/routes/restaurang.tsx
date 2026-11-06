@@ -168,13 +168,24 @@ function RestaurantDemo() {
           <h2 className="font-display text-4xl">Folkungagatan 48</h2>
           <p className="mt-4 max-w-sm text-[#5c4338]">Södermalm, nära Medborgarplatsen.</p>
         </div>
-        <iframe
-          title="Karta till Trattoria Nove"
-          src="https://maps.google.com/maps?q=Folkungagatan+48,+Stockholm&hl=sv&z=16&output=embed"
-          className="h-80 w-full border-0 lg:min-h-[22rem]"
-          loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"
-        />
+        <a
+          href="https://www.google.com/maps/search/?api=1&query=Folkungagatan+48,+Stockholm"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="relative block h-80 w-full overflow-hidden lg:min-h-[22rem]"
+        >
+          <Pic
+            src="/images/restaurang-karta.jpg"
+            alt="Karta till Trattoria Nove, Folkungagatan 48, Södermalm"
+            className="absolute inset-0 size-full object-cover"
+            width={1200}
+            height={720}
+          />
+          <span className="absolute bottom-4 left-4 inline-flex h-11 items-center bg-[#1a0f0d] px-4 text-sm text-[#f3e6d8]">
+            Öppna i Google Maps
+          </span>
+          <span className="absolute bottom-2 right-3 text-[10px] text-[#1a0f0d]/70">© OpenStreetMap</span>
+        </a>
       </section>
       <DemoExit />
     </div>
