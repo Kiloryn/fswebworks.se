@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { useState, type FormEvent } from "react";
 import { SITE, SUBJECTS } from "@/lib/site";
+import { CONTACT_LIMITS } from "@/lib/contact-guard";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -26,8 +27,21 @@ export function ContactForm({ defaultSubject = "", onPaper = false }: Props) {
       setError("Fyll i namn, e-post och meddelande.");
       return;
     }
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || email.length > CONTACT_LIMITS.email) {
       setError("Ange en giltig e-postadress.");
+      return;
+    }
+    if (name.length > CONTACT_LIMITS.name) {
+      setError("Namnet är för långt.");
+      return;
+    }
+    const phone = String(data.get("phone") ?? "").trim();
+    if (phone.length > CONTACT_LIMITS.phone) {
+      setError("Telefonnumret är för långt.");
+      return;
+    }
+    if (message.length > CONTACT_LIMITS.message) {
+      setError("Meddelandet är för långt.");
       return;
     }
 
@@ -39,7 +53,7 @@ export function ContactForm({ defaultSubject = "", onPaper = false }: Props) {
         body: JSON.stringify({
           name,
           email,
-          phone: String(data.get("phone") ?? "").trim(),
+          phone,
           subject: String(data.get("subject") ?? ""),
           message,
           website: String(data.get("website") ?? ""),
@@ -106,6 +120,7 @@ export function ContactForm({ defaultSubject = "", onPaper = false }: Props) {
             name="name"
             autoComplete="name"
             required
+            maxLength={CONTACT_LIMITS.name}
             placeholder="Ditt namn"
             className={field}
           />
@@ -123,6 +138,7 @@ export function ContactForm({ defaultSubject = "", onPaper = false }: Props) {
             type="email"
             autoComplete="email"
             required
+            maxLength={CONTACT_LIMITS.email}
             spellCheck={false}
             placeholder="din@epost.se"
             className={field}
@@ -145,6 +161,7 @@ export function ContactForm({ defaultSubject = "", onPaper = false }: Props) {
             name="phone"
             type="tel"
             autoComplete="tel"
+            maxLength={CONTACT_LIMITS.phone}
             placeholder="070-123 45 67"
             className={field}
           />
@@ -184,6 +201,7 @@ export function ContactForm({ defaultSubject = "", onPaper = false }: Props) {
           id="contact-message"
           name="message"
           required
+          maxLength={CONTACT_LIMITS.message}
           rows={4}
           placeholder="Skriv gärna några rader om vad du behöver hjälp med…"
           className={cn(field, "h-auto py-3")}

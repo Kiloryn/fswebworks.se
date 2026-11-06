@@ -30,7 +30,8 @@ npm run build
 ## Kontaktformulär
 
 Kontaktformuläret skickar mejl via [Resend](https://resend.com). Resend kräver en
-verifierad avsändardomän – `beth.t@example.com` fungerar inte längre.
+verifierad avsändardomän. Om `RESEND_API_KEY` eller `RESEND_FROM` saknas nekas
+utskick (ingen `example.com`-avsändare) och besökaren uppmanas mejla `SITE.email`.
 
 1. Lägg till t.ex. `updates.fswebworks.se` under Domains i Resend
 2. Lägg DNS-posterna Resend visar hos din DNS-leverantör
@@ -38,7 +39,7 @@ verifierad avsändardomän – `beth.t@example.com` fungerar inte längre.
 
 - `RESEND_API_KEY`
 - `CONTACT_EMAIL=fredrik@fswebworks.se`
-- `RESEND_FROM=FSwebworks <updates@updates.fswebworks.se>`
+- `RESEND_FROM=FSwebworks <updates@updates.fswebworks.se>` (required; no example.com fallback)
 
 
 ## Exempelsidor
