@@ -150,6 +150,22 @@ test("hero and studio font preloads live on the homepage route only", () => {
   assert.doesNotMatch(examples, /priority/);
 });
 
+test("homepage example thumbs bust cache on both jpg and webp", () => {
+  const site = read("src/lib/site.ts");
+  for (const slug of ["vvs", "elektriker", "salong", "restaurang", "malare", "konsult"]) {
+    assert.match(site, new RegExp(`examples/${slug}\\.jpg\\?v=10`));
+  }
+  const examples = read("src/components/home/page.tsx");
+  assert.match(examples, /\.jpe\?g\(\\\?\|\$\)/);
+  assert.match(examples, /\.webp\$1/);
+  assert.doesNotMatch(examples, /replace\(\/\\.jpg\$\/i/);
+  assert.match(examples, /width=\{960\}/);
+  assert.match(examples, /height=\{588\}/);
+  assert.doesNotMatch(examples, /height=\{640\}/);
+  const pic = read("src/components/site/pic.tsx");
+  assert.match(pic, /src\.indexOf\("\?"\)/);
+});
+
 test("vvs self-hosts IBM Plex and does not load Google Fonts", () => {
   const vvs = read("src/routes/vvs.tsx");
   assert.doesNotMatch(vvs, /fonts\.googleapis\.com/);
