@@ -15,6 +15,7 @@ import {
   isInstallQuery,
   renderInstallPageHtml,
   renderWebManifest,
+  shouldServeGrokPwa,
   snapshotOgIdentity,
 } from "./grok-pwa-shared.mjs";
 
@@ -48,6 +49,10 @@ function serveGrokPwa(middlewares) {
     const pathOnly = rawUrl.split("?", 1)[0] ?? "";
     const method = (req.method ?? "GET").toUpperCase();
     if (method !== "GET") {
+      next();
+      return;
+    }
+    if (!shouldServeGrokPwa(requestHost(req))) {
       next();
       return;
     }
@@ -94,7 +99,7 @@ function wrapHtmlResponses(middlewares, cwd) {
       String(req.headers.accept ?? "").includes("text/html") &&
       !isInstallQuery(rawUrl) &&
       isDocumentPath(pathOnly);
-    if (!looksLikeDocument) {
+    if (!looksLikeDocument || !shouldServeGrokPwa(requestHost(req))) {
       next();
       return;
     }
@@ -166,8 +171,10 @@ export function grokPwaPlugin() {
       return `export const grokOgIdentity = ${JSON.stringify(snapshotOgIdentity(root))};`;
     },
     transformIndexHtml(html) {
+      const host = process.env.VITE_PUBLIC_HOSTNAME ?? "";
+      if (!shouldServeGrokPwa(host)) return html;
       return injectGrokPwaHead(html, {
-        host: process.env.VITE_PUBLIC_HOSTNAME ?? "",
+        host,
         cwd: root,
       });
     },

@@ -13,6 +13,11 @@
  *   (this function cannot read `src/lib/og/site.json` or `public/og.jpg`).
  *   This must be a middleware transforming `next()`: h3 discards the `response`
  *   runtime hook's return value, and `render:html` does not exist in Nitro v3.
+ *
+ * Gated by `shouldServeGrokPwa`: skipped on fswebworks.se / www and on
+ * `VERCEL_ENV=production` so public visitors do not get extensions.js,
+ * /__grok/manifest, or the iOS install page. Local `npm run dev` and Grok
+ * sandbox/preview hosts still get the chrome.
  */
 import installPageTemplate from "../../scripts/install-page.html?raw";
 import { grokOgIdentity } from "virtual:grok-og-identity";
@@ -23,6 +28,7 @@ import {
   isInstallQuery,
   renderInstallPageHtml,
   renderWebManifest,
+  shouldServeGrokPwa,
 } from "../../scripts/grok-pwa-shared.mjs";
 
 interface GrokPwaEvent {
@@ -66,6 +72,8 @@ export default async function grokPwaMiddleware(
 ): Promise<unknown> {
   const method = (event.req.method ?? "GET").toUpperCase();
   if (method !== "GET") return next();
+
+  if (!shouldServeGrokPwa(requestHost(event))) return next();
 
   const path = event.url.pathname;
   const urlWithQuery = path + event.url.search;

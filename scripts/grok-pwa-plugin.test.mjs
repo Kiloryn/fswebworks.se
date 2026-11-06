@@ -7,13 +7,16 @@ import test from "node:test";
 import {
   appNameFromHost,
   createHeadInjector,
+  framingSecurityHeaders,
   grokXCreatorHeadTags,
   injectGrokPwaHead,
   isDocumentPath,
   isInstallQuery,
+  isProductionPublicHost,
   publicAppHost,
   renderWebManifest,
   resolveOgCardAsset,
+  shouldServeGrokPwa,
   snapshotOgIdentity,
   stripInstallParams,
 } from "./grok-pwa-shared.mjs";
@@ -493,9 +496,44 @@ test("nitro middleware and its bundled assets exist", () => {
   const middleware = readFileSync(join(TEMPLATE_ROOT, "server/middleware/grok-pwa.ts"), "utf8");
   assert.match(middleware, /install-page\.html\?raw/);
   assert.match(middleware, /virtual:grok-og-identity/);
+  assert.match(middleware, /shouldServeGrokPwa/);
   readFileSync(join(TEMPLATE_ROOT, "scripts/install-page.html"));
   readFileSync(join(TEMPLATE_ROOT, "public/__grok/icon-180.png"));
   readFileSync(join(TEMPLATE_ROOT, "public/__grok/install/styles.css"));
+});
+
+test("vite plugin gates PWA chrome on the request host", () => {
+  const plugin = readFileSync(join(TEMPLATE_ROOT, "scripts/grok-pwa-plugin.mjs"), "utf8");
+  assert.match(plugin, /shouldServeGrokPwa/);
+});
+
+test("root document does not hard-link Grok PWA chrome", () => {
+  const root = readFileSync(join(TEMPLATE_ROOT, "src/routes/__root.tsx"), "utf8");
+  assert.doesNotMatch(root, /__grok/);
+  assert.doesNotMatch(root, /extensions\.js/);
+});
+
+test("shouldServeGrokPwa is off for the public production site", () => {
+  assert.equal(isProductionPublicHost("fswebworks.se"), true);
+  assert.equal(isProductionPublicHost("www.fswebworks.se:443"), true);
+  assert.equal(isProductionPublicHost("localhost:8080"), false);
+  assert.equal(shouldServeGrokPwa("fswebworks.se"), false);
+  assert.equal(shouldServeGrokPwa("www.fswebworks.se"), false);
+  assert.equal(shouldServeGrokPwa("localhost:8080"), true);
+  assert.equal(shouldServeGrokPwa("127.0.0.1:8080"), true);
+  assert.equal(shouldServeGrokPwa("preview.grok-sandbox.com"), true);
+  assert.equal(shouldServeGrokPwa("wild-race.grok.me"), true);
+  assert.equal(shouldServeGrokPwa("something.vercel.app", { VERCEL_ENV: "production" }), false);
+  assert.equal(shouldServeGrokPwa("something.vercel.app", { VERCEL_ENV: "preview" }), true);
+  assert.equal(shouldServeGrokPwa("localhost", { VERCEL_ENV: "production" }), true);
+});
+
+test("framing headers only apply on the public production hosts", () => {
+  assert.equal(Object.keys(framingSecurityHeaders("fswebworks.se")).length > 0, true);
+  assert.match(framingSecurityHeaders("www.fswebworks.se")["Content-Security-Policy"], /frame-ancestors 'self'/);
+  assert.deepEqual(framingSecurityHeaders("localhost:8080"), {});
+  assert.deepEqual(framingSecurityHeaders("abc.vercel.app"), {});
+  assert.deepEqual(framingSecurityHeaders("guest.grok-sandbox.com"), {});
 });
 
 test("vite plugin bakes og identity as a virtual module", () => {

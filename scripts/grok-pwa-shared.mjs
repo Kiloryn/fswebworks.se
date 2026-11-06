@@ -81,6 +81,78 @@ export function appNameFromHost(hostHeader) {
   );
 }
 
+/** Hostname from a Host / X-Forwarded-Host header (first hop, no port). */
+export function normalizeRequestHost(hostHeader) {
+  let host = String(hostHeader ?? "")
+    .split(",")[0]
+    .trim()
+    .toLowerCase();
+  if (!host) return "";
+  if (host.startsWith("[")) {
+    const end = host.indexOf("]");
+    return end >= 0 ? host.slice(0, end + 1) : host;
+  }
+  const colon = host.lastIndexOf(":");
+  if (colon !== -1 && /^\d+$/.test(host.slice(colon + 1))) {
+    host = host.slice(0, colon);
+  }
+  return host;
+}
+
+const PRODUCTION_PUBLIC_HOSTS = new Set(["fswebworks.se", "www.fswebworks.se"]);
+
+/** Apex + www of the public marketing site. */
+export function isProductionPublicHost(hostHeader) {
+  return PRODUCTION_PUBLIC_HOSTS.has(normalizeRequestHost(hostHeader));
+}
+
+/**
+ * Hosts where Grok preview/sandbox tooling (and local `npm run dev`) needs the
+ * platform PWA chrome: extensions.js, /__grok/manifest, iOS install page.
+ */
+export function isGrokPlatformHost(hostHeader) {
+  const host = normalizeRequestHost(hostHeader);
+  if (!host) return false;
+  if (host === "localhost" || host === "127.0.0.1" || host === "[::1]") return true;
+  if (host === "grok.com" || host.endsWith(".grok.com")) return true;
+  if (host === "grok.me" || host.endsWith(".grok.me")) return true;
+  if (host === "grok-sandbox.com" || host.endsWith(".grok-sandbox.com")) return true;
+  return false;
+}
+
+/**
+ * Inject / serve Grok platform chrome only for preview tooling and local
+ * hosts — never for the public production site.
+ *
+ * `env` is injectable for tests. `VERCEL_ENV=production` is a second gate for
+ * the Vercel production alias (`*.vercel.app`) which is not a grok host.
+ */
+export function shouldServeGrokPwa(hostHeader, env = process.env) {
+  if (isGrokPlatformHost(hostHeader)) return true;
+  if (isProductionPublicHost(hostHeader)) return false;
+  const vercelEnv = String(env?.VERCEL_ENV ?? "").toLowerCase();
+  if (vercelEnv === "production") return false;
+  return true;
+}
+
+/** Framing protection belongs on the public site, not Grok/Vercel preview iframes. */
+export function shouldDenyFraming(hostHeader) {
+  return isProductionPublicHost(hostHeader);
+}
+
+export const ALWAYS_SECURITY_HEADERS = {
+  "X-Content-Type-Options": "nosniff",
+  "Referrer-Policy": "strict-origin-when-cross-origin",
+};
+
+export function framingSecurityHeaders(hostHeader) {
+  if (!shouldDenyFraming(hostHeader)) return {};
+  return {
+    "X-Frame-Options": "SAMEORIGIN",
+    "Content-Security-Policy": "frame-ancestors 'self'",
+  };
+}
+
 /** True for Vercel system domains. Envoy rewrites origin Host to these; they SSO-protect `/og.jpg`. */
 function isVercelSystemHost(host) {
   return (
