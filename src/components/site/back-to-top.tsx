@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import { useRouterState } from "@tanstack/react-router";
+import { EXAMPLES } from "@/lib/site";
 import { scrollToTop } from "@/lib/scroll-to";
 
 export function BackToTop() {
   const [show, setShow] = useState(false);
   const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const isExample = EXAMPLES.some((ex) => pathname === `/${ex.slug}`);
 
   useEffect(() => {
     const onScroll = () => {
@@ -16,7 +18,7 @@ export function BackToTop() {
     return () => window.removeEventListener("scroll", onScroll);
   }, [pathname]);
 
-  if (!show) return null;
+  if (isExample || !show) return null;
 
   return (
     <button

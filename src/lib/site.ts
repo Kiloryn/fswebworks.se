@@ -154,7 +154,7 @@ export const EXAMPLES = [
     brand: "Din Rörmokare",
     blurb:
       "Akut jour, recensioner och ROT. Så syns en rörmokare när någon googlar VVS Stockholm.",
-    image: "/images/examples/vvs.jpg",
+    image: "/images/examples/vvs.jpg?v=10",
   },
   {
     slug: "elektriker",
@@ -163,7 +163,7 @@ export const EXAMPLES = [
     brand: "Stockholms Elkraft",
     blurb:
       "A-behörig installation och snabb felsökning. Besiktning med protokoll som försäkringen godkänner.",
-    image: "/images/examples/elektriker.jpg",
+    image: "/images/examples/elektriker.jpg?v=10",
   },
   {
     slug: "salong",
@@ -172,7 +172,7 @@ export const EXAMPLES = [
     brand: "Ateljé Linné",
     blurb:
       "Boka tid, frisör med namn och prislista. Det en salong behöver för att fylla stolen.",
-    image: "/images/examples/salong.jpg",
+    image: "/images/examples/salong.jpg?v=10",
   },
   {
     slug: "restaurang",
@@ -181,7 +181,7 @@ export const EXAMPLES = [
     brand: "Trattoria Nove",
     blurb:
       "Meny, bordsbokning och karta. När gästen ser maten ska hon bli hungrig, och kartan ser till att hon hittar hit.",
-    image: "/images/examples/restaurang.jpg",
+    image: "/images/examples/restaurang.jpg?v=10",
   },
   {
     slug: "malare",
@@ -190,7 +190,7 @@ export const EXAMPLES = [
     brand: "Stockholms Måleri",
     blurb:
       "Färg, ROT och kostnadsfri offert. Ett rum som säljer hantverket, och en sida som tar in jobb.",
-    image: "/images/examples/malare.jpg",
+    image: "/images/examples/malare.jpg?v=10",
   },
   {
     slug: "konsult",
@@ -199,7 +199,7 @@ export const EXAMPLES = [
     brand: "Anders Eriksson",
     blurb:
       "Ett samtal, tre uppdragstyper, tydlig kontakt. En sida som får fler att boka trettio minuter.",
-    image: "/images/examples/konsult.jpg",
+    image: "/images/examples/konsult.jpg?v=10",
   },
 ] as const;
 

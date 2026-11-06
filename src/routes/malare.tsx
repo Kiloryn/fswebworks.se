@@ -46,8 +46,8 @@ function PainterDemo() {
       <DemoBanner current="malare" />
       <header className="border-b border-[#1f2a22]/10">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-5 py-5 md:px-8">
-          <p className="font-display text-2xl">Stockholms Måleri</p>
-          <a href="#offert" className="inline-flex h-11 items-center bg-[#2f5d3d] px-5 text-sm text-white">
+          <p className="min-w-0 font-display text-2xl">Stockholms Måleri</p>
+          <a href="#offert" className="inline-flex h-11 shrink-0 items-center whitespace-nowrap bg-[#2f5d3d] px-3 text-sm text-white md:px-5">
             Kostnadsfri offert
           </a>
         </div>
@@ -115,13 +115,12 @@ function PainterDemo() {
         <h2 className="font-display text-4xl">Vad vi gör</h2>
         <dl className="mt-12 border-y border-[#1f2a22]/10">
           {services.map((s) => (
-            <div
-              key={s.title}
-              className="grid gap-2 border-b border-[#1f2a22]/10 py-6 last:border-b-0 md:grid-cols-[12rem_1fr_auto] md:items-baseline"
-            >
-              <dt className="font-display text-2xl">{s.title}</dt>
-              <dd className="text-[#4d5b52]">{s.body}</dd>
-              <dd className="shrink-0 text-sm tabular-nums text-[#4d5b52]">{s.price}</dd>
+            <div key={s.title} className="border-b border-[#1f2a22]/10 py-6 last:border-b-0">
+              <div className="flex min-w-0 items-baseline justify-between gap-4">
+                <dt className="min-w-0 font-display text-xl">{s.title}</dt>
+                <dd className="shrink-0 tabular-nums">{s.price}</dd>
+              </div>
+              <dd className="mt-2 max-w-xl text-[#4d5b52]">{s.body}</dd>
             </div>
           ))}
         </dl>

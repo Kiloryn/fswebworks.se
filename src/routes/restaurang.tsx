@@ -69,8 +69,8 @@ function RestaurantDemo() {
         </div>
         <div className="relative min-h-[56vh] md:min-h-[82vh]">
           <Pic
-            src="/images/restaurang.jpg?v=6"
-            alt="Tagliatelle och ett glas rött vin på dukat bord"
+            src="/images/restaurang.jpg?v=10"
+            alt="Restaurangkök med kastruller och diskar"
             className="absolute inset-0 size-full object-cover"
             width={1600}
             height={1200}
@@ -91,19 +91,19 @@ function RestaurantDemo() {
             <ul className="mt-8 divide-y divide-[#1a0f0d]/10 border-y border-[#1a0f0d]/10">
               {lunch.map(([n, p]) => (
                 <li key={n} className="flex items-baseline justify-between gap-4 py-5">
-                  <span className="min-w-0 font-display text-2xl">{n}</span>
+                  <span className="min-w-0 font-display text-xl">{n}</span>
                   <span className="shrink-0 tabular-nums">{p}</span>
                 </li>
               ))}
             </ul>
           </div>
-          <div>
+          <div className="bg-[#eadccb] px-6 py-8 md:px-8">
             <h3 className="font-display text-3xl">Kväll</h3>
             <p className="mt-1 text-sm text-[#5c4338]">Tis–sön 17–23</p>
             <ul className="mt-8 divide-y divide-[#1a0f0d]/10 border-y border-[#1a0f0d]/10">
               {dinner.map(([n, p]) => (
                 <li key={n} className="flex items-baseline justify-between gap-4 py-5">
-                  <span className="min-w-0 font-display text-2xl">{n}</span>
+                  <span className="min-w-0 font-display text-xl">{n}</span>
                   <span className="shrink-0 tabular-nums">{p}</span>
                 </li>
               ))}
@@ -168,13 +168,24 @@ function RestaurantDemo() {
           <h2 className="font-display text-4xl">Folkungagatan 48</h2>
           <p className="mt-4 max-w-sm text-[#5c4338]">Södermalm, nära Medborgarplatsen.</p>
         </div>
-        <iframe
-          title="Karta till Trattoria Nove"
-          src="https://maps.google.com/maps?q=Folkungagatan+48,+Stockholm&hl=sv&z=16&output=embed"
-          className="h-80 w-full border-0 lg:min-h-[22rem]"
-          loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"
-        />
+        <a
+          href="https://www.google.com/maps/search/?api=1&query=Folkungagatan+48,+Stockholm"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="relative block h-80 w-full overflow-hidden lg:min-h-[22rem]"
+        >
+          <Pic
+            src="/images/restaurang-karta.jpg"
+            alt="Karta till Trattoria Nove, Folkungagatan 48, Södermalm"
+            className="absolute inset-0 size-full object-cover"
+            width={1200}
+            height={720}
+          />
+          <span className="absolute bottom-4 left-4 inline-flex h-11 items-center bg-[#1a0f0d] px-4 text-sm text-[#f3e6d8]">
+            Öppna i Google Maps
+          </span>
+          <span className="absolute bottom-2 right-3 text-[10px] text-[#1a0f0d]/70">© OpenStreetMap</span>
+        </a>
       </section>
       <DemoExit />
     </div>

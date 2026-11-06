@@ -143,7 +143,7 @@ function Examples() {
         <div hidden aria-hidden="true">
           {EXAMPLES.slice(1).map((item) => (
             <picture key={item.slug}>
-              <source srcSet={item.image.replace(/\.jpg$/i, ".webp")} type="image/webp" />
+              <source srcSet={item.image.replace(/\.jpe?g(\?|$)/i, ".webp$1")} type="image/webp" />
               <img src={item.image} alt="" loading="eager" fetchPriority="low" />
             </picture>
           ))}
@@ -204,7 +204,7 @@ function Examples() {
                 src={example.image}
                 alt={`Skärmdump av exempelsidan ${example.brand}`}
                 width={960}
-                height={640}
+                height={588}
                 className="home-example-photo"
               />
             </a>

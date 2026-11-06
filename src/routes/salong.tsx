@@ -7,18 +7,6 @@ export const Route = createFileRoute("/salong")({
   component: SalonDemo,
   head: () => ({
     meta: [{ title: "Ateljé Linné – exempelsida" }, NOINDEX_ROBOTS_META],
-    links: [
-      { rel: "preconnect", href: "https://fonts.googleapis.com" },
-      {
-        rel: "preconnect",
-        href: "https://fonts.gstatic.com",
-        crossOrigin: "anonymous",
-      },
-      {
-        rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&display=swap",
-      },
-    ],
   }),
 });
 
@@ -169,13 +157,24 @@ function SalonDemo() {
             Östermalm, mellan Östermalmstorg och Karlaplan. Fem minuter från tunnelbanan.
           </p>
         </div>
-        <iframe
-          title="Karta till Ateljé Linné"
-          src="https://maps.google.com/maps?q=Nybrogatan+18,+Stockholm&hl=sv&z=16&output=embed"
-          className="h-80 w-full border-0 lg:h-full lg:min-h-[22rem]"
-          loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"
-        />
+        <a
+          href="https://www.google.com/maps/search/?api=1&query=Nybrogatan+18,+Stockholm"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="relative block h-80 w-full overflow-hidden lg:h-full lg:min-h-[22rem]"
+        >
+          <Pic
+            src="/images/salong-karta.jpg"
+            alt="Karta till Ateljé Linné, Nybrogatan 18, Östermalm"
+            className="absolute inset-0 size-full object-cover"
+            width={1200}
+            height={720}
+          />
+          <span className="absolute bottom-4 left-4 inline-flex h-11 items-center bg-[#3a2f28] px-4 text-sm text-[#f6efe6]">
+            Öppna i Google Maps
+          </span>
+          <span className="absolute bottom-2 right-3 text-[10px] text-[#1a0f0d]/70">© OpenStreetMap</span>
+        </a>
       </section>
       <DemoExit />
     </div>

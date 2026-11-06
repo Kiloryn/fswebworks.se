@@ -81,8 +81,8 @@ function ElDemo() {
         </div>
         <div className="relative min-h-[56vh] md:min-h-[82vh]">
           <Pic
-            src="/images/elektriker.jpg?v=6"
-            alt="Elektriker som installerar en elcentral"
+            src="/images/elektriker.jpg?v=9"
+            alt="Elcentral med säkringar och färgkodade kablar"
             className="absolute inset-0 size-full object-cover"
             width={1600}
             height={1200}
@@ -106,13 +106,12 @@ function ElDemo() {
         </p>
         <dl className="mt-12 border-y border-[#14181f]/10">
           {services.map((s) => (
-            <div
-              key={s.title}
-              className="grid gap-2 border-b border-[#14181f]/10 py-6 last:border-b-0 md:grid-cols-[12rem_1fr_auto] md:items-baseline"
-            >
-              <dt className="font-display text-2xl">{s.title}</dt>
-              <dd className="text-[#5a6472]">{s.body}</dd>
-              <dd className="shrink-0 text-sm tabular-nums text-[#5a6472]">{s.price}</dd>
+            <div key={s.title} className="border-b border-[#14181f]/10 py-6 last:border-b-0">
+              <div className="flex min-w-0 items-baseline justify-between gap-4">
+                <dt className="min-w-0 font-display text-xl">{s.title}</dt>
+                <dd className="shrink-0 tabular-nums">{s.price}</dd>
+              </div>
+              <dd className="mt-2 max-w-xl text-[#5a6472]">{s.body}</dd>
             </div>
           ))}
         </dl>
@@ -123,7 +122,7 @@ function ElDemo() {
         <ol className="mt-12 grid gap-10 md:grid-cols-3">
           {steps.map((s, i) => (
             <li key={s.title} className="border-t border-[#14181f]/15 pt-6">
-              <span className="font-display text-5xl text-[#14181f]/25" aria-hidden="true">
+              <span className="font-display text-2xl text-[#14181f]" aria-hidden="true">
                 {i + 1}
               </span>
               <h3 className="mt-4 font-display text-2xl">{s.title}</h3>

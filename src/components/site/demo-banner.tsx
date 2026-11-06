@@ -6,7 +6,7 @@ import { SectionLink } from "@/components/site/section-link";
 
 export function DemoBanner({ current }: { current: string }) {
   return (
-    <div className="sticky top-0 z-[60] border-b border-line/60 bg-canvas/95 text-fg">
+    <div className="sticky top-0 z-[60] border-b border-line/60 bg-canvas text-fg">
       <div className="mx-auto flex h-12 max-w-6xl items-center gap-3 px-3 md:px-8">
         <Link to="/" className="shrink-0 text-sm text-muted hover:text-fg">
           ← Start
