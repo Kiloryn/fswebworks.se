@@ -7,18 +7,6 @@ export const Route = createFileRoute("/vvs")({
   component: VvsDemo,
   head: () => ({
     meta: [{ title: "Din Rörmokare i Stockholm – exempelsida" }, NOINDEX_ROBOTS_META],
-    links: [
-      { rel: "preconnect", href: "https://fonts.googleapis.com" },
-      {
-        rel: "preconnect",
-        href: "https://fonts.gstatic.com",
-        crossOrigin: "anonymous",
-      },
-      {
-        rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&display=swap",
-      },
-    ],
   }),
 });
 
@@ -42,7 +30,7 @@ const steps = [
 ];
 
 const faq = [
-  { q: "Det läcker – vad gör jag?", a: "Stäng ventilen vid vattenmätaren om du hittar den. Ring oss. Jour dygnet runt i Storstockholm." },
+  { q: "Vad gör jag om det läcker?", a: "Stäng ventilen vid vattenmätaren om du hittar den. Ring oss. Jour dygnet runt i Storstockholm." },
   { q: "Jobbar ni med ROT-avdrag?", a: "Ja, på arbetskostnaden för privatpersoner i befintlig bostad. Avdraget sitter på fakturan." },
   { q: "Vad kostar ett hembesök?", a: "Akut utryckning från 1 290 kr. Du får alltid pris innan vi sätter igång." },
   { q: "Var kör ni?", a: "Hela Storstockholm. Säg var du bor så säger vi om vi tar det." },

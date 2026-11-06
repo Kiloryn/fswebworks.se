@@ -5,7 +5,7 @@ export const SITE = {
   city: "Stockholm",
   tagline: "Webbdesign för småföretag i Sverige",
   description:
-    "Professionella hemsidor för hantverkare och småföretag i hela Sverige. Från 9\u00a0900 kr – tydliga priser och ingen inlåsning.",
+    "Professionella hemsidor för hantverkare och småföretag i hela Sverige. Från 9\u00a0900 kr. Tydliga priser och ingen inlåsning.",
 } as const;
 
 export const NAV = [
@@ -41,7 +41,7 @@ export const STEPS = [
   },
   {
     title: "Innehåll till hemsidan",
-    body: "Du skickar texter, bilder och information om ditt företag. Du behöver inte ha allt klart från början – vi hjälper dig att strukturera innehållet.",
+    body: "Du skickar texter, bilder och information om ditt företag. Du behöver inte ha allt klart från början. Vi hjälper dig att strukturera innehållet.",
   },
   {
     title: "Vi bygger hemsidan",
@@ -77,7 +77,7 @@ export const SERVICES = [
     price: "1\u00a0990 kr",
     suffix: "/ år, exkl. moms",
     description:
-      "Vi tar hand om den tekniska driften av din hemsida så att den är säker, snabb och tillgänglig. Du slipper tänka på tekniken och har en kontakt att vända dig till om något händer.",
+      "Vi sköter den tekniska driften av hemsidan. Du behöver inte tänka på uppdateringar och teknik, och du har en person att höra av dig till om något händer.",
     note: "Webbdriften faktureras årsvis.",
     subject: "service",
     featured: false,
@@ -91,7 +91,7 @@ export const SERVICES = [
     ],
     suffix: "exkl. moms",
     description:
-      "Behöver du uppdatera en text, byta en bild eller göra andra ändringar på hemsidan? Vi hjälper dig när behovet uppstår – du betalar bara för den hjälp du behöver.",
+      "Behöver du uppdatera en text, byta en bild eller göra andra ändringar på hemsidan? Vi hjälper dig när behovet uppstår. Du betalar bara för den hjälp du behöver.",
     cta: "Hör av dig",
     subject: "ovrigt",
     featured: false,
@@ -100,7 +100,7 @@ export const SERVICES = [
 
 export const INCLUDED = [
   "Uppstartssamtal och genomgång av behov",
-  "Design efter er verksamhet – inte en mall",
+  "Design efter er verksamhet, inte en mall.",
   "Startsida, tjänster, om oss och kontakt",
   "Fungerar på telefon",
   "Formulär så kunder når er",
@@ -115,14 +115,14 @@ export const FAQ = [
   },
   {
     q: "Hur fungerar ägarskap och drift?",
-    a: "Du äger din domän, bilder och innehåll. Det finns ingen inlåsning hos oss. Vi kan sköta drift och teknik så du slipper det – och om du senare vill flytta sidan går det.",
+    a: "Du äger din domän, bilder och innehåll. Det finns ingen inlåsning hos oss. Vi kan sköta drift och teknik så du slipper det. Vill du flytta sidan senare går det.",
   },
   {
     q: "Vad kostar webbdriften?",
     a: "Webbdriften kostar 1\u00a0990 kr per år exkl. moms och faktureras årsvis. Vi tar hand om den tekniska driften så att hemsidan är säker, snabb och tillgänglig.",
   },
   {
-    q: "Hjälper ni till med domän och e-post?",
+    q: "Hjälper ni till med domän och e\u2011post?",
     a: "Ja. Vi hjälper till att koppla domänen till hemsidan och ser till att din befintliga e-post fortsätter fungera. Vi erbjuder däremot inte generell IT-support för datorer, mobiler eller e-postprogram.",
   },
   {
@@ -136,7 +136,7 @@ export const FAQ = [
 ] as const;
 
 export const SUBJECTS = [
-  { value: "", label: "— Välj —" },
+  { value: "", label: "Välj" },
   { value: "offert", label: "Offert / ny hemsida" },
   { value: "kontakta-mig", label: "Kontakta mig" },
   { value: "service", label: "Serviceärende" },

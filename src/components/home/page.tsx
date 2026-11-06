@@ -95,8 +95,8 @@ function Services() {
             <aside className="home-ownership">
               <h3>Din hemsida är din.</h3>
               <p>
-                Domän, bilder och innehåll är dina. Vi kan sköta driften, men du är inte inlåst.
-                Vill du flytta hemsidan senare går det.
+                Domän, bilder och innehåll är dina. Vi kan sköta drift och teknik så du slipper det.
+                Vill du flytta sidan senare går det.
               </p>
             </aside>
           </div>
@@ -206,7 +206,6 @@ function Examples() {
                 width={960}
                 height={640}
                 className="home-example-photo"
-                priority
               />
             </a>
             <figcaption>
@@ -287,19 +286,9 @@ function Contact({ defaultSubject }: { defaultSubject: string }) {
     <section id="contact" className="home-contact" aria-labelledby="contact-title">
       <div className="home-container home-contact-grid">
         <div className="home-contact-copy">
-          <h2 id="contact-title">
-            Vad kan vi
-            <br />
-            hjälpa dig med?
-          </h2>
-          <p>
-            Oavsett om du funderar på en ny hemsida, vill göra en ändring eller bara har en fråga är
-            du välkommen att höra av dig.
-          </p>
-          <p>
-            Börja med ett mejl eller några rader i formuläret. Berätta vad du behöver, så hjälper vi
-            dig vidare.
-          </p>
+          <h2 id="contact-title">Hör av dig</h2>
+          <p>Ny hemsida, en ändring eller en fråga. Skriv vad du behöver.</p>
+          <p>Ett mejl eller några rader i formuläret räcker.</p>
           <a href={`mailto:${SITE.email}`} className="home-contact-email">
             {SITE.email}
           </a>
