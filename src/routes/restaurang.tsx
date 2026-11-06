@@ -69,7 +69,7 @@ function RestaurantDemo() {
         </div>
         <div className="relative min-h-[56vh] md:min-h-[82vh]">
           <Pic
-            src="/images/restaurang.jpg?v=9"
+            src="/images/restaurang.jpg?v=10"
             alt="Restaurangkök med kastruller och diskar"
             className="absolute inset-0 size-full object-cover"
             width={1600}

@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync, readFileSync, statSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import test from "node:test";
@@ -233,13 +233,30 @@ test("example heroes are local files with recorded stock attribution", () => {
   assert.match(credits, /ranjeet \./);
   assert.match(credits, /Pexels License/);
   assert.match(credits, /Pixabay License/);
+  assert.match(credits, /Pixabay Content License/);
+  assert.match(credits, /https:\/\/www\.pexels\.com\/photo\/kitchen-restaurant-4947388\//);
+  assert.match(credits, /https:\/\/www\.pexels\.com\/photo\/wooden-desk-and-shelves-in-room-5490294\//);
+  assert.match(credits, /https:\/\/pixabay\.com\/photos\/plumbing-pipe-wrenches-plumber-840835\//);
+  assert.match(credits, /https:\/\/www\.pexels\.com\/photo\/electrical-circuit-breaker-panel-with-color-coded-wiring-28950842\//);
   assert.doesNotMatch(credits, /unsplash\.com\/plus/);
-  for (const stem of ["restaurang", "konsult", "vvs", "elektriker"]) {
+  const kib = (rel) => statSync(join(ROOT, rel)).size / 1024;
+  const caps = {
+    restaurang: { jpeg: 300, webp: 131.6 },
+    konsult: { jpeg: 178.3, webp: 77.3 },
+    vvs: { jpeg: 126.7, webp: 55.3 },
+    elektriker: { jpeg: 193.7, webp: 82.8 },
+  };
+  for (const [stem, cap] of Object.entries(caps)) {
     assert.equal(existsSync(join(ROOT, `public/images/${stem}.jpg`)), true);
     assert.equal(existsSync(join(ROOT, `public/images/${stem}.webp`)), true);
+    assert.ok(kib(`public/images/${stem}.jpg`) <= cap.jpeg, `${stem}.jpg`);
+    assert.ok(kib(`public/images/${stem}.webp`) <= cap.webp, `${stem}.webp`);
   }
   const restaurang = read("src/routes/restaurang.tsx");
-  assert.match(restaurang, /restaurang\.jpg\?v=9/);
+  assert.match(restaurang, /restaurang\.jpg\?v=10/);
+  assert.match(read("src/routes/konsult.tsx"), /konsult\.jpg\?v=9/);
+  assert.match(read("src/routes/vvs.tsx"), /vvs\.jpg\?v=9/);
+  assert.match(read("src/routes/elektriker.tsx"), /elektriker\.jpg\?v=9/);
   assert.doesNotMatch(restaurang, /pexels\.com\/photos/);
   assert.doesNotMatch(read("src/routes/salong.tsx"), /salong\.jpg\?v=8/);
   assert.doesNotMatch(read("src/routes/malare.tsx"), /malare\.jpg\?v=8/);

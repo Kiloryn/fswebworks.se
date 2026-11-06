@@ -82,7 +82,7 @@ function ConsultDemo() {
         </div>
         <div className="relative min-h-[56vh] md:min-h-[82vh]">
           <Pic
-            src="/images/konsult.jpg?v=8"
+            src="/images/konsult.jpg?v=9"
             alt="Skrivbord i ett arbetsrum"
             className="absolute inset-0 size-full object-cover"
             width={1200}
