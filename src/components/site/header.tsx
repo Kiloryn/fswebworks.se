@@ -77,7 +77,7 @@ export function SiteHeader({ ink = true }: { ink?: boolean }) {
             : "border-b border-transparent bg-transparent text-fg",
         )}
       >
-        <div className="mx-auto max-w-6xl px-5 md:px-8">
+        <div className="mx-auto max-w-[75rem] px-6">
           <div className="flex h-14 items-center justify-between md:h-16">
             <Logo onInk />
             <a
@@ -134,7 +134,7 @@ export function SiteHeader({ ink = true }: { ink?: boolean }) {
           inert={!open || undefined}
         >
           <div className="min-h-0 overflow-hidden">
-            <div className="border-t border-line bg-canvas px-5 pb-6 pt-3 text-fg">
+            <div className="border-t border-line bg-canvas px-6 pb-6 pt-3 text-fg">
               <nav className="flex flex-col" aria-label="Mobilmeny">
                 {onHome ? null : (
                   <Link
