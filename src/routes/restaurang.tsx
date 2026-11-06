@@ -91,19 +91,19 @@ function RestaurantDemo() {
             <ul className="mt-8 divide-y divide-[#1a0f0d]/10 border-y border-[#1a0f0d]/10">
               {lunch.map(([n, p]) => (
                 <li key={n} className="flex items-baseline justify-between gap-4 py-5">
-                  <span className="min-w-0 font-display text-2xl">{n}</span>
+                  <span className="min-w-0 font-display text-xl">{n}</span>
                   <span className="shrink-0 tabular-nums">{p}</span>
                 </li>
               ))}
             </ul>
           </div>
-          <div>
+          <div className="bg-[#eadccb] px-6 py-8 md:px-8">
             <h3 className="font-display text-3xl">Kväll</h3>
             <p className="mt-1 text-sm text-[#5c4338]">Tis–sön 17–23</p>
             <ul className="mt-8 divide-y divide-[#1a0f0d]/10 border-y border-[#1a0f0d]/10">
               {dinner.map(([n, p]) => (
                 <li key={n} className="flex items-baseline justify-between gap-4 py-5">
-                  <span className="min-w-0 font-display text-2xl">{n}</span>
+                  <span className="min-w-0 font-display text-xl">{n}</span>
                   <span className="shrink-0 tabular-nums">{p}</span>
                 </li>
               ))}

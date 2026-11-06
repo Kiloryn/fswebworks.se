@@ -94,7 +94,7 @@ function VvsDemo() {
         <ol className="mt-12 grid gap-10 md:grid-cols-3">
           {steps.map((s, i) => (
             <li key={s.title} className="border-t border-[#1a2420]/15 pt-6">
-              <span className="font-display text-5xl text-[#1a2420]/25" aria-hidden="true">
+              <span className="font-display text-2xl text-[#1a2420]" aria-hidden="true">
                 {i + 1}
               </span>
               <h3 className="mt-4 font-display text-2xl">{s.title}</h3>
@@ -148,8 +148,8 @@ function VvsDemo() {
           <div className="mt-12 grid gap-6 sm:grid-cols-3">
             {team.map((p) => (
               <article key={p.name}>
-                <div className="flex aspect-[3/4] flex-col items-center justify-center bg-[#24302c]">
-                  <span className="text-sm text-[#e8b89a]">Er bild läggs här</span>
+                <div className="flex aspect-[3/4] flex-col items-center justify-center bg-[#eef3ef]">
+                  <span className="text-sm text-[#3d4a44]">Er bild läggs här</span>
                 </div>
                 <h3 className="mt-4 font-display text-xl font-medium">{p.name}</h3>
                 <p className="text-sm text-[#c5d0c8]">{p.role}</p>
@@ -179,7 +179,7 @@ function VvsDemo() {
         <p className="mt-4 text-sm text-[#3d4a44]">Linda, Södermalm</p>
       </section>
 
-      <section id="offert" className="bg-[#c45c3a] px-5 py-16 text-white md:px-8">
+      <section id="offert" className="bg-[#1a2420] px-5 py-16 text-white md:px-8">
         <div className="mx-auto flex max-w-6xl flex-col justify-between gap-8 md:flex-row md:items-end">
           <div>
             <h2 className="font-display text-4xl font-medium">Hör av dig. Vi tar det därifrån.</h2>

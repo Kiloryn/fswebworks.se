@@ -215,6 +215,66 @@ test("vvs team placeholders use the locked Voice string", () => {
   assert.doesNotMatch(vvs, /Bild på personal/);
 });
 
+test("example pages self-host Newsreader, Oswald and DM Sans without Google Fonts", () => {
+  const css = read("src/styles.css");
+  const root = read("src/routes/__root.tsx");
+  assert.doesNotMatch(css, /fonts\.googleapis\.com/);
+  assert.doesNotMatch(css, /fonts\.gstatic\.com/);
+  assert.doesNotMatch(root, /newsreader-latin|oswald-latin|dm-sans-latin/);
+  for (const [family, file] of [
+    ["Newsreader", "newsreader-latin-400.woff2"],
+    ["Newsreader", "newsreader-latin-600.woff2"],
+    ["Oswald", "oswald-latin-400.woff2"],
+    ["Oswald", "oswald-latin-600.woff2"],
+    ["DM Sans", "dm-sans-latin-400.woff2"],
+    ["DM Sans", "dm-sans-latin-600.woff2"],
+  ]) {
+    assert.match(css, new RegExp(file.replaceAll(".", "\\.")));
+    assert.equal(existsSync(join(ROOT, `public/fonts/${file}`)), true);
+    assert.match(css, new RegExp(`font-family: "?${family}"?`));
+  }
+  assert.match(css, /\.demo-konsult \{[\s\S]*font-family: "IBM Plex Sans"/);
+  assert.match(css, /\.demo-konsult \{[\s\S]*--font-display: "Fraunces"/);
+  assert.doesNotMatch(css, /\.demo-konsult \{[\s\S]*font-family: "Outfit"/);
+  for (const rel of [
+    "src/routes/elektriker.tsx",
+    "src/routes/malare.tsx",
+    "src/routes/restaurang.tsx",
+    "src/routes/vvs.tsx",
+    "src/routes/konsult.tsx",
+    "src/routes/salong.tsx",
+  ]) {
+    assert.doesNotMatch(read(rel), /fonts\.googleapis\.com/);
+    assert.doesNotMatch(read(rel), /fonts\.gstatic\.com/);
+  }
+});
+
+test("example service rows follow the salon price model", () => {
+  const elektriker = read("src/routes/elektriker.tsx");
+  const malare = read("src/routes/malare.tsx");
+  assert.doesNotMatch(elektriker, /md:grid-cols-\[12rem_1fr_auto\]/);
+  assert.doesNotMatch(malare, /md:grid-cols-\[12rem_1fr_auto\]/);
+  assert.match(elektriker, /flex min-w-0 items-baseline justify-between gap-4/);
+  assert.match(malare, /flex min-w-0 items-baseline justify-between gap-4/);
+  assert.match(elektriker, /min-w-0 font-display text-xl/);
+  assert.match(malare, /min-w-0 font-display text-xl/);
+  assert.match(elektriker, /mt-2 max-w-xl/);
+  assert.match(malare, /mt-2 max-w-xl/);
+  const restaurang = read("src/routes/restaurang.tsx");
+  assert.match(restaurang, /min-w-0 font-display text-xl/);
+  assert.doesNotMatch(restaurang, /min-w-0 font-display text-2xl/);
+  assert.match(restaurang, /bg-\[#eadccb\] px-6 py-8/);
+  const vvs = read("src/routes/vvs.tsx");
+  assert.match(vvs, /id="offert" className="bg-\[#1a2420\]/);
+  assert.doesNotMatch(vvs, /id="offert" className="bg-\[#c45c3a\]/);
+  assert.match(vvs, /font-display text-2xl text-\[#1a2420\]/);
+  assert.doesNotMatch(vvs, /text-5xl text-\[#1a2420\]\/25/);
+  assert.match(elektriker, /font-display text-2xl text-\[#14181f\]/);
+  assert.doesNotMatch(elektriker, /text-5xl text-\[#14181f\]\/25/);
+  assert.match(vvs, /bg-\[#eef3ef\]/);
+  assert.doesNotMatch(vvs, /bg-\[#24302c\]/);
+});
+
 test("salong self-hosts Cormorant and does not load Google Fonts", () => {
   const salong = read("src/routes/salong.tsx");
   assert.doesNotMatch(salong, /fonts\.googleapis\.com/);

@@ -115,13 +115,12 @@ function PainterDemo() {
         <h2 className="font-display text-4xl">Vad vi gör</h2>
         <dl className="mt-12 border-y border-[#1f2a22]/10">
           {services.map((s) => (
-            <div
-              key={s.title}
-              className="grid gap-2 border-b border-[#1f2a22]/10 py-6 last:border-b-0 md:grid-cols-[12rem_1fr_auto] md:items-baseline"
-            >
-              <dt className="font-display text-2xl">{s.title}</dt>
-              <dd className="text-[#4d5b52]">{s.body}</dd>
-              <dd className="shrink-0 text-sm tabular-nums text-[#4d5b52]">{s.price}</dd>
+            <div key={s.title} className="border-b border-[#1f2a22]/10 py-6 last:border-b-0">
+              <div className="flex min-w-0 items-baseline justify-between gap-4">
+                <dt className="min-w-0 font-display text-xl">{s.title}</dt>
+                <dd className="shrink-0 tabular-nums">{s.price}</dd>
+              </div>
+              <dd className="mt-2 max-w-xl text-[#4d5b52]">{s.body}</dd>
             </div>
           ))}
         </dl>
