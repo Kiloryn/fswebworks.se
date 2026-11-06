@@ -8,6 +8,25 @@ export const Route = createFileRoute("/")({
   validateSearch: (s: Record<string, unknown>): HomeSearch => ({
     amne: typeof s.amne === "string" ? s.amne : undefined,
   }),
+  head: () => ({
+    links: [
+      { rel: "preload", href: "/videos/hero-poster.jpg", as: "image" },
+      {
+        rel: "preload",
+        href: "/fonts/fraunces-latin.woff2",
+        as: "font",
+        type: "font/woff2",
+        crossOrigin: "anonymous",
+      },
+      {
+        rel: "preload",
+        href: "/fonts/outfit-latin.woff2",
+        as: "font",
+        type: "font/woff2",
+        crossOrigin: "anonymous",
+      },
+    ],
+  }),
   component: Home,
 });
 

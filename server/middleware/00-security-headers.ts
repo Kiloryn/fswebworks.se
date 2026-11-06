@@ -6,7 +6,7 @@
  * install/manifest early-returns still get nosniff / referrer-policy, and
  * preview iframes are not given frame-ancestors 'self'.
  *
- * Do not add HTML CDN cache headers here — Performance owns those separately.
+ * HTML CDN cache lives in cache-headers.ts and vercel.json, not here.
  */
 import {
   ALWAYS_SECURITY_HEADERS,
