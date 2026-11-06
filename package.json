@@ -16,7 +16,7 @@
     "preview:stop": "node scripts/preview.mjs stop",
     "typecheck": "tsc --noEmit",
     "check:auth": "node scripts/check-auth-invariant.mjs",
-    "test": "node --test --experimental-strip-types 'scripts/preview.test.mjs' 'scripts/sign-out-plan.test.mjs' 'scripts/browser-smoke-verdict.test.mjs' 'scripts/contact-guard.test.mjs' 'scripts/audit-security.test.mjs'",
+    "test": "node --test --experimental-strip-types 'scripts/preview.test.mjs' 'scripts/sign-out-plan.test.mjs' 'scripts/browser-smoke-verdict.test.mjs' 'scripts/contact-guard.test.mjs' 'scripts/audit-security.test.mjs' 'scripts/back-to-top.test.mjs'",
     "lint": "eslint .",
     "format": "prettier --write ."
   },
