@@ -1,0 +1,9 @@
+# FSwebworks — public marketing site.
+# Example/demo pages (/vvs, /elektriker, /salong, /restaurang, /malare, /konsult)
+# are fictional and carry noindex, nofollow. They are omitted from the sitemap.
+# They stay crawlable so bots can see the noindex robots meta.
+
+User-agent: *
+Allow: /
+
+Sitemap: https://fswebworks.se/sitemap.xml

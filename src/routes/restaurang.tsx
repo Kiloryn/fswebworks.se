@@ -1,10 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Pic } from "@/components/site/pic";
 import { DemoBanner, DemoExit, DemoPhoneLink } from "@/components/site/demo-banner";
+import { NOINDEX_ROBOTS_META } from "@/lib/site";
 
 export const Route = createFileRoute("/restaurang")({
   component: RestaurantDemo,
-  head: () => ({ meta: [{ title: "Trattoria Nove – exempelsida" }] }),
+  head: () => ({
+    meta: [{ title: "Trattoria Nove – exempelsida" }, NOINDEX_ROBOTS_META],
+  }),
 });
 
 const lunch = [

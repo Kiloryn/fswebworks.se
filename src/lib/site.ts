@@ -1,5 +1,6 @@
 export const SITE = {
   name: "FSwebworks",
+  origin: "https://fswebworks.se",
   email: "fredrik@fswebworks.se",
   city: "Stockholm",
   tagline: "Webbdesign för småföretag i Sverige",
@@ -141,6 +142,9 @@ export const SUBJECTS = [
   { value: "service", label: "Serviceärende" },
   { value: "ovrigt", label: "Övrigt" },
 ] as const;
+
+/** Example/demo pages are fictional and must not rank as real businesses. */
+export const NOINDEX_ROBOTS_META = { name: "robots", content: "noindex, nofollow" } as const;
 
 export const EXAMPLES = [
   {
