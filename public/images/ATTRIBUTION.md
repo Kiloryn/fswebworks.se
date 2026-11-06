@@ -6,48 +6,67 @@ Downloaded into this repo and served locally (not hotlinked).
 Each source page was opened before this note was written. Allowed
 licenses only: Pexels License, Pixabay Content License, Unsplash
 License. Rejected if the source page had been Plus, premium, paid,
-editorial-only, or Creative Commons NC.
+editorial-only, Creative Commons NC, Unsplash+, or a sponsored
+paid-library result (Pixabay/Pexels/Unsplash search pages can inject
+those; these files were taken from their own photo pages).
+
+Hosts are pexels.com and pixabay.com only. No Unsplash+ and no
+paid-library source URLs.
 
 ## restaurang.jpg
 
 - source_page: https://www.pexels.com/photo/kitchen-restaurant-4947388/
+- source_host: pexels.com
 - creator: Maria Orlova
 - license: Pexels License
 - source_page_label: Free / Free Stock Photo
 - paid_plus_premium: no
+- unsplash_plus: no
+- sponsored_paid_result: no
 - editorial_only: no
 - cc_nc: no
 
 ## konsult.jpg
 
 - source_page: https://www.pexels.com/photo/wooden-desk-and-shelves-in-room-5490294/
+- source_host: pexels.com
 - creator: Rachel Claire
 - license: Pexels License
 - source_page_label: Free / Free Stock Photo
 - paid_plus_premium: no
+- unsplash_plus: no
+- sponsored_paid_result: no
 - editorial_only: no
 - cc_nc: no
 
 ## vvs.jpg
 
 - source_page: https://pixabay.com/photos/plumbing-pipe-wrenches-plumber-840835/
+- source_host: pixabay.com
 - creator: stevepb
 - license: Pixabay Content License
 - source_page_label: Free for use under the Pixabay Content License
 - paid_plus_premium: no
+- unsplash_plus: no
+- sponsored_paid_result: no
 - editorial_only: no
 - cc_nc: no
 
 Pixabay’s “Editor's Choice” on that page is a quality badge, not an
 editorial-only license. Media type JPG, published 13 July 2015.
+The file is on cdn.pixabay.com, from this photo page, not from a
+sponsored search card.
 
 ## elektriker.jpg
 
 - source_page: https://www.pexels.com/photo/electrical-circuit-breaker-panel-with-color-coded-wiring-28950842/
+- source_host: pexels.com
 - creator: ranjeet .
 - license: Pexels License
 - source_page_label: Free / Free Stock Photo
 - paid_plus_premium: no
+- unsplash_plus: no
+- sponsored_paid_result: no
 - editorial_only: no
 - cc_nc: no
 

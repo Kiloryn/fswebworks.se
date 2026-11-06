@@ -256,8 +256,15 @@ test("example heroes are local files with recorded stock attribution", () => {
   assert.match(credits, /editorial_only: no/);
   assert.match(credits, /cc_nc: no/);
   assert.match(credits, /paid_plus_premium: no/);
+  assert.match(credits, /unsplash_plus: no/);
+  assert.match(credits, /sponsored_paid_result: no/);
+  assert.match(credits, /source_host: pexels\.com/);
+  assert.match(credits, /source_host: pixabay\.com/);
   assert.doesNotMatch(credits, /unsplash\.com\/plus/);
+  assert.doesNotMatch(credits, /istockphoto\.com/);
   assert.doesNotMatch(credits, /CC BY-NC/);
+  assert.doesNotMatch(credits, /unsplash_plus: yes/);
+  assert.doesNotMatch(credits, /sponsored_paid_result: yes/);
   const kib = (rel) => statSync(join(ROOT, rel)).size / 1024;
   const caps = {
     restaurang: { jpeg: 300, webp: 131.6 },
