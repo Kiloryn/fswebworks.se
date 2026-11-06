@@ -186,5 +186,6 @@ test("homepage alignment and wrapping CSS land", () => {
   assert.match(header, /max-w-\[75rem\].*px-6/);
   const footer = read("src/components/site/footer.tsx");
   assert.match(footer, /max-w-\[75rem\]/);
+  assert.match(footer, /md:pe-28/);
   assert.match(footer, /basis-full md:basis-auto/);
 });

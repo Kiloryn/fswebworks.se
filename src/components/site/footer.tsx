@@ -6,7 +6,7 @@ import { SectionLink } from "@/components/site/section-link";
 export function SiteFooter() {
   return (
     <footer className="border-t border-line bg-canvas">
-      <div className="mx-auto flex max-w-[75rem] flex-col gap-4 px-6 py-8 text-sm text-muted md:flex-row md:items-center md:justify-between">
+      <div className="mx-auto flex max-w-[75rem] flex-col gap-4 px-6 py-8 text-sm text-muted md:flex-row md:items-center md:justify-between md:pe-28">
         <Logo onInk />
         <p className="flex flex-wrap items-center gap-x-3 gap-y-1">
           <span>{SITE.city}</span>
