@@ -40,10 +40,10 @@ function ConsultDemo() {
       <DemoBanner current="konsult" />
       <header className="border-b border-[#1c1a16]/10 bg-[#f7f4ee]">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-5 py-5 md:px-8">
-          <p className="font-display text-2xl">Anders Eriksson</p>
+          <p className="min-w-0 font-display text-2xl">Anders Eriksson</p>
           <a
             href="#kontakt"
-            className="inline-flex h-11 items-center bg-[#1c1a16] px-5 text-sm text-[#f7f4ee]"
+            className="inline-flex h-11 shrink-0 items-center whitespace-nowrap bg-[#1c1a16] px-3 text-sm text-[#f7f4ee] md:px-5"
           >
             Boka 30 minuter
           </a>

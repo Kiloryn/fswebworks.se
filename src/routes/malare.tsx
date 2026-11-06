@@ -46,8 +46,8 @@ function PainterDemo() {
       <DemoBanner current="malare" />
       <header className="border-b border-[#1f2a22]/10">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-5 py-5 md:px-8">
-          <p className="font-display text-2xl">Stockholms Måleri</p>
-          <a href="#offert" className="inline-flex h-11 items-center bg-[#2f5d3d] px-5 text-sm text-white">
+          <p className="min-w-0 font-display text-2xl">Stockholms Måleri</p>
+          <a href="#offert" className="inline-flex h-11 shrink-0 items-center whitespace-nowrap bg-[#2f5d3d] px-3 text-sm text-white md:px-5">
             Kostnadsfri offert
           </a>
         </div>
