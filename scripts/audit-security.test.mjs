@@ -189,3 +189,14 @@ test("homepage alignment and wrapping CSS land", () => {
   assert.match(footer, /md:pe-28/);
   assert.match(footer, /basis-full md:basis-auto/);
 });
+
+test("example pages use an opaque sticky bar and hide BackToTop", () => {
+  const banner = read("src/components/site/demo-banner.tsx");
+  assert.match(banner, /sticky top-0 z-\[60\] border-b border-line\/60 bg-canvas text-fg/);
+  assert.doesNotMatch(banner, /bg-canvas\/95/);
+  const backToTop = read("src/components/site/back-to-top.tsx");
+  assert.match(backToTop, /EXAMPLES\.some/);
+  assert.match(backToTop, /if \(isExample \|\| !show\) return null/);
+  const footer = read("src/components/site/footer.tsx");
+  assert.match(footer, /md:pe-28/);
+});
