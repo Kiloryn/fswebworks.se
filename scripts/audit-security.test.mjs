@@ -227,7 +227,7 @@ test("salong self-hosts Cormorant and does not load Google Fonts", () => {
 
 test("example heroes are local files with recorded stock attribution", () => {
   const credits = read("public/images/ATTRIBUTION.md");
-  assert.match(credits, /Sarah Films/);
+  assert.match(credits, /Maria Orlova/);
   assert.match(credits, /Rachel Claire/);
   assert.match(credits, /stevepb/);
   assert.match(credits, /ranjeet \./);
@@ -239,7 +239,7 @@ test("example heroes are local files with recorded stock attribution", () => {
     assert.equal(existsSync(join(ROOT, `public/images/${stem}.webp`)), true);
   }
   const restaurang = read("src/routes/restaurang.tsx");
-  assert.match(restaurang, /restaurang\.jpg\?v=8/);
+  assert.match(restaurang, /restaurang\.jpg\?v=9/);
   assert.doesNotMatch(restaurang, /pexels\.com\/photos/);
   assert.doesNotMatch(read("src/routes/salong.tsx"), /salong\.jpg\?v=8/);
   assert.doesNotMatch(read("src/routes/malare.tsx"), /malare\.jpg\?v=8/);

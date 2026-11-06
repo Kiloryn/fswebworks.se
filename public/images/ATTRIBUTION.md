@@ -3,10 +3,14 @@
 Downloaded into this repo and served locally (not hotlinked).
 `salong.jpg` and `malare.jpg` are unchanged here.
 
+Checked the source pages for an AI-generated / AI-edited mark. Pexels
+does not allow generative-AI uploads. The Pixabay file is labelled
+Media type JPG (not AI generated) and was published in 2015.
+
 ## restaurang.jpg
 
-- Source: https://www.pexels.com/photo/pasta-on-plate-14628092/
-- Creator: Sarah Films
+- Source: https://www.pexels.com/photo/kitchen-restaurant-4947388/
+- Creator: Maria Orlova
 - License: Pexels License (https://www.pexels.com/license/)
 
 ## konsult.jpg
