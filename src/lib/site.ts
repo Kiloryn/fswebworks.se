@@ -136,7 +136,7 @@ export const FAQ = [
 ] as const;
 
 export const SUBJECTS = [
-  { value: "", label: "Välj" },
+  { value: "", label: "— Välj —" },
   { value: "offert", label: "Offert / ny hemsida" },
   { value: "kontakta-mig", label: "Kontakta mig" },
   { value: "service", label: "Serviceärende" },
