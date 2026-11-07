@@ -14,6 +14,7 @@ export function ContactForm({ defaultSubject = "", onPaper = false }: Props) {
   const [sent, setSent] = useState(false);
   const [error, setError] = useState("");
   const [pending, setPending] = useState(false);
+  const [subjectEmpty, setSubjectEmpty] = useState(defaultSubject === "");
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -78,10 +79,10 @@ export function ContactForm({ defaultSubject = "", onPaper = false }: Props) {
   }
 
   const field = cn(
-    "h-12 w-full rounded-sm border px-4 text-sm outline-2 outline-transparent transition-[border-color,background-color] duration-150",
+    "h-12 w-full rounded-sm border px-4 text-sm outline-2 outline-transparent transition-[border-color] duration-150",
     onPaper
-      ? "border-ink/15 bg-paper text-ink placeholder:text-subtle/70 focus-visible:border-brass focus-visible:outline-brass"
-      : "border-line/70 bg-ink-3 text-fg placeholder:text-muted/60 focus-visible:border-gold focus-visible:outline-gold",
+      ? "border-ink/15 focus-visible:border-brass focus-visible:outline-brass"
+      : "border-line/70 focus-visible:border-gold focus-visible:outline-gold",
   );
 
   if (sent) {
@@ -106,7 +107,14 @@ export function ContactForm({ defaultSubject = "", onPaper = false }: Props) {
   }
 
   return (
-    <form className="space-y-4 text-left" onSubmit={onSubmit} noValidate>
+    <form
+      className={cn(
+        "contact-form space-y-4 text-left",
+        onPaper ? "contact-form-paper" : "contact-form-dark",
+      )}
+      onSubmit={onSubmit}
+      noValidate
+    >
       <div className="grid gap-4 sm:grid-cols-2">
         <div>
           <label
@@ -180,11 +188,13 @@ export function ContactForm({ defaultSubject = "", onPaper = false }: Props) {
             id="contact-subject"
             name="subject"
             defaultValue={defaultSubject}
+            data-empty={subjectEmpty ? true : undefined}
+            onChange={(e) => setSubjectEmpty(e.currentTarget.value === "")}
             className={cn(
               field,
               // Native option menus follow color-scheme, not the closed field's
               // paint. html/body stay `only light` (Samsung auto-darken); a light
-              // scheme on this dark Field uses GrayText for the empty "Välj"
+              // scheme on this dark Field uses GrayText for the empty prompt
               // option, so it vanishes on the dark popup.
               onPaper
                 ? "[color-scheme:light] [&_option]:bg-paper [&_option]:text-ink"

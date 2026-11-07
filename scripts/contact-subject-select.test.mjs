@@ -24,7 +24,7 @@ test("contact subject stays a native labeled select with a readable empty option
   assert.match(form, /name="website"/);
   assert.match(form, /className="sr-only"/);
 
-  assert.match(site, /value: "", label: "Välj"/);
+  assert.match(site, /value: "", label: "— Välj —"/);
   assert.match(site, /value: "offert", label: "Offert \/ ny hemsida"/);
   assert.doesNotMatch(form, /<option[^>]*(disabled|hidden)/);
 

@@ -184,8 +184,7 @@ test("voice and first-party OG description match the locked Swedish strings", ()
   assert.match(site, /Vi kan sköta drift och teknik så du slipper det\. Vill du flytta sidan senare går det\./);
   assert.match(site, /Tydliga priser och ingen inlåsning/);
   assert.doesNotMatch(site, /ingen bindning/);
-  assert.match(site, /label: "Välj"/);
-  assert.doesNotMatch(site, /— Välj —/);
+  assert.match(site, /label: "— Välj —"/);
   const og = JSON.parse(read("src/lib/og/site.json"));
   assert.match(og.description, /ingen inlåsning/);
   assert.doesNotMatch(og.description, /ingen bindning/);
