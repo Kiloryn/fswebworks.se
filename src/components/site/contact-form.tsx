@@ -180,7 +180,16 @@ export function ContactForm({ defaultSubject = "", onPaper = false }: Props) {
             id="contact-subject"
             name="subject"
             defaultValue={defaultSubject}
-            className={field}
+            className={cn(
+              field,
+              // Native option menus follow color-scheme, not the closed field's
+              // paint. html/body stay `only light` (Samsung auto-darken); a light
+              // scheme on this dark Field uses GrayText for the empty "Välj"
+              // option, so it vanishes on the dark popup.
+              onPaper
+                ? "[color-scheme:light] [&_option]:bg-paper [&_option]:text-ink"
+                : "[color-scheme:dark] [&_option]:bg-ink-3 [&_option]:text-fg",
+            )}
           >
             {SUBJECTS.map((s) => (
               <option key={s.value} value={s.value}>
